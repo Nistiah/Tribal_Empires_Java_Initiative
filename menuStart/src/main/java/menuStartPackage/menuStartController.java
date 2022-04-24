@@ -150,6 +150,11 @@ public class menuStartController {
                 Hexagon temphex = new Hexagon(j,i);
                 temphex.setOnMouseClicked(MouseEvent ->{
                     textField.setText(temphex.getQ() +":"+temphex.getR());
+                    temphex.setFill(colorPick);
+                });
+                temphex.setOnMouseMoved(MouseEvent ->{
+                    textField.setText(temphex.getQ() +":"+temphex.getR());
+                    temphex.setFill(colorPick);
                 });
                 if(i%2==0) {
                     temphex.setFill(Color.PINK);
