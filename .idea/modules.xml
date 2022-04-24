@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Tribal_Empires_Java_Initiative.iml" filepath="$PROJECT_DIR$/.idea/Tribal_Empires_Java_Initiative.iml" />
+      <module fileurl="file://$PROJECT_DIR$/menuStart/demo.iml" filepath="$PROJECT_DIR$/menuStart/demo.iml" />
+    </modules>
+  </component>
+</project>
