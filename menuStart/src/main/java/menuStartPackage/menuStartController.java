@@ -181,7 +181,7 @@ public class menuStartController {
 
 
 
-        for (int i = 0; i < 30; i+=0.5) {
+        for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 30; j++) {
                 Hexagon temphex = new Hexagon(i, j);
                 temphex.setOnMouseClicked(MouseEvent ->{
