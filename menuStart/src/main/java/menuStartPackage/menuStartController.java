@@ -131,12 +131,15 @@ public class menuStartController {
     }
     @FXML
     private TextField textField;
+    int nibyzero=0;
     @FXML
     void addHex(ActionEvent event1) {
-        HexagonMap map = new HexagonMap(20);              // The size of the hexagons
+        HexagonMap map = new HexagonMap(20);
+        //map.setRenderCoordinates(true);
+
         for (int i = 0; i < 30; i++) {
-            for (int j = 0; j < 30; j++) {
-                Hexagon temphex = new Hexagon(i, j);
+            for (int j = nibyzero; j < 30; j++) {
+                Hexagon temphex = new Hexagon(j,i);
                 temphex.setOnMouseClicked(MouseEvent ->{
                     textField.setText(temphex.getQ() +":"+temphex.getR());
                 });
@@ -151,6 +154,8 @@ public class menuStartController {
                 }
                 map.addHexagon(temphex);
             }
+            nibyzero--;
+            System.out.println(nibyzero);
         }
         Group tempgrup = new Group();
         map.render(tempgrup);

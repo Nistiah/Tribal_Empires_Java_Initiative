@@ -30,7 +30,9 @@ public class musicPlayer extends Thread{
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
+
             mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(0.3);
             mediaPlayer.play();
             try {
                 Thread.sleep(500);   //this is very important, without it thread has troubles calculating in time media duration, idk why
