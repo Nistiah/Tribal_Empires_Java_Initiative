@@ -131,14 +131,22 @@ public class menuStartController {
     }
     @FXML
     private TextField textField;
-    int nibyzero=0;
+
     @FXML
     void addHex(ActionEvent event1) {
         HexagonMap map = new HexagonMap(20);
         //map.setRenderCoordinates(true);
+        int nibyzero=1, niby30 = 47;
+        for (int i = 1; i < 36; i++) {
+            if(i%2==0) {
+                nibyzero--;
+                niby30--;
+            }
+            for (int j = nibyzero; j < niby30; j++) {
+//                if(i==1&&j==46)continue;
+//                if(i==35&&j==28)continue;
+                if(i%2==1&&j==niby30-1)continue;
 
-        for (int i = 0; i < 30; i++) {
-            for (int j = nibyzero; j < 30; j++) {
                 Hexagon temphex = new Hexagon(j,i);
                 temphex.setOnMouseClicked(MouseEvent ->{
                     textField.setText(temphex.getQ() +":"+temphex.getR());
@@ -154,7 +162,7 @@ public class menuStartController {
                 }
                 map.addHexagon(temphex);
             }
-            nibyzero--;
+
             System.out.println(nibyzero);
         }
         Group tempgrup = new Group();
