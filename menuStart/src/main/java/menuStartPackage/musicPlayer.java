@@ -12,6 +12,9 @@ public class musicPlayer extends Thread{
     public boolean exit = false;
     boolean killthread = false;
     public String[] songs = {"bacchanale.mp3", "EgyptianMarch.mp3", "TurtleBeach.mp3"};
+    public double volume = 0.2;
+
+
 
     @Override
     public void run() {
@@ -32,7 +35,7 @@ public class musicPlayer extends Thread{
             }
 
             mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setVolume(0.15);
+            mediaPlayer.setVolume(volume);
             mediaPlayer.play();
             try {
                 Thread.sleep(500);   //this is very important, without it thread has troubles calculating in time media duration, idk why
@@ -48,6 +51,15 @@ public class musicPlayer extends Thread{
 
         }
     }
+    public void setVolume(double value){
+        volume+=value;
+        if(volume>1)volume=1;
+        if(volume<0)volume=-0.001;
+
+
+        mediaPlayer.setVolume(volume);
+    }
+
 
     public void stopMusic(){
         if (mediaPlayer!=null) {

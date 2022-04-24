@@ -108,9 +108,11 @@ public class menuStartController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+
         stage.setFullScreen(true);
         stage.show();
     }
@@ -174,4 +176,35 @@ public class menuStartController {
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
     }
+    @FXML
+    private Button volumeUPButton;
+
+    @FXML
+    private Button volumeDOWNbutton;
+
+    @FXML
+    void volumeDOWN(ActionEvent event) {
+        musicPlayerInstance.setVolume(-0.1);
+        volumeDOWNbutton.setText("Decrease music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+        volumeUPButton.setText("Increase music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+    }
+
+    @FXML
+    void volumeUP(ActionEvent event) {
+        musicPlayerInstance.setVolume(0.1);
+        volumeDOWNbutton.setText("Decrease music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+        volumeUPButton.setText("Increase music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
