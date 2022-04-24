@@ -28,9 +28,6 @@ import java.io.IOException;
 
 
 public class menuStartController {
-    //Hexagonal
-    @FXML
-    private GridPane gridPane;
     @FXML public AnchorPane anchorBoard;
     private Stage stage;
     private Scene scene;
@@ -115,6 +112,11 @@ public class menuStartController {
 
         stage.setFullScreen(true);
         stage.show();
+
+//        volumeDOWNbutton.setText("Decrease music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+//        volumeUPButton.setText("Increase music volume " +(int)(100*musicPlayerInstance.volume)+"%");
+
+
     }
     @FXML
     void startNewGame(ActionEvent event) {
