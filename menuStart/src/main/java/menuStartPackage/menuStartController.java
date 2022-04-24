@@ -29,39 +29,17 @@ import java.io.IOException;
 
 public class menuStartController {
     //Hexagonal
-
-
     @FXML
     private GridPane gridPane;
-
-
     @FXML public AnchorPane anchorBoard;
-
-
-
-
-
-
-
     private Stage stage;
     private Scene scene;
     private Parent root;
     private Color colorPick=Color.WHITE;
     static musicPlayer musicPlayerInstance = new musicPlayer();
-
     public void initializeMusic(){
        musicPlayerInstance.start();
-//        for(Hexagon<SatelliteData> hexagon : grid.getHexagons()) {
-//            for(Point p : hexagon.getPoints()) {
-//
-//                // Do you stuff with point.coordinateX, point.coordinateY
-//            }
-//            anchorBoard.getChildren().add((Node) hexagon);
-//
-//        }
-       //anchorBoard.getChildren().add((Node) grid);
     }
-
     @FXML
     public ColorPicker colorPicker = new ColorPicker();
     @FXML
@@ -73,7 +51,6 @@ public class menuStartController {
     void but4(ActionEvent event) {
         colorPick=colorPicker.getValue();
     }
-
     @FXML
     void credits(ActionEvent event) {
         try {
@@ -87,7 +64,6 @@ public class menuStartController {
         stage.setFullScreen(true);
         stage.show();
     }
-
     @FXML
     void backToMainMenu(ActionEvent event) {
 
@@ -105,7 +81,6 @@ public class menuStartController {
 
     @FXML
     void backToMainMenuFromBoard(ActionEvent event) {
-
         musicPlayerInstance.exit=true;
         musicPlayerInstance.menu=false;
         musicPlayerInstance.stopMusic();
@@ -119,18 +94,13 @@ public class menuStartController {
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
-
     }
-
-
     @FXML
     void quit(ActionEvent event) {
         musicPlayerInstance.killthread=true;
         musicPlayerInstance.stopMusic();     //for interupt within
         Platform.exit();
-
     }
-
     @FXML
     void settings(ActionEvent event) {
         try {
@@ -144,56 +114,32 @@ public class menuStartController {
         stage.setFullScreen(true);
         stage.show();
     }
-    public AnchorPane anchorBoard2 = new AnchorPane();
-    Rectangle temprect = new Rectangle(30,30);
-    Button tempbut = new Button("jajco");
-    Label nazwa = new Label("dawd");
     @FXML
     void startNewGame(ActionEvent event) {
-
-
-
         musicPlayerInstance.menu=false;
         musicPlayerInstance.stopMusic();
-
         try {
             root = FXMLLoader.load(getClass().getResource("mainBoard.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-
         stage.setFullScreen(true);
         stage.show();
-
     }
-
     @FXML
     private TextField textField;
-
     @FXML
     void addHex(ActionEvent event1) {
         HexagonMap map = new HexagonMap(20);              // The size of the hexagons
-
-
-
-
         for (int i = 0; i < 30; i++) {
             for (int j = 0; j < 30; j++) {
                 Hexagon temphex = new Hexagon(i, j);
                 temphex.setOnMouseClicked(MouseEvent ->{
                     textField.setText(temphex.getQ() +":"+temphex.getR());
-
-
                 });
-
-
-
-
-
                 if(i%2==0) {
                     temphex.setFill(Color.PINK);
                 }
@@ -203,20 +149,11 @@ public class menuStartController {
                 if(i%2==0&&j%2==0) {
                     temphex.setFill(Color.GOLD);
                 }
-
-
-
                 map.addHexagon(temphex);
-
             }
-
         }
         Group tempgrup = new Group();
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
     }
-
-
-
-
 }
