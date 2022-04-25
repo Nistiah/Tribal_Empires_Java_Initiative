@@ -1,4 +1,4 @@
-package menuStartPackage;
+package menuStartPackage.FXMLControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-import static menuStartPackage.menuStartController.musicPlayerInstance;
+import static menuStartPackage.menuStart.musicPlayerInstance;
+
 
 public class settingsController {
 

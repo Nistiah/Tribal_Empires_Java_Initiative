@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tribal_Empires_Java_Initiative.iml" filepath="$PROJECT_DIR$/.idea/Tribal_Empires_Java_Initiative.iml" />
-      <module fileurl="file://$PROJECT_DIR$/menuStart/demo.iml" filepath="$PROJECT_DIR$/menuStart/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/menuStart/menuStart.iml" filepath="$PROJECT_DIR$/menuStart/menuStart.iml" />
     </modules>
   </component>
 </project>

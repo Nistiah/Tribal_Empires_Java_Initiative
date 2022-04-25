@@ -7,4 +7,6 @@ module menuStart {
 
     opens menuStartPackage to javafx.fxml;
     exports menuStartPackage;
+    exports menuStartPackage.FXMLControllers;
+    opens menuStartPackage.FXMLControllers to javafx.fxml;
 }
