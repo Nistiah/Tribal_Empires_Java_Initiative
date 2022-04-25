@@ -9,13 +9,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.menuStartController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.mainBoardController">
    <right>
       <SplitPane id="rightBar" dividerPositions="0.5" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <items>
@@ -28,24 +24,6 @@
                      </font>
                   </Button>
                   <Button layoutX="66.0" layoutY="313.0" mnemonicParsing="false" onAction="#addHex" text="Button" />
-                  <Polygon fx:id="polygon01" layoutX="62.0" layoutY="436.0" onMouseClicked="#onHelloHexClick" points="-25.0, 15.0, 0.0, 30.0, 25.0, 15.0, 25.0, -15.0, 0.0, -30.0, -25.0, -15.0" smooth="false" stroke="#ffffff00" strokeType="INSIDE">
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color red="0.6930921077728271" green="0.7105262875556946" blue="0.1875" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="1.0" green="1.0" blue="1.0" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Polygon>
                   <TextField fx:id="textField" layoutX="37.0" layoutY="233.0" />
                </children>
             </AnchorPane>

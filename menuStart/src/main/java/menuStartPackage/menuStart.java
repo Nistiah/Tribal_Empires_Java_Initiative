@@ -14,11 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 public class menuStart extends Application {
 
+    static Parent root;
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         menuStartController music = new menuStartController();
         music.initializeMusic();
-        Parent root = FXMLLoader.load(getClass().getResource("menuStart.fxml"));
+        root = FXMLLoader.load(getClass().getResource("menuStart.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setFullScreen(true);
