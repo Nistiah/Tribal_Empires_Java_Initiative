@@ -4,6 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/menuStart/pom.xml" />
+        <option value="$PROJECT_DIR$/gameFiles/pom.xml" />
       </list>
     </option>
   </component>
