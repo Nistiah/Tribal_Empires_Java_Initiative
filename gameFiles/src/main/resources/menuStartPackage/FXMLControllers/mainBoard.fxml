@@ -26,7 +26,7 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
                <children>
-                  <Button fx:id="buyButton" layoutX="93.0" layoutY="141.0" mnemonicParsing="false" text="KUP POLE" />
+                  <Button fx:id="buyButton" layoutX="93.0" layoutY="141.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
                </children></AnchorPane>
          </items>
       </SplitPane>
