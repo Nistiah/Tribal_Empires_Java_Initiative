@@ -1,4 +1,4 @@
-module menuStart {
+module gameFiles {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;

@@ -53,7 +53,7 @@ public class mainBoardController {
         map = new HexagonMap(40);
         //map.setRenderCoordinates(true);
         int nibyzero = 1, niby30 = 47;
-        for (int i = 1; i < 36; i++) {
+        for (int i = 1; i < 46; i++) {
             if (i % 2 == 0) {
                 nibyzero--;
                 niby30--;
