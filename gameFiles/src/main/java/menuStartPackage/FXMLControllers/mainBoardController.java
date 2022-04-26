@@ -2,6 +2,7 @@ package menuStartPackage.FXMLControllers;
 
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
+import hexagons.src.main.java.com.prettybyte.hexagons.NoHexagonFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +32,9 @@ public class mainBoardController {
     @FXML
     public Button generateHexagonMap;
     @FXML
+    public Button buyButton;
+
+    @FXML
     public AnchorPane anchorBoard;
     @FXML
     private TextField textField;
@@ -42,9 +46,11 @@ public class mainBoardController {
         colorPick = colorPicker.getValue();
     }
 
+    private HexagonMap map;
+
     @FXML
     void addHex(ActionEvent event1) {
-        HexagonMap map = new HexagonMap(40);
+        map = new HexagonMap(40);
         //map.setRenderCoordinates(true);
         int nibyzero = 1, niby30 = 47;
         for (int i = 1; i < 36; i++) {
@@ -56,23 +62,25 @@ public class mainBoardController {
                 if (i % 2 == 1 && j == niby30 - 1) continue;
 
                 Hexagon temphex = new Hexagon(j, i);
+                temphex.setFill(Color.WHITE);
                 temphex.setOnMouseClicked(MouseEvent -> {
                     textField.setText(temphex.getQ() + ":" + temphex.getR());
-                    temphex.setFill(colorPick);
+
+                    buyField(temphex);
                 });
-                temphex.setOnMouseMoved(MouseEvent -> {
-                    textField.setText(temphex.getQ() + ":" + temphex.getR());
-                    temphex.setFill(colorPick);
-                });
-                if (i % 2 == 0) {
-                    temphex.setFill(Color.PINK);
-                }
-                if (j % 2 == 0) {
-                    temphex.setFill(Color.YELLOW);
-                }
-                if (i % 2 == 0 && j % 2 == 0) {
-                    temphex.setFill(Color.GOLD);
-                }
+//                temphex.setOnMouseMoved(MouseEvent -> {
+//                    textField.setText(temphex.getQ() + ":" + temphex.getR());
+//                    temphex.setFill(colorPick);
+//                });
+//                if (i % 2 == 0) {
+//                    temphex.setFill(Color.PINK);
+//                }
+//                if (j % 2 == 0) {
+//                    temphex.setFill(Color.YELLOW);
+//                }
+//                if (i % 2 == 0 && j % 2 == 0) {
+//                    temphex.setFill(Color.GOLD);
+//                }
                 map.addHexagon(temphex);
             }
 
@@ -86,6 +94,29 @@ public class mainBoardController {
 
 
 
+    }
+
+    private boolean buyingMode=false;
+
+
+
+    private void buyField(Hexagon tempname) {
+        buyingMode=true;
+        int q = tempname.getQ();
+        int r = tempname.getR();
+
+        try {
+            map.getHexagon(q,r-1).setFill(Color.PINK);
+            map.getHexagon(q,r+1).setFill(Color.PINK);
+            map.getHexagon(q+1,r).setFill(Color.PINK);
+            map.getHexagon(q-1,r).setFill(Color.PINK);
+            map.getHexagon(q+1,r-1).setFill(Color.PINK);
+            map.getHexagon(q-1,r+1).setFill(Color.PINK);
+
+
+        } catch (NoHexagonFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -107,13 +138,5 @@ public class mainBoardController {
     @FXML
     private ScrollPane scrollPane;
 
-
-
-
-    @FXML
-    void mapMover(KeyEvent event) {
-
-
-    }
 
 }
