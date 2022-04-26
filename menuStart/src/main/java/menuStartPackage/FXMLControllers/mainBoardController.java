@@ -3,14 +3,18 @@ package menuStartPackage.FXMLControllers;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -25,8 +29,8 @@ public class mainBoardController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-
+    @FXML
+    public Button generateHexagonMap;
     @FXML
     public AnchorPane anchorBoard;
     @FXML
@@ -41,7 +45,7 @@ public class mainBoardController {
 
     @FXML
     void addHex(ActionEvent event1) {
-        HexagonMap map = new HexagonMap(20);
+        HexagonMap map = new HexagonMap(40);
         //map.setRenderCoordinates(true);
         int nibyzero = 1, niby30 = 47;
         for (int i = 1; i < 36; i++) {
@@ -78,6 +82,11 @@ public class mainBoardController {
         Group tempgrup = new Group();
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
+        generateHexagonMap.setVisible(false);
+        scrollPane.pannableProperty().set(true);
+
+
+
     }
 
     @FXML
@@ -96,4 +105,16 @@ public class mainBoardController {
         stage.setFullScreen(true);
         stage.show();
     }
+    @FXML
+    private ScrollPane scrollPane;
+
+
+
+
+    @FXML
+    void mapMover(KeyEvent event) {
+
+
+    }
+
 }

@@ -22,6 +22,17 @@
     -fx-display: inline-block;
     -fx-font-size: 15px;
 }
+.button2 {
+    -fx-background-radius: 500px;
+    -fx-color: #474747;
+    -fx-padding: 15px 32px;
+    -fx-text-align: center;
+    -fx-text-decoration: bold;
+    -fx-font-family: Manjari;
+    -fx-display: inline-block;
+    -fx-font-size: 130px;
+}
+
 .settingsButton {
     -fx-background-radius: 30px;
     -fx-color: #474747;
