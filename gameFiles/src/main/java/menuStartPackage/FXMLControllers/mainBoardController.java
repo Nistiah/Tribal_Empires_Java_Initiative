@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
+import menuStartPackage.Prowincje.City;
 
 import java.io.File;
 import java.io.IOException;
@@ -111,7 +112,7 @@ public class mainBoardController {
 //                }
 
 
-
+                temphex.province = new City();
 
                 map.addHexagon(temphex);
             }

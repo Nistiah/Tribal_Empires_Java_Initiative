@@ -1,3 +1,5 @@
+package menuStartPackage.Prowincje;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class City extends Province{
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
 
 
-    City(){
+    public City(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

@@ -3,6 +3,7 @@ package hexagons.src.main.java.com.prettybyte.hexagons;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import menuStartPackage.Prowincje.Province;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import static java.lang.Math.*;
  * A Hexagon is the building block of the grid.
  */
 public class Hexagon extends Polygon {
-
+    public Province province ;
     final GridPosition position;
     private HexagonMap map;
     private boolean isVisualObstacle;
