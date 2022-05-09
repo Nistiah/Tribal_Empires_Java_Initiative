@@ -24,9 +24,6 @@ public class creditsController {
             e.printStackTrace();
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        stage.getScene().setRoot(root);
     }
 }
