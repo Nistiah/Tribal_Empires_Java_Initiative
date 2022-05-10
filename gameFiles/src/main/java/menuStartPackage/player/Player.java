@@ -13,7 +13,7 @@ public class Player {
     }
 
     private int gold=1;
-    private int faith=0;
+    private int belief=0;
     private int bronze=1;
     private int iron=1;
     private int dyes=1;
@@ -21,7 +21,7 @@ public class Player {
     private int horses=1;
 
     private int baseGoldProduction=1;
-    private int baseFaithProduction=0;
+    private int baseBeliefProduction=0;
     private int baseuildingResourcesProduction=1;
     private int baseHorsesProduction=0;
     private int baseBronzeProduction=0;
@@ -29,7 +29,7 @@ public class Player {
     private int baseDyesProduction=0;
 
     private int goldProduction;
-    private int faithProduction;
+    private int beliefProduction;
     private int buildingResourcesProduction;
     private int horsesProduction;
     private int bronzeProduction;
@@ -57,11 +57,11 @@ public class Player {
     }
 
     public int getFaith() {
-        return faith;
+        return belief;
     }
 
     public void setFaith(int faith) {
-        this.faith = faith;
+        this.belief = faith;
     }
 
     public int getBronze() {
