@@ -1,7 +1,6 @@
-package Prowincje;
+package menuStartPackage.Prowincje;
 
-import Prowincje.Province;
-
+import java.util.Arrays;
 import java.util.List;
 
 public class Mountains extends Province {

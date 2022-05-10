@@ -1,10 +1,7 @@
-package Prowincje;
-
-import Prowincje.Province;
+package menuStartPackage.Prowincje;
 
 import java.util.Arrays;
 import java.util.List;
-
 public class ForestWyzyny extends Province {
     List<String> resources = Arrays.asList("drewno", "brąz", "żelazo", "złoto");
     String type = "Las wyzyny";

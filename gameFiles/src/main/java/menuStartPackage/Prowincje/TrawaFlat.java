@@ -1,6 +1,5 @@
-package Prowincje;
+package menuStartPackage.Prowincje;
 
-import Prowincje.Province;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +9,6 @@ public class TrawaFlat extends Province {
     String type = "Trawa flat";
     List<String> possibleBuildings = Arrays.asList("Hodowla krów", "Hodowla świń", "Hodowla koni");
     List<String> baseBuildings = List.of("Farma");
-
 
     TrawaFlat(){
         setResources(resources);

@@ -1,4 +1,4 @@
-package Prowincje;
+package menuStartPackage.Prowincje;
 
 import java.util.List;
 

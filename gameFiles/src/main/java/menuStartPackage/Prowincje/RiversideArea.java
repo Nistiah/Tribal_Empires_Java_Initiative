@@ -1,6 +1,5 @@
-package Prowincje;
+package menuStartPackage.Prowincje;
 
-import Prowincje.Province;
 
 import java.util.List;
 
