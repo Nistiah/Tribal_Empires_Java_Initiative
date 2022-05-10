@@ -1,17 +1,15 @@
-package menuStartPackage.Prowincje;
+package Prowincje;
+
 import java.util.List;
 
 public class Province {
-    public int owner;
-    public int i;
-    public int j;
+    int i;
+    int j;
     String type;
     List<String> resources;
     List<String> possibleBuildings;
     List<String> baseBuildings;
     int belief = 0, wood = 0, gold = 0, food = 0;
-
-
 
     public void setBaseBuildings(List<String> baseBuildings) {
         this.baseBuildings = baseBuildings;
