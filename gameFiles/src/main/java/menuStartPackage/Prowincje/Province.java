@@ -10,6 +10,8 @@ public class Province {
     List<String> baseBuildings;
     int belief = 0, wood = 0, gold = 0, food = 0;
 
+
+
     public void setBaseBuildings(List<String> baseBuildings) {
         this.baseBuildings = baseBuildings;
     }
