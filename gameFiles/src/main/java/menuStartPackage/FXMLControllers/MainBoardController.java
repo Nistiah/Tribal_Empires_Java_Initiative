@@ -94,7 +94,7 @@ public class MainBoardController {
     @FXML
     void addHex(ActionEvent event1) {
         map = new HexagonMap(50);
-//        map.setRenderCoordinates(true);
+        map.setRenderCoordinates(true);
         int nibyzero = 31, niby30 = 90;
         for (int i = 1; i < 60; i++) {
             if (i % 2 == 0) {
@@ -142,7 +142,8 @@ public class MainBoardController {
 //                }
 
 
-                temphex.province = new City();
+                temphex.setProvince(new City());
+                temphex.getProvince().setCoordinates(temphex.getQ(), temphex.getR());
 
                 map.addHexagon(temphex);
             }
@@ -191,17 +192,20 @@ public class MainBoardController {
 
     //podswietla na rozowo te heksy ktore sa mozliwe do kupna, daje te grafike cos tam na te kupione
     private void buyField(Hexagon tempname) {
+        System.out.println("i:" + tempname.getProvince().i +" j: "+ tempname.getProvince().j);
+        System.out.println("q:" + tempname.getQ() +" r: "+ tempname.getR());
+
         int q = tempname.getQ() + 30;
         int r = tempname.getR();
         if(!buyInitialised &&mechanics[q][r].owner!=ownerid){
             buyClicked();
             return;
         }
-        System.out.println("q:" + q + "  r:" + r);
+        //System.out.println("q:" + q + "  r:" + r);
         if (!buyInitialised) {
             for (int tq = q - 3; tq < q + 4; tq++) {
                 for (int tr = r - 3; tr < r + 4; tr++) {
-                    System.out.println("tq:" + tq + "  tr:" + tr);
+                    //System.out.println("tq:" + tq + "  tr:" + tr);
                     if (
                             mechanics[tq][tr - 1].owner == ownerid ||
                                     mechanics[tq][tr + 1].owner == ownerid ||
@@ -251,7 +255,7 @@ public class MainBoardController {
             mechanics[q][r].owner=ownerid;
             for (int tq = initialisedQ + 30 - 3; tq < initialisedQ + 30 + 4; tq++) {
                 for (int tr = initialisedR - 3; tr < initialisedR + 4; tr++) {
-                    System.out.println("tq:" + tq + "  tr:" + tr);
+                    //System.out.println("tq:" + tq + "  tr:" + tr);
                     if (
                             mechanics[tq][tr - 1].owner == ownerid ||
                                     mechanics[tq][tr + 1].owner == ownerid ||

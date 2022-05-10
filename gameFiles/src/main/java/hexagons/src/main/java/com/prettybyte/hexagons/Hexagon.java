@@ -13,7 +13,8 @@ import static java.lang.Math.*;
  * A Hexagon is the building block of the grid.
  */
 public class Hexagon extends Polygon {
-    public Province province ;
+
+    private Province province ;
     final GridPosition position;
     private HexagonMap map;
     private boolean isVisualObstacle;
@@ -22,6 +23,14 @@ public class Hexagon extends Polygon {
     Hexagon aStarCameFrom;
     private int graphicsXoffset;
     private int graphicsYoffset;
+
+
+    public Province getProvince() {
+        return province;
+    }
+    public void setProvince(Province province) {
+        this.province=province;
+    }
 
     /**
      * The position of the Hexagon is specified with axial coordinates
