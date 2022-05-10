@@ -17,4 +17,5 @@ public class City extends Province{
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
     }
+
 }

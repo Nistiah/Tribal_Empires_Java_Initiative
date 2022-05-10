@@ -1,4 +1,4 @@
-package Frakcje;
+package menuStartPackage.Frakcje;
 
 import java.util.Arrays;
 import java.util.List;

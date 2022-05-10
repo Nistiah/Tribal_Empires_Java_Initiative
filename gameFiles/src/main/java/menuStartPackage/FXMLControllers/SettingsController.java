@@ -10,10 +10,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
 
-public class settingsController {
+public class SettingsController {
 
     @FXML
     private Button volumeUPButton;

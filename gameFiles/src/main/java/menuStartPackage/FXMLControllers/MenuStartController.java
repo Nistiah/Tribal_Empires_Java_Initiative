@@ -10,9 +10,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
-public class menuStartController {
+public class MenuStartController {
     private static Stage stage;
     private Scene scene;
     private Parent root;

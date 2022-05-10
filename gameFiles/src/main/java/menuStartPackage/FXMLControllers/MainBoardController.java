@@ -15,26 +15,24 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
 import menuStartPackage.Prowincje.City;
+import menuStartPackage.player.Player;
+import menuStartPackage.player.TourCounter;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Vector;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
 
 
-public class mainBoardController {
+public class MainBoardController {
 
     private Color colorPick = Color.WHITE;
     private Stage stage;
@@ -56,6 +54,38 @@ public class mainBoardController {
     void but4(ActionEvent event) {
         colorPick = colorPicker.getValue();
     }
+
+    int playerId;
+
+    @FXML
+    private TextField turnField = new TextField("dupa");
+
+    @FXML
+    private TextField fractionField = new TextField("duadudawu");
+
+    @FXML
+    void nextPlayerButton(ActionEvent event){
+        turnField.setText("Tura: "+tourCounter.getTour());
+        playerId++;
+        if(playerId==playerList.size()){
+            playerId=0;
+            tourCounter.incrementTour();
+        }
+        currentPlayer=playerList.get(playerId);
+        fractionField.setText("Gracz:"+currentPlayer.getClass().getName());
+
+    }
+
+
+
+
+    static public Vector<Player> playerList = new Vector<>();
+
+
+
+    Player currentPlayer;
+
+    TourCounter tourCounter = new TourCounter();
 
     private HexagonMap map;
 
@@ -143,6 +173,8 @@ public class mainBoardController {
     private boolean buyingMode=false;
     private boolean buyInitialised = false;
     private int ownerid =1;
+
+
 
 
     private class province {

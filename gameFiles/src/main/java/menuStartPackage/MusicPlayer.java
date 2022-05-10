@@ -4,7 +4,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URISyntaxException;
 
-public class musicPlayer extends Thread {
+public class MusicPlayer extends Thread {
     public static MediaPlayer mediaPlayer;
     private Media media;
     public String songName = "";

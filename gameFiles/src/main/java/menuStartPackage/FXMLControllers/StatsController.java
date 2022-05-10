@@ -7,17 +7,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class creditsController {
+public class StatsController {
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     @FXML
-    void backToMainMenu(ActionEvent event) {
+    void backToMainMenuFromStats(ActionEvent event) {
         try {
             root = FXMLLoader.load(getClass().getResource("menuStart.fxml"));
         } catch (IOException e) {
