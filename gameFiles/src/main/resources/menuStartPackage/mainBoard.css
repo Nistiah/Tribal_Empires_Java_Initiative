@@ -44,3 +44,6 @@
     -fx-display: inline-block;
     -fx-font-size: 22px;
 }
+.text-field {
+    -fx-cursor: default;
+}

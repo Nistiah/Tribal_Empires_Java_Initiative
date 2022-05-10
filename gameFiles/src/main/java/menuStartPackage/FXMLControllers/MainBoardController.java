@@ -64,6 +64,27 @@ public class MainBoardController {
     private TextField fractionField = new TextField("duadudawu");
 
     @FXML
+    private TextField goldField = new TextField("goldField");
+
+    @FXML
+    private TextField beliefField = new TextField("beliefField");
+
+    @FXML
+    private TextField bronzeField = new TextField("bronzeField");
+
+    @FXML
+    private TextField dyesField = new TextField("dyesField");
+
+    @FXML
+    private TextField recoursesField = new TextField("recoursesField");
+
+    @FXML
+    private TextField horsesField = new TextField("horsesField");
+
+    @FXML
+    private TextField ironField = new TextField("ironField");
+
+    @FXML
     void nextPlayerButton(ActionEvent event){
         turnField.setText("Tura: "+tourCounter.getTour());
         playerId++;
@@ -73,7 +94,13 @@ public class MainBoardController {
         }
         currentPlayer=playerList.get(playerId);
         fractionField.setText("Gracz:"+currentPlayer.getClass().getName());
-
+        goldField.setText("" + currentPlayer.getGold());
+        beliefField.setText("" + currentPlayer.getFaith());
+        bronzeField.setText("" + currentPlayer.getBronze());
+        recoursesField.setText("" + currentPlayer.getBuildingResources());
+        horsesField.setText("" + currentPlayer.getHorses());
+        ironField.setText("" + currentPlayer.getIron());
+        dyesField.setText("" + currentPlayer.getDyes());
     }
 
 
