@@ -1,3 +1,5 @@
+package Prowincje;
+
 import java.util.List;
 
 public class Province {
