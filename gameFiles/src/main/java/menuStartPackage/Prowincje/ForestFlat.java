@@ -1,6 +1,7 @@
 package menuStartPackage.Prowincje;
 
-
+import java.util.Arrays;
+import java.util.List;
 public class ForestFlat extends Province {
     List<String> resources = Arrays.asList("drewno", "dziczyzna");
     String type = "Las flat";

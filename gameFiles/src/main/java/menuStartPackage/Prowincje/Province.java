@@ -3,8 +3,8 @@ package menuStartPackage.Prowincje;
 import java.util.List;
 
 public class Province {
-    int i;
-    int j;
+    public int i;
+    public int j;
     String type;
     List<String> resources;
     List<String> possibleBuildings;
