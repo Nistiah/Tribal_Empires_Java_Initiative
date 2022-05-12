@@ -25,6 +25,7 @@ import menuStartPackage.player.TourCounter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Random;
 import java.util.Vector;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
@@ -33,7 +34,22 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 
 
 public class MainBoardController {
-
+    private final String[] imageNames = {"province_icons/desert - flat.png",
+            "province_icons/desert - wyz.png",
+            "province_icons/forest - flat.png",
+            "province_icons/forest - flat2.png",
+            "province_icons/forest - wyz.png",
+            "province_icons/landscape - mountain.png",
+            "province_icons/mountain.png",
+            "province_icons/river (2).png",
+            "province_icons/sea2.png",
+            "province_icons/trawa - flat.png",
+            "province_icons/trawa - flat3.png",
+            "province_icons/trawa - wyz.png",
+            "province_icons/trawa - wyz2.png",
+            "province_icons/wybrzeze.png",
+            "province_icons/wybrzeze.jpg",
+    };
     private Color colorPick = Color.WHITE;
     private Stage stage;
     private Scene scene;
@@ -266,9 +282,10 @@ public class MainBoardController {
             }
             if(mechanics[q][r].owner==ownerid){return;}
 
+            int rnd = new Random().nextInt(imageNames.length);
             Image image = null;
             try {
-                image = new Image(getClass().getResource("city.png").toURI().toString());
+                image = new Image(getClass().getResource(imageNames[rnd]).toURI().toString());
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
