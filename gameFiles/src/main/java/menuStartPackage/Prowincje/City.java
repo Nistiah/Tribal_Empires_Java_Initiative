@@ -1,9 +1,11 @@
 package menuStartPackage.Prowincje;
 
+
+
 import java.util.Arrays;
 import java.util.List;
 
-public class City extends Province{
+public class City extends Province {
     List<String> resources = List.of();
     String type = "Miasto";
     List<String> possibleBuildings = List.of();
@@ -17,5 +19,4 @@ public class City extends Province{
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
     }
-
 }
