@@ -9,6 +9,8 @@ public class Mountains extends Province {
     List<String> possibleBuildings = List.of();
     List<String> baseBuildings = List.of();
 
+    @Override
+    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/mountain.png";}
 
     public Mountains(){
         setResources(resources);

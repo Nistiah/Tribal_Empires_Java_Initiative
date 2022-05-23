@@ -9,6 +9,8 @@ public class DesertFlat extends Province {
     List<String> possibleBuildings = Arrays.asList();
     List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
 
+    @Override
+    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/desert - flat.png";}
 
     public DesertFlat(){
         setResources(resources);
