@@ -135,11 +135,12 @@ public class HexagonMap {
      * @return the Hexagon
      * @throws NoHexagonFoundException if there is no Hexagon at the specified position
      */
-    public Hexagon getHexagon(int q, int r) throws NoHexagonFoundException {
+    public Hexagon getHexagon(int q, int r){// throws NoHexagonFoundException {
         GridPosition position = new GridPosition(q, r);
         Hexagon result = hexagons.get(position);
         if (result == null) {
-            throw new NoHexagonFoundException("There is no Hexagon on q:" + q + " r:" + r);
+            //throw new NoHexagonFoundException("There is no Hexagon on q:" + q + " r:" + r); -laura zakomentowanane
+            System.out.println("There is no Hexagon on q:" + q + " r:" + r);
         }
         return result;
     }

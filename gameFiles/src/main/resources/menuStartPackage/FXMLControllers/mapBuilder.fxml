@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mapBuilder.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MapBuilderController">
+   <right>
+      <SplitPane id="rightBar" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="bodyBackground2" BorderPane.alignment="CENTER">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="282.0" styleClass="bodyBackground">
+               <children>
+                  <Button layoutX="183.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" text="QUIT" />
+                  <Button layoutX="43.0" layoutY="297.0" mnemonicParsing="false" onAction="#CityClick" text="City" />
+                  <Button layoutX="10.0" layoutY="364.0" mnemonicParsing="false" onAction="#DesertFlatClick" text="DesertFlat" />
+                  <Button layoutX="167.0" layoutY="294.0" mnemonicParsing="false" onAction="#CoastClick" text="Coast" />
+                  <Button layoutX="164.0" layoutY="364.0" mnemonicParsing="false" onAction="#DesertWyzClick" text="DesertWyz" />
+                  <Button layoutX="27.0" layoutY="451.0" mnemonicParsing="false" onAction="#ForestFlatClick" text="ForestFlat" />
+                  <Button layoutX="181.0" layoutY="451.0" mnemonicParsing="false" onAction="#ForestWyzClick" text="ForestWyz" />
+                  <Button layoutX="55.0" layoutY="555.0" mnemonicParsing="false" onAction="#MountainsClick" text="Mountains" />
+                  <Button layoutX="73.0" layoutY="629.0" mnemonicParsing="false" onAction="#TrawaFlatClick" text="TrawaFlat" />
+                  <Button layoutX="75.0" layoutY="718.0" mnemonicParsing="false" onAction="#TrawaWyzClick" text="TrawaWyzyny" />
+                  <Button layoutX="92.0" layoutY="820.0" mnemonicParsing="false" onAction="#RiversideClick" text="RiversideArea" />
+                  <Button layoutX="77.0" layoutY="929.0" mnemonicParsing="false" onAction="#saveMap" text="Save" />
+                  <Button layoutX="22.0" layoutY="53.0" mnemonicParsing="false" onAction="#player0" text="Player0" />
+                  <Button layoutX="36.0" layoutY="118.0" mnemonicParsing="false" onAction="#player1" text="Player1" />
+                  <Button layoutX="161.0" layoutY="116.0" mnemonicParsing="false" onAction="#player2" text="Player2" />
+                  <Button layoutX="41.0" layoutY="177.0" mnemonicParsing="false" onAction="#player3" text="Player3" />
+                  <TextField fx:id="current" layoutX="67.0" layoutY="247.0" />
+               </children></AnchorPane>
+         </items>
+      </SplitPane>
+   </right>
+   <left>
+      <ScrollPane fx:id="scrollPane" styleClass="bodyBackground" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="anchorBoard" prefHeight="1080.0" prefWidth="1623.0" styleClass="bodyBackground">
+               <children>
+                  <Button fx:id="generateHexagonMap" layoutX="702.0" layoutY="459.0" mnemonicParsing="false" onAction="#addHex" styleClass="button2" text="Start Game" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+                     <font>
+                        <Font name="Manjari Regular" size="59.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </left>
+</BorderPane>

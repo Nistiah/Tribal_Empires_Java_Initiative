@@ -5,6 +5,7 @@ import java.util.List;
 public class Province {
     public int i;
     public int j;
+    public int ownerId;
     String type;
     String iconPath;
     List<String> resources;
@@ -35,27 +36,29 @@ public class Province {
         this.type = type;
     }
 
+    public String getType() {return this.type;}
+
     public void setBaseProduction(String type){
         switch(type){
             case "Morze":
                 food = 1;
                 break;
-            case "Pustynia flat":
+            case "PustyniaFlat":
                 belief = 1;
                 break;
-            case "Pustynia wyzyny":
+            case "PustyniaWyzyny":
                 belief = 1;
                 break;
-            case "Trawa flat":
+            case "TrawaFlat":
                 food = 1;
                 break;
-            case "Trawa wyzyny":
+            case "TrawaWyzyny":
                 food = 1;
                 break;
-            case "Las flat":
+            case "LasFlat":
                 wood = 1;
                 break;
-            case "Las wyzyny":
+            case "LasWyzyny":
                 wood = 1;
                 break;
             case "Gory":
@@ -63,7 +66,7 @@ public class Province {
             case "Wybrzeze":
                 food = 1;
                 break;
-            case "Teren nadrzeczny":
+            case "TerenNadrzeczny":
                 food = 2;
                 break;
             case "Miasto":

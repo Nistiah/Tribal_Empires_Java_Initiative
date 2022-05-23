@@ -14,7 +14,7 @@ public class Coast extends Province {
     @Override
     public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/wybrzeze.jpg";}
 
-    Coast(){
+    public Coast(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

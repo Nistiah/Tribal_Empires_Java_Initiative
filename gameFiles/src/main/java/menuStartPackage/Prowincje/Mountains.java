@@ -12,7 +12,7 @@ public class Mountains extends Province {
     @Override
     public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/mountain.png";}
 
-    Mountains(){
+    public Mountains(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);
