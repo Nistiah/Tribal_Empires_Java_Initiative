@@ -10,7 +10,7 @@ public class Mountains extends Province {
     List<String> baseBuildings = List.of();
 
 
-    Mountains(){
+    public Mountains(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

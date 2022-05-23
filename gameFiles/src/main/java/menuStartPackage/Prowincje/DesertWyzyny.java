@@ -9,7 +9,7 @@ public class DesertWyzyny extends Province {
     List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
 
 
-    DesertWyzyny(){
+    public DesertWyzyny(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

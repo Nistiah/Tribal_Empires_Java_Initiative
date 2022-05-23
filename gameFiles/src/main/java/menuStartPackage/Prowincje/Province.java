@@ -5,6 +5,7 @@ import java.util.List;
 public class Province {
     public int i;
     public int j;
+    public int ownerId;
     String type;
     List<String> resources;
     List<String> possibleBuildings;
@@ -31,6 +32,8 @@ public class Province {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getType() {return this.type;}
 
     public void setBaseProduction(String type){
         switch(type){

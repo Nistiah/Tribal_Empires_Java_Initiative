@@ -10,7 +10,7 @@ public class RiversideArea extends Province {
     List<String> baseBuildings = List.of("Farma nadrzeczna");
 
 
-    RiversideArea(){
+    public RiversideArea(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

@@ -2,7 +2,6 @@ package menuStartPackage.FXMLControllers;
 
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
-import hexagons.src.main.java.com.prettybyte.hexagons.NoHexagonFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
-import menuStartPackage.Prowincje.City;
+
+import menuStartPackage.Prowincje.Province;
 import menuStartPackage.player.Player;
 import menuStartPackage.player.TourCounter;
 
@@ -29,7 +29,11 @@ import java.util.Vector;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
 
+//import static menuStartPackage.StartUp.musicPlayerInstance;
+
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
+
+//ownerId 0 -nikt
 
 
 public class MainBoardController {
@@ -103,12 +107,12 @@ public class MainBoardController {
         dyesField.setText("" + currentPlayer.getDyes());
     }
 
-
+    private boolean buyingMode=false;
+    private boolean buyInitialised = false;
+    private int ownerId =1;
 
 
     static public Vector<Player> playerList = new Vector<>();
-
-
 
     Player currentPlayer;
 
@@ -120,44 +124,43 @@ public class MainBoardController {
     //funkcja generujaca siatke
     @FXML
     void addHex(ActionEvent event1) {
-        map = new HexagonMap(50);
+        map = new HexagonMap(40);
         map.setRenderCoordinates(true);
-        int nibyzero = 31, niby30 = 90;
+        int jSetter = 1, jLimiter = 60;
         for (int i = 1; i < 60; i++) {
-            if (i % 2 == 0) {
-                nibyzero--;
-                niby30--;
-            }
-            for (int j = nibyzero; j < niby30; j++) {
-                if (i % 2 == 1 && j == niby30 - 1) continue;
+            if (i % 2 == 0) {jSetter--; jLimiter--;}
+            for (int j=jSetter; j < jLimiter; j++) {
 
-                Hexagon temphex = new Hexagon(j-30, i);
+                if (i % 2 == 1 && j == jLimiter - 1) continue;
+
+                Hexagon temphex = new Hexagon(j, i);
                 temphex.setFill(Color.WHITE);
-                province temp = new province();
-                mechanics[j][i]=temp;
+                Province temp = new Province();
+                temp.setCoordinates(j, i);
+                temphex.setProvince(temp);
 
-
-                if(j==35&&i==10){
+                if(j==5&&i==10){
                     temphex.setFill(Color.GOLD);
-                    mechanics[j][i].owner=ownerid;
+                    temphex.getProvince().ownerId=1;
+                    System.out.println(temphex.getProvince().i+" "+temphex.getProvince().j + " " + temphex.getProvince().ownerId);
+                    System.out.println(temphex.getQ()+" "+temphex.getR() + " " + temphex.getProvince().ownerId);
 
                 }
-
+                //temphex.getProvince().ownerId=7;
 
 
                 temphex.setOnMouseClicked(MouseEvent -> {
-                    visibility=!visibility;
-                    textField.setVisible(visibility);
+//                    visibility=!visibility;
+//                    textField.setVisible(visibility);
 
 //                    textField.setText(temphex.getQ() + ":" + temphex.getR());
                     if(buyingMode) {
                         buyField(temphex);
                     }
                 });
-//                temphex.setOnMouseMoved(MouseEvent -> {
-//                    textField.setText(temphex.getQ() + ":" + temphex.getR());
-//                    temphex.setFill(colorPick);
-//                });
+                temphex.setOnMouseMoved(MouseEvent -> {
+                    textField.setText(temphex.getQ() + ":" + temphex.getR() + "  i:"+temphex.getProvince().i+" j:"+temphex.getProvince().j + "owner: "+ temphex.getProvince().ownerId);
+                });
 //                if (i % 2 == 0) {
 //                    temphex.setFill(Color.PINK);
 //                }
@@ -169,13 +172,13 @@ public class MainBoardController {
 //                }
 
 
-                temphex.setProvince(new City());
-                temphex.getProvince().setCoordinates(temphex.getQ(), temphex.getR());
+                //temphex.setProvince(new City());
+                //temphex.getProvince().setCoordinates(temphex.getQ(), temphex.getR());
 
                 map.addHexagon(temphex);
             }
 
-            System.out.println(nibyzero);
+            //System.out.println(jSetter);
         }
         Group tempgrup = new Group();
         map.render(tempgrup);
@@ -189,133 +192,112 @@ public class MainBoardController {
     void buyClicked() {
         buyingMode=!buyingMode;
         if(buyingMode) {
-            buyButton.setText("WYJDZ");
+            buyButton.setText("WYJDZ "+buyingMode);
         }
         else {
             buyInitialised=false;
-            buyButton.setText("KUP POLE");
+            cityCoordinatesLock = false;
+            buyButton.setText("KUP POLE "+buyingMode);
         }
     }
 
 
-    private boolean buyingMode=false;
-    private boolean buyInitialised = false;
-    private int ownerid =1;
 
 
 
-
-    private class province {
-
-        int owner = 0;
-
-
-
-    }
-    private province[][] mechanics = new province[90][90];
-    private int initialisedQ;
-    private int initialisedR;
+    boolean cityCoordinatesLock = false;
+    private int initialisedI;
+    private int initialisedJ;
 
 
     //podswietla na rozowo te heksy ktore sa mozliwe do kupna, daje te grafike cos tam na te kupione
     private void buyField(Hexagon tempname) {
-        System.out.println("i:" + tempname.getProvince().i +" j: "+ tempname.getProvince().j);
-        System.out.println("q:" + tempname.getQ() +" r: "+ tempname.getR());
 
-        int q = tempname.getQ() + 30;
-        int r = tempname.getR();
-        if(!buyInitialised &&mechanics[q][r].owner!=ownerid){
+//        System.out.println("i:" + tempname.getProvince().i + " j:" + tempname.getProvince().j);
+//        System.out.print("q:" + tempname.getQ() + " r: " + tempname.getR() + " buyinit" + buyInitialised);
+        int i = tempname.getQ();
+        int j = tempname.getR();
+//        System.out.println(" " + map.getHexagon(i, j).getProvince().ownerId);
+        if (!buyInitialised && tempname.getProvince().ownerId != ownerId) {
             buyClicked();
             return;
         }
-        //System.out.println("q:" + q + "  r:" + r);
-        if (!buyInitialised) {
-            for (int tq = q - 3; tq < q + 4; tq++) {
-                for (int tr = r - 3; tr < r + 4; tr++) {
-                    //System.out.println("tq:" + tq + "  tr:" + tr);
-                    if (
-                            mechanics[tq][tr - 1].owner == ownerid ||
-                                    mechanics[tq][tr + 1].owner == ownerid ||
-                                    mechanics[tq + 1][tr - 1].owner == ownerid ||
-                                    mechanics[tq - 1][tr + 1].owner == ownerid ||
-                                    mechanics[tq + 1][tr].owner == ownerid ||
-                                    mechanics[tq - 1][tr].owner == ownerid) {
-                        try {
-                            map.getHexagon(tq - 30, tr).setFill(Color.PINK);
-                            System.out.println("SUKCES");
-                        } catch (NoHexagonFoundException e) {
-                            e.printStackTrace();
+        if (!cityCoordinatesLock) {
+            cityCoordinatesLock = true;
+            buyInitialised = true;
+            initialisedI = i;
+            initialisedJ = j;
+
+            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
+                for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
+//                    System.out.println("tq:" + tempI + "  tr:" + tempJ + " ownId:" + ownerId);
+                    if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
+                            || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
+                            || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
+
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {
+                            map.getHexagon(tempI, tempJ).setFill(Color.PINK);
+//                            System.out.println("SUKCES");
                         }
                     }
                 }
             }
-            buyInitialised = true;
-            initialisedQ = tempname.getQ();
-            initialisedR = tempname.getR();
-        } else {
-            if ((Math.abs(initialisedQ - tempname.getQ()) > 3 ||
-                    Math.abs(initialisedR - tempname.getR()) > 3) ||
-                    (tempname.getQ() < initialisedQ && tempname.getR() < initialisedR &&
-                            (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 4
-                            || (tempname.getQ() > initialisedQ && tempname.getR() > initialisedR &&
-                            (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 4
-                            || (tempname.getR() == initialisedR && Math.abs(initialisedQ - tempname.getQ()) == 3)
-                            || (tempname.getQ() == initialisedQ && Math.abs(initialisedR - tempname.getR()) == 3)
-                            || (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 6))) {
+            return;
+        } else { //click poza zasiegiem
+            if ((Math.abs(initialisedI - i) > 3 ||
+                    Math.abs(initialisedJ - j) > 3) ||
+                    (i < initialisedI && j < initialisedJ &&
+                            ((Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 4 || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 5)
+                            || (i > initialisedI && j > initialisedJ &&
+                            ((Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 4 || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 5)
+                            || (j == initialisedJ && Math.abs(initialisedI - i) == 3)
+                            || (i == initialisedI && Math.abs(initialisedJ - j) == 3)
+                            || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 6))) {
                 return;
             }
-            if(mechanics[q][r].owner==ownerid){return;}
+        }
 
-            Image image = null;
-            try {
-                image = new Image(getClass().getResource("city.png").toURI().toString());
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            ImagePattern imgPat = new ImagePattern(image);
-            try {
-                map.getHexagon(q - 30, r).setFill(imgPat);
+        map.getHexagon(i, j).getProvince().ownerId = ownerId;
 
-            } catch (NoHexagonFoundException e) {
-                e.printStackTrace();
-            }
-            mechanics[q][r].owner=ownerid;
-            for (int tq = initialisedQ + 30 - 3; tq < initialisedQ + 30 + 4; tq++) {
-                for (int tr = initialisedR - 3; tr < initialisedR + 4; tr++) {
-                    //System.out.println("tq:" + tq + "  tr:" + tr);
-                    if (
-                            mechanics[tq][tr - 1].owner == ownerid ||
-                                    mechanics[tq][tr + 1].owner == ownerid ||
-                                    mechanics[tq + 1][tr - 1].owner == ownerid ||
-                                    mechanics[tq - 1][tr + 1].owner == ownerid ||
-                                    mechanics[tq + 1][tr].owner == ownerid ||
-                                    mechanics[tq - 1][tr].owner == ownerid) {
-                        try {
-                            if (map.getHexagon(tq - 30, tr).getFill() != Color.GOLD) {
-
-                                if (((Math.abs(initialisedQ+30 - tq) > 3 ||
-                                        Math.abs(initialisedR - tr) > 3) ||
-                                        (tq < initialisedQ+30 && tr < initialisedR &&
-                                                (Math.abs(initialisedQ +30- tq) + Math.abs(initialisedR - tr)) == 4
-                                                || (tq > initialisedQ +30&& tr > initialisedR &&
-                                                (Math.abs(initialisedQ +30- tq) + Math.abs(initialisedR - tr)) == 4
-                                                || (tr == initialisedR && Math.abs(initialisedQ +30- tq) == 3)
-                                                || (tq == initialisedQ+30 && Math.abs(initialisedR - tr) == 3)
-                                                || (Math.abs(initialisedQ +30- tq) + Math.abs(initialisedR - tr)) == 6)
-                                        ))
-                                ) {continue;}
-                                    if(mechanics[tq][tr].owner==0)
-                                        map.getHexagon(tq - 30, tr).setBackgroundColor(Color.PINK);
-                                    System.out.println("SUKCES");
-                            }
-                        } catch (NoHexagonFoundException e) {
-                            e.printStackTrace();
+        for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
+            for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
+                //System.out.println("tq:" + tq + "  tr:" + tr);
+                if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
+                        || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
+                        || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
+                    if (map.getHexagon(tempI, tempJ).getProvince().ownerId==0) {
+                        if ((Math.abs(initialisedI - tempI) > 3 || //patern mozliwych do kupna
+                                Math.abs(initialisedJ - tempJ) > 3) ||
+                                (tempI < initialisedI && tempJ < initialisedJ &&
+                                        (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4
+                                        || (tempI > initialisedI && tempJ > initialisedJ &&
+                                        (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4
+                                        || (tempJ == initialisedJ && Math.abs(initialisedI - tempI) == 3)
+                                        || (tempI == initialisedI && Math.abs(initialisedJ - tempJ) == 3)
+                                        || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
+                            continue;
                         }
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId)
+                            map.getHexagon(tempI, tempJ).setBackgroundColor(Color.PINK);
+//                        System.out.println("SUKCES");
                     }
                 }
             }
         }
+        Image image = null;
+        try {
+            image = new Image(getClass().getResource("city.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        ImagePattern imgPat = new ImagePattern(image);
+        map.getHexagon(i, j).setFill(imgPat);
+
     }
+
+
+
+
 
     @FXML
     void backToMainMenuFromBoard(ActionEvent event) {

@@ -12,7 +12,7 @@ public class Coast extends Province {
     List<String> baseBuildings = List.of("latarnia");
 
 
-    Coast(){
+    public Coast(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

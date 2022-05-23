@@ -25,6 +25,21 @@ public class SettingsController {
     private Scene scene;
     private Parent root;
 
+
+    @FXML
+    void mapBuilder(ActionEvent event) {
+        try {
+            root = FXMLLoader.load(getClass().getResource("mapBuilder.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        musicPlayerInstance.menu = false;
+        musicPlayerInstance.stopMusic();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+    }
+
+
     @FXML
     void backToMainMenu(ActionEvent event) {
         try {
@@ -32,6 +47,7 @@ public class SettingsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
     }

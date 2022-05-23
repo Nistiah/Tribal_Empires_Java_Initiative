@@ -9,7 +9,7 @@ public class ForestWyzyny extends Province {
     List<String> baseBuildings = List.of("Łowca");
 
 
-    ForestWyzyny(){
+    public ForestWyzyny(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

@@ -10,7 +10,7 @@ public class TrawaFlat extends Province {
     List<String> possibleBuildings = Arrays.asList("Hodowla krów", "Hodowla świń", "Hodowla koni");
     List<String> baseBuildings = List.of("Farma");
 
-    TrawaFlat(){
+    public TrawaFlat(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

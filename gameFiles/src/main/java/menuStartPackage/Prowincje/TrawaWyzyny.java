@@ -11,7 +11,7 @@ public class TrawaWyzyny extends Province {
     List<String> baseBuildings = List.of("Farma");
 
 
-    TrawaWyzyny(){
+    public TrawaWyzyny(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);
