@@ -8,6 +8,9 @@ public class ForestFlat extends Province {
     List<String> possibleBuildings = Arrays.asList("Tartak", "Złapanie dzików", "Wycięcie lasu");
     List<String> baseBuildings = List.of("Łowca");
 
+    @Override
+    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/forest - flat.png";}
+
     ForestFlat(){
         setResources(resources);
         setType(type);
