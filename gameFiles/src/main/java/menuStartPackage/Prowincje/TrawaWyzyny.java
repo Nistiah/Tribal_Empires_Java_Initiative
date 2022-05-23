@@ -10,8 +10,6 @@ public class TrawaWyzyny extends Province {
     List<String> possibleBuildings = Arrays.asList("Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto", "Hodowla krów", "Hodowla świń");
     List<String> baseBuildings = List.of("Farma");
 
-    @Override
-    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/trawa - wyz2.png";}
 
     public TrawaWyzyny(){
         setResources(resources);

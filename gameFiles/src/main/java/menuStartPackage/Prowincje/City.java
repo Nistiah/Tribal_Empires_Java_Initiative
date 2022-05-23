@@ -11,8 +11,6 @@ public class City extends Province {
     List<String> possibleBuildings = List.of();
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
 
-    @Override
-    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/city.png";}
 
     public City(){
         setResources(resources);

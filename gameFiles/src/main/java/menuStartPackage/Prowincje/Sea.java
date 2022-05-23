@@ -9,8 +9,6 @@ public class Sea extends Province {
     List<String> possibleBuildings = Arrays.asList("Poławiacze ryb", "Poławiacze szkarłatników");
     List<String> baseBuildings = Arrays.asList();
 
-    @Override
-    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/sea2.jpg";}
 
     Sea(){
         setResources(resources);
