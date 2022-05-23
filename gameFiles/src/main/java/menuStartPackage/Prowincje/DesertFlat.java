@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DesertFlat extends Province {
     List<String> resources = Arrays.asList();
-    String type = "Pustynia flat";
+    String type = "PustyniaFlat";
     List<String> possibleBuildings = Arrays.asList();
     List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
 
