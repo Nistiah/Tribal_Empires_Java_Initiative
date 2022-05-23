@@ -8,7 +8,6 @@ import java.util.List;
 public class City extends Province {
     List<String> resources = List.of();
     String type = "Miasto";
-    String iconPath = "../../resources/menuStartPackage/FXMLControllers/city.png";
     List<String> possibleBuildings = List.of();
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
 
