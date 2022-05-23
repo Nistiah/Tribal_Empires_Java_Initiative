@@ -1,4 +1,7 @@
 ./target
 /gameFiles/target/
 /gameFiles/target/classes/
+/gameFiles/target/
+/gameFiles/target/
+/gameFiles/target/classes/
 ./idea
