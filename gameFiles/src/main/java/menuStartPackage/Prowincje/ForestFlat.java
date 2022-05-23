@@ -8,11 +8,15 @@ public class ForestFlat extends Province {
     List<String> possibleBuildings = Arrays.asList("Tartak", "Złapanie dzików", "Wycięcie lasu");
     List<String> baseBuildings = List.of("Łowca");
 
-    public ForestFlat(){
+
+    public ForestFlat() {
+
+
         setResources(resources);
         setType(type);
         setBaseProduction(type);
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
+
     }
 }

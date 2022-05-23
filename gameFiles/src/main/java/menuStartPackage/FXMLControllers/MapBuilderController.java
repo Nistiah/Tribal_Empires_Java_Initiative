@@ -104,7 +104,7 @@ public class MapBuilderController {
                 temphex.setOnMouseClicked(MouseEvent -> {
                     temphex.setProvince(province);
                     try {
-                        image = new Image(getClass().getResource("province.tutajpath").toURI().toString());
+                        image = new Image(getClass().getResource(province.iconPath()).toURI().toString());
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
