@@ -9,8 +9,6 @@ public class RiversideArea extends Province {
     List<String> possibleBuildings = List.of("System irygacji");
     List<String> baseBuildings = List.of("Farma nadrzeczna");
 
-    @Override
-    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/river2.png";}
 
     public RiversideArea(){
         setResources(resources);

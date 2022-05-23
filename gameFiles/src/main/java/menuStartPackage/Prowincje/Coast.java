@@ -11,8 +11,6 @@ public class Coast extends Province {
     List<String> possibleBuildings = Arrays.asList("Zbieracze bursztynu", "Zbieracze owoców morza");
     List<String> baseBuildings = List.of("latarnia");
 
-    @Override
-    public String iconPath(){return "../../resources/menuStartPackage/FXMLControllers/province_icons/wybrzeze.jpg";}
 
     public Coast(){
         setResources(resources);
