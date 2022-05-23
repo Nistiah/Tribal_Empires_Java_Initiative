@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ForestWyzyny extends Province{
     List<String> resources = Arrays.asList("drewno", "brąz", "żelazo", "złoto");
-    String type = "Las wyzyny";
+    String type = "LasWyzyny";
     List<String> possibleBuildings = Arrays.asList("Tartak", "Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto", "Wycięcie lasu");
     List<String> baseBuildings = List.of("Łowca");
 
