@@ -1,11 +1,8 @@
-package Prowincje;
-
-import Prowincje.Province;
-
+package menuStartPackage.Prowincje;
 import java.util.Arrays;
 import java.util.List;
 
-public class Sea extends Province {
+public class Sea extends Province{
 
     List<String> resources = Arrays.asList("ryby", "barwiniki");
     String type = "Morze";

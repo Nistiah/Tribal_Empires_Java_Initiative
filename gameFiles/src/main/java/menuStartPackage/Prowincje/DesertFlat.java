@@ -1,11 +1,8 @@
-package Prowincje;
-
-import Prowincje.Province;
-
+package menuStartPackage.Prowincje;
 import java.util.Arrays;
 import java.util.List;
 
-public class DesertFlat extends Province {
+public class DesertFlat extends Province{
     List<String> resources = Arrays.asList();
     String type = "Pustynia flat";
     List<String> possibleBuildings = Arrays.asList();

@@ -10,16 +10,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
-public class menuStartController {
-    private Stage stage;
+public class MenuStartController {
+    private static Stage stage;
     private Scene scene;
     private Parent root;
 
     @FXML
     void startNewGame(ActionEvent event) {
-
         try {
             root = FXMLLoader.load(getClass().getResource("mainBoard.fxml"));
         } catch (IOException e) {
@@ -28,10 +27,7 @@ public class menuStartController {
         musicPlayerInstance.menu = false;
         musicPlayerInstance.stopMusic();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        stage.getScene().setRoot(root);
     }
 
     @FXML
@@ -41,13 +37,8 @@ public class menuStartController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-
-        stage.setFullScreen(true);
-        stage.show();
+        stage.getScene().setRoot(root);
     }
 
     @FXML
@@ -58,10 +49,7 @@ public class menuStartController {
             e.printStackTrace();
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        stage.getScene().setRoot(root);
     }
 
     @FXML

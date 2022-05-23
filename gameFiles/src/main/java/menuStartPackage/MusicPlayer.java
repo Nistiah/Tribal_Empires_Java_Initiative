@@ -4,9 +4,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URISyntaxException;
 
-public class musicPlayer extends Thread {
-    MediaPlayer mediaPlayer;
-    Media media;
+public class MusicPlayer extends Thread {
+    public static MediaPlayer mediaPlayer;
+    private Media media;
     public String songName = "";
     public boolean menu = true;
     public boolean exit = false;
@@ -14,12 +14,14 @@ public class musicPlayer extends Thread {
     public String[] songs = {"bacchanale.mp3", "EgyptianMarch.mp3", "TurtleBeach.mp3"};
     public double volume = 0.2;
 
+
+
     @Override
     public void run() {
         while (true) {
             if (menu) {
                 songName = "lacrimosa.mp3";
-            } else if (exit) {
+            }else if (exit) {
                 songName = "diesIrae.mp3";
                 exit = false;
                 menu = true;
@@ -29,26 +31,52 @@ public class musicPlayer extends Thread {
             try {
                 media = new Media(getClass().getResource(songName).toURI().toString());
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+                System.out.println("brak sciezki dzwiekowej");
             }
             mediaPlayer = new MediaPlayer(media);
             mediaPlayer.setVolume(volume);
-            mediaPlayer.play();
-            try {
-                Thread.sleep(500);   //this is very important, without it thread has troubles calculating in time media duration, idk why
-            } catch (InterruptedException e) {
+            startUpmusic();
+
+            //mediaPlayer.setOnEndOfMedia();   --do ogarniecia czy wgl watek trzeba
+
+            while(mediaPlayer.getStatus()== MediaPlayer.Status.PLAYING){
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+                    System.out.println("interr 2celowy");
+                }
+//            i++;
+//            System.out.println(i);
             }
 
-            try {
-                Thread.sleep((long) media.getDuration().toMillis());
-            } catch (InterruptedException e) {
-            }
+
+//            try {
+//                Thread.sleep((long) media.getDuration().toMillis());
+//            } catch (InterruptedException e) {
+//            }
 
             if (killthread) {
                 return;
             }
         }
     }
+
+    public void startUpmusic(){
+        mediaPlayer.play();
+//        int i = 0;
+        while(mediaPlayer.getStatus()!= MediaPlayer.Status.PLAYING){
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                System.out.println("interr celowy");
+            }
+//            i++;
+//            System.out.println(i);
+        }
+
+    }
+
 
     public void setVolume(double value) {
         volume += value;

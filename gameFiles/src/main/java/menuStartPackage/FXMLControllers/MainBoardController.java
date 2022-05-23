@@ -15,23 +15,24 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.Stage;
+import menuStartPackage.Prowincje.City;
+import menuStartPackage.player.Player;
+import menuStartPackage.player.TourCounter;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Vector;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
+
+//progamowanie reaktywne - zmiana zmiennej -> zdarzenie
 
 
-public class mainBoardController {
+public class MainBoardController {
 
     private Color colorPick = Color.WHITE;
     private Stage stage;
@@ -54,11 +55,72 @@ public class mainBoardController {
         colorPick = colorPicker.getValue();
     }
 
-    private HexagonMap map;
+    int playerId;
 
     @FXML
+    private TextField turnField = new TextField("dupa");
+
+    @FXML
+    private TextField fractionField = new TextField("duadudawu");
+
+    @FXML
+    private TextField goldField = new TextField("goldField");
+
+    @FXML
+    private TextField beliefField = new TextField("beliefField");
+
+    @FXML
+    private TextField bronzeField = new TextField("bronzeField");
+
+    @FXML
+    private TextField dyesField = new TextField("dyesField");
+
+    @FXML
+    private TextField recoursesField = new TextField("recoursesField");
+
+    @FXML
+    private TextField horsesField = new TextField("horsesField");
+
+    @FXML
+    private TextField ironField = new TextField("ironField");
+
+    @FXML
+    void nextPlayerButton(ActionEvent event){
+        turnField.setText("Tura: "+tourCounter.getTour());
+        playerId++;
+        if(playerId==playerList.size()){
+            playerId=0;
+            tourCounter.incrementTour();
+        }
+        currentPlayer=playerList.get(playerId);
+        fractionField.setText("Gracz:"+currentPlayer.getClass().getName());
+        goldField.setText("" + currentPlayer.getGold());
+        beliefField.setText("" + currentPlayer.getFaith());
+        bronzeField.setText("" + currentPlayer.getBronze());
+        recoursesField.setText("" + currentPlayer.getBuildingResources());
+        horsesField.setText("" + currentPlayer.getHorses());
+        ironField.setText("" + currentPlayer.getIron());
+        dyesField.setText("" + currentPlayer.getDyes());
+    }
+
+
+
+
+    static public Vector<Player> playerList = new Vector<>();
+
+
+
+    Player currentPlayer;
+
+    TourCounter tourCounter = new TourCounter();
+
+    private HexagonMap map;
+
+    boolean visibility;
+    //funkcja generujaca siatke
+    @FXML
     void addHex(ActionEvent event1) {
-        map = new HexagonMap(40);
+        map = new HexagonMap(50);
         map.setRenderCoordinates(true);
         int nibyzero = 31, niby30 = 90;
         for (int i = 1; i < 60; i++) {
@@ -84,7 +146,10 @@ public class mainBoardController {
 
 
                 temphex.setOnMouseClicked(MouseEvent -> {
-                    textField.setText(temphex.getQ() + ":" + temphex.getR());
+                    visibility=!visibility;
+                    textField.setVisible(visibility);
+
+//                    textField.setText(temphex.getQ() + ":" + temphex.getR());
                     if(buyingMode) {
                         buyField(temphex);
                     }
@@ -102,6 +167,11 @@ public class mainBoardController {
 //                if (i % 2 == 0 && j % 2 == 0) {
 //                    temphex.setFill(Color.GOLD);
 //                }
+
+
+                temphex.setProvince(new City());
+                temphex.getProvince().setCoordinates(temphex.getQ(), temphex.getR());
+
                 map.addHexagon(temphex);
             }
 
@@ -112,10 +182,9 @@ public class mainBoardController {
         anchorBoard.getChildren().add(tempgrup);
         generateHexagonMap.setVisible(false);
         scrollPane.pannableProperty().set(true);
-
-
-
     }
+
+    //panel do uruchomienia kupowania hexów dla miasta
     @FXML
     void buyClicked() {
         buyingMode=!buyingMode;
@@ -134,28 +203,36 @@ public class mainBoardController {
     private int ownerid =1;
 
 
-    public class province {
+
+
+    private class province {
+
         int owner = 0;
 
 
 
     }
-    public province[][] mechanics = new province[90][90];
+    private province[][] mechanics = new province[90][90];
     private int initialisedQ;
     private int initialisedR;
 
+
+    //podswietla na rozowo te heksy ktore sa mozliwe do kupna, daje te grafike cos tam na te kupione
     private void buyField(Hexagon tempname) {
+        System.out.println("i:" + tempname.getProvince().i +" j: "+ tempname.getProvince().j);
+        System.out.println("q:" + tempname.getQ() +" r: "+ tempname.getR());
+
         int q = tempname.getQ() + 30;
         int r = tempname.getR();
         if(!buyInitialised &&mechanics[q][r].owner!=ownerid){
             buyClicked();
             return;
         }
-        System.out.println("q:" + q + "  r:" + r);
+        //System.out.println("q:" + q + "  r:" + r);
         if (!buyInitialised) {
             for (int tq = q - 3; tq < q + 4; tq++) {
                 for (int tr = r - 3; tr < r + 4; tr++) {
-                    System.out.println("tq:" + tq + "  tr:" + tr);
+                    //System.out.println("tq:" + tq + "  tr:" + tr);
                     if (
                             mechanics[tq][tr - 1].owner == ownerid ||
                                     mechanics[tq][tr + 1].owner == ownerid ||
@@ -184,10 +261,7 @@ public class mainBoardController {
                             (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 4
                             || (tempname.getR() == initialisedR && Math.abs(initialisedQ - tempname.getQ()) == 3)
                             || (tempname.getQ() == initialisedQ && Math.abs(initialisedR - tempname.getR()) == 3)
-                            || (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 6)
-
-                    )
-            ) {
+                            || (Math.abs(initialisedQ - tempname.getQ()) + Math.abs(initialisedR - tempname.getR())) == 6))) {
                 return;
             }
             if(mechanics[q][r].owner==ownerid){return;}
@@ -208,7 +282,7 @@ public class mainBoardController {
             mechanics[q][r].owner=ownerid;
             for (int tq = initialisedQ + 30 - 3; tq < initialisedQ + 30 + 4; tq++) {
                 for (int tr = initialisedR - 3; tr < initialisedR + 4; tr++) {
-                    System.out.println("tq:" + tq + "  tr:" + tr);
+                    //System.out.println("tq:" + tq + "  tr:" + tr);
                     if (
                             mechanics[tq][tr - 1].owner == ownerid ||
                                     mechanics[tq][tr + 1].owner == ownerid ||
@@ -228,13 +302,11 @@ public class mainBoardController {
                                                 || (tr == initialisedR && Math.abs(initialisedQ +30- tq) == 3)
                                                 || (tq == initialisedQ+30 && Math.abs(initialisedR - tr) == 3)
                                                 || (Math.abs(initialisedQ +30- tq) + Math.abs(initialisedR - tr)) == 6)
-
                                         ))
                                 ) {continue;}
                                     if(mechanics[tq][tr].owner==0)
                                         map.getHexagon(tq - 30, tr).setBackgroundColor(Color.PINK);
                                     System.out.println("SUKCES");
-
                             }
                         } catch (NoHexagonFoundException e) {
                             e.printStackTrace();
@@ -242,10 +314,7 @@ public class mainBoardController {
                     }
                 }
             }
-
         }
-
-
     }
 
     @FXML
@@ -259,10 +328,7 @@ public class mainBoardController {
             e.printStackTrace();
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        stage.getScene().setRoot(root);
     }
     @FXML
     private ScrollPane scrollPane;

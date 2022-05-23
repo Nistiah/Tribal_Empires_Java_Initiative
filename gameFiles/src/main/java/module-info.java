@@ -8,5 +8,6 @@ module gameFiles {
     opens menuStartPackage to javafx.fxml;
     exports menuStartPackage;
     exports menuStartPackage.FXMLControllers;
+    exports menuStartPackage.Prowincje;
     opens menuStartPackage.FXMLControllers to javafx.fxml;
 }

@@ -9,25 +9,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.mainBoardController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
    <right>
       <SplitPane id="rightBar" dividerPositions="0.5" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="282.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
-               <children>
-                  <ColorPicker fx:id="colorPicker" layoutX="70.0" layoutY="80.0" onAction="#but4" />
-                  <Button layoutX="170.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="53.0" prefWidth="128.0" stylesheets="@../mainBoard.css" text="Quit">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Button>
-                  <TextField fx:id="textField" layoutX="37.0" layoutY="233.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
-               <children>
-                  <Button fx:id="buyButton" layoutX="93.0" layoutY="141.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
-               </children></AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="282.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
          </items>
       </SplitPane>
    </right>
@@ -46,4 +33,28 @@
          </content>
       </ScrollPane>
    </left>
+   <top>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button layoutX="84.0" layoutY="76.0" mnemonicParsing="false" onAction="#nextPlayerButton" text="Nastepna Tura" />
+            <TextField fx:id="turnField" layoutX="272.0" layoutY="101.0" />
+            <TextField fx:id="fractionField" layoutX="478.0" layoutY="102.0" />
+            <TextField fx:id="goldField" editable="false" focusTraversable="false" layoutX="695.0" layoutY="51.0" />
+            <TextField fx:id="beliefField" editable="false" layoutX="695.0" layoutY="89.0" />
+            <TextField fx:id="bronzeField" editable="false" layoutX="695.0" layoutY="127.0" />
+            <TextField fx:id="dyesField" editable="false" layoutX="868.0" layoutY="51.0" />
+            <TextField fx:id="horsesField" editable="false" layoutX="868.0" layoutY="89.0" />
+            <TextField fx:id="recoursesField" editable="false" layoutX="868.0" layoutY="127.0" />
+            <TextField fx:id="ironField" editable="false" layoutX="1033.0" layoutY="89.0" />
+            <Button layoutX="1765.0" layoutY="11.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="53.0" prefWidth="128.0" stylesheets="@../mainBoard.css" text="Quit">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Button>
+            <ColorPicker fx:id="colorPicker" layoutX="1612.0" layoutY="28.0" onAction="#but4" />
+            <TextField fx:id="textField" layoutX="1561.0" layoutY="89.0" />
+            <Button fx:id="buyButton" layoutX="1741.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

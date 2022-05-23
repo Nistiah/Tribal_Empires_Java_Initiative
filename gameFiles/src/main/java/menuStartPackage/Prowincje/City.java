@@ -1,21 +1,21 @@
-package Prowincje;
+package menuStartPackage.Prowincje;
 
-import Prowincje.Province;
-
+import java.util.Arrays;
 import java.util.List;
 
-public class Mountains extends Province {
+public class City extends Province{
     List<String> resources = List.of();
-    String type = "Gory";
+    String type = "Miasto";
     List<String> possibleBuildings = List.of();
-    List<String> baseBuildings = List.of();
+    List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
 
 
-    Mountains(){
+    public City(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
     }
+
 }

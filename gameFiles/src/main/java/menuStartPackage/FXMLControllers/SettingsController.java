@@ -10,10 +10,10 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import static menuStartPackage.startUp.musicPlayerInstance;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
 
-public class settingsController {
+public class SettingsController {
 
     @FXML
     private Button volumeUPButton;
@@ -32,11 +32,8 @@ public class settingsController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setFullScreen(true);
-        stage.show();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
     }
 
     @FXML

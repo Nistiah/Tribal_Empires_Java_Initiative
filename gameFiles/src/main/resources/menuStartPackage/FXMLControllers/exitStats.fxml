@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.statsController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.StatsController">
    <center>
       <Button mnemonicParsing="false" onAction="#backToMainMenuFromStats" prefHeight="53.0" prefWidth="128.0" stylesheets="@../mainBoard.css" text="Quit" BorderPane.alignment="CENTER">
          <font>

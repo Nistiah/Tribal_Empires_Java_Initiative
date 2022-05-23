@@ -3,6 +3,7 @@ package hexagons.src.main.java.com.prettybyte.hexagons;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import menuStartPackage.Prowincje.Province;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import static java.lang.Math.*;
  */
 public class Hexagon extends Polygon {
 
+    private Province province ;
     final GridPosition position;
     private HexagonMap map;
     private boolean isVisualObstacle;
@@ -21,6 +23,14 @@ public class Hexagon extends Polygon {
     Hexagon aStarCameFrom;
     private int graphicsXoffset;
     private int graphicsYoffset;
+
+
+    public Province getProvince() {
+        return province;
+    }
+    public void setProvince(Province province) {
+        this.province=province;
+    }
 
     /**
      * The position of the Hexagon is specified with axial coordinates

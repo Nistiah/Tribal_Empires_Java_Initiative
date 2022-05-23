@@ -1,10 +1,7 @@
-package Prowincje;
-
-import Prowincje.Province;
-
+package menuStartPackage.Prowincje;
 import java.util.List;
 
-public class RiversideArea extends Province {
+public class RiversideArea extends Province{
     List<String> resources = List.of();
     String type = "Teren nadrzeczny";
     List<String> possibleBuildings = List.of("System irygacji");

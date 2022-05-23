@@ -1,11 +1,8 @@
-package Prowincje;
-
-import Prowincje.Province;
-
+package menuStartPackage.Prowincje;
 import java.util.Arrays;
 import java.util.List;
 
-public class ForestFlat extends Province {
+public class ForestFlat extends Province{
     List<String> resources = Arrays.asList("drewno", "dziczyzna");
     String type = "Las flat";
     List<String> possibleBuildings = Arrays.asList("Tartak", "Złapanie dzików", "Wycięcie lasu");
