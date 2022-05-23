@@ -40,22 +40,22 @@ public class Province {
             case "Morze":
                 food = 1;
                 break;
-            case "Pustynia flat":
+            case "PustyniaFlat":
                 belief = 1;
                 break;
-            case "Pustynia wyzyny":
+            case "PustyniaWyzyny":
                 belief = 1;
                 break;
-            case "Trawa flat":
+            case "TrawaFlat":
                 food = 1;
                 break;
-            case "Trawa wyzyny":
+            case "TrawaWyzyny":
                 food = 1;
                 break;
-            case "Las flat":
+            case "LasFlat":
                 wood = 1;
                 break;
-            case "Las wyzyny":
+            case "LasWyzyny":
                 wood = 1;
                 break;
             case "Gory":
@@ -63,7 +63,7 @@ public class Province {
             case "Wybrzeze":
                 food = 1;
                 break;
-            case "Teren nadrzeczny":
+            case "TerenNadrzeczny":
                 food = 2;
                 break;
             case "Miasto":
