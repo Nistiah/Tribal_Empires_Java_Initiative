@@ -19,12 +19,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
 
-import menuStartPackage.Prowincje.Province;
+import menuStartPackage.Prowincje.*;
 import menuStartPackage.player.Player;
 import menuStartPackage.player.TourCounter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
@@ -53,6 +56,7 @@ public class MainBoardController {
     private TextField textField;
     @FXML
     public ColorPicker colorPicker = new ColorPicker();
+    private Color color;
 
     @FXML
     void but4(ActionEvent event) {
@@ -121,71 +125,123 @@ public class MainBoardController {
     private HexagonMap map;
 
     boolean visibility;
-    //funkcja generujaca siatke
+
+    private Province provinceBuilder(String name){
+        switch (name){
+            case "City":
+                return new City();
+            case "Coast":
+                return  new Coast();
+            case "DesertFlat":
+                return  new DesertFlat();
+            case "DesertWyzyny":
+                return new DesertWyzyny();
+            case "ForestFlat":
+                return  new ForestFlat();
+            case "ForestWyzyny":
+                return  new ForestWyzyny();
+            case "Mountains":
+                return new Mountains();
+            case "RiversideArea":
+                return  new RiversideArea();
+            case "Sea":
+                return  new Sea();
+            case "TrawaFlat":
+                return  new TrawaFlat();
+            case "TrawaWyzyny":
+                return  new TrawaWyzyny();
+            default:
+                return  new TrawaFlat();
+        }
+    }
+
+    Image image;
     @FXML
-    void addHex(ActionEvent event1) {
+    void addHex(ActionEvent event) {
         map = new HexagonMap(40);
-        map.setRenderCoordinates(true);
-        int jSetter = 1, jLimiter = 60;
-        for (int i = 1; i < 60; i++) {
-            if (i % 2 == 0) {jSetter--; jLimiter--;}
-            for (int j=jSetter; j < jLimiter; j++) {
+        map.setRenderCoordinates(false);
+        File file = new File("map_1.txt");
 
-                if (i % 2 == 1 && j == jLimiter - 1) continue;
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int i,j,owner;
+        String tempProvince;
 
-                Hexagon temphex = new Hexagon(j, i);
-                temphex.setFill(Color.WHITE);
-                Province temp = new Province();
-                temp.setCoordinates(j, i);
-                temphex.setProvince(temp);
+        while(scanner.hasNext()){
 
-                if(j==5&&i==10){
-                    temphex.setFill(Color.GOLD);
-                    temphex.getProvince().ownerId=1;
-                    System.out.println(temphex.getProvince().i+" "+temphex.getProvince().j + " " + temphex.getProvince().ownerId);
-                    System.out.println(temphex.getQ()+" "+temphex.getR() + " " + temphex.getProvince().ownerId);
+            j=scanner.nextInt();
+            i=scanner.nextInt();
+            owner=scanner.nextInt();
+            tempProvince=scanner.next();
+            System.out.println(j+" "+i+" "+owner);
+            Hexagon temphex = new Hexagon(j, i);
+            temphex.setFill(Color.WHITE);
+            Province temp = provinceBuilder(tempProvince);
+            temp.setType(tempProvince);
+            temp.ownerId=owner;
+            temp.setCoordinates(j, i);
+            temphex.setProvince(temp);
+            try {
+                image = new Image(getClass().getResource(temp.iconPath()).toURI().toString());
+            } catch (URISyntaxException e) {
+                System.out.println("pattern null");
+            }
+            ImagePattern imgPat2 = new ImagePattern(image);
+            temphex.setFill(imgPat2);
+            switch (owner) {
+                case 0:
+                    playerId = 0;
+                    color = Color.BLACK;
+                    break;
+                case 1:
+                    playerId = 1;
+                    color = Color.AQUAMARINE;
+                    break;
+                case 2:
+                    playerId = 2;
+                    color = Color.YELLOW;
+                    break;
+                case 3:
+                    playerId = 3;
+                    color = Color.RED;
+                    break;
+            }
 
-                }
-                //temphex.getProvince().ownerId=7;
 
 
-                temphex.setOnMouseClicked(MouseEvent -> {
+            temphex.borderColor(color);
+
+
+
+            temphex.setOnMouseClicked(MouseEvent -> {
 //                    visibility=!visibility;
 //                    textField.setVisible(visibility);
 
 //                    textField.setText(temphex.getQ() + ":" + temphex.getR());
-                    if(buyingMode) {
-                        buyField(temphex);
-                    }
-                });
-                temphex.setOnMouseMoved(MouseEvent -> {
-                    textField.setText(temphex.getQ() + ":" + temphex.getR() + "  i:"+temphex.getProvince().i+" j:"+temphex.getProvince().j + "owner: "+ temphex.getProvince().ownerId);
-                });
-//                if (i % 2 == 0) {
-//                    temphex.setFill(Color.PINK);
-//                }
-//                if (j % 2 == 0) {
-//                    temphex.setFill(Color.YELLOW);
-//                }
-//                if (i % 2 == 0 && j % 2 == 0) {
-//                    temphex.setFill(Color.GOLD);
-//                }
+                if(buyingMode) {
+                    buyField(temphex);
+                }
+            });
+            temphex.setOnMouseMoved(MouseEvent -> {
+                textField.setText(temphex.getQ() + ":" + temphex.getR() + "  i:"+temphex.getProvince().i+" j:"+temphex.getProvince().j + "owner: "+ temphex.getProvince().ownerId);
+            });
+            map.addHexagon(temphex);
 
-
-                //temphex.setProvince(new City());
-                //temphex.getProvince().setCoordinates(temphex.getQ(), temphex.getR());
-
-                map.addHexagon(temphex);
-            }
-
-            //System.out.println(jSetter);
         }
         Group tempgrup = new Group();
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
-        generateHexagonMap.setVisible(false);
+        generateHexagonMap.setVisible(true);
         scrollPane.pannableProperty().set(true);
+
     }
+
+
+
 
     //panel do uruchomienia kupowania hexów dla miasta
     @FXML
