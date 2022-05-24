@@ -44,7 +44,7 @@ public class MusicPlayer extends Thread {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
 //                    e.printStackTrace();
-                    System.out.println("interr 2celowy");
+                   // System.out.println("interr 2celowy");
                 }
 //            i++;
 //            System.out.println(i);

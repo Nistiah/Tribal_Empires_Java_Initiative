@@ -49,6 +49,10 @@ public class Hexagon extends Polygon {
         }
     }
 
+    public void borderColor(Color color){
+        this.setStroke(color);
+    }
+
     /**
      * @return axial Q-value
      */

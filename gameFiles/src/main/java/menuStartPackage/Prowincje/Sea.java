@@ -5,14 +5,14 @@ import java.util.List;
 public class Sea extends Province {
 
     List<String> resources = Arrays.asList("ryby", "barwiniki");
-    String type = "Morze";
+    String type = "Sea";
     List<String> possibleBuildings = Arrays.asList("Poławiacze ryb", "Poławiacze szkarłatników");
     List<String> baseBuildings = Arrays.asList();
 
     @Override
     public String iconPath(){return "provinceIcons/sea2.jpg";}
 
-    Sea(){
+    public Sea(){
         setResources(resources);
         setType(type);
         setBaseProduction(type);

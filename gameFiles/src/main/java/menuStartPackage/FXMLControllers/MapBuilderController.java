@@ -21,10 +21,12 @@ import javafx.stage.Stage;
 import menuStartPackage.Prowincje.*;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
@@ -59,6 +61,7 @@ public class MapBuilderController {
     private Province province;
     private Image image = null;
     PrintWriter writer;
+    Scanner scanner;
 
     @FXML
     private void saveMap(){
@@ -68,13 +71,13 @@ public class MapBuilderController {
             System.out.println("brak pliku");
         }
 
-        int jSetter = 1, jLimiter = 60;
-        for (int i = 1; i < 60; i++) {
+        int jSetter = 1, jLimiter = 30;
+        for (int i = 1; i < 30; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
                 //System.out.print(i+" "+j+" "+map.getHexagon(j,i).getProvince().getType()+"\n");
-                writer.print(j+" "+i+" "+map.getHexagon(j, i).getProvince().getType()+"\n");
+                writer.print(j+" "+i+" "+map.getHexagon(j,i).getProvince().ownerId+" "+map.getHexagon(j, i).getProvince().getType()+"\n");
 
             }
         }
@@ -87,9 +90,9 @@ public class MapBuilderController {
     @FXML
     void addHex(ActionEvent event1) {
         map = new HexagonMap(40);
-        map.setRenderCoordinates(true);
-        int jSetter = 1, jLimiter = 60;
-        for (int i = 1; i < 60; i++) {
+        map.setRenderCoordinates(false);
+        int jSetter = 1, jLimiter = 30;
+        for (int i = 1; i <30; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
@@ -97,24 +100,27 @@ public class MapBuilderController {
 
                 Hexagon temphex = new Hexagon(j, i);
                 temphex.setFill(Color.WHITE);
-                Province temp = new Province();
+                Province temp = new TrawaFlat();
                 temp.setCoordinates(j, i);
                 temphex.setProvince(temp);
 
                 temphex.setOnMouseClicked(MouseEvent -> {
+                    temphex.setProvince(null);
                     temphex.setProvince(province);
                     try {
                         image = new Image(getClass().getResource(province.iconPath()).toURI().toString());
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
                     }
+
                     ImagePattern imgPat = new ImagePattern(image);
+
                     temphex.setFill(imgPat);
+                    temphex.borderColor(color);
 
                 });
                 temphex.setOnMouseMoved(MouseEvent -> {
                     current.setText(temphex.getQ()+":"+temphex.getR()+" "+"owner:"+playerId+" "+temphex.getProvince().getType());
-
                 });
 
 
@@ -124,12 +130,126 @@ public class MapBuilderController {
         Group tempgrup = new Group();
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
-        generateHexagonMap.setVisible(false);
+        //generateHexagonMap.setVisible(false);
         scrollPane.pannableProperty().set(true);
     }
 
+    private Province provinceBuilder(String name){
+        switch (name){
+            case "City":
+                return new City();
+            case "Coast":
+                return  new Coast();
+            case "DesertFlat":
+                return  new DesertFlat();
+            case "DesertWyzyny":
+                return new DesertWyzyny();
+            case "ForestFlat":
+                return  new ForestFlat();
+            case "ForestWyzyny":
+                return  new ForestWyzyny();
+            case "Mountains":
+                return new Mountains();
+            case "RiversideArea":
+                return  new RiversideArea();
+            case "Sea":
+                return  new Sea();
+            case "TrawaFlat":
+                return  new TrawaFlat();
+            case "TrawaWyzyny":
+                return  new TrawaWyzyny();
+            default:
+                return  new TrawaFlat();
+        }
+    }
+
+    @FXML
+    void load(ActionEvent event) {
+        map = new HexagonMap(40);
+        map.setRenderCoordinates(false);
+        File file = new File("map_1.txt");
+
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int i,j,owner;
+        String tempProvince;
+
+        while(scanner.hasNext()){
+
+            j=scanner.nextInt();
+            i=scanner.nextInt();
+            owner=scanner.nextInt();
+            tempProvince=scanner.next();
+            System.out.println(j+" "+i+" "+owner);
+            Hexagon temphex = new Hexagon(j, i);
+            temphex.setFill(Color.WHITE);
+            Province temp = provinceBuilder(tempProvince);
+            temp.setType(tempProvince);
+            temp.ownerId=owner;
+            temp.setCoordinates(j, i);
+            temphex.setProvince(temp);
+            try {
+                image = new Image(getClass().getResource(temp.iconPath()).toURI().toString());
+            } catch (URISyntaxException e) {
+                System.out.println("pattern null");
+            }
+            ImagePattern imgPat2 = new ImagePattern(image);
+            temphex.setFill(imgPat2);
+            switch (owner) {
+                case 0:
+                    playerId = 0;
+                    color = Color.BLACK;
+                    break;
+                case 1:
+                    playerId = 1;
+                    color = Color.AQUAMARINE;
+                    break;
+                case 2:
+                    playerId = 2;
+                    color = Color.YELLOW;
+                    break;
+                case 3:
+                    playerId = 3;
+                    color = Color.RED;
+                    break;
+            }
 
 
+
+            temphex.borderColor(color);
+
+
+            temphex.setOnMouseClicked(MouseEvent -> {
+                temphex.setProvince(province);
+                try {
+                    image = new Image(getClass().getResource(province.iconPath()).toURI().toString());
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+
+                ImagePattern imgPat = new ImagePattern(image);
+
+                temphex.setFill(imgPat);
+                temphex.borderColor(color);
+
+            });
+            temphex.setOnMouseMoved(MouseEvent -> {
+                current.setText(temphex.getQ()+":"+temphex.getR()+" "+"owner:"+playerId+" "+temphex.getProvince().getType());
+
+            });
+            map.addHexagon(temphex);
+
+        }
+        Group tempgrup = new Group();
+        map.render(tempgrup);
+        anchorBoard.getChildren().add(tempgrup);
+        generateHexagonMap.setVisible(true);
+        scrollPane.pannableProperty().set(true);
+
+    }
 
     @FXML
     void backToMainMenuFromBoard(ActionEvent event) {
@@ -158,6 +278,11 @@ public class MapBuilderController {
     void CoastClick(ActionEvent event) {
         province = new Coast();
 
+    }
+
+    @FXML
+    void SeaClick(ActionEvent event) {
+        province = new Sea();
     }
 
     @FXML
@@ -199,27 +324,33 @@ public class MapBuilderController {
     void TrawaWyzClick(ActionEvent event) {
         province = new TrawaWyzyny();
     }
-
+    Color color = Color.BLACK;
 
     @FXML
     void player0(ActionEvent event) {
         playerId=0;
+        color = Color.BLACK;
     }
 
     @FXML
     void player1(ActionEvent event) {
         playerId=1;
+        color = Color.AQUAMARINE;
     }
 
     @FXML
     void player2(ActionEvent event) {
         playerId=2;
+        color = Color.YELLOW;
     }
 
     @FXML
     void player3(ActionEvent event) {
         playerId=3;
+        color = Color.RED;
     }
+    boolean coordinates = false;
+
 
 
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Coast extends Province {
     List<String> resources = Arrays.asList("bursztyn", "owoce morza");
-    String type = "Wybrzeze";
+    String type = "Coast";
     List<String> possibleBuildings = Arrays.asList("Zbieracze bursztynu", "Zbieracze owoców morza");
     List<String> baseBuildings = List.of("latarnia");
 

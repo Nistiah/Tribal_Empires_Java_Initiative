@@ -21,7 +21,7 @@
                   <Button layoutX="164.0" layoutY="364.0" mnemonicParsing="false" onAction="#DesertWyzClick" text="DesertWyz" />
                   <Button layoutX="27.0" layoutY="451.0" mnemonicParsing="false" onAction="#ForestFlatClick" text="ForestFlat" />
                   <Button layoutX="181.0" layoutY="451.0" mnemonicParsing="false" onAction="#ForestWyzClick" text="ForestWyz" />
-                  <Button layoutX="55.0" layoutY="555.0" mnemonicParsing="false" onAction="#MountainsClick" text="Mountains" />
+                  <Button layoutX="12.0" layoutY="553.0" mnemonicParsing="false" onAction="#MountainsClick" text="Mountains" />
                   <Button layoutX="73.0" layoutY="629.0" mnemonicParsing="false" onAction="#TrawaFlatClick" text="TrawaFlat" />
                   <Button layoutX="75.0" layoutY="718.0" mnemonicParsing="false" onAction="#TrawaWyzClick" text="TrawaWyzyny" />
                   <Button layoutX="92.0" layoutY="820.0" mnemonicParsing="false" onAction="#RiversideClick" text="RiversideArea" />
@@ -31,6 +31,7 @@
                   <Button layoutX="161.0" layoutY="116.0" mnemonicParsing="false" onAction="#player2" text="Player2" />
                   <Button layoutX="41.0" layoutY="177.0" mnemonicParsing="false" onAction="#player3" text="Player3" />
                   <TextField fx:id="current" layoutX="67.0" layoutY="247.0" />
+                  <Button layoutX="153.0" layoutY="562.0" mnemonicParsing="false" onAction="#SeaClick" text="SEA" />
                </children></AnchorPane>
          </items>
       </SplitPane>
@@ -40,7 +41,12 @@
          <content>
             <AnchorPane fx:id="anchorBoard" prefHeight="1080.0" prefWidth="1623.0" styleClass="bodyBackground">
                <children>
-                  <Button fx:id="generateHexagonMap" layoutX="702.0" layoutY="459.0" mnemonicParsing="false" onAction="#addHex" styleClass="button2" text="Start Game" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+                  <Button fx:id="generateHexagonMap" layoutX="702.0" layoutY="459.0" mnemonicParsing="false" onAction="#addHex" prefHeight="346.0" prefWidth="596.0" styleClass="button2" text="New" AnchorPane.bottomAnchor="584.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="925.0" AnchorPane.topAnchor="150.0">
+                     <font>
+                        <Font name="Manjari Regular" size="59.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="874.0" layoutY="121.0" mnemonicParsing="false" onAction="#load" prefHeight="371.0" prefWidth="630.0" styleClass="button2" text="Load">
                      <font>
                         <Font name="Manjari Regular" size="59.0" />
                      </font>
