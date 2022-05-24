@@ -12,7 +12,7 @@ public class Coast extends Province {
     List<String> baseBuildings = List.of("latarnia");
 
     @Override
-    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/wybrzeze.jpg";}
+    public String iconPath(){return "provinceIcons/wybrzeze.jpg";}
 
     public Coast(){
         setResources(resources);

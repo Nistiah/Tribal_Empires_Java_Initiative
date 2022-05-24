@@ -11,7 +11,7 @@ public class TrawaWyzyny extends Province {
     List<String> baseBuildings = List.of("Farma");
 
     @Override
-    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/trawa - wyz2.png";}
+    public String iconPath(){return "provinceIcons/trawa - wyz2.png";}
 
     public TrawaWyzyny(){
         setResources(resources);

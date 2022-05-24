@@ -11,7 +11,7 @@ public class TrawaFlat extends Province {
     List<String> baseBuildings = List.of("Farma");
 
     @Override
-    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/trawa - flat3.png";}
+    public String iconPath(){return "provinceIcons/trawa - flat3.png";}
 
     public TrawaFlat(){
         setResources(resources);

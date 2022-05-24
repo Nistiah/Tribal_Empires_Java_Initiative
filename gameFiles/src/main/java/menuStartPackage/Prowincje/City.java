@@ -12,7 +12,7 @@ public class City extends Province {
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
 
     @Override
-    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/city.png";}
+    public String iconPath(){return "provinceIcons/city.png";}
 
     public City(){
         setResources(resources);

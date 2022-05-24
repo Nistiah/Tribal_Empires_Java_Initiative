@@ -10,7 +10,7 @@ public class Sea extends Province {
     List<String> baseBuildings = Arrays.asList();
 
     @Override
-    public String iconPath(){return "../../../resources/menuStartPackage/FXMLControllers/provinceIcons/sea2.jpg";}
+    public String iconPath(){return "provinceIcons/sea2.jpg";}
 
     Sea(){
         setResources(resources);
