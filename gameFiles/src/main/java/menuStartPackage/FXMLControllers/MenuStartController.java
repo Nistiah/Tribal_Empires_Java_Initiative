@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -14,8 +15,9 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 
 public class MenuStartController {
     private static Stage stage;
-    private Scene scene;
     private Parent root;
+
+
 
     @FXML
     void startNewGame(ActionEvent event) {

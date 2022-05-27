@@ -24,17 +24,21 @@ public class HexagonMap {
 
     public enum Direction {NORTHWEST, NORTHEAST, EAST, SOUTHEAST, SOUTHWEST, WEST}
     public void sizeDown(){
-        hexagonSize-=5;
-        for (Hexagon h : getAllHexagons()) {
-            h.getPoints().removeAll(h.getPoints());
-            h.init();
+        if(hexagonSize>20) {
+            hexagonSize -= 3;
+            for (Hexagon h : getAllHexagons()) {
+                h.getPoints().removeAll(h.getPoints());
+                h.init();
+            }
         }
     }
     public void sizeUp(){
-        hexagonSize+=5;
-        for (Hexagon h : getAllHexagons()) {
-            h.getPoints().removeAll(h.getPoints());
-            h.init();
+        if(hexagonSize<100){
+            hexagonSize += 3;
+            for (Hexagon h : getAllHexagons()) {
+                h.getPoints().removeAll(h.getPoints());
+                h.init();
+            }
         }
     }
 

@@ -15,6 +15,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -123,7 +124,7 @@ public class MainBoardController {
 
     TourCounter tourCounter = new TourCounter();
 
-    private HexagonMap map;
+    private static HexagonMap map;
 
     boolean visibility;
 
@@ -258,6 +259,16 @@ public class MainBoardController {
 
     }
 
+    public static void zoom(KeyEvent event){
+        switch(event.getCode()){
+            case SUBTRACT:
+                map.sizeDown();
+                break;
+            case ADD:
+                map.sizeUp();
+                break;
+        }
+    }
 
 
 
