@@ -65,7 +65,7 @@ class MapGenerator {
                 int axialR = y;
                 Hexagon h = new Hexagon(axialQ, axialR);
                 h.setMap(map);
-                int xOnImage = (int) ((h.getGraphicsXoffset() - map.graphicsXpadding) * horizontalRelation);
+                int xOnImage = (int) ((h.getGraphicsXoffset() - map.graphicsXpadding) * horizontalRelation );
                 int yOnImage = (int) ((h.getGraphicsYoffset() - map.graphicsYpadding) * verticalRelation);
                 Color pixelColor = pr.getColor(xOnImage, yOnImage);
                 creator.createHexagon(axialQ, axialR, pixelColor, map);

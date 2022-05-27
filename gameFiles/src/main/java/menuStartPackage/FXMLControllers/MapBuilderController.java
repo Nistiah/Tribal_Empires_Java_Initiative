@@ -103,9 +103,7 @@ public class MapBuilderController {
                 Province temp = new TrawaFlat();
                 temp.setCoordinates(j, i);
                 temphex.setProvince(temp);
-
                 temphex.setOnMouseClicked(MouseEvent -> {
-                    temphex.setProvince(null);
                     temphex.setProvince(province);
                     try {
                         image = new Image(getClass().getResource(province.iconPath()).toURI().toString());
@@ -114,13 +112,15 @@ public class MapBuilderController {
                     }
 
                     ImagePattern imgPat = new ImagePattern(image);
-
+                    temphex.getProvince().ownerId=playerId;
                     temphex.setFill(imgPat);
                     temphex.borderColor(color);
 
+
                 });
                 temphex.setOnMouseMoved(MouseEvent -> {
-                    current.setText(temphex.getQ()+":"+temphex.getR()+" "+"owner:"+playerId+" "+temphex.getProvince().getType());
+                    current.setText(temphex.getQ()+":"+temphex.getR()+" "+"owner:"+temphex.getProvince().ownerId+" "+temphex.getProvince().getType());
+
                 });
 
 
@@ -132,6 +132,7 @@ public class MapBuilderController {
         anchorBoard.getChildren().add(tempgrup);
         //generateHexagonMap.setVisible(false);
         scrollPane.pannableProperty().set(true);
+
     }
 
     private Province provinceBuilder(String name){
@@ -183,7 +184,7 @@ public class MapBuilderController {
             i=scanner.nextInt();
             owner=scanner.nextInt();
             tempProvince=scanner.next();
-            System.out.println(j+" "+i+" "+owner);
+//            System.out.println(j+" "+i+" "+owner);
             Hexagon temphex = new Hexagon(j, i);
             temphex.setFill(Color.WHITE);
             Province temp = provinceBuilder(tempProvince);
@@ -218,36 +219,49 @@ public class MapBuilderController {
             }
 
 
-
+            temphex.getProvince().ownerId=playerId;
+            temphex.setStrokeWidth(3);
             temphex.borderColor(color);
 
 
             temphex.setOnMouseClicked(MouseEvent -> {
                 temphex.setProvince(province);
+
                 try {
                     image = new Image(getClass().getResource(province.iconPath()).toURI().toString());
                 } catch (URISyntaxException e) {
-                    e.printStackTrace();
+                    System.out.println("dawddaw");
                 }
 
                 ImagePattern imgPat = new ImagePattern(image);
-
+                temphex.getProvince().ownerId=playerId;   //co tu sie odpierdala, jak klikam inne, zmieniaja sie dla poprzednich
                 temphex.setFill(imgPat);
                 temphex.borderColor(color);
 
+
             });
             temphex.setOnMouseMoved(MouseEvent -> {
-                current.setText(temphex.getQ()+":"+temphex.getR()+" "+"owner:"+playerId+" "+temphex.getProvince().getType());
+                try {
+                    current.setText(temphex.getQ() + ":" + temphex.getR() + " " + "owner:" + temphex.getProvince().ownerId + " " + temphex.getProvince().getType());
+                }catch (NullPointerException e){
+                    System.out.println("jajco" + temphex.getR()+" "+temphex.getQ());
+                }
 
             });
             map.addHexagon(temphex);
 
         }
+
         Group tempgrup = new Group();
+        map.setPadding(10,10);
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
         generateHexagonMap.setVisible(true);
         scrollPane.pannableProperty().set(true);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
 
     }
 

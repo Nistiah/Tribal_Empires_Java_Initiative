@@ -2,6 +2,7 @@
     -fx-background-color: #474747;
     -fx-color: #474747;
     -fx-opacity: 90%;
+    -fx-border-width: 50;
     -fx-background-size: 100% 100%;
 }
 .bodyBackground2 {

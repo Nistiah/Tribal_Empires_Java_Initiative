@@ -3,6 +3,7 @@ package menuStartPackage.FXMLControllers;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -155,9 +156,24 @@ public class MainBoardController {
         }
     }
 
+    Group tempgrup;
+
+    @FXML
+    void scrollup(ActionEvent event) {
+
+
+        System.out.println("gowno");
+//        anchorBoard.translateZProperty().set(anchorBoard.getTranslateZ()*0.5);
+        map.sizeDown();
+//        tempgrup.translateZProperty().set(tempgrup.getTranslateZ()*0.9);
+
+//        tempgrup.translateYProperty().set(tempgrup.getTranslateY()*0.9);
+//        tempgrup.translateXProperty().set(tempgrup.getTranslateX()*0.9);
+    }
+
     Image image;
     @FXML
-    void addHex(ActionEvent event) {
+    void addhex(ActionEvent event) {
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
         File file = new File("map_1.txt");
@@ -177,7 +193,6 @@ public class MainBoardController {
             i=scanner.nextInt();
             owner=scanner.nextInt();
             tempProvince=scanner.next();
-            System.out.println(j+" "+i+" "+owner);
             Hexagon temphex = new Hexagon(j, i);
             temphex.setFill(Color.WHITE);
             Province temp = provinceBuilder(tempProvince);
@@ -185,6 +200,7 @@ public class MainBoardController {
             temp.ownerId=owner;
             temp.setCoordinates(j, i);
             temphex.setProvince(temp);
+            temphex.setStrokeWidth(3);
             try {
                 image = new Image(getClass().getResource(temp.iconPath()).toURI().toString());
             } catch (URISyntaxException e) {
@@ -232,11 +248,13 @@ public class MainBoardController {
             map.addHexagon(temphex);
 
         }
-        Group tempgrup = new Group();
+        tempgrup = new Group();
         map.render(tempgrup);
         anchorBoard.getChildren().add(tempgrup);
-        generateHexagonMap.setVisible(true);
+        generateHexagonMap.setVisible(false);
         scrollPane.pannableProperty().set(true);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
     }
 

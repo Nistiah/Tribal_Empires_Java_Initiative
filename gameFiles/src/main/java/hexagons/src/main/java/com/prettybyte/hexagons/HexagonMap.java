@@ -12,8 +12,8 @@ import static java.lang.Math.sqrt;
 
 public class HexagonMap {
 
-    final int hexagonSize;
-    int graphicsXpadding = 0;
+    int hexagonSize;
+    int graphicsXpadding = 0;   //bylo zero w obydwu
     int graphicsYpadding = 0;
     private MapGenerator mapGenerator;
     boolean renderCoordinates = false;
@@ -23,7 +23,20 @@ public class HexagonMap {
     };
 
     public enum Direction {NORTHWEST, NORTHEAST, EAST, SOUTHEAST, SOUTHWEST, WEST}
-
+    public void sizeDown(){
+        hexagonSize-=5;
+        for (Hexagon h : getAllHexagons()) {
+            h.getPoints().removeAll(h.getPoints());
+            h.init();
+        }
+    }
+    public void sizeUp(){
+        hexagonSize+=5;
+        for (Hexagon h : getAllHexagons()) {
+            h.getPoints().removeAll(h.getPoints());
+            h.init();
+        }
+    }
 
     /**
      * Creates an empty HexagonMap

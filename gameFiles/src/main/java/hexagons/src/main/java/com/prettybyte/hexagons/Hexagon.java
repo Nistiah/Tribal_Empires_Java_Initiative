@@ -106,8 +106,8 @@ public class Hexagon extends Polygon {
     // --------------------- Graphics --------------------------------------------
     private double[] calculatePolygonPoints() {
         checkMap();
-        int graphicsHeight = map.hexagonSize * 2;
-        double graphicsWidth = sqrt(3) / 2 * graphicsHeight;
+        int graphicsHeight =  map.hexagonSize * 2 + 3;
+        double graphicsWidth = sqrt(3) / 2 * graphicsHeight ;
         graphicsXoffset = (int) (graphicsWidth * (double) position.q + 0.5 * graphicsWidth * (double) position.r);
         graphicsYoffset = (int) (3.0 / 4.0 * graphicsHeight * position.r);
         graphicsXoffset = graphicsXoffset + map.graphicsXpadding;

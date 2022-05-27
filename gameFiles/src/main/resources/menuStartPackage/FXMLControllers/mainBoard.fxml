@@ -23,7 +23,7 @@
          <content>
             <AnchorPane fx:id="anchorBoard" prefHeight="1080.0" prefWidth="1623.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
                <children>
-                  <Button fx:id="generateHexagonMap" layoutX="702.0" layoutY="459.0" mnemonicParsing="false" onAction="#addHex" styleClass="button2" text="Start Game" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
+                  <Button fx:id="generateHexagonMap" layoutX="702.0" layoutY="459.0" mnemonicParsing="false" onAction="#addhex" styleClass="button2" text="Start Game" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="150.0">
                      <font>
                         <Font name="Manjari Regular" size="59.0" />
                      </font>
@@ -54,6 +54,7 @@
             <ColorPicker fx:id="colorPicker" layoutX="1612.0" layoutY="28.0" onAction="#but4" />
             <TextField fx:id="textField" layoutX="1561.0" layoutY="89.0" />
             <Button fx:id="buyButton" layoutX="1741.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
+            <Button layoutX="1421.0" layoutY="50.0" mnemonicParsing="false" onAction="#scrollup" text="scrollup" />
          </children>
       </AnchorPane>
    </top>
