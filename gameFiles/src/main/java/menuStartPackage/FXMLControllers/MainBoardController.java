@@ -43,9 +43,7 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 
 public class MainBoardController {
 
-    private Color colorPick = Color.WHITE;
     private Stage stage;
-    private Scene scene;
     private Parent root;
     @FXML
     public Button generateHexagonMap;
@@ -59,11 +57,6 @@ public class MainBoardController {
     @FXML
     public ColorPicker colorPicker = new ColorPicker();
     private Color color;
-
-    @FXML
-    void but4(ActionEvent event) {
-        colorPick = colorPicker.getValue();
-    }
 
     int playerId;
 
@@ -98,12 +91,12 @@ public class MainBoardController {
     void nextPlayerButton(ActionEvent event){
         turnField.setText("Tura: "+tourCounter.getTour());
         playerId++;
-        if(playerId==playerList.size()){
-            playerId=0;
+        if(playerId==playerList.size()+1){
+            playerId=1;
             tourCounter.incrementTour();
         }
-        currentPlayer=playerList.get(playerId);
-        fractionField.setText("Gracz:"+currentPlayer.getClass().getName());
+        currentPlayer=playerList.get(playerId-1);
+        fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
         bronzeField.setText("" + currentPlayer.getBronze());
@@ -111,6 +104,9 @@ public class MainBoardController {
         horsesField.setText("" + currentPlayer.getHorses());
         ironField.setText("" + currentPlayer.getIron());
         dyesField.setText("" + currentPlayer.getDyes());
+        if(buyInitialised){
+            buyClicked();
+        }
     }
 
     private boolean buyingMode=false;
@@ -125,8 +121,6 @@ public class MainBoardController {
     TourCounter tourCounter = new TourCounter();
 
     private static HexagonMap map;
-
-    boolean visibility;
 
     private Province provinceBuilder(String name){
         switch (name){
@@ -209,28 +203,26 @@ public class MainBoardController {
             }
             ImagePattern imgPat2 = new ImagePattern(image);
             temphex.setFill(imgPat2);
-            switch (owner) {
+
+            switch (temp.ownerId) {
                 case 0:
-                    playerId = 0;
                     color = Color.BLACK;
+                    temphex.borderColor(color);
                     break;
                 case 1:
-                    playerId = 1;
                     color = Color.AQUAMARINE;
+                    temphex.borderColor(color);
                     break;
                 case 2:
-                    playerId = 2;
                     color = Color.YELLOW;
+                    temphex.borderColor(color);
                     break;
                 case 3:
-                    playerId = 3;
                     color = Color.RED;
+                    temphex.borderColor(color);
                     break;
             }
 
-
-
-            temphex.borderColor(color);
 
 
 
@@ -257,6 +249,35 @@ public class MainBoardController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        int jSetter = 1, jLimiter = 30;
+        for (int i2 = 1; i2 <30; i2++) {
+            if (i2 % 2 == 0) {jSetter--; jLimiter--;}
+            for (int j2=jSetter; j2 < jLimiter; j2++) {
+                if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
+
+                switch (map.getHexagon(j2,i2).getProvince().ownerId) {
+                    case 0:
+                        color = Color.BLACK;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 1:
+                        color = Color.AQUAMARINE;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 2:
+                        color = Color.YELLOW;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 3:
+                        color = Color.RED;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                }
+
+            }
+        }
+
+
     }
 
     public static void zoom(KeyEvent event){
@@ -267,6 +288,7 @@ public class MainBoardController {
             case ADD:
                 map.sizeUp();
                 break;
+
         }
     }
 
@@ -283,6 +305,17 @@ public class MainBoardController {
             buyInitialised=false;
             cityCoordinatesLock = false;
             buyButton.setText("KUP POLE "+buyingMode);
+            int jSetter = 1, jLimiter = 30;
+            for (int i = 1; i <30; i++) {
+                if (i % 2 == 0) {jSetter--; jLimiter--;}
+                for (int j=jSetter; j < jLimiter; j++) {
+                    if (i % 2 == 1 && j == jLimiter - 1) continue;
+                    if(map.getHexagon(j,i).getBorderColor()==Color.PINK){
+                        map.getHexagon(j,i).borderColor(Color.BLACK);
+                    }
+                }
+            }
+
         }
     }
 
@@ -303,7 +336,9 @@ public class MainBoardController {
         int i = tempname.getQ();
         int j = tempname.getR();
 //        System.out.println(" " + map.getHexagon(i, j).getProvince().ownerId);
-        if (!buyInitialised && tempname.getProvince().ownerId != ownerId) {
+
+
+        if (!buyInitialised && tempname.getProvince().ownerId != playerId) {
             buyClicked();
             return;
         }
@@ -321,7 +356,7 @@ public class MainBoardController {
                             || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
 
                         if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {
-                            map.getHexagon(tempI, tempJ).setFill(Color.PINK);
+                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
 //                            System.out.println("SUKCES");
                         }
                     }
@@ -343,6 +378,24 @@ public class MainBoardController {
         }
 
         map.getHexagon(i, j).getProvince().ownerId = ownerId;
+        switch (map.getHexagon(i, j).getProvince().ownerId) {
+            case 0:
+                color = Color.BLACK;
+                break;
+            case 1:
+                color = Color.AQUAMARINE;
+                break;
+            case 2:
+                color = Color.YELLOW;
+                break;
+            case 3:
+                color = Color.RED;
+                break;
+        }
+
+
+
+        map.getHexagon(i, j).borderColor(color);
 
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
             for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
@@ -363,7 +416,7 @@ public class MainBoardController {
                             continue;
                         }
                         if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId)
-                            map.getHexagon(tempI, tempJ).setBackgroundColor(Color.PINK);
+                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
 //                        System.out.println("SUKCES");
                     }
                 }

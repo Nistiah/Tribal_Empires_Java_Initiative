@@ -53,6 +53,10 @@ public class Hexagon extends Polygon {
         this.setStroke(color);
     }
 
+    public Color getBorderColor(){
+        return (Color) this.getStroke();
+    }
+
     /**
      * @return axial Q-value
      */
