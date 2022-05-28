@@ -422,15 +422,6 @@ public class MainBoardController {
                 }
             }
         }
-        Image image = null;
-        try {
-            image = new Image(getClass().getResource("city.png").toURI().toString());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        ImagePattern imgPat = new ImagePattern(image);
-        map.getHexagon(i, j).setFill(imgPat);
-
     }
 
 
