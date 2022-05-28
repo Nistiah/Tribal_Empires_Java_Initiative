@@ -216,7 +216,7 @@ public class MapBuilderController {
                 ImagePattern imgPat = new ImagePattern(image);
                 temphex.getProvince().ownerId=playerId;   //co tu sie odpierdala, jak klikam inne, zmieniaja sie dla poprzednich
                 temphex.setFill(imgPat);
-//                temphex.borderColor(color);
+                temphex.borderColor(color);
 
 
             });
