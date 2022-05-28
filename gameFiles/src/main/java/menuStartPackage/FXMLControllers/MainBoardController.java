@@ -19,7 +19,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.text.Text;
 
 import menuStartPackage.Prowincje.*;
 import menuStartPackage.player.Player;
@@ -86,6 +89,12 @@ public class MainBoardController {
 
     @FXML
     private TextField ironField = new TextField("ironField");
+
+    @FXML
+    public AnchorPane provinceLowerPanel;
+
+    @FXML
+    public AnchorPane provinceUpperPanel;
 
     @FXML
     void nextPlayerButton(ActionEvent event){
@@ -229,7 +238,29 @@ public class MainBoardController {
             temphex.setOnMouseClicked(MouseEvent -> {
 //                    visibility=!visibility;
 //                    textField.setVisible(visibility);
-
+                final int[] przesuniecie = {10,60};
+                provinceLowerPanel.getChildren().clear();
+                provinceUpperPanel.getChildren().clear();
+                //provinceType.setText("Typ prowincji: " + temphex.getProvince().getType());
+                Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
+                provinceType2.setTranslateY(30);
+                provinceType2.setTranslateX(30);
+                provinceType2.setFill(Paint.valueOf("GREEN"));
+                provinceType2.setFont(Font.font("Berlin Sans FB",24));
+                provinceUpperPanel.getChildren().add(provinceType2);
+                temphex.getProvince().possibleBuildings.forEach(building -> {
+                    Button b3 = new Button(building);
+                    b3.setTranslateY(przesuniecie[0]);
+                    przesuniecie[0] += 60;
+                    provinceLowerPanel.getChildren().add(b3);
+                });
+                temphex.getProvince().resources.forEach(resource -> {
+                    Text resourceText = new Text(resource);
+                    resourceText.setTranslateY(przesuniecie[1]);
+                    resourceText.setFont(Font.font("Berlin Sans FB",20));
+                    przesuniecie[1] += 20;
+                    provinceUpperPanel.getChildren().add(resourceText);
+                });
 //                    textField.setText(temphex.getQ() + ":" + temphex.getR());
                 if(buyingMode) {
                     buyField(temphex);
