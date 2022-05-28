@@ -11,7 +11,7 @@ public class City extends Province {
     String type = "City";
     List<String> possibleBuildings = List.of();
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
-    Vector<Province> provincelist;
+    Vector<Province> provincelist = new Vector<>();
 
     public void assignProvince(Province province){
         provincelist.add(province);
@@ -83,6 +83,7 @@ public class City extends Province {
 
     @Override
     public int getGold() {
+        System.out.println("gold:"+gold+"  provinces:"+getProvincesGold());
         return gold+getProvincesGold();
     }
     @Override

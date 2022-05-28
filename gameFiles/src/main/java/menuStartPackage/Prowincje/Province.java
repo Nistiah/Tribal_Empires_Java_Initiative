@@ -52,10 +52,6 @@ public class Province {
         return wood;
     }
 
-
-
-
-
     public String iconPath(){return null;}
 
     public void setBaseBuildings(List<String> baseBuildings) {
@@ -94,6 +90,7 @@ public class Province {
                 break;
             case "TrawaFlat":
                 food = 1;
+                gold = 1;
                 break;
             case "TrawaWyzyny":
                 food = 1;

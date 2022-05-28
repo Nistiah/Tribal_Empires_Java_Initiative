@@ -36,6 +36,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
+import static hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap.nullHex;
 
 //import static menuStartPackage.StartUp.musicPlayerInstance;
 
@@ -59,13 +60,14 @@ public class MainBoardController {
     private TextField textField;
 
     private Color color;
-    int playerId;
+    int playerId=1;
 
     @FXML
     private TextField turnField = new TextField("dupa");
 
     @FXML
-    private TextField fractionField = new TextField("duadudawu");
+    private TextField fractionField = new TextField("fractionField");
+
 
     @FXML
     private TextField goldField = new TextField("goldField");
@@ -101,8 +103,13 @@ public class MainBoardController {
         if(playerId==playerList.size()+1){
             playerId=1;
             tourCounter.incrementTour();
+            for(Player player: playerList){
+                player.resourcesTourIncrease();
+            }
+
         }
         currentPlayer=playerList.get(playerId-1);
+        ownerId=playerId;
         fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
@@ -163,6 +170,10 @@ public class MainBoardController {
 
     @FXML
     void addhex(ActionEvent event) {
+        fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
+        turnField.setText("Tura: "+tourCounter.getTour());
+        nullHex.setProvince(new Province());
+        nullHex.getProvince().ownerId=-1;   //wazne dla granic mapy przy malowaniu jej do map buildera
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
         File file = new File("map_1.txt");
@@ -188,6 +199,9 @@ public class MainBoardController {
             temp.setType(tempProvince);
             temp.ownerId=owner;
             temp.setCoordinates(j, i);
+            if(tempProvince.equals("City")){
+                playerList.get(owner-1).createNewCity((City)temp);
+            }
             temphex.setProvince(temp);
             temphex.setStrokeWidth(3);
             try {
@@ -265,6 +279,7 @@ public class MainBoardController {
                 }
             }
         }
+        map.setRenderCoordinates(true);
     }
 
     public static void zoom(KeyEvent event){
@@ -325,11 +340,13 @@ public class MainBoardController {
             initialisedJ = j;
             for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) { //pierwotny pattern mozliwych do kupna
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
+
+
                     if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
 
-                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {map.getHexagon(tempI, tempJ).borderColor(Color.PINK);}
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId == 0) {map.getHexagon(tempI, tempJ).borderColor(Color.PINK);}
                     }
                 }
             }
@@ -384,7 +401,7 @@ public class MainBoardController {
                                         || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
                             continue;
                         }
-                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId)
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId == 0)
                             map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
                     }
                 }
