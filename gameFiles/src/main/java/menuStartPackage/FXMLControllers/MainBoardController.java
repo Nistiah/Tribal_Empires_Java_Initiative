@@ -57,10 +57,8 @@ public class MainBoardController {
     public AnchorPane anchorBoard;
     @FXML
     private TextField textField;
-    @FXML
-    public ColorPicker colorPicker = new ColorPicker();
-    private Color color;
 
+    private Color color;
     int playerId;
 
     @FXML
@@ -161,21 +159,8 @@ public class MainBoardController {
     }
 
     Group tempgrup;
-
-    @FXML
-    void scrollup(ActionEvent event) {
-
-
-        System.out.println("gowno");
-//        anchorBoard.translateZProperty().set(anchorBoard.getTranslateZ()*0.5);
-        map.sizeDown();
-//        tempgrup.translateZProperty().set(tempgrup.getTranslateZ()*0.9);
-
-//        tempgrup.translateYProperty().set(tempgrup.getTranslateY()*0.9);
-//        tempgrup.translateXProperty().set(tempgrup.getTranslateX()*0.9);
-    }
-
     Image image;
+
     @FXML
     void addhex(ActionEvent event) {
         map = new HexagonMap(40);
@@ -214,12 +199,9 @@ public class MainBoardController {
             temphex.setFill(imgPat2);
 
             temphex.setOnMouseClicked(MouseEvent -> {
-//                    visibility=!visibility;
-//                    textField.setVisible(visibility);
                 final int[] przesuniecie = {10,60};
                 provinceLowerPanel.getChildren().clear();
                 provinceUpperPanel.getChildren().clear();
-                //provinceType.setText("Typ prowincji: " + temphex.getProvince().getType());
                 Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
                 provinceType2.setTranslateY(30);
                 provinceType2.setTranslateX(30);
@@ -239,7 +221,6 @@ public class MainBoardController {
                     przesuniecie[1] += 20;
                     provinceUpperPanel.getChildren().add(resourceText);
                 });
-//                    textField.setText(temphex.getQ() + ":" + temphex.getR());
                 if(buyingMode) {
                     buyField(temphex);
                 }
@@ -321,29 +302,18 @@ public class MainBoardController {
                     }
                 }
             }
-
+            initialisedI=-11;
+            initialisedJ=-11;
         }
     }
-
-
-
-
 
     boolean cityCoordinatesLock = false;
     private int initialisedI;
     private int initialisedJ;
 
-
-    //podswietla na rozowo te heksy ktore sa mozliwe do kupna, daje te grafike cos tam na te kupione
     private void buyField(Hexagon tempname) {
-
-//        System.out.println("i:" + tempname.getProvince().i + " j:" + tempname.getProvince().j);
-//        System.out.print("q:" + tempname.getQ() + " r: " + tempname.getR() + " buyinit" + buyInitialised);
         int i = tempname.getQ();
         int j = tempname.getR();
-//        System.out.println(" " + map.getHexagon(i, j).getProvince().ownerId);
-
-
         if (!buyInitialised && tempname.getProvince().ownerId != playerId) {
             buyClicked();
             return;
@@ -353,18 +323,13 @@ public class MainBoardController {
             buyInitialised = true;
             initialisedI = i;
             initialisedJ = j;
-
-            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
+            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) { //pierwotny pattern mozliwych do kupna
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
-//                    System.out.println("tq:" + tempI + "  tr:" + tempJ + " ownId:" + ownerId);
                     if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
 
-                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {
-                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
-//                            System.out.println("SUKCES");
-                        }
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {map.getHexagon(tempI, tempJ).borderColor(Color.PINK);}
                     }
                 }
             }
@@ -398,14 +363,12 @@ public class MainBoardController {
                 color = Color.RED;
                 break;
         }
-
-
-
         map.getHexagon(i, j).borderColor(color);
+        City tempCity = (City) map.getHexagon(initialisedI, initialisedJ).getProvince();  //dodanie kupionej prowincji do miasta
+        tempCity.assignProvince(map.getHexagon(i, j).getProvince());
 
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
             for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
-                //System.out.println("tq:" + tq + "  tr:" + tr);
                 if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
                         || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
                         || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
@@ -423,16 +386,11 @@ public class MainBoardController {
                         }
                         if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId)
                             map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
-//                        System.out.println("SUKCES");
                     }
                 }
             }
         }
     }
-
-
-
-
 
     @FXML
     void backToMainMenuFromBoard(ActionEvent event) {

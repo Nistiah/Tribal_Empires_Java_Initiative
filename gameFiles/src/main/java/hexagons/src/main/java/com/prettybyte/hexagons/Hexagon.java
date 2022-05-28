@@ -43,7 +43,7 @@ public class Hexagon extends Polygon {
     }
 
     void init() {
-        this.setStroke(Color.BLACK);
+//        this.setStroke(Color.BLACK);   -commented, so zooming wont repaint borders
         for (double p : calculatePolygonPoints()) {
             this.getPoints().add(p);
         }
