@@ -7,8 +7,8 @@ public class Province {
     public int j;
     public int ownerId;
     String type;
-    List<String> resources;
-    List<String> possibleBuildings;
+    public List<String> resources;
+    public List<String> possibleBuildings;
     List<String> baseBuildings;
     int belief = 0, wood = 0, gold = 0, food = 0;
 
