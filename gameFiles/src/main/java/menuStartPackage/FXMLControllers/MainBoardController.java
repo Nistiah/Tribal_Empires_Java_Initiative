@@ -189,7 +189,7 @@ public class MainBoardController {
             owner=scanner.nextInt();
             tempProvince=scanner.next();
             Hexagon temphex = new Hexagon(j, i);
-            temphex.setFill(Color.WHITE);
+
             Province temp = provinceBuilder(tempProvince);
             temp.setType(tempProvince);
             temp.ownerId=owner;
@@ -203,28 +203,6 @@ public class MainBoardController {
             }
             ImagePattern imgPat2 = new ImagePattern(image);
             temphex.setFill(imgPat2);
-
-            switch (temp.ownerId) {
-                case 0:
-                    color = Color.BLACK;
-                    temphex.borderColor(color);
-                    break;
-                case 1:
-                    color = Color.AQUAMARINE;
-                    temphex.borderColor(color);
-                    break;
-                case 2:
-                    color = Color.YELLOW;
-                    temphex.borderColor(color);
-                    break;
-                case 3:
-                    color = Color.RED;
-                    temphex.borderColor(color);
-                    break;
-            }
-
-
-
 
             temphex.setOnMouseClicked(MouseEvent -> {
 //                    visibility=!visibility;
@@ -273,11 +251,8 @@ public class MainBoardController {
                         map.getHexagon(j2,i2).borderColor(color);
                         break;
                 }
-
             }
         }
-
-
     }
 
     public static void zoom(KeyEvent event){
