@@ -83,7 +83,7 @@ public class MenuStartController implements Initializable {
 
     public static void space(KeyEvent event){
         switch(event.getCode()) {
-            case C:
+            case S:
                 initializedIntroFlag=true;
                 mediaPlayer.stop();
                 break;
