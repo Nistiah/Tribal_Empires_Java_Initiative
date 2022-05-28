@@ -79,13 +79,13 @@ public class Province {
 
     public void setBaseProduction(String type){
         switch(type){
-            case "Morze":
+            case "Sea":
                 food = 1;
                 break;
-            case "PustyniaFlat":
+            case "DesertFlat":
                 belief = 1;
                 break;
-            case "PustyniaWyzyny":
+            case "DesertWyzyny":
                 belief = 1;
                 break;
             case "TrawaFlat":
@@ -95,21 +95,21 @@ public class Province {
             case "TrawaWyzyny":
                 food = 1;
                 break;
-            case "LasFlat":
+            case "ForestFlat":
                 wood = 1;
                 break;
-            case "LasWyzyny":
+            case "ForestWyzyny":
                 wood = 1;
                 break;
-            case "Gory":
+            case "Mountains":
                 break;
-            case "Wybrzeze":
+            case "Coast":
                 food = 1;
                 break;
-            case "TerenNadrzeczny":
+            case "RiversideArea":
                 food = 2;
                 break;
-            case "Miasto":
+            case "City":
                 food = 1;
                 wood = 1;
                 gold = 1;
