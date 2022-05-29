@@ -231,6 +231,17 @@ public class MainBoardController {
     @FXML
     void addhex(ActionEvent event) {
         fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
+
+
+        fractionField.setText("Gracz:"+playerList.get(playerId).name +" "+playerId);
+        goldField.setText("" + playerList.get(playerId).getGold());
+        beliefField.setText("" + playerList.get(playerId).getFaith());
+        bronzeField.setText("bronze" + playerList.get(playerId).getBronze());
+        recoursesField.setText("" + playerList.get(playerId).getBuildingResources());
+        horsesField.setText("" + playerList.get(playerId).getHorses());
+        ironField.setText("iron" + playerList.get(playerId).getIron());
+        dyesField.setText("dyes" + playerList.get(playerId).getDyes());
+
         turnField.setText("Tura: "+tourCounter.getTour());
         nullHex.setProvince(new Province());
         nullHex.getProvince().ownerId=-1;   //wazne dla granic mapy przy malowaniu jej do map buildera
