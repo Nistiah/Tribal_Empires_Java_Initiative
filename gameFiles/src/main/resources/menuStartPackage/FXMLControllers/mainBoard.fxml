@@ -51,8 +51,7 @@
                </font>
             </Button>
             <TextField fx:id="textField" layoutX="1561.0" layoutY="89.0" />
-            <Button layoutX="1421.0" layoutY="50.0" mnemonicParsing="false" onAction="#scrollup" text="scrollup" />
-            <Button fx:id="buyButton" layoutX="1677.0" layoutY="128.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
+            <Button fx:id="buyButton" layoutX="1741.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
          </children>
       </AnchorPane>
    </top>

@@ -72,8 +72,8 @@ public class MapBuilderController {
             System.out.println("brak pliku");
         }
 
-        int jSetter = 1, jLimiter = 30;
-        for (int i = 1; i < 30; i++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i = 1; i < 35; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
@@ -92,12 +92,12 @@ public class MapBuilderController {
     void addHex(ActionEvent event1) {
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
-        int jSetter = 1, jLimiter = 30;
-        for (int i = 1; i <30; i++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i = 1; i <35; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
-               // System.out.println(i+" "+j);
+                // System.out.println(i+" "+j);
 
                 Hexagon temphex = new Hexagon(j, i);
                 temphex.setFill(Color.WHITE);
@@ -187,7 +187,6 @@ public class MapBuilderController {
             tempProvince=scanner.next();
 //            System.out.println(j+" "+i+" "+owner);
             Hexagon temphex = new Hexagon(j, i);
-            temphex.setFill(Color.WHITE);
             Province temp = provinceBuilder(tempProvince);
             temp.setType(tempProvince);
             temp.ownerId=owner;
@@ -200,29 +199,9 @@ public class MapBuilderController {
             }
             ImagePattern imgPat2 = new ImagePattern(image);
             temphex.setFill(imgPat2);
-            switch (owner) {
-                case 0:
-                    playerId = 0;
-                    color = Color.BLACK;
-                    break;
-                case 1:
-                    playerId = 1;
-                    color = Color.AQUAMARINE;
-                    break;
-                case 2:
-                    playerId = 2;
-                    color = Color.YELLOW;
-                    break;
-                case 3:
-                    playerId = 3;
-                    color = Color.RED;
-                    break;
-            }
-
-
-            temphex.getProvince().ownerId=playerId;
+            temphex.getProvince().ownerId=owner;
             temphex.setStrokeWidth(3);
-            temphex.borderColor(color);
+//            temphex.borderColor(color);
 
 
             temphex.setOnMouseClicked(MouseEvent -> {
@@ -263,7 +242,32 @@ public class MapBuilderController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
+        int jSetter = 1, jLimiter = 46;
+        for (int i2 = 1; i2 <35; i2++) {
+            if (i2 % 2 == 0) {jSetter--; jLimiter--;}
+            for (int j2=jSetter; j2 < jLimiter; j2++) {
+                if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
 
+                switch (map.getHexagon(j2,i2).getProvince().ownerId) {
+                    case 0:
+                        color = Color.BLACK;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 1:
+                        color = Color.AQUAMARINE;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 2:
+                        color = Color.YELLOW;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 3:
+                        color = Color.RED;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                }
+            }
+        }
     }
 
     public static void zoom(KeyEvent event){
@@ -283,7 +287,7 @@ public class MapBuilderController {
         musicPlayerInstance.menu = false;
         musicPlayerInstance.stopMusic();
         try {
-            root = FXMLLoader.load(getClass().getResource("exitStats.fxml"));
+            root = FXMLLoader.load(getClass().getResource("menuStart.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

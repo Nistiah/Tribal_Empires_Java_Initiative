@@ -36,8 +36,10 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.Vector;
 
+import static menuStartPackage.FXMLControllers.StatsController.playerStats;
 import static menuStartPackage.StartUp.musicPlayerInstance;
-
+import static hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap.nullHex;
+import static menuStartPackage.FXMLControllers.StatsController.addPlayer;
 //import static menuStartPackage.StartUp.musicPlayerInstance;
 
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
@@ -58,17 +60,16 @@ public class MainBoardController {
     public AnchorPane anchorBoard;
     @FXML
     private TextField textField;
-    @FXML
-    public ColorPicker colorPicker = new ColorPicker();
-    private Color color;
 
-    int playerId;
+    private Color color;
+    int playerId=1;
 
     @FXML
     private TextField turnField = new TextField("dupa");
 
     @FXML
-    private TextField fractionField = new TextField("duadudawu");
+    private TextField fractionField = new TextField("fractionField");
+
 
     @FXML
     private TextField goldField = new TextField("goldField");
@@ -102,12 +103,27 @@ public class MainBoardController {
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
         turnField.setText("Tura: "+tourCounter.getTour());
+        currentPlayer=playerList.get(playerId-1);
+        if(tourCounter.getTour()==0){    ///stats pane regulator
+            PlayerData tmp = new PlayerData(currentPlayer.name);
+            tmp.addInfo(currentPlayer.getGold(), currentPlayer.numberOfProvinces);
+            addPlayer(tmp);
+            System.out.println(playerId + " " + currentPlayer.name);
+        }else{
+            playerStats.get(playerId-1).addInfo(currentPlayer.getGold(),currentPlayer.numberOfProvinces);
+        }
+
         playerId++;
         if(playerId==playerList.size()+1){
             playerId=1;
             tourCounter.incrementTour();
+            for(Player player: playerList){
+                player.resourcesTourIncrease();
+            }
+
         }
         currentPlayer=playerList.get(playerId-1);
+        ownerId=playerId;
         fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
@@ -149,6 +165,21 @@ public class MainBoardController {
 
         if(buyInitialised){
             buyClicked();
+        }
+    }
+
+    public class PlayerData{
+        String name;
+        Vector <Integer> goldPerTour;
+        Vector <Integer> numberOfProvincesPerTour;
+        PlayerData(String tmp){
+            this.name = tmp;
+            goldPerTour = new Vector<>();
+            numberOfProvincesPerTour = new Vector<>();
+        }
+        public void addInfo(int gold, int numberOfProvinces){
+            goldPerTour.add(gold);
+            numberOfProvincesPerTour.add(numberOfProvinces);
         }
     }
 
@@ -195,24 +226,14 @@ public class MainBoardController {
     }
 
     Group tempgrup;
-
-    @FXML
-    void scrollup(ActionEvent event) {
-
-
-        System.out.println("gowno");
-//        anchorBoard.translateZProperty().set(anchorBoard.getTranslateZ()*0.5);
-        map.sizeDown();
-//        tempgrup.translateZProperty().set(tempgrup.getTranslateZ()*0.9);
-
-//        tempgrup.translateYProperty().set(tempgrup.getTranslateY()*0.9);
-//        tempgrup.translateXProperty().set(tempgrup.getTranslateX()*0.9);
-    }
-
-
     Image image;
+
     @FXML
     void addhex(ActionEvent event) {
+        fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
+        turnField.setText("Tura: "+tourCounter.getTour());
+        nullHex.setProvince(new Province());
+        nullHex.getProvince().ownerId=-1;   //wazne dla granic mapy przy malowaniu jej do map buildera
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
         File file = new File("map_1.txt");
@@ -233,11 +254,14 @@ public class MainBoardController {
             owner=scanner.nextInt();
             tempProvince=scanner.next();
             Hexagon temphex = new Hexagon(j, i);
-            temphex.setFill(Color.WHITE);
+
             Province temp = provinceBuilder(tempProvince);
             temp.setType(tempProvince);
             temp.ownerId=owner;
             temp.setCoordinates(j, i);
+            if(tempProvince.equals("City")){
+                playerList.get(owner-1).createNewCity((City)temp);
+            }
             temphex.setProvince(temp);
             temphex.setStrokeWidth(3);
             try {
@@ -248,26 +272,7 @@ public class MainBoardController {
             ImagePattern imgPat2 = new ImagePattern(image);
             temphex.setFill(imgPat2);
 
-            switch (temp.ownerId) {
-                case 0:
-                    color = Color.BLACK;
-                    temphex.borderColor(color);
-                    break;
-                case 1:
-                    color = Color.AQUAMARINE;
-                    temphex.borderColor(color);
-                    break;
-                case 2:
-                    color = Color.YELLOW;
-                    temphex.borderColor(color);
-                    break;
-                case 3:
-                    color = Color.RED;
-                    temphex.borderColor(color);
-                    break;
-            }
-
-
+  
             Button by = new Button("kup se pole");
             by.setOnMouseClicked(e -> buyClicked());
             by.setTranslateY(400);
@@ -343,8 +348,8 @@ public class MainBoardController {
                 }
 
 
-
 //                    textField.setText(temphex.getQ() + ":" + temphex.getR());
+
                 if(buyingMode) {
                     buyField(temphex);
                 }
@@ -363,8 +368,8 @@ public class MainBoardController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        int jSetter = 1, jLimiter = 30;
-        for (int i2 = 1; i2 <30; i2++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i2 = 1; i2 <35; i2++) {
             if (i2 % 2 == 0) {jSetter--; jLimiter--;}
             for (int j2=jSetter; j2 < jLimiter; j2++) {
                 if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
@@ -387,11 +392,9 @@ public class MainBoardController {
                         map.getHexagon(j2,i2).borderColor(color);
                         break;
                 }
-
             }
         }
-
-
+        map.setRenderCoordinates(true);
     }
 
     public static void zoom(KeyEvent event){
@@ -419,8 +422,8 @@ public class MainBoardController {
             buyInitialised=false;
             cityCoordinatesLock = false;
             buyButton.setText("KUP POLE "+buyingMode);
-            int jSetter = 1, jLimiter = 30;
-            for (int i = 1; i <30; i++) {
+            int jSetter = 1, jLimiter = 46;
+            for (int i = 1; i <35; i++) {
                 if (i % 2 == 0) {jSetter--; jLimiter--;}
                 for (int j=jSetter; j < jLimiter; j++) {
                     if (i % 2 == 1 && j == jLimiter - 1) continue;
@@ -429,29 +432,18 @@ public class MainBoardController {
                     }
                 }
             }
-
+            initialisedI=-11;
+            initialisedJ=-11;
         }
     }
-
-
-
-
 
     boolean cityCoordinatesLock = false;
     private int initialisedI;
     private int initialisedJ;
 
-
-    //podswietla na rozowo te heksy ktore sa mozliwe do kupna, daje te grafike cos tam na te kupione
     private void buyField(Hexagon tempname) {
-
-//        System.out.println("i:" + tempname.getProvince().i + " j:" + tempname.getProvince().j);
-//        System.out.print("q:" + tempname.getQ() + " r: " + tempname.getR() + " buyinit" + buyInitialised);
         int i = tempname.getQ();
         int j = tempname.getR();
-//        System.out.println(" " + map.getHexagon(i, j).getProvince().ownerId);
-
-
         if (!buyInitialised && tempname.getProvince().ownerId != playerId) {
             buyClicked();
             return;
@@ -461,18 +453,15 @@ public class MainBoardController {
             buyInitialised = true;
             initialisedI = i;
             initialisedJ = j;
-
-            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
+            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) { //pierwotny pattern mozliwych do kupna
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
-//                    System.out.println("tq:" + tempI + "  tr:" + tempJ + " ownId:" + ownerId);
+
+
                     if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
                             || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
 
-                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId) {
-                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
-//                            System.out.println("SUKCES");
-                        }
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId == 0) {map.getHexagon(tempI, tempJ).borderColor(Color.PINK);}
                     }
                 }
             }
@@ -490,6 +479,7 @@ public class MainBoardController {
                 return;
             }
         }
+        if(map.getHexagon(i,j).getBorderColor()!=Color.PINK)return;
 
         map.getHexagon(i, j).getProvince().ownerId = ownerId;
         switch (map.getHexagon(i, j).getProvince().ownerId) {
@@ -506,14 +496,12 @@ public class MainBoardController {
                 color = Color.RED;
                 break;
         }
-
-
-
         map.getHexagon(i, j).borderColor(color);
+        City tempCity = (City) map.getHexagon(initialisedI, initialisedJ).getProvince();  //dodanie kupionej prowincji do miasta
+        tempCity.assignProvince(map.getHexagon(i, j).getProvince());
 
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
             for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
-                //System.out.println("tq:" + tq + "  tr:" + tr);
                 if (map.getHexagon(tempI, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI, tempJ + 1).getProvince().ownerId == ownerId
                         || map.getHexagon(tempI + 1, tempJ - 1).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ + 1).getProvince().ownerId == ownerId
                         || map.getHexagon(tempI + 1, tempJ).getProvince().ownerId == ownerId || map.getHexagon(tempI - 1, tempJ).getProvince().ownerId == ownerId) {
@@ -529,27 +517,13 @@ public class MainBoardController {
                                         || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
                             continue;
                         }
-                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId != ownerId)
+                        if (map.getHexagon(tempI, tempJ).getProvince().ownerId == 0)
                             map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
-//                        System.out.println("SUKCES");
                     }
                 }
             }
         }
-        Image image = null;
-        try {
-            image = new Image(getClass().getResource("city.png").toURI().toString());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        ImagePattern imgPat = new ImagePattern(image);
-        map.getHexagon(i, j).setFill(imgPat);
-
     }
-
-
-
-
 
     @FXML
     void backToMainMenuFromBoard(ActionEvent event) {
@@ -566,6 +540,7 @@ public class MainBoardController {
     }
     @FXML
     private ScrollPane scrollPane;
+
 
 
 }

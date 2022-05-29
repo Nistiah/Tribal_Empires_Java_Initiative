@@ -10,7 +10,47 @@ public class Province {
     public List<String> resources;
     public List<String> possibleBuildings;
     List<String> baseBuildings;
-    public int belief = 0, wood = 0, gold = 0, food = 0;
+
+    int gold = 0;
+    int belief = 0;
+    int food = 0;
+    int bronze = 0;
+    int iron = 0;
+    int dices = 0;
+    int horses = 0;
+    int wood = 0;
+
+    public int getGold() {
+        return gold;
+    }
+
+    public int getBelief() {
+        return belief;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public int getBronze() {
+        return bronze;
+    }
+
+    public int getIron() {
+        return iron;
+    }
+
+    public int getDices() {
+        return dices;
+    }
+
+    public int getHorses() {
+        return horses;
+    }
+
+    public int getWood() {
+        return wood;
+    }
 
     public String iconPath(){return null;}
 
@@ -50,6 +90,7 @@ public class Province {
                 break;
             case "TrawaFlat":
                 food = 1;
+                gold = 1;
                 break;
             case "TrawaWyzyny":
                 food = 1;
@@ -76,5 +117,4 @@ public class Province {
                 break;
         }
     }
-
 }
