@@ -247,6 +247,7 @@ public class MapBuilderController {
             if (i2 % 2 == 0) {jSetter--; jLimiter--;}
             for (int j2=jSetter; j2 < jLimiter; j2++) {
                 if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
+                map.getHexagon(j2,i2).setStrokeWidth(3);
 
                 switch (map.getHexagon(j2,i2).getProvince().ownerId) {
                     case 0:

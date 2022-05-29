@@ -6,14 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
    <right>
-      <SplitPane id="rightBar" dividerPositions="0.2539863325740319" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <SplitPane id="rightBar" dividerPositions="0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <items>
-            <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="282.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
-            <AnchorPane fx:id="provinceLowerPanel" minHeight="580.0" minWidth="298.0" prefHeight="580.0" prefWidth="317.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
+            <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="280.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
+            <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
          </items>
       </SplitPane>
    </right>
@@ -33,25 +36,47 @@
       </ScrollPane>
    </left>
    <top>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="84.0" layoutY="76.0" mnemonicParsing="false" onAction="#nextPlayerButton" text="Nastepna Tura" />
-            <TextField fx:id="turnField" layoutX="272.0" layoutY="101.0" />
-            <TextField fx:id="fractionField" layoutX="478.0" layoutY="102.0" />
-            <TextField fx:id="goldField" editable="false" focusTraversable="false" layoutX="695.0" layoutY="51.0" />
-            <TextField fx:id="beliefField" editable="false" layoutX="695.0" layoutY="89.0" />
-            <TextField fx:id="bronzeField" editable="false" layoutX="695.0" layoutY="127.0" />
-            <TextField fx:id="dyesField" editable="false" layoutX="868.0" layoutY="51.0" />
-            <TextField fx:id="horsesField" editable="false" layoutX="868.0" layoutY="89.0" />
-            <TextField fx:id="recoursesField" editable="false" layoutX="868.0" layoutY="127.0" />
-            <TextField fx:id="ironField" editable="false" layoutX="1033.0" layoutY="89.0" />
-            <Button layoutX="1765.0" layoutY="11.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="53.0" prefWidth="128.0" stylesheets="@../mainBoard.css" text="Quit">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Button>
-            <TextField fx:id="textField" layoutX="1561.0" layoutY="89.0" />
-            <Button fx:id="buyButton" layoutX="1741.0" layoutY="96.0" mnemonicParsing="false" onMouseClicked="#buyClicked" text="KUP POLE" />
+            <GridPane layoutX="1056.0" layoutY="-232.0" prefHeight="40.0" prefWidth="1925.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="beliefField" editable="false" text="faith" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="bronzeField" editable="false" promptText="bronze" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="horsesField" editable="false" promptText="horses" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <TextField fx:id="ironField" editable="false" promptText="iron" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField fx:id="recoursesField" editable="false" promptText="build res" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="textField" promptText="coord" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <TextField fx:id="goldField" editable="false" focusTraversable="false" promptText="gold" GridPane.rowIndex="2" />
+                  <TextField fx:id="dyesField" editable="false" promptText="dyes" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="10" GridPane.rowIndex="2" />
+                  <TextField fx:id="turnField" text="tura" GridPane.columnIndex="11" GridPane.rowIndex="2" />
+                  <Button minHeight="18.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="18.0" prefWidth="166.0" text="Nastepna Tura" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <Button minHeight="19.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="19.0" prefWidth="111.0" stylesheets="@../mainBoard.css" text="Quit" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </top>
