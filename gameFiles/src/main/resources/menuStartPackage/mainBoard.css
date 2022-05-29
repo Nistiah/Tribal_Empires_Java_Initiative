@@ -12,6 +12,68 @@
     -fx-background-size: 100% 100%;
 }
 
+.gold{
+    -fx-background-image:url('gold.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+
+}
+.faith{
+    -fx-background-image:url('faith.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.buildingResources{
+    -fx-background-image:url('buildingResources.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.bronze{
+    -fx-background-image:url('gold.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.iron{
+    -fx-background-image:url('gold.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.horse{
+    -fx-background-image:url('horse.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: #474747;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+
 .button {
     -fx-background-radius: 15px;
     -fx-color: #474747;

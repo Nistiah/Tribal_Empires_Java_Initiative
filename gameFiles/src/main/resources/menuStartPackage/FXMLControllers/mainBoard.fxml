@@ -38,16 +38,17 @@
    <top>
       <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <GridPane layoutX="1056.0" layoutY="-232.0" prefHeight="40.0" prefWidth="1925.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane layoutX="29.0" layoutY="-232.0" prefHeight="40.0" prefWidth="1896.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="6.6666717529296875" prefWidth="6.6666717529296875" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
@@ -59,18 +60,18 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="beliefField" editable="false" text="faith" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="bronzeField" editable="false" promptText="bronze" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <TextField fx:id="horsesField" editable="false" promptText="horses" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <TextField fx:id="ironField" editable="false" promptText="iron" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <TextField fx:id="recoursesField" editable="false" promptText="build res" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="textField" promptText="coord" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                  <TextField fx:id="goldField" editable="false" focusTraversable="false" promptText="gold" GridPane.rowIndex="2" />
-                  <TextField fx:id="dyesField" editable="false" promptText="dyes" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                  <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="10" GridPane.rowIndex="2" />
-                  <TextField fx:id="turnField" text="tura" GridPane.columnIndex="11" GridPane.rowIndex="2" />
-                  <Button minHeight="18.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="18.0" prefWidth="166.0" text="Nastepna Tura" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                  <Button minHeight="19.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="19.0" prefWidth="111.0" stylesheets="@../mainBoard.css" text="Quit" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                  <TextField fx:id="beliefField" editable="false" styleClass="faith" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="bronzeField" editable="false" promptText="bronze" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField fx:id="horsesField" editable="false" styleClass="horse" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                  <TextField fx:id="ironField" editable="false" promptText="iron" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <TextField fx:id="recoursesField" editable="false" styleClass="buildingResources" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <TextField fx:id="textField" promptText="coord" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                  <TextField fx:id="goldField" editable="false" focusTraversable="false" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="dyesField" editable="false" promptText="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                  <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="11" GridPane.rowIndex="2" />
+                  <TextField fx:id="turnField" text="tura" GridPane.columnIndex="12" GridPane.rowIndex="2" />
+                  <Button minHeight="18.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="18.0" prefWidth="166.0" text="Nastepna Tura" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                  <Button minHeight="19.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="19.0" prefWidth="111.0" stylesheets="@../mainBoard.css" text="Quit" GridPane.columnIndex="10" GridPane.rowIndex="2">
                      <font>
                         <Font size="12.0" />
                      </font>

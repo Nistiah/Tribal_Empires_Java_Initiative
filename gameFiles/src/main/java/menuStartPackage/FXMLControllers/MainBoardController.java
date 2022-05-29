@@ -125,11 +125,11 @@ public class MainBoardController {
         currentPlayer=playerList.get(playerId-1);
         ownerId=playerId;
         fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
-        goldField.setText("gold" + currentPlayer.getGold());
-        beliefField.setText("faith" + currentPlayer.getFaith());
+        goldField.setText("" + currentPlayer.getGold());
+        beliefField.setText("" + currentPlayer.getFaith());
         bronzeField.setText("bronze" + currentPlayer.getBronze());
-        recoursesField.setText("build.res" + currentPlayer.getBuildingResources());
-        horsesField.setText("horses" + currentPlayer.getHorses());
+        recoursesField.setText("" + currentPlayer.getBuildingResources());
+        horsesField.setText("" + currentPlayer.getHorses());
         ironField.setText("iron" + currentPlayer.getIron());
         dyesField.setText("dyes" + currentPlayer.getDyes());
         Text goldField1 = new Text("Złoto: " + currentPlayer.getGold());
@@ -412,16 +412,16 @@ public class MainBoardController {
 
 
     //panel do uruchomienia kupowania hexów dla miasta
-    @FXML
+
     void buyClicked() {
         buyingMode=!buyingMode;
         if(buyingMode) {
-            buyButton.setText("WYJDZ "+buyingMode);
+
         }
         else {
             buyInitialised=false;
             cityCoordinatesLock = false;
-            buyButton.setText("KUP POLE "+buyingMode);
+
             int jSetter = 1, jLimiter = 46;
             for (int i = 1; i <35; i++) {
                 if (i % 2 == 0) {jSetter--; jLimiter--;}
