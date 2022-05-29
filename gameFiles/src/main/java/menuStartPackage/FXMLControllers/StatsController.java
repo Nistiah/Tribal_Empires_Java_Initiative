@@ -47,6 +47,14 @@ public class StatsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try{
+            playerStats.get(0);
+            playerStats.get(1);
+            playerStats.get(2);
+        }catch (ArrayIndexOutOfBoundsException e){
+            return;
+        }
+
         XYChart.Series series1 = new XYChart.Series();
         XYChart.Series series2 = new XYChart.Series();
         XYChart.Series series3 = new XYChart.Series();
