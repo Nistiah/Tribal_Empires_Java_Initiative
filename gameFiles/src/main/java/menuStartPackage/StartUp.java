@@ -4,10 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import menuStartPackage.FXMLControllers.MainBoardController;
 import menuStartPackage.FXMLControllers.MenuStartController;
-import menuStartPackage.FXMLControllers.SettingsController;
 import menuStartPackage.player.Player;
 
 import java.io.IOException;
@@ -38,12 +37,14 @@ public class StartUp extends Application {
         playerList.add(player2);
         playerList.add(player3);
         scene = new Scene(root);
-
+        stage.getIcons().add(new Image("/icon.png"));
         scene.setOnKeyPressed(MenuStartController::space);
 //        scene.setOnKeyPressed(MainBoardController::zoom);
         stage.setScene(scene);
         stage.setFullScreen(true);
+
         stage.show();
+
     }
 
     public static void main(String[] args) {

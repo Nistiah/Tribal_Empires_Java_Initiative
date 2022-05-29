@@ -11,14 +11,14 @@ public class Province {
     public List<String> possibleBuildings;
     List<String> baseBuildings;
 
-    int gold = 0;
-    int belief = 0;
-    int food = 0;
+    public int gold = 0;
+    public int belief = 0;
+    public int food = 0;
     int bronze = 0;
     int iron = 0;
     int dices = 0;
     int horses = 0;
-    int wood = 0;
+    public int wood = 0;
 
     public int getGold() {
         return gold;
