@@ -72,8 +72,8 @@ public class MapBuilderController {
             System.out.println("brak pliku");
         }
 
-        int jSetter = 1, jLimiter = 30;
-        for (int i = 1; i < 30; i++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i = 1; i < 35; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
@@ -92,12 +92,12 @@ public class MapBuilderController {
     void addHex(ActionEvent event1) {
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
-        int jSetter = 1, jLimiter = 30;
-        for (int i = 1; i <30; i++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i = 1; i <35; i++) {
             if (i % 2 == 0) {jSetter--; jLimiter--;}
             for (int j=jSetter; j < jLimiter; j++) {
                 if (i % 2 == 1 && j == jLimiter - 1) continue;
-               // System.out.println(i+" "+j);
+                // System.out.println(i+" "+j);
 
                 Hexagon temphex = new Hexagon(j, i);
                 temphex.setFill(Color.WHITE);
@@ -242,8 +242,8 @@ public class MapBuilderController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        int jSetter = 1, jLimiter = 30;
-        for (int i2 = 1; i2 <30; i2++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i2 = 1; i2 <35; i2++) {
             if (i2 % 2 == 0) {jSetter--; jLimiter--;}
             for (int j2=jSetter; j2 < jLimiter; j2++) {
                 if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;

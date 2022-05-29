@@ -217,8 +217,8 @@ public class MainBoardController {
                 provinceLowerPanel.getChildren().clear();
                 provinceUpperPanel.getChildren().clear();
                 Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
-                provinceType2.setTranslateY(30);
-                provinceType2.setTranslateX(30);
+                provinceType2.setTranslateY(46);
+                provinceType2.setTranslateX(35);
                 provinceType2.setFill(Paint.valueOf("GREEN"));
                 provinceType2.setFont(Font.font("Berlin Sans FB",24));
                 provinceUpperPanel.getChildren().add(provinceType2);
@@ -253,8 +253,8 @@ public class MainBoardController {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-        int jSetter = 1, jLimiter = 30;
-        for (int i2 = 1; i2 <30; i2++) {
+        int jSetter = 1, jLimiter = 46;
+        for (int i2 = 1; i2 <35; i2++) {
             if (i2 % 2 == 0) {jSetter--; jLimiter--;}
             for (int j2=jSetter; j2 < jLimiter; j2++) {
                 if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
@@ -307,8 +307,8 @@ public class MainBoardController {
             buyInitialised=false;
             cityCoordinatesLock = false;
             buyButton.setText("KUP POLE "+buyingMode);
-            int jSetter = 1, jLimiter = 30;
-            for (int i = 1; i <30; i++) {
+            int jSetter = 1, jLimiter = 46;
+            for (int i = 1; i <35; i++) {
                 if (i % 2 == 0) {jSetter--; jLimiter--;}
                 for (int j=jSetter; j < jLimiter; j++) {
                     if (i % 2 == 1 && j == jLimiter - 1) continue;
