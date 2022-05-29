@@ -287,7 +287,7 @@ public class MapBuilderController {
         musicPlayerInstance.menu = false;
         musicPlayerInstance.stopMusic();
         try {
-            root = FXMLLoader.load(getClass().getResource("exitStats.fxml"));
+            root = FXMLLoader.load(getClass().getResource("menuStart.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -13,6 +13,8 @@ public class Player {
         this.name=name;
     }
 
+    public int numberOfProvinces = 1;
+
     private int gold=1;
     private int belief=0;
     private int bronze=1;

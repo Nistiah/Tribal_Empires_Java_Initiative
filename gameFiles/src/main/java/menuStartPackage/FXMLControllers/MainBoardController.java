@@ -35,9 +35,10 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.Vector;
 
+import static menuStartPackage.FXMLControllers.StatsController.playerStats;
 import static menuStartPackage.StartUp.musicPlayerInstance;
 import static hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap.nullHex;
-
+import static menuStartPackage.FXMLControllers.StatsController.addPlayer;
 //import static menuStartPackage.StartUp.musicPlayerInstance;
 
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
@@ -99,6 +100,16 @@ public class MainBoardController {
     @FXML
     void nextPlayerButton(ActionEvent event){
         turnField.setText("Tura: "+tourCounter.getTour());
+        currentPlayer=playerList.get(playerId-1);
+        if(tourCounter.getTour()==0){    ///stats pane regulator
+            PlayerData tmp = new PlayerData(currentPlayer.name);
+            tmp.addInfo(currentPlayer.getGold(), currentPlayer.numberOfProvinces);
+            addPlayer(tmp);
+            System.out.println(playerId + " " + currentPlayer.name);
+        }else{
+            playerStats.get(playerId-1).addInfo(currentPlayer.getGold(),currentPlayer.numberOfProvinces);
+        }
+
         playerId++;
         if(playerId==playerList.size()+1){
             playerId=1;
@@ -120,6 +131,21 @@ public class MainBoardController {
         dyesField.setText("" + currentPlayer.getDyes());
         if(buyInitialised){
             buyClicked();
+        }
+    }
+
+    public class PlayerData{
+        String name;
+        Vector <Integer> goldPerTour;
+        Vector <Integer> numberOfProvincesPerTour;
+        PlayerData(String tmp){
+            this.name = tmp;
+            goldPerTour = new Vector<>();
+            numberOfProvincesPerTour = new Vector<>();
+        }
+        public void addInfo(int gold, int numberOfProvinces){
+            goldPerTour.add(gold);
+            numberOfProvincesPerTour.add(numberOfProvinces);
         }
     }
 
@@ -364,6 +390,7 @@ public class MainBoardController {
                 return;
             }
         }
+        if(map.getHexagon(i,j).getBorderColor()!=Color.PINK)return;
 
         map.getHexagon(i, j).getProvince().ownerId = ownerId;
         switch (map.getHexagon(i, j).getProvince().ownerId) {
