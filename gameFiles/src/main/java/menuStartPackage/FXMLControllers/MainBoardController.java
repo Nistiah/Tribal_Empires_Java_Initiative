@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -32,7 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -47,7 +50,7 @@ import static menuStartPackage.FXMLControllers.StatsController.addPlayer;
 //ownerId 0 -nikt
 
 
-public class MainBoardController {
+public class MainBoardController implements Initializable {
 
     private Stage stage;
     private Parent root;
@@ -168,6 +171,8 @@ public class MainBoardController {
         }
     }
 
+
+
     public class PlayerData{
         String name;
         Vector <Integer> goldPerTour;
@@ -228,8 +233,11 @@ public class MainBoardController {
     Group tempgrup;
     Image image;
 
-    @FXML
-    void addhex(ActionEvent event) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+
+
         generateHexagonMap.setVisible(false);
         fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
 
