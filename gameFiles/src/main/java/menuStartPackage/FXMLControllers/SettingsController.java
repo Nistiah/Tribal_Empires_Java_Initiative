@@ -37,6 +37,7 @@ public class SettingsController {
         musicPlayerInstance.stopMusic();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
+        stage.getScene().setOnKeyPressed(MapBuilderController::zoom);
     }
 
 
