@@ -10,10 +10,10 @@
 
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
    <right>
-      <SplitPane id="rightBar" dividerPositions="0.5" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+      <SplitPane id="rightBar" dividerPositions="0.2539863325740319" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <items>
             <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="282.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
-            <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
+            <AnchorPane fx:id="provinceLowerPanel" minHeight="580.0" minWidth="298.0" prefHeight="580.0" prefWidth="317.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
          </items>
       </SplitPane>
    </right>

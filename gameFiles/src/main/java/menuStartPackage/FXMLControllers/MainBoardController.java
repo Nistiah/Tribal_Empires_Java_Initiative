@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -99,6 +100,8 @@ public class MainBoardController {
 
     @FXML
     void nextPlayerButton(ActionEvent event){
+        provinceLowerPanel.getChildren().clear();
+        provinceUpperPanel.getChildren().clear();
         turnField.setText("Tura: "+tourCounter.getTour());
         currentPlayer=playerList.get(playerId-1);
         if(tourCounter.getTour()==0){    ///stats pane regulator
@@ -129,6 +132,37 @@ public class MainBoardController {
         horsesField.setText("" + currentPlayer.getHorses());
         ironField.setText("" + currentPlayer.getIron());
         dyesField.setText("" + currentPlayer.getDyes());
+        Text goldField1 = new Text("Złoto: " + currentPlayer.getGold());
+        Text beliefField1 = new Text("Wiara: " + currentPlayer.getFaith());
+        Text bronzeField1 = new Text("Brąz: " + currentPlayer.getBronze());
+        Text recoursesField1 = new Text("Surowce: " + currentPlayer.getBuildingResources());
+        Text horsesField1 = new Text("Konie: " + currentPlayer.getHorses());
+        Text ironField1 = new Text("Żelazo: " + currentPlayer.getIron());
+        Text dyesField1 = new Text("Barwniki: " + currentPlayer.getDyes());
+
+        goldField1.setFont(Font.font("Berlin Sans FB",20));
+        beliefField1.setFont(Font.font("Berlin Sans FB",20));
+        bronzeField1.setFont(Font.font("Berlin Sans FB",20));
+        recoursesField1.setFont(Font.font("Berlin Sans FB",20));
+        horsesField1.setFont(Font.font("Berlin Sans FB",20));
+        ironField1.setFont(Font.font("Berlin Sans FB",20));
+        dyesField1.setFont(Font.font("Berlin Sans FB",20));
+        goldField1.setTranslateY(10);
+        beliefField1.setTranslateY(30);
+        bronzeField1.setTranslateY(50);
+        recoursesField1.setTranslateY(70);
+        horsesField1.setTranslateY(90);
+        ironField1.setTranslateY(110);
+        dyesField1.setTranslateY(130);
+
+        provinceUpperPanel.getChildren().add(goldField1);
+        provinceUpperPanel.getChildren().add(beliefField1);
+        provinceUpperPanel.getChildren().add(bronzeField1);
+        provinceUpperPanel.getChildren().add(recoursesField1);
+        provinceUpperPanel.getChildren().add(horsesField1);
+        provinceUpperPanel.getChildren().add(ironField1);
+        provinceUpperPanel.getChildren().add(dyesField1);
+
         if(buyInitialised){
             buyClicked();
         }
@@ -238,29 +272,84 @@ public class MainBoardController {
             ImagePattern imgPat2 = new ImagePattern(image);
             temphex.setFill(imgPat2);
 
+  
+            Button by = new Button("kup se pole");
+            by.setOnMouseClicked(e -> buyClicked());
+            by.setTranslateY(400);
+            by.setTranslateX(80);
             temphex.setOnMouseClicked(MouseEvent -> {
-                final int[] przesuniecie = {10,60};
+//                    visibility=!visibility;
+//                    textField.setVisible(visibility);
                 provinceLowerPanel.getChildren().clear();
-                provinceUpperPanel.getChildren().clear();
-                Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
-                provinceType2.setTranslateY(46);
-                provinceType2.setTranslateX(35);
-                provinceType2.setFill(Paint.valueOf("GREEN"));
-                provinceType2.setFont(Font.font("Berlin Sans FB",24));
-                provinceUpperPanel.getChildren().add(provinceType2);
-                temphex.getProvince().possibleBuildings.forEach(building -> {
-                    Button b3 = new Button(building);
-                    b3.setTranslateY(przesuniecie[0]);
-                    przesuniecie[0] += 60;
-                    provinceLowerPanel.getChildren().add(b3);
-                });
-                temphex.getProvince().resources.forEach(resource -> {
-                    Text resourceText = new Text(resource);
-                    resourceText.setTranslateY(przesuniecie[1]);
-                    resourceText.setFont(Font.font("Berlin Sans FB",20));
-                    przesuniecie[1] += 20;
-                    provinceUpperPanel.getChildren().add(resourceText);
-                });
+//                buyButton.setOnMouseClicked(e -> buyClicked());
+//                provinceLowerPanel.getChildren().add(buyButton);
+                if(buyingMode)provinceLowerPanel.getChildren().add(by);
+                //provinceUpperPanel.getChildren().clear();
+                //provinceType.setText("Typ prowincji: " + temphex.getProvince().getType());
+
+                if(playerId == temp.ownerId && !buyingMode){
+                    if(Objects.equals(temphex.getProvince().getType(), "City"))
+                    {
+
+                        provinceLowerPanel.getChildren().add(by);
+                    }
+                    else
+                    {
+                        //if(buyingMode)provinceLowerPanel.getChildren().add(by);
+                    }
+                    Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
+                    provinceType2.setTranslateY(30);
+                    provinceType2.setTranslateX(5);
+                    provinceType2.setFill(Paint.valueOf("GREEN"));
+                    provinceType2.setFont(Font.font("Berlin Sans FB",24));
+                    provinceLowerPanel.getChildren().add(provinceType2);
+
+                    int belief = temphex.getProvince().belief;
+                    int wood = temphex.getProvince().wood;
+                    int gold = temphex.getProvince().gold;
+                    int food = temphex.getProvince().food;
+                    String provBelief = belief>0 ? "Wiara +" + belief + "\n" : "";
+                    String provWood = wood>0 ? "Drewno +" + wood + "\n" : "";
+                    String provGold = gold>0 ? "Złoto +" + gold + "\n" : "";
+                    String provFood = food>0 ? "Jedzenie +" + food + "\n" : "";
+                    if(belief > 0 || wood > 0 || gold > 0 || food > 0)
+                    {
+                        Text production = new Text("Produkcja: \n");
+                        production.setTranslateY(60);
+                        production.setTranslateX(5);
+                        production.setFont(Font.font("Berlin Sans FB",24));
+                        provinceLowerPanel.getChildren().add(production);
+                        temphex.getProvince().setBaseProduction(temphex.getProvince().getType());
+                    }
+                    Text provinceProduction = new Text(provBelief  + provWood + provGold + provFood);
+                    provinceProduction.setTranslateY(80);
+                    provinceProduction.setTranslateX(40);
+                    provinceProduction.setFont(Font.font("Berlin Sans FB",20));
+                    provinceLowerPanel.getChildren().add(provinceProduction);
+                    final int[] resourcesOffset = {(int) provinceProduction.getTranslateX() + (int) provinceProduction.getLayoutBounds().getHeight() + 30};
+                    temphex.getProvince().resources.forEach(resource -> {
+                        Text resourceText = new Text(resource);
+                        resourceText.setTranslateY(resourcesOffset[0]);
+                        resourceText.setFont(Font.font("Berlin Sans FB",20));
+                        resourcesOffset[0] += 20;
+                        provinceLowerPanel.getChildren().add(resourceText);
+                    });
+                    final int[] buttonOffset = { resourcesOffset[0] + 10};
+                    temphex.getProvince().possibleBuildings.forEach(building -> {
+
+                        Button b3 = new Button(building);
+                        b3.setTranslateY(buttonOffset[0]);
+                        b3.setPrefWidth(250);
+                        b3.setTranslateX(20);
+                        buttonOffset[0] += 60;
+                        provinceLowerPanel.getChildren().add(b3);
+                    });
+                    provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
+                }
+
+
+//                    textField.setText(temphex.getQ() + ":" + temphex.getR());
+
                 if(buyingMode) {
                     buyField(temphex);
                 }
