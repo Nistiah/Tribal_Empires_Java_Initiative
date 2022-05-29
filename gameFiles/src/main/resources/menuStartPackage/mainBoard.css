@@ -1,8 +1,13 @@
 .bodyBackground {
-    -fx-background-color: #474747;
+
+    -fx-background-color: linear-gradient(to bottom, rgb(2,0,36,1) 0%, rgb(185,187,110,1) 50%, rgb(2,0,36,1) 100%);
+    /*-fx-background-color: #474747;*/
     -fx-color: #474747;
     -fx-opacity: 90%;
     -fx-background-size: 100% 100%;
+
+
+
 }
 .bodyBackground2 {
     -fx-background-color: #111111;
@@ -11,13 +16,20 @@
     -fx-opacity: 90%;
     -fx-background-size: 100% 100%;
 }
+.bodyBackground3 {
+    -fx-background-image: url('sea.png');
+    -fx-background-size: 100% 100%;
+}
+
 
 .gold{
     -fx-background-image:url('gold.png');
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -28,7 +40,8 @@
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -38,7 +51,8 @@
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -48,7 +62,8 @@
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -58,7 +73,8 @@
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -68,7 +84,8 @@
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
-    -fx-background-color: #474747;
+    -fx-background-color: rgb(2,0,36,1);
+    /*-fx-background-color: #474747;*/
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -93,6 +110,17 @@
     -fx-font-family: Manjari;
     -fx-display: inline-block;
     -fx-font-size: 130px;
+}
+
+.button3 {
+    -fx-background-color: linear-gradient(to bottom, rgb(2,0,36,1) 0%, rgb(185,187,110,1) 50%, rgb(2,0,36,1) 100%);
+    -fx-padding: 50px 32px;
+    -fx-text-align: center;
+    -fx-text-decoration: bold;
+    -fx-font-family: Manjari;
+    -fx-display: inline-block;
+    -fx-font-size: 200px;
+    -fx-text-fill: #eae0c8;
 }
 
 .settingsButton {

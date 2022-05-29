@@ -230,6 +230,7 @@ public class MainBoardController {
 
     @FXML
     void addhex(ActionEvent event) {
+        generateHexagonMap.setVisible(false);
         fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
 
 
