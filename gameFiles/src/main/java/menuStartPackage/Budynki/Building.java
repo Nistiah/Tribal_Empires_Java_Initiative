@@ -1,8 +1,11 @@
 package menuStartPackage.Budynki;
 
+import java.util.Objects;
+
 public class Building {
     int owner;
     int level = 0;
+    int maxLevel;
     double [] levelProductionModificator= {1,2,5};
     double [] levelCostModificator= {1,1.5,3};
 
@@ -26,6 +29,15 @@ public class Building {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void setMaxLevel(String type) {
+        if(Objects.equals(type, "CowBreeding") || Objects.equals(type, "PigBreeding") || Objects.equals(type, "HorseBreeding") || Objects.equals(type, "Hunter")){
+            this.maxLevel = 2;
+        }
+        else{
+            this.maxLevel = 3;
+        }
     }
 
     public double getGold() {
@@ -141,10 +153,6 @@ public class Building {
             case "Warehouse":
                 ////TODO mechanika na zwiekszanie limitu surowcow
                 break;
-
-
-
-
 
         }
     }
