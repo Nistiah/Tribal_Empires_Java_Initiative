@@ -123,6 +123,9 @@
     -fx-text-fill: #eae0c8;
 }
 
+
+
+
 .settingsButton {
     -fx-background-radius: 30px;
     -fx-color: #474747;
@@ -136,4 +139,17 @@
 }
 .text-field {
     -fx-cursor: default;
+}
+
+
+.myButton {
+    -fx-background-radius: 200px;
+    -fx-background-color: rgba(2,0,36,0.85) ;
+    -fx-color: 	rgba(255,192,203,1);
+    -fx-border-radius: 800;
+    -fx-text-fill: rgba(255,192,203,1);
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 40;
+    -fx-padding: 10px 20px;
+
 }

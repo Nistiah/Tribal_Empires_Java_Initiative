@@ -102,6 +102,9 @@ public class MainBoardController implements Initializable {
     public AnchorPane provinceUpperPanel;
 
     @FXML
+    private Button nextButton = new Button("Next Player");
+
+    @FXML
     void nextPlayerButton(ActionEvent event){
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
@@ -240,8 +243,7 @@ public class MainBoardController implements Initializable {
 
         generateHexagonMap.setVisible(false);
         fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
-
-
+//        nextButton.setFont(Font.font("Berlin Sans FB",30));
         fractionField.setText("Gracz:"+playerList.get(playerId).name +" "+playerId);
         goldField.setText("" + playerList.get(playerId).getGold());
         beliefField.setText("" + playerList.get(playerId).getFaith());
@@ -415,6 +417,7 @@ public class MainBoardController implements Initializable {
             }
         }
         map.setRenderCoordinates(true);
+
     }
 
     public static void zoom(KeyEvent event){

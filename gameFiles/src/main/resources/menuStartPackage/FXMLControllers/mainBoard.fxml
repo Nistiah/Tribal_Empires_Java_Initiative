@@ -64,7 +64,6 @@
                         <TextField fx:id="dyesField" editable="false" promptText="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                         <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="11" GridPane.rowIndex="2" />
                         <TextField fx:id="turnField" text="tura" GridPane.columnIndex="12" GridPane.rowIndex="2" />
-                        <Button minHeight="18.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="18.0" prefWidth="166.0" text="Nastepna Tura" GridPane.columnIndex="9" GridPane.rowIndex="2" />
                         <Button minHeight="19.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="19.0" prefWidth="111.0" stylesheets="@../mainBoard.css" text="Quit" GridPane.columnIndex="10" GridPane.rowIndex="2">
                            <font>
                               <Font size="12.0" />
@@ -76,6 +75,11 @@
             </AnchorPane>
          </top>
       </BorderPane>
+      <Button fx:id="nextButton" minHeight="40.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="80.0" prefWidth="600.0" styleClass="myButton" stylesheets="@../mainBoard.css" text="Next Player" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Button>
       <Button fx:id="generateHexagonMap" mnemonicParsing="false" prefHeight="1080.0" prefWidth="1925.0" styleClass="button3" stylesheets="@../mainBoard.css" text="Start Game" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Manjari Regular" size="96.0" />
