@@ -10,7 +10,14 @@ public class DesertFlat extends Province {
     List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
 
     @Override
-    public String iconPath(){return "provinceIcons/desert - flat.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/desert - flat.png";
+        }else{
+            return "provinceIcons/desert - flat (kopia).png";
+        }
+    }
+
 
     public DesertFlat(){
         setResources(resources);

@@ -11,7 +11,15 @@ public class TrawaFlat extends Province {
     List<String> baseBuildings = List.of("Farma");
 
     @Override
-    public String iconPath(){return "provinceIcons/trawa - flat3.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/trawa - flat3.png";
+        }else{
+            return "provinceIcons/trawa - flat3 (kopia).png";
+        }
+    }
+
+
 
     public TrawaFlat(){
         setResources(resources);

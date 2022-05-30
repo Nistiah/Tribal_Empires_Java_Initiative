@@ -9,7 +9,14 @@ public class ForestWyzyny extends Province {
     List<String> baseBuildings = List.of("Łowca");
 
     @Override
-    public String iconPath(){return "provinceIcons/forest - wyz.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/forest - wyz.png";
+        }else{
+            return "provinceIcons/forest - wyz (kopia).png";
+        }
+    }
+
 
     public ForestWyzyny(){
         setResources(resources);

@@ -10,8 +10,16 @@ public class TrawaWyzyny extends Province {
     List<String> possibleBuildings = Arrays.asList("Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto", "Hodowla krów", "Hodowla świń");
     List<String> baseBuildings = List.of("Farma");
 
+
     @Override
-    public String iconPath(){return "provinceIcons/trawa - wyz2.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/trawa - wyz2.png";
+        }else{
+            return "provinceIcons/trawa - wyz2 (kopia).png";
+        }
+    }
+
 
     public TrawaWyzyny(){
         setResources(resources);

@@ -10,7 +10,13 @@ public class Mountains extends Province {
     List<String> baseBuildings = List.of();
 
     @Override
-    public String iconPath(){return "provinceIcons/mountain.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/mountain.png";
+        }else{
+            return "provinceIcons/mountain (kopia).png";
+        }
+    }
 
     public Mountains(){
         setResources(resources);

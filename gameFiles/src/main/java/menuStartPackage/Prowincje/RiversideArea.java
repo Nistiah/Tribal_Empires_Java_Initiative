@@ -10,7 +10,13 @@ public class RiversideArea extends Province {
     List<String> baseBuildings = List.of("Farma nadrzeczna");
 
     @Override
-    public String iconPath(){return "provinceIcons/river2.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/river2.png";
+        }else{
+            return "provinceIcons/river2 (kopia).png";
+        }
+    }
 
     public RiversideArea(){
         setResources(resources);

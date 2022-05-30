@@ -1,6 +1,7 @@
 package menuStartPackage.FXMLControllers;
 
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
+import static hexagons.src.main.java.com.prettybyte.hexagons.Hexagon.hexBorderWidth;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -21,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -316,7 +318,7 @@ public class MainBoardController implements Initializable {
                 playerList.get(owner-1).createNewCity((City)temp);
             }
             temphex.setProvince(temp);
-            temphex.setStrokeWidth(3);
+            temphex.setStrokeWidth(hexBorderWidth);
             try {
                 image = new Image(getClass().getResource(temp.iconPath()).toURI().toString());
             } catch (URISyntaxException e) {
@@ -551,8 +553,21 @@ public class MainBoardController implements Initializable {
                 break;
         }
         map.getHexagon(i, j).borderColor(color);
+
+        try {
+            image = new Image(getClass().getResource(map.getHexagon(i, j).getProvince().iconPath()).toURI().toString());
+            ImagePattern imgPat3 = new ImagePattern(image);
+            map.getHexagon(i, j).setFill(imgPat3);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+
+        map.getHexagon(i, j).borderColor(color);///TODO: tutaj
         City tempCity = (City) map.getHexagon(initialisedI, initialisedJ).getProvince();  //dodanie kupionej prowincji do miasta
         tempCity.assignProvince(map.getHexagon(i, j).getProvince());
+
+
 
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
             for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {

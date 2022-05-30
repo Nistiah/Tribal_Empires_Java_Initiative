@@ -9,7 +9,14 @@ public class ForestFlat extends Province {
     List<String> baseBuildings = List.of("Łowca");
 
     @Override
-    public String iconPath(){return "provinceIcons/forest - flat.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/forest - flat.png";
+        }else{
+            return "provinceIcons/forest - flat (kopia).png";
+        }
+    }
+
 
     public ForestFlat() {
 

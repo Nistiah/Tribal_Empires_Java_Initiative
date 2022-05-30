@@ -14,6 +14,7 @@ import static java.lang.Math.*;
  */
 public class Hexagon extends Polygon {
 
+    static public int hexBorderWidth=3;
     private Province province ;
     final GridPosition position;
     private HexagonMap map;
@@ -110,7 +111,7 @@ public class Hexagon extends Polygon {
     // --------------------- Graphics --------------------------------------------
     private double[] calculatePolygonPoints() {
         checkMap();
-        int graphicsHeight =  map.hexagonSize * 2 + 3;
+        int graphicsHeight =  map.hexagonSize * 2 + hexBorderWidth;
         double graphicsWidth = sqrt(3) / 2 * graphicsHeight ;
         graphicsXoffset = (int) (graphicsWidth * (double) position.q + 0.5 * graphicsWidth * (double) position.r);
         graphicsYoffset = (int) (3.0 / 4.0 * graphicsHeight * position.r);

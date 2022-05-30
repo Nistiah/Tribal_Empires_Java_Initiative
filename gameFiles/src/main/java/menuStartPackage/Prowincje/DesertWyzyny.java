@@ -9,7 +9,14 @@ public class DesertWyzyny extends Province {
     List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
 
     @Override
-    public String iconPath(){return "provinceIcons/desert - wyz.png";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/desert - wyz.png";
+        }else{
+            return "provinceIcons/desert - wyz (kopia).png";
+        }
+    }
+
 
     public DesertWyzyny(){
         setResources(resources);

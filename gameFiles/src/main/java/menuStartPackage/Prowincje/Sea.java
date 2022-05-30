@@ -10,7 +10,15 @@ public class Sea extends Province {
     List<String> baseBuildings = Arrays.asList();
 
     @Override
-    public String iconPath(){return "provinceIcons/sea2.jpg";}
+    public String iconPath(){
+        if(ownerId!=0){
+            return "provinceIcons/sea2.jpg";
+        }else{
+            return "provinceIcons/sea2 (kopia).jpg";
+        }
+    }
+
+
 
     public Sea(){
         setResources(resources);
