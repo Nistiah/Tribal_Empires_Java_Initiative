@@ -15,21 +15,21 @@ public class Player {
 
     public int numberOfProvinces = 1;
 
-    private int gold=1;
+    private int gold=20;
     private int belief=0;
-    private int bronze=1;
-    private int iron=1;
-    private int dyes=1;
+    private int bronze=0;
+    private int iron=0;
+    private int dyes=0;
     private int buildingResources=1;
-    private int horses=1;
+    private int horses=0;
 
-    private final int baseGoldProduction=1;
-    private final int baseBeliefProduction=0;
-    private final int baseBuildingResourcesProduction=1;
-    private final int baseHorsesProduction=0;
-    private final int baseBronzeProduction=0;
-    private final int baseIronProduction=0;
-    private final int baseDyesProduction=0;
+    private static final int baseGoldProduction=1;
+    private static final int baseBeliefProduction=0;
+    private static final int baseBuildingResourcesProduction=1;
+    private static final int baseHorsesProduction=0;
+    private static final int baseBronzeProduction=0;
+    private static final int baseIronProduction=0;
+    private static final int baseDyesProduction=0;
 
 //    private int goldProduction=baseGoldProduction+getProvincesGold();
 //    private int beliefProduction=baseBeliefProduction+getProvincesBelief();
@@ -42,8 +42,8 @@ public class Player {
     public void resourcesTourIncrease(){
         gold+=baseGoldProduction+getProvincesGold();
         belief+=baseBeliefProduction+getProvincesBelief();
-        buildingResources+=baseBuildingResourcesProduction;   //do rozwiazania
-        horses+=baseBuildingResourcesProduction;
+        buildingResources+=baseBuildingResourcesProduction+getProvincesWood();   //do rozwiazania
+        horses+=baseHorsesProduction+getProvincesHorses();
         bronze+=baseBronzeProduction+getProvincesBronze();
         iron+=baseIronProduction+getProvincesIron();
         dyes+=baseDyesProduction+getProvincesDices();

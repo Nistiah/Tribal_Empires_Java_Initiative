@@ -90,7 +90,6 @@ public class Province {
                 break;
             case "TrawaFlat":
                 food = 1;
-                gold = 1;
                 break;
             case "TrawaWyzyny":
                 food = 1;
@@ -111,9 +110,7 @@ public class Province {
                 break;
             case "City":
                 food = 1;
-                wood = 1;
                 gold = 1;
-                belief = 1;
                 break;
         }
     }
