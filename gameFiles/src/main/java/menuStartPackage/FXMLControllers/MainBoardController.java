@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -105,7 +106,11 @@ public class MainBoardController implements Initializable {
     private Button nextButton = new Button("Next Player");
 
     @FXML
-    void nextPlayerButton(ActionEvent event){
+    private Rectangle avatar;
+    private String[] listaAvatarów = {"/avatar3.png", "/avatar2.png", "/avatar1.png"};
+
+    @FXML
+    void nextPlayerButton(ActionEvent event) throws URISyntaxException {
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
         turnField.setText("Tura: "+tourCounter.getTour());
@@ -120,6 +125,13 @@ public class MainBoardController implements Initializable {
         }
 
         playerId++;
+
+
+        ImagePattern imgPat2 = new ImagePattern(image);
+        avatar.setFill(imgPat2);
+
+
+
         if(playerId==playerList.size()+1){
             playerId=1;
             tourCounter.incrementTour();
@@ -128,16 +140,29 @@ public class MainBoardController implements Initializable {
             }
 
         }
+
+        switch(playerId){
+            case 1:
+                image = new Image(getClass().getResource("avatar1.png").toURI().toString());
+                break;
+            case 2:
+                image = new Image(getClass().getResource("avatar2.png").toURI().toString());
+                break;
+            case 3:
+                image = new Image(getClass().getResource("avatar3.png").toURI().toString());
+                break;
+        }
+
         currentPlayer=playerList.get(playerId-1);
         ownerId=playerId;
         fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
-        bronzeField.setText("bronze" + currentPlayer.getBronze());
+        bronzeField.setText("" + currentPlayer.getBronze());
         recoursesField.setText("" + currentPlayer.getBuildingResources());
         horsesField.setText("" + currentPlayer.getHorses());
-        ironField.setText("iron" + currentPlayer.getIron());
-        dyesField.setText("dyes" + currentPlayer.getDyes());
+        ironField.setText("" + currentPlayer.getIron());
+        dyesField.setText("" + currentPlayer.getDyes());
         Text goldField1 = new Text("Złoto: " + currentPlayer.getGold());
         Text beliefField1 = new Text("Wiara: " + currentPlayer.getFaith());
         Text bronzeField1 = new Text("Brąz: " + currentPlayer.getBronze());
@@ -247,11 +272,11 @@ public class MainBoardController implements Initializable {
         fractionField.setText("Gracz:"+playerList.get(playerId).name +" "+playerId);
         goldField.setText("" + playerList.get(playerId).getGold());
         beliefField.setText("" + playerList.get(playerId).getFaith());
-        bronzeField.setText("bronze" + playerList.get(playerId).getBronze());
+        bronzeField.setText("" + playerList.get(playerId).getBronze());
         recoursesField.setText("" + playerList.get(playerId).getBuildingResources());
         horsesField.setText("" + playerList.get(playerId).getHorses());
-        ironField.setText("iron" + playerList.get(playerId).getIron());
-        dyesField.setText("dyes" + playerList.get(playerId).getDyes());
+        ironField.setText("" + playerList.get(playerId).getIron());
+        dyesField.setText("" + playerList.get(playerId).getDyes());
 
         turnField.setText("Tura: "+tourCounter.getTour());
         nullHex.setProvince(new Province());

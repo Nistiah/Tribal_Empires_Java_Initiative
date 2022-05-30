@@ -9,6 +9,9 @@
 
 
 }
+
+
+
 .bodyBackground2 {
     -fx-background-color: #111111;
     -fx-color: #111111;
@@ -21,10 +24,18 @@
     -fx-background-size: 100% 100%;
 }
 
+.bodyBackground4 {
+
+    -fx-background-color: rgb(2, 0, 36, 1);
+}
+
+
+
+
 
 .gold{
     -fx-background-image:url('gold.png');
-    -fx-background-size: 30% 95%;
+    -fx-background-size: 25% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
     -fx-background-color: rgb(2,0,36,1);
@@ -58,7 +69,7 @@
     -fx-text-fill: pink;
 }
 .bronze{
-    -fx-background-image:url('gold.png');
+    -fx-background-image:url('bronze.png');
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
@@ -69,7 +80,7 @@
     -fx-text-fill: pink;
 }
 .iron{
-    -fx-background-image:url('gold.png');
+    -fx-background-image:url('iron.png');
     -fx-background-size: 30% 95%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
@@ -86,6 +97,16 @@
     -fx-background-position: left;
     -fx-background-color: rgb(2,0,36,1);
     /*-fx-background-color: #474747;*/
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.dyes{
+    -fx-background-image:url('dyes.png');
+    -fx-background-size: 30% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center;
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
@@ -121,6 +142,25 @@
     -fx-display: inline-block;
     -fx-font-size: 200px;
     -fx-text-fill: #eae0c8;
+}
+.exitButton {
+    /*-fx-background-color: rgb(2,0,36,1);*/
+    -fx-background-image:url('exit.png');
+    -fx-background-size: 95% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: rgb(2,0,36,1);
+
+
+    -fx-max-width: 50;
+    -fx-max-height: 30;
+    -fx-pref-width: 50;
+    -fx-pref-height: 30;
+    -fx-min-width: 50;
+    -fx-min-height: 30;
+    -fx-alignment: center;
+    /*-fx-display: inline-block;*/
+    -fx-border-radius: 15px;
 }
 
 
