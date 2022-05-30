@@ -5,7 +5,8 @@
 
 .button {
     -fx-background-radius: 15px;
-    -fx-color: #474747;
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-color:  rgba(2,0,36,0.7);
     -fx-padding: 15px 32px;
     -fx-text-align: center;
     -fx-text-decoration: bold;
@@ -13,6 +14,16 @@
     -fx-display: inline-block;
     -fx-font-size: 22px;
 }
+
+.button:hover{
+    -fx-text-fill: rgb(215, 173, 173);
+    -fx-background-color: rgba(46, 45, 104,1);
+}
+.button:selected{
+    -fx-text-fill: rgb(215, 173, 173);
+    -fx-background-color: rgb(146, 37, 163, 1);
+}
+
 .settingsButton {
     -fx-background-radius: 30px;
     -fx-color: #474747;

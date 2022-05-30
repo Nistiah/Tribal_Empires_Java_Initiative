@@ -162,6 +162,11 @@
     /*-fx-display: inline-block;*/
     -fx-border-radius: 15px;
 }
+.exitButton:hover{
+    -fx-background-color: rgb(52, 46, 157);
+
+
+}
 
 
 
@@ -181,15 +186,22 @@
     -fx-cursor: default;
 }
 
-
+/*exit button*/
 .myButton {
     -fx-background-radius: 200px;
-    -fx-background-color: rgba(2,0,36,0.85) ;
+    -fx-background-color: rgba(2,0,36,0.60) ;
     -fx-color: 	rgba(255,192,203,1);
     -fx-border-radius: 800;
     -fx-text-fill: rgba(255,192,203,1);
     /*-fx-opacity:85%;*/
     -fx-font-size: 40;
     -fx-padding: 10px 20px;
-
+}
+.myButton:hover{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: rgba(2,0,36,0.90) ;
+}
+.myButton:visited{
+    -fx-text-fill: rgb(0, 135, 54);
+    -fx-background-color: rgba(2,0,36,0.90) ;
 }

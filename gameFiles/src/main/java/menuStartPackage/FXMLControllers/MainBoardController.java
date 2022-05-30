@@ -127,8 +127,7 @@ public class MainBoardController implements Initializable {
         playerId++;
 
 
-        ImagePattern imgPat2 = new ImagePattern(image);
-        avatar.setFill(imgPat2);
+
 
 
 
@@ -143,15 +142,17 @@ public class MainBoardController implements Initializable {
 
         switch(playerId){
             case 1:
-                image = new Image(getClass().getResource("avatar1.png").toURI().toString());
+                image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
                 break;
             case 2:
-                image = new Image(getClass().getResource("avatar2.png").toURI().toString());
+                image2 = new Image(getClass().getResource("avatar2.png").toURI().toString());
                 break;
             case 3:
-                image = new Image(getClass().getResource("avatar3.png").toURI().toString());
+                image2 = new Image(getClass().getResource("avatar3.png").toURI().toString());
                 break;
         }
+        ImagePattern imgPat2 = new ImagePattern(image2);
+        avatar.setFill(imgPat2);
 
         currentPlayer=playerList.get(playerId-1);
         ownerId=playerId;
@@ -260,16 +261,21 @@ public class MainBoardController implements Initializable {
 
     Group tempgrup;
     Image image;
-
+    Image image2;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        try {
+            image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        ImagePattern imgPat2 = new ImagePattern(image2);
+        avatar.setFill(imgPat2);
 
-
+//        playerId=1;
         generateHexagonMap.setVisible(false);
-        fractionField.setText("Gracz:"+ playerList.get(playerId-1).name);
-//        nextButton.setFont(Font.font("Berlin Sans FB",30));
-        fractionField.setText("Gracz:"+playerList.get(playerId).name +" "+playerId);
+        fractionField.setText("Gracz:"+playerList.get(playerId-1).name +" "+playerId);
         goldField.setText("" + playerList.get(playerId).getGold());
         beliefField.setText("" + playerList.get(playerId).getFaith());
         bronzeField.setText("" + playerList.get(playerId).getBronze());
@@ -316,8 +322,8 @@ public class MainBoardController implements Initializable {
             } catch (URISyntaxException e) {
                 System.out.println("pattern null");
             }
-            ImagePattern imgPat2 = new ImagePattern(image);
-            temphex.setFill(imgPat2);
+            ImagePattern imgPat3 = new ImagePattern(image);
+            temphex.setFill(imgPat3);
 
   
             Button by = new Button("kup se pole");

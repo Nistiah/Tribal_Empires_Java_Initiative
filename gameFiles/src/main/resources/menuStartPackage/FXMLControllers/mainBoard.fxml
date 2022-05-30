@@ -16,11 +16,11 @@
    <children>
       <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
          <right>
-            <SplitPane id="rightBar" dividerPositions="0.5, 0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+            <SplitPane id="rightBar" dividerPositions="0.5, 0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="bodyBackground4" BorderPane.alignment="CENTER">
                <items>
                   <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                  <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="280.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
-                  <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" />
+                  <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="280.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
+                  <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
                </items>
             </SplitPane>
          </right>
