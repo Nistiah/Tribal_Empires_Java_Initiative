@@ -27,32 +27,27 @@ public class HexagonMap {
     public enum Direction {NORTHWEST, NORTHEAST, EAST, SOUTHEAST, SOUTHWEST, WEST}
     public void sizeDown(){
 
-        if(hexagonSize>21) {
-            if(hexagonSize<40){
-                hexBorderWidth=2;
-            }
+        if(hexagonSize>20) {
 
-            if(hexagonSize<25){
-                hexBorderWidth=1;
-            }
+            hexBorderWidth = hexagonSize/10 + 1 - hexagonSize/20;
+
             hexagonSize -= 2;
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
+                h.setStrokeWidth(hexBorderWidth);
                 h.init();
             }
         }
     }
     public void sizeUp(){
         if(hexagonSize<100){
-            if(hexagonSize>25){
-                hexBorderWidth=2;
-            }
-            if(hexagonSize>=40){
-                hexBorderWidth=3;
-            }
+
+            hexBorderWidth = hexagonSize/10 + 1 - hexagonSize/20;
+
             hexagonSize += 2;
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
+                h.setStrokeWidth(hexBorderWidth);
                 h.init();
             }
         }

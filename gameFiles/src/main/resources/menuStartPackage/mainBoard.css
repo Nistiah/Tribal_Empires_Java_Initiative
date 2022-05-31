@@ -172,9 +172,7 @@
     -fx-border-radius: 15px;
 }
 .exitButton:hover{
-    -fx-background-color: rgb(0, 0, 5);
-
-
+    -fx-background-image:url('exit2.png');
 }
 
 

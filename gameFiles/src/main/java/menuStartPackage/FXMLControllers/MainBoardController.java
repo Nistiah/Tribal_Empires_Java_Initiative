@@ -38,6 +38,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Vector;
 
+import static javafx.scene.paint.Color.rgb;
 import static menuStartPackage.FXMLControllers.StatsController.playerStats;
 import static menuStartPackage.StartUp.musicPlayerInstance;
 import static hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap.nullHex;
@@ -53,6 +54,8 @@ public class MainBoardController implements Initializable {
 
     private Stage stage;
     private Parent root;
+    private String font = "Manjaro";
+
     @FXML
     public Button generateHexagonMap;
     @FXML
@@ -113,7 +116,7 @@ public class MainBoardController implements Initializable {
     void bronzeEntered(MouseEvent event) {
         bronzeTextFlow.setVisible(true);
         Text baseProduction = new Text("Base bronze production " + Player.baseBronzeProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREY);
         bronzeTextFlow.getChildren().add(baseProduction);
 
@@ -122,7 +125,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " dyes production " + city.getBronze() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             bronzeTextFlow.getChildren().add(text);
         }
@@ -140,7 +143,7 @@ public class MainBoardController implements Initializable {
         dyesTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base dyes production " + Player.baseDyesProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREY);
         dyesTextFlow.getChildren().add(baseProduction);
 
@@ -149,7 +152,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " dyes production " + city.getDyes() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             dyesTextFlow.getChildren().add(text);
         }
@@ -169,7 +172,7 @@ public class MainBoardController implements Initializable {
         faithTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base dyes production " + Player.baseBeliefProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREY);
         faithTextFlow.getChildren().add(baseProduction);
 
@@ -178,7 +181,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " faith production " + city.getBelief() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             faithTextFlow.getChildren().add(text);
         }
@@ -197,7 +200,7 @@ public class MainBoardController implements Initializable {
         goldTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base gold production " + Player.baseGoldProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREEN);
         goldTextFlow.getChildren().add(baseProduction);
 
@@ -206,7 +209,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " gold production " + city.getGold() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             goldTextFlow.getChildren().add(text);
         }
@@ -225,7 +228,7 @@ public class MainBoardController implements Initializable {
         horseTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base dyes production " + Player.baseHorsesProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREY);
         horseTextFlow.getChildren().add(baseProduction);
 
@@ -234,7 +237,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text("City "+city.getName() + "horse production" + city.getHorses() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             horseTextFlow.getChildren().add(text);
         }
@@ -252,7 +255,7 @@ public class MainBoardController implements Initializable {
         ironTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base dyes production " + Player.baseIronProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREY);
         ironTextFlow.getChildren().add(baseProduction);
 
@@ -261,7 +264,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " dyes production " + city.getIron() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             ironTextFlow.getChildren().add(text);
         }
@@ -279,7 +282,7 @@ public class MainBoardController implements Initializable {
         woodTextFlow.setVisible(true);
 
         Text baseProduction = new Text("Base building resources production " + Player.baseBuildingResourcesProduction + "\n");
-        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFont(Font.font(font,18));
         baseProduction.setFill(Color.GREEN);
         woodTextFlow.getChildren().add(baseProduction);
 
@@ -288,7 +291,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
             Text text = new Text(city.getName() + " building resources production " + city.getIron() + "\n");
-            text.setFont(Font.font("Manjaro",18));
+            text.setFont(Font.font(font,18));
             text.setFill(Color.GREEN);
             woodTextFlow.getChildren().add(text);
         }
@@ -364,13 +367,13 @@ public class MainBoardController implements Initializable {
         Text ironField1 = new Text("Żelazo: " + currentPlayer.getIron());
         Text dyesField1 = new Text("Barwniki: " + currentPlayer.getDyes());
 
-        goldField1.setFont(Font.font("Berlin Sans FB",20));
-        beliefField1.setFont(Font.font("Berlin Sans FB",20));
-        bronzeField1.setFont(Font.font("Berlin Sans FB",20));
-        recoursesField1.setFont(Font.font("Berlin Sans FB",20));
-        horsesField1.setFont(Font.font("Berlin Sans FB",20));
-        ironField1.setFont(Font.font("Berlin Sans FB",20));
-        dyesField1.setFont(Font.font("Berlin Sans FB",20));
+        goldField1.setFont(Font.font(font,20));
+        beliefField1.setFont(Font.font(font,20));
+        bronzeField1.setFont(Font.font(font,20));
+        recoursesField1.setFont(Font.font(font,20));
+        horsesField1.setFont(Font.font(font,20));
+        ironField1.setFont(Font.font(font,20));
+        dyesField1.setFont(Font.font(font,20));
         goldField1.setTranslateY(10);
         beliefField1.setTranslateY(30);
         bronzeField1.setTranslateY(50);
@@ -555,7 +558,7 @@ public class MainBoardController implements Initializable {
                     provinceType2.setTranslateY(30);
                     provinceType2.setTranslateX(5);
                     provinceType2.setFill(Paint.valueOf("GREEN"));
-                    provinceType2.setFont(Font.font("Berlin Sans FB",24));
+                    provinceType2.setFont(Font.font(font,24));
                     provinceLowerPanel.getChildren().add(provinceType2);
 
                     int belief = temphex.getProvince().belief;
@@ -571,20 +574,20 @@ public class MainBoardController implements Initializable {
                         Text production = new Text("Produkcja: \n");
                         production.setTranslateY(60);
                         production.setTranslateX(5);
-                        production.setFont(Font.font("Berlin Sans FB",24));
+                        production.setFont(Font.font(font,24));
                         provinceLowerPanel.getChildren().add(production);
                         temphex.getProvince().setBaseProduction(temphex.getProvince().getType());
                     }
                     Text provinceProduction = new Text(provBelief  + provWood + provGold + provFood);
                     provinceProduction.setTranslateY(80);
                     provinceProduction.setTranslateX(40);
-                    provinceProduction.setFont(Font.font("Berlin Sans FB",20));
+                    provinceProduction.setFont(Font.font(font,20));
                     provinceLowerPanel.getChildren().add(provinceProduction);
                     final int[] resourcesOffset = {(int) provinceProduction.getTranslateX() + (int) provinceProduction.getLayoutBounds().getHeight() + 30};
                     temphex.getProvince().resources.forEach(resource -> {
                         Text resourceText = new Text(resource);
                         resourceText.setTranslateY(resourcesOffset[0]);
-                        resourceText.setFont(Font.font("Berlin Sans FB",20));
+                        resourceText.setFont(Font.font(font,20));
                         resourcesOffset[0] += 20;
                         provinceLowerPanel.getChildren().add(resourceText);
                     });
@@ -630,7 +633,8 @@ public class MainBoardController implements Initializable {
 
                 switch (map.getHexagon(j2,i2).getProvince().ownerId) {
                     case 0:
-                        color = Color.BLACK;
+//                        color = rgb(117,117,117);
+                        color = rgb(2,0,36,1);
                         map.getHexagon(j2,i2).borderColor(color);
                         break;
                     case 1:
@@ -739,7 +743,7 @@ public class MainBoardController implements Initializable {
         map.getHexagon(i, j).getProvince().ownerId = ownerId;
         switch (map.getHexagon(i, j).getProvince().ownerId) {
             case 0:
-                color = Color.BLACK;
+                color = rgb(2,0,36,1);
                 break;
             case 1:
                 color = Color.AQUAMARINE;
