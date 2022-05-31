@@ -122,6 +122,8 @@ public class MainBoardController implements Initializable {
     private int                  initialisedJ;
     @FXML
     private ScrollPane           scrollPane;
+    @FXML
+    private AnchorPane           mainAnchorPane;
 
     @FXML
     void bronzeEntered() {
@@ -529,6 +531,8 @@ public class MainBoardController implements Initializable {
         ironTextFlow.setTextAlignment(TextAlignment.CENTER);
         horseTextFlow.setTextAlignment(TextAlignment.CENTER);
         dyesTextFlow.setTextAlignment(TextAlignment.CENTER);
+
+        mainAnchorPane.setOnKeyPressed(MainBoardController::zoom);
 
         try {
             image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar1.png")).toURI().toString());
