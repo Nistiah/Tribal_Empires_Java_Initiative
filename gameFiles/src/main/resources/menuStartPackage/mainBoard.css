@@ -129,8 +129,20 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center;
     -fx-text-decoration: bold;
-    -fx-text-fill: pink;
+    -fx-text-fill: grey;
 }
+
+.split-pane:vertical > .split-pane-divider {
+    /*-fx-background-color: rgb(2,0,36,1); maybe?*/
+    -fx-background-color: gold;
+}
+
+
+.split-pane2:vertical > .split-pane-divider {
+    -fx-background-color: pink;
+}
+
+
 
 
 .description{

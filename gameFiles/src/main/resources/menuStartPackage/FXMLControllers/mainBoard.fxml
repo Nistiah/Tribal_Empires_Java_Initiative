@@ -18,7 +18,7 @@
    <children>
       <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
          <right>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.0" orientation="VERTICAL">
                <items>
                   <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#descriptionEntered" onMouseExited="#descriptionExited" prefHeight="150.0" prefWidth="300.0" styleClass="bodyBackground4" SplitPane.resizableWithParent="false">
                      <columnConstraints>
@@ -29,7 +29,7 @@
                         <RowConstraints maxHeight="150.0" minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
+                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" styleClass="bodyBackground4" width="150.0" />
                         <TextFlow fx:id="descriptionField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="130.0" styleClass="bodyBackground4" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets />
@@ -37,7 +37,7 @@
                         </TextFlow>
                      </children>
                   </GridPane>
-                  <SplitPane id="rightBar" dividerPositions="0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="bodyBackground4">
+                  <SplitPane id="rightBar" dividerPositions="0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="split-pane2">
                      <items>
                         <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="300.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
                         <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
