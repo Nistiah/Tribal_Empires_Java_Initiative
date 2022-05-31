@@ -321,11 +321,6 @@ public class MainBoardController implements Initializable {
 
         playerId++;
 
-
-
-
-
-
         if(playerId==playerList.size()+1){
             playerId=1;
             tourCounter.incrementTour();
@@ -338,12 +333,21 @@ public class MainBoardController implements Initializable {
         switch(playerId){
             case 1:
                 image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
+                map.setNormalZoom();
+                scrollPane.setVvalue(0.5975);
+                scrollPane.setHvalue(0);
                 break;
             case 2:
                 image2 = new Image(getClass().getResource("avatar2.png").toURI().toString());
+                map.setNormalZoom();
+                scrollPane.setVvalue(0);
+                scrollPane.setHvalue(0);
                 break;
             case 3:
                 image2 = new Image(getClass().getResource("avatar3.png").toURI().toString());
+                map.setNormalZoom();
+                scrollPane.setVvalue(0.4621);
+                scrollPane.setHvalue(0.3900);
                 break;
         }
         ImagePattern imgPat2 = new ImagePattern(image2);
@@ -393,6 +397,9 @@ public class MainBoardController implements Initializable {
         if(buyInitialised){
             buyClicked();
         }
+
+
+
     }
 
 
@@ -466,7 +473,8 @@ public class MainBoardController implements Initializable {
         playerList.add(player1);
         playerList.add(player2);
         playerList.add(player3);
-
+        scrollPane.setVvalue(0.5975);
+        scrollPane.setHvalue(0);
 
         currentPlayer=playerList.get(1);
         try {
@@ -612,7 +620,7 @@ public class MainBoardController implements Initializable {
                 }
             });
             temphex.setOnMouseMoved(MouseEvent -> {
-                textField.setText(temphex.getQ() + ":" + temphex.getR() + "  i:"+temphex.getProvince().i+" j:"+temphex.getProvince().j + "owner: "+ temphex.getProvince().ownerId);
+                textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue());
             });
             map.addHexagon(temphex);
 

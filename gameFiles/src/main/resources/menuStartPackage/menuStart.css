@@ -18,7 +18,3 @@
     -fx-text-fill: rgb(255, 255, 255);
     -fx-background-color: rgba(2,0,36,0.95) ;
 }
-.mainMenuButton:visited{
-    -fx-text-fill: rgb(0, 135, 54);
-    -fx-background-color: rgba(2,0,36,0.90) ;
-}

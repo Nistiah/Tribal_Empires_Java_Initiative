@@ -25,13 +25,24 @@ public class HexagonMap {
     };
 
     public enum Direction {NORTHWEST, NORTHEAST, EAST, SOUTHEAST, SOUTHWEST, WEST}
+
+
+    public void setNormalZoom(){
+        hexagonSize = 40;
+        hexBorderWidth = hexagonSize/10 + 1 - hexagonSize/20;
+        for (Hexagon h : getAllHexagons()) {
+            h.getPoints().removeAll(h.getPoints());
+            h.setStrokeWidth(hexBorderWidth);
+            h.init();
+        }
+    }
+
     public void sizeDown(){
 
         if(hexagonSize>20) {
-
+            hexagonSize -= 2;
             hexBorderWidth = hexagonSize/10 + 1 - hexagonSize/20;
 
-            hexagonSize -= 2;
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
                 h.setStrokeWidth(hexBorderWidth);
@@ -41,10 +52,10 @@ public class HexagonMap {
     }
     public void sizeUp(){
         if(hexagonSize<100){
-
+            hexagonSize += 2;
             hexBorderWidth = hexagonSize/10 + 1 - hexagonSize/20;
 
-            hexagonSize += 2;
+
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
                 h.setStrokeWidth(hexBorderWidth);
