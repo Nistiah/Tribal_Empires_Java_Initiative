@@ -25,6 +25,19 @@
     -fx-background-color: rgb(2, 0, 36, 1);
 }
 
+/*this one is for gain hightlight in resources on top bar/*/
+.bodyBackground5 {
+    /*-fx-stroke-width: 3px;*/
+    /*-fx-stroke: rgba(255, 171, 79, 0.45);*/
+    -fx-border-color: rgba(255, 171, 79, 0.45);
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 6px;
+    -fx-background-color: rgba(2, 0, 36, 0.75);
+    -fx-text-fill: pink;
+
+}
+
 
 
 
@@ -159,7 +172,7 @@
     -fx-border-radius: 15px;
 }
 .exitButton:hover{
-    -fx-background-color: rgb(52, 46, 157);
+    -fx-background-color: rgb(0, 0, 5);
 
 
 }

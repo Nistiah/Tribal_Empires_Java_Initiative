@@ -1,7 +1,6 @@
 package menuStartPackage.player;
 
 import menuStartPackage.Prowincje.City;
-import menuStartPackage.Prowincje.Province;
 
 import java.util.Vector;
 
@@ -23,13 +22,14 @@ public class Player {
     private int buildingResources=1;
     private int horses=0;
 
-    private static final int baseGoldProduction=1;
-    private static final int baseBeliefProduction=0;
-    private static final int baseBuildingResourcesProduction=1;
-    private static final int baseHorsesProduction=0;
-    private static final int baseBronzeProduction=0;
-    private static final int baseIronProduction=0;
-    private static final int baseDyesProduction=0;
+
+    public static final int baseGoldProduction=1;
+    public static final int baseBeliefProduction=0;
+    public static final int baseBuildingResourcesProduction=1;
+    public static final int baseHorsesProduction=0;
+    public static final int baseBronzeProduction=0;
+    public static final int baseIronProduction=0;
+    public static final int baseDyesProduction=0;
 
 //    private int goldProduction=baseGoldProduction+getProvincesGold();
 //    private int beliefProduction=baseBeliefProduction+getProvincesBelief();
@@ -52,7 +52,7 @@ public class Player {
 
     //do dodania get production from cities list, gosix musi zrobic getery na to w cities, a w prowincjach na cities
 
-    Vector<City> cityList = new Vector<>();
+    public Vector<City> cityList = new Vector<>();
 
     private int getProvincesGold() {
         if(cityList==null){
@@ -115,7 +115,7 @@ public class Player {
         }
         int retDices = 0;
         for (City city:cityList) {
-            retDices+=city.getDices();
+            retDices+=city.getDyes();
         }
         return retDices;
     }

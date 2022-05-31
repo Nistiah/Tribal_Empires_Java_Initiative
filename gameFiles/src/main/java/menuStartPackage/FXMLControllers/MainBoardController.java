@@ -4,27 +4,23 @@ import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import static hexagons.src.main.java.com.prettybyte.hexagons.Hexagon.hexBorderWidth;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
@@ -112,6 +108,200 @@ public class MainBoardController implements Initializable {
     private String[] listaAvatarów = {"/avatar3.png", "/avatar2.png", "/avatar1.png"};
 
     @FXML
+    private TextFlow bronzeTextFlow;
+    @FXML
+    void bronzeEntered(MouseEvent event) {
+        bronzeTextFlow.setVisible(true);
+        Text baseProduction = new Text("Base bronze production " + Player.baseBronzeProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREY);
+        bronzeTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getBronze()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " dyes production " + city.getBronze() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            bronzeTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void bronzeExited(MouseEvent event) {
+        bronzeTextFlow.getChildren().clear();
+        bronzeTextFlow.setVisible(false);
+    }
+
+    @FXML
+    private TextFlow dyesTextFlow;
+    @FXML
+    void dyesEntered(MouseEvent event) {
+        dyesTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base dyes production " + Player.baseDyesProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREY);
+        dyesTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getDyes()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " dyes production " + city.getDyes() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            dyesTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void dyesExited(MouseEvent event) {
+        dyesTextFlow.getChildren().clear();
+        dyesTextFlow.setVisible(false);
+
+
+    }
+
+    @FXML
+    private TextFlow faithTextFlow;
+    @FXML
+    void faithEntered(MouseEvent event) {
+        faithTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base dyes production " + Player.baseBeliefProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREY);
+        faithTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getBelief()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " faith production " + city.getBelief() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            faithTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void faithExited(MouseEvent event) {
+        faithTextFlow.getChildren().clear();
+        faithTextFlow.setVisible(false);
+
+    }
+
+    @FXML
+    private TextFlow goldTextFlow;
+    @FXML
+    void goldEntered(MouseEvent event) {
+        goldTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base gold production " + Player.baseGoldProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREEN);
+        goldTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getGold()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " gold production " + city.getGold() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            goldTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void goldExited(MouseEvent event) {
+        goldTextFlow.getChildren().clear();
+        goldTextFlow.setVisible(false);
+
+    }
+
+    @FXML
+    private TextFlow horseTextFlow;
+    @FXML
+    void horseEntered(MouseEvent event) {
+        horseTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base dyes production " + Player.baseHorsesProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREY);
+        horseTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getHorses()<=0){
+                continue;
+            }
+            Text text = new Text("City "+city.getName() + "horse production" + city.getHorses() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            horseTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void horseExited(MouseEvent event) {
+        horseTextFlow.getChildren().clear();
+        horseTextFlow.setVisible(false);
+    }
+
+    @FXML
+    private TextFlow ironTextFlow;
+    @FXML
+    void ironEntered(MouseEvent event) {
+        ironTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base dyes production " + Player.baseIronProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREY);
+        ironTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getIron()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " dyes production " + city.getIron() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            ironTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void ironExited(MouseEvent event) {
+        ironTextFlow.getChildren().clear();
+        ironTextFlow.setVisible(false);
+    }
+
+    @FXML
+    private TextFlow woodTextFlow;
+    @FXML
+    void woodEntered(MouseEvent event) {
+        woodTextFlow.setVisible(true);
+
+        Text baseProduction = new Text("Base building resources production " + Player.baseBuildingResourcesProduction + "\n");
+        baseProduction.setFont(Font.font("Manjaro",18));
+        baseProduction.setFill(Color.GREEN);
+        woodTextFlow.getChildren().add(baseProduction);
+
+        for (City city:currentPlayer.cityList) {
+            if(city.getWood()<=0){
+                continue;
+            }
+            Text text = new Text(city.getName() + " building resources production " + city.getIron() + "\n");
+            text.setFont(Font.font("Manjaro",18));
+            text.setFill(Color.GREEN);
+            woodTextFlow.getChildren().add(text);
+        }
+    }
+    @FXML
+    void woodExited(MouseEvent event) {
+        woodTextFlow.getChildren().clear();
+        woodTextFlow.setVisible(false);
+    }
+
+
+
+    @FXML
     void nextPlayerButton(ActionEvent event) throws URISyntaxException {
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
@@ -158,7 +348,7 @@ public class MainBoardController implements Initializable {
 
         currentPlayer=playerList.get(playerId-1);
         ownerId=playerId;
-        fractionField.setText("Gracz:"+currentPlayer.name +" "+playerId);
+        fractionField.setText(currentPlayer.name +" "+playerId);
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
         bronzeField.setText("" + currentPlayer.getBronze());
@@ -267,6 +457,15 @@ public class MainBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Player player1 = new Player("Egipt");
+        Player player2 = new Player("Hettyci");
+        Player player3 = new Player("Assyria");
+        playerList.add(player1);
+        playerList.add(player2);
+        playerList.add(player3);
+
+
+        currentPlayer=playerList.get(1);
         try {
             image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
         } catch (URISyntaxException e) {
@@ -277,7 +476,7 @@ public class MainBoardController implements Initializable {
 
 //        playerId=1;
         generateHexagonMap.setVisible(false);
-        fractionField.setText("Gracz:"+playerList.get(playerId-1).name +" "+playerId);
+        fractionField.setText(playerList.get(playerId-1).name +" "+playerId);
         goldField.setText("" + playerList.get(playerId).getGold());
         beliefField.setText("" + playerList.get(playerId).getFaith());
         bronzeField.setText("" + playerList.get(playerId).getBronze());

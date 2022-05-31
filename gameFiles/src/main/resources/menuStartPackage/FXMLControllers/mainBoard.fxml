@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
+<AnchorPane stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
    <children>
       <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
          <right>
@@ -56,14 +57,14 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="beliefField" editable="false" styleClass="faith" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <TextField fx:id="bronzeField" editable="false" styleClass="bronze" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <TextField fx:id="horsesField" editable="false" styleClass="horse" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-                        <TextField fx:id="ironField" editable="false" styleClass="iron" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                        <TextField fx:id="recoursesField" editable="false" styleClass="buildingResources" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <TextField fx:id="beliefField" editable="false" onMouseEntered="#faithEntered" onMouseExited="#faithExited" styleClass="faith" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="bronzeField" editable="false" onMouseEntered="#bronzeEntered" onMouseExited="#bronzeExited" styleClass="bronze" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <TextField fx:id="horsesField" editable="false" onMouseEntered="#horseEntered" onMouseExited="#horseExited" styleClass="horse" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <TextField fx:id="ironField" editable="false" onMouseEntered="#ironEntered" onMouseExited="#ironExited" styleClass="iron" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <TextField fx:id="recoursesField" editable="false" onMouseEntered="#woodEntered" onMouseExited="#woodExited" styleClass="buildingResources" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <TextField fx:id="textField" promptText="coord" styleClass="button1" GridPane.columnIndex="9" GridPane.rowIndex="2" />
-                        <TextField fx:id="goldField" editable="false" focusTraversable="false" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="dyesField" editable="false" styleClass="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <TextField fx:id="goldField" editable="false" focusTraversable="false" onMouseEntered="#goldEntered" onMouseExited="#goldExited" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="dyesField" editable="false" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" styleClass="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                         <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="11" GridPane.rowIndex="2" />
                         <TextField fx:id="turnField" text="tura" GridPane.columnIndex="12" GridPane.rowIndex="2" />
                         <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="20.0" prefWidth="20.0" styleClass="exitButton" stylesheets="@../mainBoard.css" text="Quit" GridPane.rowIndex="2">
@@ -87,5 +88,12 @@
             <Font name="Manjari Regular" size="96.0" />
          </font>
       </Button>
+      <TextFlow fx:id="goldTextFlow" layoutX="85.0" layoutY="40.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="faithTextFlow" layoutX="185.0" layoutY="40.0" onMouseEntered="#faithEntered" onMouseExited="#faithExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="woodTextFlow" layoutX="285.0" layoutY="40.0" onMouseEntered="#woodEntered" onMouseExited="#woodExited" prefHeight="50.0" prefWidth="350.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="bronzeTextFlow" layoutX="385.0" layoutY="40.0" onMouseEntered="#bronzeEntered" onMouseExited="#bronzeExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="ironTextFlow" layoutX="485.0" layoutY="40.0" onMouseEntered="#ironEntered" onMouseExited="#ironExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="horseTextFlow" layoutX="585.0" layoutY="40.0" onMouseEntered="#horseEntered" onMouseExited="#horseExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="dyesTextFlow" layoutX="685.0" layoutY="40.0" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" prefHeight="50.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
    </children>
 </AnchorPane>

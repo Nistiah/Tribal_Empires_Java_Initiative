@@ -40,7 +40,7 @@ public class Province {
         return iron;
     }
 
-    public int getDices() {
+    public int getDyes() {
         return dices;
     }
 

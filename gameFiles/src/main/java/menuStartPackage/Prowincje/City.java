@@ -13,6 +13,13 @@ public class City extends Province {
     List<String> baseBuildings = Arrays.asList("Dzielnica mieszkaniowa", "Targ", "Koszary", "Świątynia", "Magazyn");
     Vector<Province> provincelist = new Vector<>();
 
+    public String getName() {
+        return name;
+    }
+
+    String name = "xyz";
+
+
     public void assignProvince(Province province){
         provincelist.add(province);
     }
@@ -60,7 +67,7 @@ public class City extends Province {
     private int getProvincesDices() {
         int retDices = 0;
         for (Province province:provincelist) {
-            retDices+=province.getDices();
+            retDices+=province.getDyes();
         }
         return retDices;
     }
@@ -103,7 +110,7 @@ public class City extends Province {
         return iron+getProvincesIron();
     }
     @Override
-    public int getDices() {
+    public int getDyes() {
         return dices+getProvincesDices();
     }
     @Override
