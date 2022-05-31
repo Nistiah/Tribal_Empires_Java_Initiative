@@ -306,6 +306,8 @@ public class MainBoardController implements Initializable {
 
     @FXML
     void nextPlayerButton(ActionEvent event) throws URISyntaxException {
+        map.setNormalZoom();
+        scrollPane.layout();
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
         turnField.setText("Tura: "+tourCounter.getTour());
@@ -333,19 +335,16 @@ public class MainBoardController implements Initializable {
         switch(playerId){
             case 1:
                 image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
-                map.setNormalZoom();
                 scrollPane.setVvalue(0.5975);
                 scrollPane.setHvalue(0);
                 break;
             case 2:
                 image2 = new Image(getClass().getResource("avatar2.png").toURI().toString());
-                map.setNormalZoom();
                 scrollPane.setVvalue(0);
                 scrollPane.setHvalue(0);
                 break;
             case 3:
                 image2 = new Image(getClass().getResource("avatar3.png").toURI().toString());
-                map.setNormalZoom();
                 scrollPane.setVvalue(0.4621);
                 scrollPane.setHvalue(0.3900);
                 break;
