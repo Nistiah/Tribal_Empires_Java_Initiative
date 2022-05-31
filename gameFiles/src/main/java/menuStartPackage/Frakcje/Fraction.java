@@ -4,6 +4,13 @@ import java.util.List;
 public class Fraction {
     List<String> improvements;
     List<String> militaryUnit;
+
+    public String description = ""; //TODO: add descriptions for all fractions
+
+    public String getKing() {
+        return king;
+    }
+
     String king;
 
     public void setImprovements(List<String> improvements) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,11 +18,31 @@
    <children>
       <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
          <right>
-            <SplitPane id="rightBar" dividerPositions="0.5, 0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="bodyBackground4" BorderPane.alignment="CENTER">
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
                <items>
-                  <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                  <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="280.0" prefWidth="280.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
-                  <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#descriptionEntered" onMouseExited="#descriptionExited" prefHeight="150.0" prefWidth="300.0" styleClass="bodyBackground4" SplitPane.resizableWithParent="false">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="150.0" minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
+                        <TextFlow fx:id="descriptionField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="130.0" styleClass="bodyBackground4" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </TextFlow>
+                     </children>
+                  </GridPane>
+                  <SplitPane id="rightBar" dividerPositions="0.5" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="bodyBackground4">
+                     <items>
+                        <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="300.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
+                        <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
+                     </items>
+                  </SplitPane>
                </items>
             </SplitPane>
          </right>
@@ -62,16 +83,15 @@
                         <TextField fx:id="horsesField" editable="false" onMouseEntered="#horseEntered" onMouseExited="#horseExited" styleClass="horse" GridPane.columnIndex="6" GridPane.rowIndex="2" />
                         <TextField fx:id="ironField" editable="false" onMouseEntered="#ironEntered" onMouseExited="#ironExited" styleClass="iron" GridPane.columnIndex="5" GridPane.rowIndex="2" />
                         <TextField fx:id="recoursesField" editable="false" onMouseEntered="#woodEntered" onMouseExited="#woodExited" styleClass="buildingResources" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <TextField fx:id="textField" promptText="coord" styleClass="button1" GridPane.columnIndex="9" GridPane.rowIndex="2" />
                         <TextField fx:id="goldField" editable="false" focusTraversable="false" onMouseEntered="#goldEntered" onMouseExited="#goldExited" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="dyesField" editable="false" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" styleClass="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                        <TextField fx:id="fractionField" text="gracz" GridPane.columnIndex="11" GridPane.rowIndex="2" />
-                        <TextField fx:id="turnField" text="tura" GridPane.columnIndex="12" GridPane.rowIndex="2" />
+                        <TextField fx:id="turnField" styleClass="clock123" GridPane.columnIndex="12" GridPane.rowIndex="2" />
                         <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="20.0" prefWidth="20.0" styleClass="exitButton" stylesheets="@../mainBoard.css" text="Quit" GridPane.rowIndex="2">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Button>
+                        <TextField fx:id="textField" promptText="coord" styleClass="button1" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
@@ -95,5 +115,6 @@
       <TextFlow fx:id="ironTextFlow" layoutX="485.0" layoutY="40.0" onMouseEntered="#ironEntered" onMouseExited="#ironExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
       <TextFlow fx:id="horseTextFlow" layoutX="585.0" layoutY="40.0" onMouseEntered="#horseEntered" onMouseExited="#horseExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
       <TextFlow fx:id="dyesTextFlow" layoutX="685.0" layoutY="40.0" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="descriptionTextFlow" layoutX="1374.0" layoutY="41.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
    </children>
 </AnchorPane>

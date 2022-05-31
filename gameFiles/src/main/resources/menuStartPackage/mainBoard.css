@@ -121,6 +121,26 @@
     -fx-text-fill: pink;
 }
 
+.clock123{
+    -fx-background-image:url('clock.png');
+    -fx-background-size: 20% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+
+
+.description{
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+    -fx-stroke-width: 0px;
+}
+
 .button {
     -fx-background-radius: 15px;
     -fx-color: #474747;

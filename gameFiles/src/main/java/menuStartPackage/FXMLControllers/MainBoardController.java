@@ -20,6 +20,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
@@ -73,7 +74,7 @@ public class MainBoardController implements Initializable {
     private TextField turnField = new TextField("dupa");
 
     @FXML
-    private TextField fractionField = new TextField("fractionField");
+    private TextFlow descriptionField = new TextFlow();
 
 
     @FXML
@@ -109,6 +110,29 @@ public class MainBoardController implements Initializable {
     @FXML
     private Rectangle avatar;
     private String[] listaAvatarów = {"/avatar3.png", "/avatar2.png", "/avatar1.png"};
+
+
+    @FXML
+    private TextFlow descriptionTextFlow;
+
+    @FXML
+    void descriptionEntered(MouseEvent event) {
+        descriptionTextFlow.setVisible(true);
+        Text description = new Text(currentPlayer.fraction.description);
+        description.setFont(Font.font(font,18));
+        description.setFill(Color.GREY);
+        descriptionTextFlow.getChildren().add(description);
+
+    }
+
+    @FXML
+    void descriptionExited(MouseEvent event) {
+        descriptionTextFlow.getChildren().clear();
+        descriptionTextFlow.setVisible(false);
+    }
+
+
+
 
     @FXML
     private TextFlow bronzeTextFlow;
@@ -306,11 +330,12 @@ public class MainBoardController implements Initializable {
 
     @FXML
     void nextPlayerButton(ActionEvent event) throws URISyntaxException {
+        descriptionField.getChildren().clear();
         map.setNormalZoom();
         scrollPane.layout();
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
-        turnField.setText("Tura: "+tourCounter.getTour());
+        turnField.setText("Turn: "+tourCounter.getTour());
         currentPlayer=playerList.get(playerId-1);
         if(tourCounter.getTour()==0){    ///stats pane regulator
             PlayerData tmp = new PlayerData(currentPlayer.name);
@@ -354,7 +379,11 @@ public class MainBoardController implements Initializable {
 
         currentPlayer=playerList.get(playerId-1);
         ownerId=playerId;
-        fractionField.setText(currentPlayer.name +" "+playerId);
+        Text temp = new Text(currentPlayer.name +"\n" + currentPlayer.fraction.getKing());
+        temp.setFont(Font.font(font,18));
+        temp.setFill(Color.PINK);
+        descriptionField.getChildren().add(temp);
+
         goldField.setText("" + currentPlayer.getGold());
         beliefField.setText("" + currentPlayer.getFaith());
         bronzeField.setText("" + currentPlayer.getBronze());
@@ -466,8 +495,8 @@ public class MainBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Player player1 = new Player("Egipt");
-        Player player2 = new Player("Hettyci");
+        Player player1 = new Player("Egypt");
+        Player player2 = new Player("Hittites");
         Player player3 = new Player("Assyria");
         playerList.add(player1);
         playerList.add(player2);
@@ -475,7 +504,19 @@ public class MainBoardController implements Initializable {
         scrollPane.setVvalue(0.5975);
         scrollPane.setHvalue(0);
 
-        currentPlayer=playerList.get(1);
+        currentPlayer = playerList.get(1);
+
+        descriptionTextFlow.setTextAlignment(TextAlignment.CENTER);
+        goldTextFlow.setTextAlignment(TextAlignment.CENTER);
+        faithTextFlow.setTextAlignment(TextAlignment.CENTER);
+        woodTextFlow.setTextAlignment(TextAlignment.CENTER);
+        bronzeTextFlow.setTextAlignment(TextAlignment.CENTER);
+        ironTextFlow.setTextAlignment(TextAlignment.CENTER);
+        horseTextFlow.setTextAlignment(TextAlignment.CENTER);
+        dyesTextFlow.setTextAlignment(TextAlignment.CENTER);
+
+
+
         try {
             image2 = new Image(getClass().getResource("avatar1.png").toURI().toString());
         } catch (URISyntaxException e) {
@@ -486,7 +527,17 @@ public class MainBoardController implements Initializable {
 
 //        playerId=1;
         generateHexagonMap.setVisible(false);
-        fractionField.setText(playerList.get(playerId-1).name +" "+playerId);
+
+        ///descriptionFieldInit
+        playerId=1;
+        currentPlayer=playerList.get(0);
+        Text temp2 = new Text(playerList.get(playerId-1).name +"\n" + playerList.get(playerId-1).fraction.getKing());
+        temp2.setFont(Font.font(font,18));
+        temp2.setFill(Color.PINK);
+        descriptionField.getChildren().add(temp2);
+        descriptionField.setLineSpacing(20);
+//        descriptionField.setTextAlignment(TextAlignment.CENTER);  niekoniecznie ma to sens, dobrze na align left wyglada :)
+
         goldField.setText("" + playerList.get(playerId).getGold());
         beliefField.setText("" + playerList.get(playerId).getFaith());
         bronzeField.setText("" + playerList.get(playerId).getBronze());
@@ -495,7 +546,7 @@ public class MainBoardController implements Initializable {
         ironField.setText("" + playerList.get(playerId).getIron());
         dyesField.setText("" + playerList.get(playerId).getDyes());
 
-        turnField.setText("Tura: "+tourCounter.getTour());
+        turnField.setText("Turn: "+tourCounter.getTour());
         nullHex.setProvince(new Province());
         nullHex.getProvince().ownerId=-1;   //wazne dla granic mapy przy malowaniu jej do map buildera
         map = new HexagonMap(40);

@@ -1,5 +1,9 @@
 package menuStartPackage.player;
 
+import menuStartPackage.Frakcje.Assyria;
+import menuStartPackage.Frakcje.Egypt;
+import menuStartPackage.Frakcje.Fraction;
+import menuStartPackage.Frakcje.Hittites;
 import menuStartPackage.Prowincje.City;
 
 import java.util.Vector;
@@ -8,9 +12,24 @@ public class Player {
     //tu dodac trzeba bedzie frakcje tez, ale gosix musi zrobic klase matke bo kurde polimorfizm konieczny
     public String name;
 
+    public Fraction fraction;
     public Player(String name){
         this.name=name;
+
+        switch (name){ //TODO: dodac reszte
+            case "Egypt":
+                fraction = new Egypt();
+                break;
+            case "Hittites" :
+                fraction = new Hittites();
+                break;
+            case "Assyria" :
+                fraction = new Assyria();
+                break;
+        }
     }
+
+
 
     public int numberOfProvinces = 1;
 
