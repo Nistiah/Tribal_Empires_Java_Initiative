@@ -3,10 +3,10 @@ package menuStartPackage.Frakcje;
 import java.util.Arrays;
 import java.util.List;
 
-public class Babilon extends Fraction{
-    List<String> improvements = Arrays.asList("Świątynia boga Nanny", "Brama Isztar", "wiszące ogrody");
-    List<String> militaryUnit = Arrays.asList("Oddział rydwanów", "Babiloński oddział piechoty");
-    String king = "Kadaszman-Enlil I";
+public class Babilon extends Fraction {
+    private List<String> improvements = Arrays.asList("Świątynia boga Nanny", "Brama Isztar", "wiszące ogrody");
+    private List<String> militaryUnit = Arrays.asList("Oddział rydwanów", "Babiloński oddział piechoty");
+    private String       king         = "Kadaszman-Enlil I";
 
     public Babilon() {
         setImprovements(improvements);

@@ -1,188 +1,81 @@
 package menuStartPackage.player;
 
+import java.util.Vector;
+
 import menuStartPackage.Frakcje.Assyria;
 import menuStartPackage.Frakcje.Egypt;
 import menuStartPackage.Frakcje.Fraction;
 import menuStartPackage.Frakcje.Hittites;
+
 import menuStartPackage.Prowincje.City;
 
-import java.util.Vector;
-
 public class Player {
-    //tu dodac trzeba bedzie frakcje tez, ale gosix musi zrobic klase matke bo kurde polimorfizm konieczny
-    public String name;
 
-    public Fraction fraction;
-    public Player(String name){
-        this.name=name;
+    public static final int baseGoldProduction              = 1;
+    public static final int baseBeliefProduction            = 0;
+    public static final int baseBuildingResourcesProduction = 1;
+    public static final int baseHorsesProduction            = 0;
+    public static final int baseBronzeProduction            = 0;
+    public static final int baseIronProduction              = 0;
+    public static final int baseDyesProduction              = 0;
 
-        switch (name){ //TODO: dodac reszte
-            case "Egypt":
-                fraction = new Egypt();
-                break;
-            case "Hittites" :
-                fraction = new Hittites();
-                break;
-            case "Assyria" :
-                fraction = new Assyria();
-                break;
+    private int             numberOfProvinces               = 1;
+    private int             gold                            = 20;
+    private int             belief                          = 0;
+    private int             bronze                          = 0;
+    private int             iron                            = 0;
+    private int             dyes                            = 0;
+    private int             buildingResources               = 1;
+    private int             horses                          = 0;
+
+    // do dodania get production from cities list, gosix musi zrobic getery na to w cities, a w prowincjach na cities
+    private Vector<City> cityList = new Vector<>();
+
+    // tu dodac trzeba bedzie frakcje tez, ale gosix musi zrobic klase matke bo kurde polimorfizm konieczny
+    private String   name;
+    private Fraction fraction;
+
+    public Player(String name) {
+        this.setName(name);
+
+        switch (name) {    // TODO: dodac reszte
+        case "Egypt" :
+            setFraction(new Egypt());
+
+            break;
+
+        case "Hittites" :
+            setFraction(new Hittites());
+
+            break;
+
+        case "Assyria" :
+            setFraction(new Assyria());
+
+            break;
         }
     }
 
-
-
-    public int numberOfProvinces = 1;
-
-    private int gold=20;
-    private int belief=0;
-    private int bronze=0;
-    private int iron=0;
-    private int dyes=0;
-    private int buildingResources=1;
-    private int horses=0;
-
-
-    public static final int baseGoldProduction=1;
-    public static final int baseBeliefProduction=0;
-    public static final int baseBuildingResourcesProduction=1;
-    public static final int baseHorsesProduction=0;
-    public static final int baseBronzeProduction=0;
-    public static final int baseIronProduction=0;
-    public static final int baseDyesProduction=0;
-
-//    private int goldProduction=baseGoldProduction+getProvincesGold();
-//    private int beliefProduction=baseBeliefProduction+getProvincesBelief();
-//    private int buildingResourcesProduction=baseBuildingResourcesProduction;  //do rozwiazania to jeszcze
-//    private int horsesProduction=baseHorsesProduction+getProvincesHorses();
-//    private int bronzeProduction=baseBronzeProduction+getProvincesBronze();
-//    private int ironProduction=baseIronProduction+getProvincesIron();
-//    private int dyesProduction=baseDyesProduction+getProvincesDices();
-
-    public void resourcesTourIncrease(){
-        gold+=baseGoldProduction+getProvincesGold();
-        belief+=baseBeliefProduction+getProvincesBelief();
-        buildingResources+=baseBuildingResourcesProduction+getProvincesWood();   //do rozwiazania
-        horses+=baseHorsesProduction+getProvincesHorses();
-        bronze+=baseBronzeProduction+getProvincesBronze();
-        iron+=baseIronProduction+getProvincesIron();
-        dyes+=baseDyesProduction+getProvincesDices();
+    public void createNewCity(City city) {
+        getCityList().add(city);
     }
 
+//  private int goldProduction=baseGoldProduction+getProvincesGold();
+//  private int beliefProduction=baseBeliefProduction+getProvincesBelief();
+//  private int buildingResourcesProduction=baseBuildingResourcesProduction;  //do rozwiazania to jeszcze
+//  private int horsesProduction=baseHorsesProduction+getProvincesHorses();
+//  private int bronzeProduction=baseBronzeProduction+getProvincesBronze();
+//  private int ironProduction=baseIronProduction+getProvincesIron();
+//  private int dyesProduction=baseDyesProduction+getProvincesDices();
 
-    //do dodania get production from cities list, gosix musi zrobic getery na to w cities, a w prowincjach na cities
-
-    public Vector<City> cityList = new Vector<>();
-
-    private int getProvincesGold() {
-        if(cityList==null){
-            return 0;
-        }
-        int retGold = 0;
-        for (City city:cityList) {
-            retGold+=city.getGold();
-        }
-        return retGold;
-    }
-
-    private int getProvincesBelief() {
-        if(cityList==null){
-            return 0;
-        }
-        int retBelief = 0;
-        for (City city:cityList) {
-            retBelief+=city.getBelief();
-        }
-        return retBelief;
-    }
-
-    private int getProvincesFood() {
-        if(cityList==null){
-            return 0;
-        }
-        int retFood = 0;
-        for (City city:cityList) {
-            retFood+=city.getFood();
-        }
-        return retFood;
-    }
-
-    private int getProvincesBronze() {
-        if(cityList==null){
-            return 0;
-        }
-        int retBronze = 0;
-        for (City city:cityList) {
-            retBronze+=city.getBronze();
-        }
-        return retBronze;
-    }
-
-    private int getProvincesIron() {
-        if(cityList==null){
-            return 0;
-        }
-        int retIron = 0;
-        for (City city:cityList) {
-            retIron+=city.getIron();
-        }
-        return retIron;
-    }
-
-    private int getProvincesDices() {
-        if(cityList==null){
-            return 0;
-        }
-        int retDices = 0;
-        for (City city:cityList) {
-            retDices+=city.getDyes();
-        }
-        return retDices;
-    }
-
-    private int getProvincesHorses() {
-        if(cityList==null){
-            return 0;
-        }
-        int retHorses = 0;
-        for (City city:cityList) {
-            retHorses+=city.getHorses();
-        }
-        return retHorses;
-    }
-
-    private int getProvincesWood() {
-        if(cityList==null){
-            return 0;
-        }
-        int retWood = 0;
-        for (City city:cityList) {
-            retWood+=city.getWood();
-        }
-        return retWood;
-    }
-
-
-
-
-    public void createNewCity(City city){
-        cityList.add(city);
-    }
-
-
-    public int getGold() {
-        return gold;
-    }
-
-    public void setGold(int gold) {
-        this.gold = gold;
-    }
-
-    public int getFaith() {
-        return belief;
-    }
-
-    public void setFaith(int faith) {
-        this.belief = faith;
+    public void resourcesTourIncrease() {
+        gold              += baseGoldProduction + getProvincesGold();
+        belief            += baseBeliefProduction + getProvincesBelief();
+        buildingResources += baseBuildingResourcesProduction + getProvincesWood();    // do rozwiazania
+        horses            += baseHorsesProduction + getProvincesHorses();
+        bronze            += baseBronzeProduction + getProvincesBronze();
+        iron              += baseIronProduction + getProvincesIron();
+        dyes              += baseDyesProduction + getProvincesDices();
     }
 
     public int getBronze() {
@@ -193,12 +86,20 @@ public class Player {
         this.bronze = bronze;
     }
 
-    public int getIron() {
-        return iron;
+    public int getBuildingResources() {
+        return buildingResources;
     }
 
-    public void setIron(int iron) {
-        this.iron = iron;
+    public void setBuildingResources(int buildingResources) {
+        this.buildingResources = buildingResources;
+    }
+
+    public Vector<City> getCityList() {
+        return cityList;
+    }
+
+    public void setCityList(Vector<City> cityList) {
+        this.cityList = cityList;
     }
 
     public int getDyes() {
@@ -209,12 +110,28 @@ public class Player {
         this.dyes = dyes;
     }
 
-    public int getBuildingResources() {
-        return buildingResources;
+    public int getFaith() {
+        return belief;
     }
 
-    public void setBuildingResources(int buildingResources) {
-        this.buildingResources = buildingResources;
+    public void setFaith(int faith) {
+        this.belief = faith;
+    }
+
+    public Fraction getFraction() {
+        return fraction;
+    }
+
+    public void setFraction(Fraction fraction) {
+        this.fraction = fraction;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
     public int getHorses() {
@@ -225,9 +142,139 @@ public class Player {
         this.horses = horses;
     }
 
+    public int getIron() {
+        return iron;
+    }
 
+    public void setIron(int iron) {
+        this.iron = iron;
+    }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public int getNumberOfProvinces() {
+        return numberOfProvinces;
+    }
 
+    public void setNumberOfProvinces(int numberOfProvinces) {
+        this.numberOfProvinces = numberOfProvinces;
+    }
+
+    private int getProvincesBelief() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retBelief = 0;
+
+        for (City city : getCityList()) {
+            retBelief += city.getBelief();
+        }
+
+        return retBelief;
+    }
+
+    private int getProvincesBronze() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retBronze = 0;
+
+        for (City city : getCityList()) {
+            retBronze += city.getBronze();
+        }
+
+        return retBronze;
+    }
+
+    private int getProvincesDices() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retDices = 0;
+
+        for (City city : getCityList()) {
+            retDices += city.getDyes();
+        }
+
+        return retDices;
+    }
+
+    private int getProvincesFood() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retFood = 0;
+
+        for (City city : getCityList()) {
+            retFood += city.getFood();
+        }
+
+        return retFood;
+    }
+
+    private int getProvincesGold() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retGold = 0;
+
+        for (City city : getCityList()) {
+            retGold += city.getGold();
+        }
+
+        return retGold;
+    }
+
+    private int getProvincesHorses() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retHorses = 0;
+
+        for (City city : getCityList()) {
+            retHorses += city.getHorses();
+        }
+
+        return retHorses;
+    }
+
+    private int getProvincesIron() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retIron = 0;
+
+        for (City city : getCityList()) {
+            retIron += city.getIron();
+        }
+
+        return retIron;
+    }
+
+    private int getProvincesWood() {
+        if (getCityList() == null) {
+            return 0;
+        }
+
+        int retWood = 0;
+
+        for (City city : getCityList()) {
+            retWood += city.getWood();
+        }
+
+        return retWood;
+    }
 }
