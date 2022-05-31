@@ -1,28 +1,30 @@
 package menuStartPackage.Frakcje;
+
 import java.util.List;
 
 public class Fraction {
-    List<String> improvements;
-    List<String> militaryUnit;
+    protected String     description = "";    // TODO: add descriptions for all fractions
+    private List<String> improvements;
+    private List<String> militaryUnit;
+    private String       king;
 
-    public String description = ""; //TODO: add descriptions for all fractions
-
-    public String getKing() {
-        return king;
+    public String getDescription() {
+        return description;
     }
-
-    String king;
 
     public void setImprovements(List<String> improvements) {
         this.improvements = improvements;
     }
 
-    public void setMilitaryUnit(List<String> militaryUnit) {
-        this.militaryUnit = militaryUnit;
+    public String getKing() {
+        return king;
     }
 
     public void setKing(String king) {
         this.king = king;
     }
 
+    public void setMilitaryUnit(List<String> militaryUnit) {
+        this.militaryUnit = militaryUnit;
+    }
 }

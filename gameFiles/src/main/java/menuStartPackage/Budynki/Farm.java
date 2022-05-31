@@ -1,5 +1,5 @@
 package menuStartPackage.Budynki;
 
 public class Farm extends Building{
-    String type = "Farm";
+    private String type = "Farm";
 }

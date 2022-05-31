@@ -29,7 +29,7 @@
                         <RowConstraints maxHeight="150.0" minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" styleClass="bodyBackground4" width="150.0" />
+                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff05" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" styleClass="bodyBackground4" width="150.0" />
                         <TextFlow fx:id="descriptionField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="130.0" styleClass="bodyBackground4" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets />
@@ -98,7 +98,7 @@
             </AnchorPane>
          </top>
       </BorderPane>
-      <Button fx:id="nextButton" minHeight="40.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="80.0" prefWidth="600.0" styleClass="nextPlayerButton" stylesheets="@../mainBoard.css" text="Next Player" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+      <Button minHeight="40.0" mnemonicParsing="false" onAction="#nextPlayerButton" prefHeight="80.0" prefWidth="600.0" styleClass="nextPlayerButton" stylesheets="@../mainBoard.css" text="Next Player" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>

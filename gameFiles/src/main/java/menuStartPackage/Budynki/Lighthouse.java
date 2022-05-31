@@ -1,5 +1,5 @@
 package menuStartPackage.Budynki;
 
 public class Lighthouse extends Building{
-    String type = "Lighthouse";
+    private String type = "Lighthouse";
 }

@@ -1,28 +1,37 @@
 package menuStartPackage.Prowincje;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class DesertWyzyny extends Province {
-    List<String> resources = Arrays.asList("brąz", "żelazo", "złoto");
-    String type = "DesertWyzyny";
-    List<String> possibleBuildings = Arrays.asList("Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto");
-    List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
+    private List<String> resources         = Arrays.asList("brąz", "żelazo", "złoto");
+    private String       type              = "DesertWyzyny";
+    private List<String> possibleBuildings = Arrays.asList("Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto");
+    private List<String> baseBuildings     = Arrays.asList("Piramida", "Karawana");
+
+    public DesertWyzyny() {
+        setResources(resources);
+        setType(type);
+        setBaseProduction(type);
+        setPossibleBuildings(getPossibleBuildings());
+        setBaseBuildings(baseBuildings);
+    }
 
     @Override
-    public String iconPath(){
-        if(ownerId!=0){
+    public String iconPath() {
+        if (ownerId != 0) {
             return "provinceIcons/desert - wyz.png";
-        }else{
+        } else {
             return "provinceIcons/desert - wyz (kopia).png";
         }
     }
 
+    public List<String> getPossibleBuildings() {
+        return possibleBuildings;
+    }
 
-    public DesertWyzyny(){
-        setResources(resources);
-        setType(type);
-        setBaseProduction(type);
-        setPossibleBuildings(possibleBuildings);
-        setBaseBuildings(baseBuildings);
+    @Override
+    public void setPossibleBuildings(List<String> possibleBuildings) {
+        this.possibleBuildings = possibleBuildings;
     }
 }

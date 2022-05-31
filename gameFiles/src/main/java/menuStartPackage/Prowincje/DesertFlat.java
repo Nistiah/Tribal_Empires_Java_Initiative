@@ -4,26 +4,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DesertFlat extends Province {
-    List<String> resources = Arrays.asList();
-    String type = "DesertFlat";
-    List<String> possibleBuildings = Arrays.asList();
-    List<String> baseBuildings = Arrays.asList("Piramida", "Karawana");
+    private List<String> resources         = Arrays.asList();
+    private String       type              = "DesertFlat";
+    private List<String> possibleBuildings = Arrays.asList();
+    private List<String> baseBuildings     = Arrays.asList("Piramida", "Karawana");
 
-    @Override
-    public String iconPath(){
-        if(ownerId!=0){
-            return "provinceIcons/desert - flat.png";
-        }else{
-            return "provinceIcons/desert - flat (kopia).png";
-        }
-    }
-
-
-    public DesertFlat(){
+    public DesertFlat() {
         setResources(resources);
         setType(type);
         setBaseProduction(type);
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
+    }
+
+    @Override
+    public String iconPath() {
+        if (ownerId != 0) {
+            return "provinceIcons/desert - flat.png";
+        } else {
+            return "provinceIcons/desert - flat (kopia).png";
+        }
     }
 }
