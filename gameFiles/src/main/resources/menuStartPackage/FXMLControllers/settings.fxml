@@ -21,12 +21,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button mnemonicParsing="false" onAction="#mapBuilder" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text="Map Builder" GridPane.rowIndex="2" />
-                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text=" Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse" GridPane.rowIndex="3" />
-                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text="Te ergo quaesumus, Tuis famulis subveni" GridPane.rowIndex="4" />
-                <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text="Back" GridPane.rowIndex="5" />
-                <Button fx:id="volumeUPButton" mnemonicParsing="false" onAction="#volumeUP" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text="Increase music volume" />
-                <Button fx:id="volumeDOWNbutton" mnemonicParsing="false" onAction="#volumeDOWN" prefHeight="28.0" prefWidth="1000.0" stylesheets="@../menuStart.css" text="Decrease music volume" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#mapBuilder" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Map Builder" GridPane.rowIndex="2" />
+                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text=" Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse" GridPane.rowIndex="3" />
+                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Te ergo quaesumus, Tuis famulis subveni" GridPane.rowIndex="4" />
+                <Button mnemonicParsing="false" onAction="#backToMainMenu" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Back" GridPane.rowIndex="5" />
+                <Button fx:id="volumeUPButton" mnemonicParsing="false" onAction="#volumeUP" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Increase music volume" />
+                <Button fx:id="volumeDOWNbutton" mnemonicParsing="false" onAction="#volumeDOWN" prefHeight="28.0" prefWidth="1000.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Decrease music volume" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </center>

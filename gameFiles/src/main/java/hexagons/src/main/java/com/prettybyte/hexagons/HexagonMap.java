@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import static java.lang.Math.sqrt;
+import static hexagons.src.main.java.com.prettybyte.hexagons.Hexagon.hexBorderWidth;
 
 public class HexagonMap {
 
@@ -25,8 +26,16 @@ public class HexagonMap {
 
     public enum Direction {NORTHWEST, NORTHEAST, EAST, SOUTHEAST, SOUTHWEST, WEST}
     public void sizeDown(){
-        if(hexagonSize>20) {
-            hexagonSize -= 3;
+
+        if(hexagonSize>21) {
+            if(hexagonSize<40){
+                hexBorderWidth=2;
+            }
+
+            if(hexagonSize<25){
+                hexBorderWidth=1;
+            }
+            hexagonSize -= 2;
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
                 h.init();
@@ -35,7 +44,13 @@ public class HexagonMap {
     }
     public void sizeUp(){
         if(hexagonSize<100){
-            hexagonSize += 3;
+            if(hexagonSize>25){
+                hexBorderWidth=2;
+            }
+            if(hexagonSize>=40){
+                hexBorderWidth=3;
+            }
+            hexagonSize += 2;
             for (Hexagon h : getAllHexagons()) {
                 h.getPoints().removeAll(h.getPoints());
                 h.init();

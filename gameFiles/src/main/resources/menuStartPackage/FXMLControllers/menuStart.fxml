@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.media.MediaView?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MenuStartController">
    <children>
       <BorderPane fx:id="settingsBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../menuStart.css">
@@ -24,10 +23,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="startNewGameButton" mnemonicParsing="false" onAction="#startNewGame" prefHeight="28.0" prefWidth="600.0" stylesheets="@../menuStart.css" text="Start New Game" />
-                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settings" prefHeight="28.0" prefWidth="600.0" stylesheets="@../menuStart.css" text="Settings" GridPane.rowIndex="1" />
-                  <Button fx:id="creditsButton" mnemonicParsing="false" onAction="#credits" prefHeight="28.0" prefWidth="600.0" stylesheets="@../menuStart.css" text="Credits" GridPane.rowIndex="2" />
-                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" prefHeight="28.0" prefWidth="600.0" stylesheets="@../menuStart.css" text="Quit" GridPane.rowIndex="3" />
+                  <Button fx:id="startNewGameButton" mnemonicParsing="false" onAction="#startNewGame" prefHeight="28.0" prefWidth="600.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Start New Game" />
+                  <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#settings" prefHeight="28.0" prefWidth="600.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Settings" GridPane.rowIndex="1" />
+                  <Button fx:id="creditsButton" mnemonicParsing="false" onAction="#credits" prefHeight="28.0" prefWidth="600.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Credits" GridPane.rowIndex="2" />
+                  <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quit" prefHeight="28.0" prefWidth="600.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" text="Quit" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </center>

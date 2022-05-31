@@ -196,7 +196,7 @@
 }
 
 /*exit button*/
-.myButton {
+.nextPlayerButton {
     -fx-background-radius: 200px;
     -fx-background-color: rgba(2,0,36,0.60) ;
     -fx-color: 	rgba(255,192,203,1);
@@ -206,11 +206,11 @@
     -fx-font-size: 40;
     -fx-padding: 10px 20px;
 }
-.myButton:hover{
+.nextPlayerButton:hover{
     -fx-text-fill: rgb(255, 255, 255);
     -fx-background-color: rgba(2,0,36,0.90) ;
 }
-.myButton:visited{
+.nextPlayerButton:visited{
     -fx-text-fill: rgb(0, 135, 54);
     -fx-background-color: rgba(2,0,36,0.90) ;
 }
