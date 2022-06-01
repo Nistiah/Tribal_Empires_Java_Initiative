@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.net.URISyntaxException;
 
 import java.util.Scanner;
+import java.util.Vector;
 
 import javafx.event.ActionEvent;
 
@@ -17,7 +18,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,15 +38,21 @@ import menuStartPackage.Prowincje.*;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
 
+//progamowanie reaktywne - zmiana zmiennej -> zdarzenie
 //ownerId 0 -nikt
 public class MapBuilderController {
     private static HexagonMap map;
+    @FXML
+    public ColorPicker        colorPicker = new ColorPicker();
     private int               playerId    = 0;
     private Image             image       = null;
     Color                     color       = Color.BLACK;
+    boolean                   coordinates = false;
     private Parent            root;
     @FXML
     public Button             generateHexagonMap;
+    @FXML
+    public Button             buyButton;
     @FXML
     private TextField         current;
     @FXML
@@ -56,67 +65,63 @@ public class MapBuilderController {
     @FXML
     private ScrollPane        scrollPane;
 
-    public MapBuilderController(TextField textField) {
-        this.textField = textField;
-    }
-
     @FXML
-    void CityClick() {
+    void CityClick(ActionEvent event) {
         province = new City();
     }
 
     @FXML
-    void CoastClick() {
+    void CoastClick(ActionEvent event) {
         province = new Coast();
     }
 
     @FXML
-    void DesertFlatClick() {
+    void DesertFlatClick(ActionEvent event) {
         province = new DesertFlat();
     }
 
     @FXML
-    void DesertWyzClick() {
+    void DesertWyzClick(ActionEvent event) {
         province = new DesertWyzyny();
     }
 
     @FXML
-    void ForestFlatClick() {
+    void ForestFlatClick(ActionEvent event) {
         province = new ForestFlat();
     }
 
     @FXML
-    void ForestWyzClick() {
+    void ForestWyzClick(ActionEvent event) {
         province = new ForestWyzyny();
     }
 
     @FXML
-    void MountainsClick() {
+    void MountainsClick(ActionEvent event) {
         province = new Mountains();
     }
 
     @FXML
-    void RiversideClick() {
+    void RiversideClick(ActionEvent event) {
         province = new RiversideArea();
     }
 
     @FXML
-    void SeaClick() {
+    void SeaClick(ActionEvent event) {
         province = new Sea();
     }
 
     @FXML
-    void TrawaFlatClick() {
+    void TrawaFlatClick(ActionEvent event) {
         province = new TrawaFlat();
     }
 
     @FXML
-    void TrawaWyzClick() {
+    void TrawaWyzClick(ActionEvent event) {
         province = new TrawaWyzyny();
     }
 
     @FXML
-    void addHex() {
+    void addHex(ActionEvent event1) {
         map = new HexagonMap(40);
         map.setRenderCoordinates(false);
 
@@ -134,6 +139,7 @@ public class MapBuilderController {
                     continue;
                 }
 
+                // System.out.println(i+" "+j);
                 Hexagon temphex = new Hexagon(j, i);
 
                 temphex.setFill(Color.WHITE);
@@ -322,25 +328,25 @@ public class MapBuilderController {
     }
 
     @FXML
-    void player0() {
+    void player0(ActionEvent event) {
         playerId = 0;
         color    = Color.BLACK;
     }
 
     @FXML
-    void player1() {
+    void player1(ActionEvent event) {
         playerId = 1;
         color    = Color.AQUAMARINE;
     }
 
     @FXML
-    void player2() {
+    void player2(ActionEvent event) {
         playerId = 2;
         color    = Color.YELLOW;
     }
 
     @FXML
-    void player3() {
+    void player3(ActionEvent event) {
         playerId = 3;
         color    = Color.RED;
     }

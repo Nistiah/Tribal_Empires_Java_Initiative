@@ -1,7 +1,7 @@
 .bodyBackground {
     -fx-background-image: url('petra.jpg');
     -fx-background-size: 100% 100%;
-    -fx-background-repeat: no;
+    /*-fx-background-repeat: no;*/
 }
 
 .mainMenuButton {
@@ -17,4 +17,17 @@
 .mainMenuButton:hover{
     -fx-text-fill: rgb(255, 255, 255);
     -fx-background-color: rgba(2,0,36,0.95) ;
+}
+
+.slider {
+    -slider-filled-track-color: pink ;
+}
+.slider .thumb {
+    -fx-background-color: pink ;
+}
+.slider .track {
+    -fx-background-color: grey ;
+}
+.slider .thumb:hover{
+    -fx-background-color: white ;
 }

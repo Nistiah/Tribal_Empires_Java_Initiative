@@ -1,8 +1,12 @@
 package menuStartPackage.FXMLControllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,20 +14,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
 
-public class SettingsController {
+public class SettingsController implements Initializable {
     @FXML
-    private Button volumeUPButton;
-    @FXML
-    private Button volumeDOWNbutton;
+    private Slider volumeSlider;
     private Stage  stage;
     private Scene  scene;
     private Parent root;
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
+        volumeSlider.setOnDragDone(event -> sliderVolumeChange());
+        volumeSlider.setOnMouseDragReleased(event -> sliderVolumeChange());
+
+    }
+
+    private void sliderVolumeChange() {
+        musicPlayerInstance.setVolumeAbsolute(volumeSlider.getValue());
+        volumeSlider.setSnapToTicks(true);
+        System.out.println(volumeSlider.getValue());
+    }
 
     @FXML
     void backToMainMenu(ActionEvent event) {
@@ -40,7 +56,7 @@ public class SettingsController {
     @FXML
     void mapBuilder(ActionEvent event) {
         try {
-            root = FXMLLoader.load(getClass().getResource("mapBuilder.fxml"));
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("mapBuilder.fxml")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,19 +66,5 @@ public class SettingsController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.getScene().setOnKeyPressed(MapBuilderController::zoom);
-    }
-
-    @FXML
-    void volumeDOWN(ActionEvent event) {
-        musicPlayerInstance.setVolume(-0.1);
-        volumeDOWNbutton.setText("Decrease music volume " + (int) (100 * musicPlayerInstance.volume) + "%");
-        volumeUPButton.setText("Increase music volume " + (int) (100 * musicPlayerInstance.volume) + "%");
-    }
-
-    @FXML
-    void volumeUP(ActionEvent event) {
-        musicPlayerInstance.setVolume(0.1);
-        volumeDOWNbutton.setText("Decrease music volume " + (int) (100 * musicPlayerInstance.volume) + "%");
-        volumeUPButton.setText("Increase music volume " + (int) (100 * musicPlayerInstance.volume) + "%");
     }
 }
