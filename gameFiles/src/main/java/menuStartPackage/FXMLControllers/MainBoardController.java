@@ -772,7 +772,10 @@ public class MainBoardController implements Initializable {
     int iColonize, jColonize;
 
     private void colonize(int iFrom, int jFrom) {
-        if(buyInitialised){buyClicked();}
+        if(buyInitialised){
+            buyClicked();
+            cityCoordinatesLock=false;
+        }
 
         if(!colonizeInitialised) {
             System.out.println("niecolo " + iFrom + " " + jFrom);
@@ -792,10 +795,13 @@ public class MainBoardController implements Initializable {
             jColonize=jFrom;
             colonizeInitialised=true;
         }else{
-            System.out.println("takcolo " + iFrom + " " + jFrom);
-            if(iFrom!=iColonize&&jFrom!=jColonize) {
+            System.out.println("takcolo " + iFrom + " vs " + iColonize+"|||" + jFrom+" vs "+jColonize);
+            if(iFrom!=iColonize||jFrom!=jColonize) {
+                System.out.println("pass");
                 if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
+                    System.out.println("pass");
                     if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
+                        System.out.println("pass");
 
                         City temp = new City();
                         temp.setOwnerId(currentPlayer.id);
@@ -866,7 +872,7 @@ public class MainBoardController implements Initializable {
 
 
     private void buyField(Hexagon tempname) {
-        System.out.println("otwarcie" + cityCoordinatesLock);
+//        System.out.println("otwarcie" + cityCoordinatesLock);
         if (colonizeInitialised) {
             colonizeInitialised=false;
             fullMapBorderCleaning();
@@ -881,7 +887,7 @@ public class MainBoardController implements Initializable {
         if(buyInitialised&&(map.getHexagon(i,j).getBorderColor()!=Color.PINK)){
             fullMapBorderCleaning();
             buyClicked();
-            System.out.println("jeden");
+//            System.out.println("jeden");
             return;
         }
 
@@ -889,7 +895,7 @@ public class MainBoardController implements Initializable {
         if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
             buyClicked();
             fullMapBorderCleaning();
-            System.out.println("dwa");
+//            System.out.println("dwa");
             return;
         }
 
@@ -913,7 +919,7 @@ public class MainBoardController implements Initializable {
                     }
                 }
             }
-            System.out.println("trzy" + cityCoordinatesLock);
+//            System.out.println("trzy" + cityCoordinatesLock);
             return;
         }else{
 
@@ -921,7 +927,7 @@ public class MainBoardController implements Initializable {
         }
 
         if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
-            System.out.println("cztery");
+//            System.out.println("cztery");
             cityCoordinatesLock = false;
             buyingMode=false;
             fullMapBorderCleaning();
@@ -980,7 +986,7 @@ public class MainBoardController implements Initializable {
                 }
             }
         }
-        System.out.println("piec");
+//        System.out.println("piec");
     }
 
 }
