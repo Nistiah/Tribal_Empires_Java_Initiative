@@ -421,7 +421,9 @@ public class MainBoardController implements Initializable {
 
         if (buyInitialised) {
             buyClicked();
+            cityCoordinatesLock=false;
         }
+        fullMapBorderCleaning();
     }
 
     private Province provinceBuilder(String name) {
@@ -606,17 +608,8 @@ public class MainBoardController implements Initializable {
             ImagePattern imgPat3 = new ImagePattern(image);
             temphex.setFill(imgPat3);
 
-            Button colonize = new Button("colonize");
-            Button by = new Button("kup se pole");
 
-            by.setOnMouseClicked(e -> {
-                buyClicked();
-                buyField(temphex);
-            });
-
-            by.setTranslateY(400);
-            by.setTranslateX(80);
-            temphex.setOnMouseClicked(MouseEvent -> hexClick(temphex, temp, by, colonize));
+            temphex.setOnMouseClicked(MouseEvent -> hexClick(temphex, temp));
             temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue() + "owner:" + temphex.getProvince().getOwnerId()));
             map.addHexagon(temphex);
 
@@ -658,11 +651,24 @@ public class MainBoardController implements Initializable {
         map.setRenderCoordinates(true);
 
     }
-    void hexClick(Hexagon temphex, Province temp, Button by, Button colonize){
+    void hexClick(Hexagon temphex, Province temp){
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
 
+        Button colonize = new Button("colonize");
+        Button by = new Button("kup se pole");
+
+        by.setOnMouseClicked(e -> {
+            buyClicked();
+            buyField(temphex);
+        });
+
+        by.setTranslateY(400);
+        by.setTranslateX(80);
+
+
         if(buyingMode)provinceLowerPanel.getChildren().add(by);
+        if(colonizeInitialised)provinceLowerPanel.getChildren().add(by);
 
         if(playerId == temp.getOwnerId() && !buyingMode){
             if(Objects.equals(temphex.getProvince().getType(), "City"))
@@ -670,7 +676,7 @@ public class MainBoardController implements Initializable {
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceLowerPanel.getChildren().add(by);
             }
-            colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR(), by, colonize));
+            colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 
 
             Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
@@ -726,7 +732,7 @@ public class MainBoardController implements Initializable {
             buyField(temphex);
         }
         if(colonizeInitialised){
-            colonize(temphex.getQ(), temphex.getR(), by, colonize);
+            colonize(temphex.getQ(), temphex.getR());
         }
 
     }
@@ -765,8 +771,8 @@ public class MainBoardController implements Initializable {
 
     int iColonize, jColonize;
 
-    private void colonize(int iFrom, int jFrom, Button by, Button colonize) {
-
+    private void colonize(int iFrom, int jFrom) {
+        if(buyInitialised){buyClicked();}
 
         if(!colonizeInitialised) {
             System.out.println("niecolo " + iFrom + " " + jFrom);
@@ -802,31 +808,11 @@ public class MainBoardController implements Initializable {
                         }
                         ImagePattern imgPat3 = new ImagePattern(image);
                         map.getHexagon(iFrom, jFrom).setFill(imgPat3);
-                        map.getHexagon(iFrom, jFrom).setOnMouseClicked(MouseEvent -> hexClick(map.getHexagon(iFrom, jFrom), temp, by, colonize));
+                        map.getHexagon(iFrom, jFrom).setOnMouseClicked(MouseEvent -> hexClick(map.getHexagon(iFrom, jFrom), temp));
                     }
                 }
             }
-            for (int i = iColonize-7; i < iColonize+8; i++) {
-                for (int j = jColonize-7; j < jColonize+8; j++) {
-                    if (map.getHexagon(j, i).getBorderColor() == Color.PINK) {
-                        switch (map.getHexagon(j, i).getProvince().getOwnerId()) {
-                            case 0:
-                                color = rgb(2,0,36,1);
-                                break;
-                            case 1:
-                                color = Color.AQUAMARINE;
-                                break;
-                            case 2:
-                                color = Color.YELLOW;
-                                break;
-                            case 3:
-                                color = Color.RED;
-                                break;
-                        }
-                        map.getHexagon(j, i).borderColor(color);
-                    }
-                }
-            }
+            fullMapBorderCleaning();
             colonizeInitialised = false;
         }
     }
@@ -838,52 +824,107 @@ public class MainBoardController implements Initializable {
 
         if (!buyingMode){
             buyInitialised      = false;
-            cityCoordinatesLock = false;
-            for (Hexagon hexagon: map.getAllHexagons()){
-                if (hexagon.getBorderColor()== Color.PINK) {
-                    hexagon.borderColor(Color.BLACK);
-                }
-
-            }
+//            cityCoordinatesLock = false;
+//            fullMapBorderCleaning();
+//            colonize(initialisedI,initialisedJ);
+//            colonize(initialisedI,initialisedJ);
             initialisedI = -11;
             initialisedJ = -11;
         }
     }
 
+    void fullMapBorderCleaning(){
+        int jSetter = 1, jLimiter = 46;
+        for (int i2 = 1; i2 <35; i2++) {
+            if (i2 % 2 == 0) {jSetter--; jLimiter--;}
+            for (int j2=jSetter; j2 < jLimiter; j2++) {
+                if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
+
+                switch (map.getHexagon(j2,i2).getProvince().getOwnerId()) {
+                    case 0:
+                        color = rgb(2,0,36,1);
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 1:
+                        color = Color.AQUAMARINE;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 2:
+                        color = Color.YELLOW;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                    case 3:
+                        color = Color.RED;
+                        map.getHexagon(j2,i2).borderColor(color);
+                        break;
+                }
+            }
+        }
+    }
+
+
+
+
     private void buyField(Hexagon tempname) {
+        System.out.println("otwarcie" + cityCoordinatesLock);
+        if (colonizeInitialised) {
+            colonizeInitialised=false;
+            fullMapBorderCleaning();
+        }
+
+
+
+
         int i = tempname.getQ();
         int j = tempname.getR();
 
-        if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
+        if(buyInitialised&&(map.getHexagon(i,j).getBorderColor()!=Color.PINK)){
+            fullMapBorderCleaning();
             buyClicked();
-
+            System.out.println("jeden");
             return;
         }
 
-        if (!cityCoordinatesLock) {
+
+        if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
+            buyClicked();
+            fullMapBorderCleaning();
+            System.out.println("dwa");
+            return;
+        }
+
+        if (!cityCoordinatesLock&& Objects.equals(map.getHexagon(i, j).getProvince().getType(), "City")) {
             cityCoordinatesLock = true;
             buyInitialised      = true;
             initialisedI        = i;
             initialisedJ        = j;
 
-            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {    // pierwotny pattern mozliwych do kupna
+            for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
                     if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
                         if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                            if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
+                                continue;
+                            }
+                            if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                                map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                            }
                         }
                     }
                 }
             }
-
+            System.out.println("trzy" + cityCoordinatesLock);
             return;
-        } else {    // click poza zasiegiem
-            if (((Math.abs(initialisedI - i) > 3) || (Math.abs(initialisedJ - j) > 3)) || (((i < initialisedI) && (j < initialisedJ) && ((Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 4 || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 5)) || (((i > initialisedI) && (j > initialisedJ) && ((Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 4 || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 5)) || ((j == initialisedJ) && (Math.abs(initialisedI - i) == 3)) || ((i == initialisedI) && (Math.abs(initialisedJ - j) == 3)) || (Math.abs(initialisedI - i) + Math.abs(initialisedJ - j)) == 6))) {
-                return;
-            }
+        }else{
+
+
         }
 
         if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
+            System.out.println("cztery");
+            cityCoordinatesLock = false;
+            buyingMode=false;
+            fullMapBorderCleaning();
             return;
         }
 
@@ -925,10 +966,6 @@ public class MainBoardController implements Initializable {
 
         map.getHexagon(i, j).borderColor(color);    // /TODO: tutaj
 
-        City tempCity = (City) map.getHexagon(initialisedI, initialisedJ).getProvince();    // dodanie kupionej prowincji do miasta
-
-        tempCity.assignProvince(map.getHexagon(i, j).getProvince());
-
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
             for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
                 if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
@@ -943,5 +980,7 @@ public class MainBoardController implements Initializable {
                 }
             }
         }
+        System.out.println("piec");
     }
+
 }
