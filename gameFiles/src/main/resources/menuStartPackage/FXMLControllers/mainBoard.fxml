@@ -91,7 +91,7 @@
                               <Font size="12.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="textField" promptText="coord" styleClass="button1" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                        <TextField fx:id="textField" promptText="coord" styleClass="button1" GridPane.columnIndex="9" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

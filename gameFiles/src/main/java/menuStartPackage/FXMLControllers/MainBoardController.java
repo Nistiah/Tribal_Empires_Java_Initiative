@@ -516,8 +516,11 @@ public class MainBoardController implements Initializable {
         Player player2 = new Player("Hittites");
         Player player3 = new Player("Assyria");
         playerList.add(player1);
+        player1.id=1;
         playerList.add(player2);
+        player2.id=2;
         playerList.add(player3);
+        player3.id=3;
         scrollPane.setVvalue(0.5975);
         scrollPane.setHvalue(0);
 
@@ -604,10 +607,8 @@ public class MainBoardController implements Initializable {
             temphex.setFill(imgPat3);
 
             Button colonize = new Button("colonize");
-            colonize.setOnMouseClicked(e -> colonize());
-
-
             Button by = new Button("kup se pole");
+
             by.setOnMouseClicked(e -> {
                 buyClicked();
                 buyField(temphex);
@@ -615,79 +616,8 @@ public class MainBoardController implements Initializable {
 
             by.setTranslateY(400);
             by.setTranslateX(80);
-            temphex.setOnMouseClicked(MouseEvent -> {
-                provinceLowerPanel.getChildren().clear();
-                provinceUpperPanel.getChildren().clear();
-
-                provinceUpperPanel.getChildren().add(colonize);
-//                buyButton.setOnMouseClicked(e -> buyClicked());
-//                provinceLowerPanel.getChildren().add(buyButton);
-                if(buyingMode)provinceLowerPanel.getChildren().add(by);
-                //provinceUpperPanel.getChildren().clear();
-                //provinceType.setText("Typ prowincji: " + temphex.getProvince().getType());
-
-                if(playerId == temp.getOwnerId() && !buyingMode){
-                    if(Objects.equals(temphex.getProvince().getType(), "City"))
-                    {
-
-                        provinceLowerPanel.getChildren().add(by);
-                    }
-
-                    Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
-                    provinceType2.setTranslateY(30);
-                    provinceType2.setTranslateX(5);
-                    provinceType2.setFill(Paint.valueOf("GREEN"));
-                    provinceType2.setFont(Font.font(font,24));
-                    provinceLowerPanel.getChildren().add(provinceType2);
-
-                    int belief = temphex.getProvince().getBelief();
-                    int wood = temphex.getProvince().getWood();
-                    int gold = temphex.getProvince().getGold();
-                    int food = temphex.getProvince().getFood();
-                    String provBelief = belief>0 ? "Wiara +" + belief + "\n" : "";
-                    String provWood = wood>0 ? "Drewno +" + wood + "\n" : "";
-                    String provGold = gold>0 ? "Złoto +" + gold + "\n" : "";
-                    String provFood = food>0 ? "Jedzenie +" + food + "\n" : "";
-                    if(belief > 0 || wood > 0 || gold > 0 || food > 0)
-                    {
-                        Text production = new Text("Produkcja: \n");
-                        production.setTranslateY(60);
-                        production.setTranslateX(5);
-                        production.setFont(Font.font(font,24));
-                        provinceLowerPanel.getChildren().add(production);
-                        temphex.getProvince().setBaseProduction(temphex.getProvince().getType());
-                    }
-                    Text provinceProduction = new Text(provBelief  + provWood + provGold + provFood);
-                    provinceProduction.setTranslateY(80);
-                    provinceProduction.setTranslateX(40);
-                    provinceProduction.setFont(Font.font(font,20));
-                    provinceLowerPanel.getChildren().add(provinceProduction);
-                    final int[] resourcesOffset = {(int) provinceProduction.getTranslateX() + (int) provinceProduction.getLayoutBounds().getHeight() + 30};
-                    temphex.getProvince().getResources().forEach(resource -> {
-                        Text resourceText = new Text(resource);
-                        resourceText.setTranslateY(resourcesOffset[0]);
-                        resourceText.setFont(Font.font(font,20));
-                        resourcesOffset[0] += 20;
-                        provinceLowerPanel.getChildren().add(resourceText);
-                    });
-                    final int[] buttonOffset = { resourcesOffset[0] + 10};
-                    temphex.getProvince().getPossibleBuildings().forEach(building -> {
-
-                        Button b3 = new Button(building);
-                        b3.setTranslateY(buttonOffset[0]);
-                        b3.setPrefWidth(250);
-                        b3.setTranslateX(20);
-                        buttonOffset[0] += 60;
-                        provinceLowerPanel.getChildren().add(b3);
-                    });
-                    provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
-                }
-                if(buyInitialised) {
-                    buyField(temphex);
-                }
-
-            });
-            temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue()));
+            temphex.setOnMouseClicked(MouseEvent -> hexClick(temphex, temp, by, colonize));
+            temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue() + "owner:" + temphex.getProvince().getOwnerId()));
             map.addHexagon(temphex);
 
         }
@@ -728,9 +658,80 @@ public class MainBoardController implements Initializable {
         map.setRenderCoordinates(true);
 
     }
+    void hexClick(Hexagon temphex, Province temp, Button by, Button colonize){
+        provinceLowerPanel.getChildren().clear();
+        provinceUpperPanel.getChildren().clear();
 
-    private void colonize() {
+        if(buyingMode)provinceLowerPanel.getChildren().add(by);
+
+        if(playerId == temp.getOwnerId() && !buyingMode){
+            if(Objects.equals(temphex.getProvince().getType(), "City"))
+            {
+                provinceUpperPanel.getChildren().add(colonize);
+                provinceLowerPanel.getChildren().add(by);
+            }
+            colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR(), by, colonize));
+
+
+            Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
+            provinceType2.setTranslateY(30);
+            provinceType2.setTranslateX(5);
+            provinceType2.setFill(Paint.valueOf("GREEN"));
+            provinceType2.setFont(Font.font(font,24));
+            provinceLowerPanel.getChildren().add(provinceType2);
+
+            int belief = temphex.getProvince().getBelief();
+            int wood = temphex.getProvince().getWood();
+            int gold = temphex.getProvince().getGold();
+            int food = temphex.getProvince().getFood();
+            String provBelief = belief>0 ? "Wiara +" + belief + "\n" : "";
+            String provWood = wood>0 ? "Drewno +" + wood + "\n" : "";
+            String provGold = gold>0 ? "Złoto +" + gold + "\n" : "";
+            String provFood = food>0 ? "Jedzenie +" + food + "\n" : "";
+            if(belief > 0 || wood > 0 || gold > 0 || food > 0)
+            {
+                Text production = new Text("Produkcja: \n");
+                production.setTranslateY(60);
+                production.setTranslateX(5);
+                production.setFont(Font.font(font,24));
+                provinceLowerPanel.getChildren().add(production);
+                temphex.getProvince().setBaseProduction(temphex.getProvince().getType());
+            }
+            Text provinceProduction = new Text(provBelief  + provWood + provGold + provFood);
+            provinceProduction.setTranslateY(80);
+            provinceProduction.setTranslateX(40);
+            provinceProduction.setFont(Font.font(font,20));
+            provinceLowerPanel.getChildren().add(provinceProduction);
+            final int[] resourcesOffset = {(int) provinceProduction.getTranslateX() + (int) provinceProduction.getLayoutBounds().getHeight() + 30};
+            temphex.getProvince().getResources().forEach(resource -> {
+                Text resourceText = new Text(resource);
+                resourceText.setTranslateY(resourcesOffset[0]);
+                resourceText.setFont(Font.font(font,20));
+                resourcesOffset[0] += 20;
+                provinceLowerPanel.getChildren().add(resourceText);
+            });
+            final int[] buttonOffset = { resourcesOffset[0] + 10};
+            temphex.getProvince().getPossibleBuildings().forEach(building -> {
+
+                Button b3 = new Button(building);
+                b3.setTranslateY(buttonOffset[0]);
+                b3.setPrefWidth(250);
+                b3.setTranslateX(20);
+                buttonOffset[0] += 60;
+                provinceLowerPanel.getChildren().add(b3);
+            });
+            provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
+        }
+        if(buyInitialised) {
+            buyField(temphex);
+        }
+        if(colonizeInitialised){
+            colonize(temphex.getQ(), temphex.getR(), by, colonize);
+        }
+
     }
+
+
 
     public static void zoom(KeyEvent event){
         switch(event.getCode()){
@@ -760,6 +761,77 @@ public class MainBoardController implements Initializable {
         stage.getScene().setRoot(root);
     }
 
+    boolean colonizeInitialised = false;
+
+    int iColonize, jColonize;
+
+    private void colonize(int iFrom, int jFrom, Button by, Button colonize) {
+
+
+        if(!colonizeInitialised) {
+            System.out.println("niecolo " + iFrom + " " + jFrom);
+            for (int tempI = iFrom - 6; tempI < iFrom + 7; tempI++) {
+                for (int tempJ = jFrom - 6; tempJ < jFrom + 7; tempJ++) {
+                    if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                        if (((Math.abs(iFrom - tempI) > 5) || (Math.abs(jFrom - tempJ) > 5)) || (((tempI < iFrom) && (tempJ < jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || (((tempI > iFrom) && (tempJ > jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || ((tempJ == jFrom) && (Math.abs(iFrom - tempI) > 5)) || ((tempI == iFrom) && (Math.abs(jFrom - tempJ) > 5))))) {
+                            continue;
+                        }
+                        if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                        }
+                    }
+                }
+            }
+            iColonize=iFrom;
+            jColonize=jFrom;
+            colonizeInitialised=true;
+        }else{
+            System.out.println("takcolo " + iFrom + " " + jFrom);
+            if(iFrom!=iColonize&&jFrom!=jColonize) {
+                if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
+                    if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
+
+                        City temp = new City();
+                        temp.setOwnerId(currentPlayer.id);
+                        map.getHexagon(iFrom, jFrom).setProvince(temp);
+                        currentPlayer.createNewCity(temp);
+                        try {
+                            image = new Image(Objects.requireNonNull(getClass().getResource(temp.iconPath())).toURI().toString());
+                        } catch (URISyntaxException e) {
+                            System.out.println("pattern null");
+                        }
+                        ImagePattern imgPat3 = new ImagePattern(image);
+                        map.getHexagon(iFrom, jFrom).setFill(imgPat3);
+                        map.getHexagon(iFrom, jFrom).setOnMouseClicked(MouseEvent -> hexClick(map.getHexagon(iFrom, jFrom), temp, by, colonize));
+                    }
+                }
+            }
+            for (int i = iColonize-7; i < iColonize+8; i++) {
+                for (int j = jColonize-7; j < jColonize+8; j++) {
+                    if (map.getHexagon(j, i).getBorderColor() == Color.PINK) {
+                        switch (map.getHexagon(j, i).getProvince().getOwnerId()) {
+                            case 0:
+                                color = rgb(2,0,36,1);
+                                break;
+                            case 1:
+                                color = Color.AQUAMARINE;
+                                break;
+                            case 2:
+                                color = Color.YELLOW;
+                                break;
+                            case 3:
+                                color = Color.RED;
+                                break;
+                        }
+                        map.getHexagon(j, i).borderColor(color);
+                    }
+                }
+            }
+            colonizeInitialised = false;
+        }
+    }
+
+
     // panel do uruchomienia kupowania hexów dla miasta
     void buyClicked() {
         buyingMode = !buyingMode;
@@ -767,24 +839,11 @@ public class MainBoardController implements Initializable {
         if (!buyingMode){
             buyInitialised      = false;
             cityCoordinatesLock = false;
-            int jSetter  = 1,
-                jLimiter = 46;
-
-            for (int i = 1; i < 35; i++) {
-                if (i % 2 == 0) {
-                    jSetter--;
-                    jLimiter--;
+            for (Hexagon hexagon: map.getAllHexagons()){
+                if (hexagon.getBorderColor()== Color.PINK) {
+                    hexagon.borderColor(Color.BLACK);
                 }
 
-                for (int j = jSetter; j < jLimiter; j++) {
-                    if ((i % 2 == 1) && (j == jLimiter - 1)) {
-                        continue;
-                    }
-
-                    if (map.getHexagon(j, i).getBorderColor() == Color.PINK) {
-                        map.getHexagon(j, i).borderColor(Color.BLACK);
-                    }
-                }
             }
             initialisedI = -11;
             initialisedJ = -11;
