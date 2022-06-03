@@ -24,7 +24,6 @@ public class SettingsController implements Initializable {
     @FXML
     private Slider volumeSlider;
     private Stage  stage;
-    private Scene  scene;
     private Parent root;
 
     @Override
@@ -38,7 +37,6 @@ public class SettingsController implements Initializable {
     private void sliderVolumeChange() {
         musicPlayerInstance.setVolumeAbsolute(volumeSlider.getValue());
         volumeSlider.setSnapToTicks(true);
-        System.out.println(volumeSlider.getValue());
     }
 
     @FXML

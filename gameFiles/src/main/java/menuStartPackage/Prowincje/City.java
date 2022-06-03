@@ -54,11 +54,7 @@ public class City extends Province {
     }
 
     @Override
-    public int getGold() {
-        System.out.println("gold:" + gold + "  provinces:" + getProvincesGold());
-
-        return gold + getProvincesGold();
-    }
+    public int getGold() {return gold + getProvincesGold();}
 
     @Override
     public int getHorses() {

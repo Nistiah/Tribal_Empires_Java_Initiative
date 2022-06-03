@@ -12,6 +12,15 @@ public class Province {
     protected int        horses = 0;
     protected int        wood   = 0;
     private int          i;
+
+    public int getJ() {
+        return j;
+    }
+
+    public void setJ(int j) {
+        this.j = j;
+    }
+
     private int          j;
     protected int        ownerId;
     private String       type;
@@ -95,7 +104,7 @@ public class Province {
 
     public void setCoordinates(int i, int j) {
         this.setI(i);
-        this.j = j;
+        this.setI(j);
     }
 
     public int getDyes() {

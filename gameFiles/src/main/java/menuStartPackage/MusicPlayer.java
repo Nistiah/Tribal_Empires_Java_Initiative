@@ -86,7 +86,7 @@ public class MusicPlayer extends Thread {
         mediaPlayer.setVolume(volume);
     }
     public void setVolumeAbsolute(double value) {
-        volume = value;
+        volume = value/100;
         mediaPlayer.setVolume(volume);
     }
 }

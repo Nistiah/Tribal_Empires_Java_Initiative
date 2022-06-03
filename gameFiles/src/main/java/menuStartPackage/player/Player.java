@@ -28,6 +28,8 @@ public class Player {
     private int             buildingResources               = 1;
     private int             horses                          = 0;
 
+    public int id;
+
     // do dodania get production from cities list, gosix musi zrobic getery na to w cities, a w prowincjach na cities
     private Vector<City> cityList = new Vector<>();
 
