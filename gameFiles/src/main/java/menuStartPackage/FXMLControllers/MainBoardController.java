@@ -603,13 +603,23 @@ public class MainBoardController implements Initializable {
             ImagePattern imgPat3 = new ImagePattern(image);
             temphex.setFill(imgPat3);
 
+            Button colonize = new Button("colonize");
+            colonize.setOnMouseClicked(e -> colonize());
+
 
             Button by = new Button("kup se pole");
-            by.setOnMouseClicked(e -> buyClicked());
+            by.setOnMouseClicked(e -> {
+                buyClicked();
+                buyField(temphex);
+            });
+
             by.setTranslateY(400);
             by.setTranslateX(80);
             temphex.setOnMouseClicked(MouseEvent -> {
                 provinceLowerPanel.getChildren().clear();
+                provinceUpperPanel.getChildren().clear();
+
+                provinceUpperPanel.getChildren().add(colonize);
 //                buyButton.setOnMouseClicked(e -> buyClicked());
 //                provinceLowerPanel.getChildren().add(buyButton);
                 if(buyingMode)provinceLowerPanel.getChildren().add(by);
@@ -672,10 +682,10 @@ public class MainBoardController implements Initializable {
                     });
                     provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
                 }
-
-                if(buyingMode) {
+                if(buyInitialised) {
                     buyField(temphex);
                 }
+
             });
             temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue()));
             map.addHexagon(temphex);
@@ -717,6 +727,9 @@ public class MainBoardController implements Initializable {
         }
         map.setRenderCoordinates(true);
 
+    }
+
+    private void colonize() {
     }
 
     public static void zoom(KeyEvent event){
@@ -773,7 +786,6 @@ public class MainBoardController implements Initializable {
                     }
                 }
             }
-
             initialisedI = -11;
             initialisedJ = -11;
         }
