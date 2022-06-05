@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 import javafx.event.ActionEvent;
 
@@ -25,6 +22,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -124,6 +123,12 @@ public class MainBoardController implements Initializable {
     private ScrollPane           scrollPane;
     @FXML
     private AnchorPane           mainAnchorPane;
+    @FXML
+    public  TextFlow             provinceType;
+    @FXML
+    public  HBox                 panelHbox;
+    @FXML
+    public  GridPane             mainPanel;
 
     @FXML
     void bronzeEntered() {
@@ -654,6 +659,7 @@ public class MainBoardController implements Initializable {
     void hexClick(Hexagon temphex, Province temp){
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
+        provinceType.getChildren().clear();
 
         Button colonize = new Button("colonize");
         Button by = new Button("kup se pole");
@@ -663,69 +669,281 @@ public class MainBoardController implements Initializable {
             buyField(temphex);
         });
 
-        by.setTranslateY(400);
-        by.setTranslateX(80);
+
+        by.setTranslateX(130);
 
 
-        if(buyingMode)provinceLowerPanel.getChildren().add(by);
-        if(colonizeInitialised)provinceLowerPanel.getChildren().add(by);
+        if(buyingMode)provinceUpperPanel.getChildren().add(by);
+        if(colonizeInitialised)provinceUpperPanel.getChildren().add(by);
 
         if(playerId == temp.getOwnerId() && !buyingMode){
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
                 provinceUpperPanel.getChildren().add(colonize);
-                provinceLowerPanel.getChildren().add(by);
+                provinceUpperPanel.getChildren().add(by);
             }
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 
-
-            Text provinceType2 = new Text("Typ prowincji: " + temphex.getProvince().getType());
-            provinceType2.setTranslateY(30);
-            provinceType2.setTranslateX(5);
-            provinceType2.setFill(Paint.valueOf("GREEN"));
+            String provName = temphex.getProvince().getType();
+            switch (provName)
+            {
+                case "City": provName = "City";
+                    break;
+                case "Coast": provName = "Coast";
+                    break;
+                case "DesertFlat": provName = "Desert - Lowlands";
+                    break;
+                case "DesertWyzyny": provName = "Desert - Highlands";
+                    break;
+                case "ForestFlat": provName = "Forest - Lowlands";
+                    break;
+                case "ForestWyzyny": provName = "Forest - Highlands";
+                    break;
+                case "Mountains": provName = "Mountains";
+                    break;
+                case "RiversideArea": provName = "Riverside Area";
+                    break;
+                case "Sea": provName = "Sea";
+                    break;
+                case "TrawaFlat": provName = "Grass - Lowlands";
+                    break;
+                case "TrawaWyzyny": provName = "Grass - Highlands";
+                    break;
+                default: provName = "";
+            }
+            Text provinceType2 = new Text(provName);
+            provinceType.getChildren().add(provinceType2);
+            provinceType.setTextAlignment(TextAlignment.CENTER);
+            provinceType2.setFill(Paint.valueOf("WHITE"));
             provinceType2.setFont(Font.font(font,24));
-            provinceLowerPanel.getChildren().add(provinceType2);
+            provinceLowerPanel.getChildren().add(provinceType);
+
+
 
             int belief = temphex.getProvince().getBelief();
             int wood = temphex.getProvince().getWood();
             int gold = temphex.getProvince().getGold();
             int food = temphex.getProvince().getFood();
-            String provBelief = belief>0 ? "Wiara +" + belief + "\n" : "";
-            String provWood = wood>0 ? "Drewno +" + wood + "\n" : "";
-            String provGold = gold>0 ? "Złoto +" + gold + "\n" : "";
-            String provFood = food>0 ? "Jedzenie +" + food + "\n" : "";
-            if(belief > 0 || wood > 0 || gold > 0 || food > 0)
-            {
-                Text production = new Text("Produkcja: \n");
-                production.setTranslateY(60);
-                production.setTranslateX(5);
-                production.setFont(Font.font(font,24));
-                provinceLowerPanel.getChildren().add(production);
-                temphex.getProvince().setBaseProduction(temphex.getProvince().getType());
-            }
-            Text provinceProduction = new Text(provBelief  + provWood + provGold + provFood);
-            provinceProduction.setTranslateY(80);
-            provinceProduction.setTranslateX(40);
-            provinceProduction.setFont(Font.font(font,20));
-            provinceLowerPanel.getChildren().add(provinceProduction);
-            final int[] resourcesOffset = {(int) provinceProduction.getTranslateX() + (int) provinceProduction.getLayoutBounds().getHeight() + 30};
-            temphex.getProvince().getResources().forEach(resource -> {
-                Text resourceText = new Text(resource);
-                resourceText.setTranslateY(resourcesOffset[0]);
-                resourceText.setFont(Font.font(font,20));
-                resourcesOffset[0] += 20;
-                provinceLowerPanel.getChildren().add(resourceText);
-            });
-            final int[] buttonOffset = { resourcesOffset[0] + 10};
-            temphex.getProvince().getPossibleBuildings().forEach(building -> {
 
-                Button b3 = new Button(building);
-                b3.setTranslateY(buttonOffset[0]);
-                b3.setPrefWidth(250);
-                b3.setTranslateX(20);
-                buttonOffset[0] += 60;
-                provinceLowerPanel.getChildren().add(b3);
+            Text textOnProd = new Text();
+            //GOLD
+            TextField goldProduction = new TextField(String.valueOf(gold));
+            goldProduction.getStyleClass().add("provincePanelGold");
+            goldProduction.setTranslateY(40);
+            goldProduction.setTranslateX(50);
+            goldProduction.setFont(Font.font(font,16));
+            goldProduction.setPrefWidth(50);
+            goldProduction.setEditable(false);
+
+            goldProduction.setOnMouseMoved(e -> {
+                provinceLowerPanel.getChildren().remove(textOnProd);
+                double x = e.getX();
+                double y = e.getY();
+                StringBuilder sb = new StringBuilder();
+                if(goldProduction.contains(x,y)){
+                    sb.append("gold");
+                }
+                textOnProd.setText(sb.toString());
+                textOnProd.setX(x + 35);
+                textOnProd.setY(y + 20);
+                textOnProd.setFill(Paint.valueOf("GRAY"));
+                provinceLowerPanel.getChildren().add(textOnProd);
             });
+            goldProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+
+            //FOOD
+            TextField foodProduction = new TextField(String.valueOf(food));
+            foodProduction.getStyleClass().add("provincePanelFood");
+            foodProduction.setTranslateY(40);
+            foodProduction.setTranslateX(100);
+            foodProduction.setFont(Font.font(font,16));
+            foodProduction.setPrefWidth(50);
+            foodProduction.setEditable(false);
+
+            foodProduction.setOnMouseMoved(e -> {
+                provinceLowerPanel.getChildren().remove(textOnProd);
+                double x = e.getX();
+                double y = e.getY();
+                StringBuilder sb = new StringBuilder();
+                if(goldProduction.contains(x,y)){
+                    sb.append("food");
+                }
+                textOnProd.setText(sb.toString());
+                textOnProd.setX(x + 85);
+                textOnProd.setY(y + 20);
+                textOnProd.setFill(Paint.valueOf("GRAY"));
+                provinceLowerPanel.getChildren().add(textOnProd);
+            });
+            foodProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+
+            //WOOD
+            TextField woodProduction = new TextField(String.valueOf(wood));
+            woodProduction.getStyleClass().add("provincePanelWood");
+            woodProduction.setTranslateY(40);
+            woodProduction.setTranslateX(150);
+            woodProduction.setFont(Font.font(font,16));
+            woodProduction.setPrefWidth(50);
+            woodProduction.setEditable(false);
+
+            woodProduction.setOnMouseMoved(e -> {
+                provinceLowerPanel.getChildren().remove(textOnProd);
+                double x = e.getX();
+                double y = e.getY();
+                StringBuilder sb = new StringBuilder();
+                if(goldProduction.contains(x,y)){
+                    sb.append("wood");
+                }
+                textOnProd.setText(sb.toString());
+                textOnProd.setX(x + 135);
+                textOnProd.setY(y + 20);
+                textOnProd.setFill(Paint.valueOf("GRAY"));
+                provinceLowerPanel.getChildren().add(textOnProd);
+            });
+            woodProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+
+            //BELIEF
+            TextField beliefProduction = new TextField(String.valueOf(belief));
+            beliefProduction.getStyleClass().add("provincePanelFaith");
+            beliefProduction.setTranslateY(40);
+            beliefProduction.setTranslateX(200);
+            beliefProduction.setFont(Font.font(font,16));
+            beliefProduction.setPrefWidth(50);
+            beliefProduction.setEditable(false);
+
+            beliefProduction.setOnMouseMoved(e -> {
+                provinceLowerPanel.getChildren().remove(textOnProd);
+                double x = e.getX();
+                double y = e.getY();
+                StringBuilder sb = new StringBuilder();
+                if(goldProduction.contains(x,y)){
+                    sb.append("faith");
+                }
+                textOnProd.setText(sb.toString());
+                textOnProd.setX(x + 185);
+                textOnProd.setY(y + 20);
+                textOnProd.setFill(Paint.valueOf("GRAY"));
+                provinceLowerPanel.getChildren().add(textOnProd);
+            });
+            beliefProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+
+            provinceLowerPanel.getChildren().add(goldProduction);
+            provinceLowerPanel.getChildren().add(foodProduction);
+            provinceLowerPanel.getChildren().add(woodProduction);
+            provinceLowerPanel.getChildren().add(beliefProduction);
+
+            final int[] resourcesOffset = {(int) beliefProduction.getLayoutBounds().getHeight() + 70};
+            //possible resources
+            panelHbox.getChildren().clear();
+            temphex.getProvince().getResources().forEach(resource -> {
+                TextField resourceText = new TextField("  ");
+
+                resourceText.setFont(Font.font(font,16));
+
+                switch (resource)
+                {
+                    case "ryby":
+                        resourceText.getStyleClass().add("possResryby");
+                        break;
+                    case "barwniki":
+                        resourceText.getStyleClass().add("possResbarwniki");
+                        break;
+                    case "brąz":
+                        resourceText.getStyleClass().add("possResbraz");
+                        break;
+                    case "żelazo":
+                        resourceText.getStyleClass().add("possReszelazo");
+                        break;
+                    case "złoto":
+                        resourceText.getStyleClass().add("possReszloto");
+                        break;
+                    case "bydło":
+                        resourceText.getStyleClass().add("possResbydlo");
+                        break;
+                    case "konie":
+                        resourceText.getStyleClass().add("possReskonie");
+                        break;
+                    case "drewno":
+                        resourceText.getStyleClass().add("possResdrewno");
+                        break;
+                    case "dziczyzna":
+                        resourceText.getStyleClass().add("possResdziczyzna");
+                        break;
+                    case "bursztyn":
+                        resourceText.getStyleClass().add("possResbursztyn");
+                        break;
+                    case "owoce morza":
+                        resourceText.getStyleClass().add("possResowocemorza");
+                        break;
+                }
+                resourceText.getStyleClass().add("possRes"+resource);
+                //System.out.println("possRes"+resource);
+                //resourcesOffset[0] += 20;
+                panelHbox.getChildren().add(resourceText);
+            });
+            if(temphex.getProvince().getResources().size() > 0)provinceLowerPanel.getChildren().add(panelHbox);
+            final int[] buttonOffset = { resourcesOffset[0] + 60};
+            temphex.getProvince().getBaseBuildings().forEach(baseBuilding -> {
+                Button baseBuildingButton = new Button(baseBuilding);
+                baseBuildingButton.setId(baseBuilding);
+                baseBuildingButton.getStyleClass().add("baseBuilding");
+                baseBuildingButton.setTranslateY(buttonOffset[0]);
+                baseBuildingButton.setPrefWidth(250);
+                baseBuildingButton.setPrefHeight(100);
+                baseBuildingButton.setTranslateX(20);
+                buttonOffset[0] += 120;
+                temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
+                    if(Objects.equals(baseBuilding, builtBuilding)){
+                        baseBuildingButton.getStyleClass().add("builtBaseBuilding");
+                    }
+                });
+
+                baseBuildingButton.setOnMouseClicked(e -> {
+                    //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
+                    temphex.getProvince().builtBuildings.add(baseBuilding);
+                    baseBuildingButton.getStyleClass().add("builtBaseBuilding");
+                    if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
+                    if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
+                    //System.out.println(temphex.getProvince().builtBuildings);
+                    List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
+                    tempList.remove(baseBuilding);
+                    //temphex.getProvince().setPossibleBuildings(tempList);
+                    //System.out.println(temphex.getProvince().getPossibleBuildings());
+                });
+
+                provinceLowerPanel.getChildren().add(baseBuildingButton);
+            });
+
+            //possible buildings
+            temphex.getProvince().getPossibleBuildings().forEach(building -> {
+                Button possibleBuildingButton = new Button(building);
+                possibleBuildingButton.setId(building);
+                possibleBuildingButton.getStyleClass().add("building");
+                temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
+                    if(Objects.equals(building, builtBuilding)){
+                        possibleBuildingButton.getStyleClass().add("builtBuilding");
+                    }
+                });
+                possibleBuildingButton.setTranslateY(buttonOffset[0]);
+                possibleBuildingButton.setPrefWidth(250);
+                possibleBuildingButton.setPrefHeight(100);
+                possibleBuildingButton.setTranslateX(20);
+                buttonOffset[0] += 120;
+                possibleBuildingButton.setOnMouseClicked(e -> {
+                    //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
+                    temphex.getProvince().builtBuildings.add(building);
+                    possibleBuildingButton.getStyleClass().add("builtBuilding");
+                    if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
+                    if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
+                    //System.out.println(temphex.getProvince().builtBuildings);
+                    List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
+                    tempList.remove(building);
+                    //temphex.getProvince().setPossibleBuildings(tempList);
+                    //System.out.println(temphex.getProvince().getPossibleBuildings());
+                });
+                provinceLowerPanel.getChildren().add(possibleBuildingButton);
+            });
+
+
             provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
         }
         if(buyInitialised) {
