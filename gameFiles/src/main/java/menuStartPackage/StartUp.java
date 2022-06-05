@@ -12,8 +12,6 @@ import menuStartPackage.player.Player;
 
 import java.io.IOException;
 
-import static menuStartPackage.FXMLControllers.MainBoardController.playerList;
-
 //import static menuStartPackage.FXMLControllers.MainBoardController.playerList;
 
 

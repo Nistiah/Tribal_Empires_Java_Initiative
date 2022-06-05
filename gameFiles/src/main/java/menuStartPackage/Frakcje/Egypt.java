@@ -8,6 +8,7 @@ public class Egypt extends Fraction {
     private List<String> militaryUnit = Arrays.asList("Oddział rydwanów", "Kompania Nosiciela Sztandaru");
     private String       king         = "Amenhotep III";
 
+
     public Egypt() {
         setImprovements(improvements);
         setMilitaryUnit(militaryUnit);

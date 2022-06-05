@@ -9,6 +9,7 @@ public class Hittites extends Fraction {
                                                       "Hetycka piechota uzbrojona w topory");
     private String king = "Telepinu";
 
+
     public Hittites() {
         setImprovements(improvements);
         setMilitaryUnit(militaryUnit);

@@ -138,6 +138,6 @@ public class MenuStartController implements Initializable {
         musicPlayerInstance.stopMusic();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
-        stage.getScene().setOnKeyPressed(MainBoardController::zoom);
+
     }
 }

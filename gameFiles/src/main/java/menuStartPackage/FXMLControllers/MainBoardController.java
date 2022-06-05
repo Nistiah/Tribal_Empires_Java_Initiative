@@ -11,6 +11,7 @@ import java.util.*;
 
 import javafx.event.ActionEvent;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,6 +37,7 @@ import javafx.scene.text.TextFlow;
 
 import javafx.stage.Stage;
 
+import static javafx.scene.input.KeyCode.*;
 import static javafx.scene.paint.Color.rgb;
 
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
@@ -58,7 +60,7 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
 //ownerId 0 -nikt
 public class MainBoardController implements Initializable {
-    static public Vector<Player> playerList = new Vector<>();
+    public Vector<Player> playerList = new Vector<>();
     private static HexagonMap    map;
     private final String         font                = "Manjaro";
     public Slider soundSlider;
@@ -219,7 +221,7 @@ public class MainBoardController implements Initializable {
         faithTextFlow.getChildren().add(baseProduction);
 
         for (City city : currentPlayer.getCityList()) {
-            if (city.getBelief() <= 0) {
+            if (city.getBelief() < 0) {
                 continue;
             }
 
@@ -434,10 +436,10 @@ public class MainBoardController implements Initializable {
         fullMapBorderCleaning();
     }
 
-    private Province provinceBuilder(String name) {
+    private Province provinceBuilder(String name, int owner) {
         switch (name) {
             case "City" :
-                return new City();
+                return new City(owner);
 
             case "Coast" :
                 return new Coast();
@@ -519,12 +521,12 @@ public class MainBoardController implements Initializable {
             numberOfProvincesPerTour.add(numberOfProvinces);
         }
     }
+    Player player1 = new Player("Egypt");
+    Player player2 = new Player("Hittites");
+    Player player3 = new Player("Assyria");
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        Player player1 = new Player("Egypt");
-        Player player2 = new Player("Hittites");
-        Player player3 = new Player("Assyria");
         playerList.add(player1);
         player1.id=1;
         playerList.add(player2);
@@ -533,6 +535,10 @@ public class MainBoardController implements Initializable {
         player3.id=3;
         scrollPane.setVvalue(0.5975);
         scrollPane.setHvalue(0);
+
+        mainAnchorPane.setOnKeyPressed((event)-> {
+            shortcuts(event);
+        });
 
         currentPlayer = playerList.get(1);
 
@@ -545,7 +551,6 @@ public class MainBoardController implements Initializable {
         horseTextFlow.setTextAlignment(TextAlignment.CENTER);
         dyesTextFlow.setTextAlignment(TextAlignment.CENTER);
 
-        mainAnchorPane.setOnKeyPressed(MainBoardController::zoom);
 
         volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
         volumeSlider.setOnDragDone(event -> sliderVolumeChange());
@@ -609,7 +614,7 @@ public class MainBoardController implements Initializable {
             tempProvince=scanner.next();
             Hexagon temphex = new Hexagon(j, i);
 
-            Province temp = provinceBuilder(tempProvince);
+            Province temp = provinceBuilder(tempProvince, owner);
             temp.setType(tempProvince);
             temp.setOwnerId(owner);
             temp.setCoordinates(j, i);
@@ -681,9 +686,12 @@ public class MainBoardController implements Initializable {
     @FXML
     AnchorPane settingsPane;
 
+    
+    boolean visible = false;
     @FXML
-    void openSettings(ActionEvent event) {
-        settingsPane.setVisible(true);
+    void openSettings() {
+        visible=!visible;
+        settingsPane.setVisible(visible);
     }
 
     @FXML
@@ -988,11 +996,13 @@ public class MainBoardController implements Initializable {
             colonize(temphex.getQ(), temphex.getR());
         }
 
+
     }
 
+    
 
-
-    public static void zoom(KeyEvent event){
+    private void shortcuts(KeyEvent event) {
+//        System.out.println(event.getCode());
         switch(event.getCode()){
             case SUBTRACT:
                 map.sizeDown();
@@ -1000,6 +1010,17 @@ public class MainBoardController implements Initializable {
             case ADD:
                 map.sizeUp();
                 break;
+            case ESCAPE:
+                this.openSettings();
+                break;
+            case N:
+                try {
+                    this.nextPlayerButton();
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                break;
+
 
         }
     }
@@ -1056,7 +1077,7 @@ public class MainBoardController implements Initializable {
                     if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
                         System.out.println("pass");
 
-                        City temp = new City();
+                        City temp = new City(currentPlayer.id);
                         temp.setOwnerId(currentPlayer.id);
                         map.getHexagon(iFrom, jFrom).setProvince(temp);
                         currentPlayer.createNewCity(temp);
@@ -1188,7 +1209,8 @@ public class MainBoardController implements Initializable {
         }
 
         map.getHexagon(i, j).getProvince().setOwnerId(ownerId);
-
+        City temoCity = (City)map.getHexagon(initialisedI, initialisedJ).getProvince();
+        temoCity.assignProvince(map.getHexagon(i, j).getProvince());
         switch (map.getHexagon(i, j).getProvince().getOwnerId()) {
         case 0 :
             color = rgb(2, 0, 36, 1);

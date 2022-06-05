@@ -8,6 +8,15 @@ public class Fraction {
     private List<String> militaryUnit;
     private String       king;
 
+    private final String[] cityNames =null;
+
+    public String getCityName(int id){
+        if(id>cityNames.length)
+            return "New "+cityNames[id-7];
+        return cityNames[id];
+    }
+
+
     public String getDescription() {
         return description;
     }
