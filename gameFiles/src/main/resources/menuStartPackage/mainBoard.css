@@ -473,6 +473,7 @@
     -fx-border-width: 2;
     -fx-border-radius: 5;
     -fx-text-fill: pink;
+}
 
 .settingsButton {
     -fx-background-radius: 200px;
