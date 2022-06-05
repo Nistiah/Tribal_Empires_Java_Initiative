@@ -41,6 +41,7 @@ import static javafx.scene.paint.Color.rgb;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
+import menuStartPackage.Budynki.Building;
 import menuStartPackage.Prowincje.*;
 
 import menuStartPackage.player.Player;
@@ -704,8 +705,15 @@ public class MainBoardController implements Initializable {
             buyField(temphex);
         });
 
+        colonize.setPrefWidth(150);
+        colonize.setTranslateY(75);
+        colonize.getStyleClass().add("colonizeButton");
 
-        by.setTranslateX(130);
+        by.setPrefWidth(145);
+        by.setTranslateX(150);
+        by.setTranslateY(75);
+        by.getStyleClass().add("colonizeButton");
+
 
 
         if(buyingMode)provinceUpperPanel.getChildren().add(by);
@@ -749,9 +757,9 @@ public class MainBoardController implements Initializable {
             Text provinceType2 = new Text(provName);
             provinceType.getChildren().add(provinceType2);
             provinceType.setTextAlignment(TextAlignment.CENTER);
-            provinceType2.setFill(Paint.valueOf("WHITE"));
+            provinceType2.setFill(Paint.valueOf("GRAY"));
             provinceType2.setFont(Font.font(font,24));
-            provinceLowerPanel.getChildren().add(provinceType);
+            provinceUpperPanel.getChildren().add(provinceType);
 
 
 
@@ -771,7 +779,7 @@ public class MainBoardController implements Initializable {
             goldProduction.setEditable(false);
 
             goldProduction.setOnMouseMoved(e -> {
-                provinceLowerPanel.getChildren().remove(textOnProd);
+                provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
@@ -782,9 +790,9 @@ public class MainBoardController implements Initializable {
                 textOnProd.setX(x + 35);
                 textOnProd.setY(y + 20);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceLowerPanel.getChildren().add(textOnProd);
+                provinceUpperPanel.getChildren().add(textOnProd);
             });
-            goldProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+            goldProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //FOOD
             TextField foodProduction = new TextField(String.valueOf(food));
@@ -796,7 +804,7 @@ public class MainBoardController implements Initializable {
             foodProduction.setEditable(false);
 
             foodProduction.setOnMouseMoved(e -> {
-                provinceLowerPanel.getChildren().remove(textOnProd);
+                provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
@@ -807,9 +815,9 @@ public class MainBoardController implements Initializable {
                 textOnProd.setX(x + 85);
                 textOnProd.setY(y + 20);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceLowerPanel.getChildren().add(textOnProd);
+                provinceUpperPanel.getChildren().add(textOnProd);
             });
-            foodProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+            foodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //WOOD
             TextField woodProduction = new TextField(String.valueOf(wood));
@@ -821,7 +829,7 @@ public class MainBoardController implements Initializable {
             woodProduction.setEditable(false);
 
             woodProduction.setOnMouseMoved(e -> {
-                provinceLowerPanel.getChildren().remove(textOnProd);
+                provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
@@ -832,9 +840,9 @@ public class MainBoardController implements Initializable {
                 textOnProd.setX(x + 135);
                 textOnProd.setY(y + 20);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceLowerPanel.getChildren().add(textOnProd);
+                provinceUpperPanel.getChildren().add(textOnProd);
             });
-            woodProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+            woodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //BELIEF
             TextField beliefProduction = new TextField(String.valueOf(belief));
@@ -846,7 +854,7 @@ public class MainBoardController implements Initializable {
             beliefProduction.setEditable(false);
 
             beliefProduction.setOnMouseMoved(e -> {
-                provinceLowerPanel.getChildren().remove(textOnProd);
+                provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
@@ -857,14 +865,14 @@ public class MainBoardController implements Initializable {
                 textOnProd.setX(x + 185);
                 textOnProd.setY(y + 20);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceLowerPanel.getChildren().add(textOnProd);
+                provinceUpperPanel.getChildren().add(textOnProd);
             });
-            beliefProduction.setOnMouseExited(e -> provinceLowerPanel.getChildren().remove(textOnProd));
+            beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
-            provinceLowerPanel.getChildren().add(goldProduction);
-            provinceLowerPanel.getChildren().add(foodProduction);
-            provinceLowerPanel.getChildren().add(woodProduction);
-            provinceLowerPanel.getChildren().add(beliefProduction);
+            provinceUpperPanel.getChildren().add(goldProduction);
+            provinceUpperPanel.getChildren().add(foodProduction);
+            provinceUpperPanel.getChildren().add(woodProduction);
+            provinceUpperPanel.getChildren().add(beliefProduction);
 
             final int[] resourcesOffset = {(int) beliefProduction.getLayoutBounds().getHeight() + 70};
             //possible resources
@@ -910,13 +918,13 @@ public class MainBoardController implements Initializable {
                         resourceText.getStyleClass().add("possResowocemorza");
                         break;
                 }
-                resourceText.getStyleClass().add("possRes"+resource);
+                //resourceText.getStyleClass().add("possRes"+resource);
                 //System.out.println("possRes"+resource);
                 //resourcesOffset[0] += 20;
-                panelHbox.getChildren().add(resourceText);
+                //panelHbox.getChildren().add(resourceText);
             });
             if(temphex.getProvince().getResources().size() > 0)provinceLowerPanel.getChildren().add(panelHbox);
-            final int[] buttonOffset = { resourcesOffset[0] + 60};
+            final int[] buttonOffset = { 10 };
             temphex.getProvince().getBaseBuildings().forEach(baseBuilding -> {
                 Button baseBuildingButton = new Button(baseBuilding);
                 baseBuildingButton.setId(baseBuilding);
@@ -930,15 +938,24 @@ public class MainBoardController implements Initializable {
                     if(Objects.equals(baseBuilding, builtBuilding)){
                         baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     }
-                });
+//                    builtBuilding = builtBuilding.replaceAll("\\s+","");
+//                    if(!temphex.getProvince().builtBuildings.contains(builtBuilding)){
+//                        Building bld = new Building();
+//                        bld.setBaseProduction(builtBuilding);
+//                        temphex.getProvince().build.add(bld);
+//                    }
 
+                });
+                System.out.println("Build: " + temphex.getProvince().build);
+                System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
                 baseBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    temphex.getProvince().builtBuildings.add(baseBuilding);
+                    if(!temphex.getProvince().builtBuildings.contains(baseBuilding))temphex.getProvince().builtBuildings.add(baseBuilding);
+
                     baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
                     if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
-                    //System.out.println(temphex.getProvince().builtBuildings);
+                    //System.out.println(temphex.getProvince().build);
                     List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
                     tempList.remove(baseBuilding);
                     //temphex.getProvince().setPossibleBuildings(tempList);
@@ -965,7 +982,7 @@ public class MainBoardController implements Initializable {
                 buttonOffset[0] += 120;
                 possibleBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    temphex.getProvince().builtBuildings.add(building);
+                    if(!temphex.getProvince().builtBuildings.contains(building))temphex.getProvince().builtBuildings.add(building);
                     possibleBuildingButton.getStyleClass().add("builtBuilding");
                     if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
                     if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");

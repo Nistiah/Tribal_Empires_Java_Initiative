@@ -7,7 +7,7 @@ public class DesertFlat extends Province {
     private List<String> resources         = Arrays.asList();
     private String       type              = "DesertFlat";
     private List<String> possibleBuildings = Arrays.asList();
-    private List<String> baseBuildings     = Arrays.asList("Piramida", "Karawana");
+    private List<String> baseBuildings     = Arrays.asList("Pyramid", "Caravan");
 
     public DesertFlat() {
         setResources(resources);

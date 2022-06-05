@@ -326,6 +326,11 @@
     -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
     -fx-border-width: 2;
     -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.building:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
 }
 .builtBuilding {
     -fx-opacity: 1;
@@ -340,6 +345,10 @@
     -fx-border-width: 2;
     -fx-border-radius: 5;
 }
+.builtBuilding:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
 
 .baseBuilding {
     -fx-opacity: 0.2;
@@ -353,6 +362,11 @@
     -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
     -fx-border-width: 2;
     -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.baseBuilding:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
 }
 .builtBaseBuilding {
     -fx-opacity: 1;
@@ -366,6 +380,10 @@
     -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
     -fx-border-width: 2;
     -fx-border-radius: 5;
+}
+.builtBaseBuilding:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
 }
 
 .possReskonie{
@@ -445,6 +463,16 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-background-position: center;
 }
+
+
+.colonizeButton {
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
 
 .settingsButton {
     -fx-background-radius: 200px;
