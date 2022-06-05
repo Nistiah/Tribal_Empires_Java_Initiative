@@ -6,8 +6,8 @@ import java.util.List;
 public class DesertWyzyny extends Province {
     private List<String> resources         = Arrays.asList("brąz", "żelazo", "złoto");
     private String       type              = "DesertWyzyny";
-    private List<String> possibleBuildings = Arrays.asList("Kopalnia brąz", "Kopalnia żelazo", "Kopalnia złoto");
-    private List<String> baseBuildings     = Arrays.asList("Piramida", "Karawana");
+    private List<String> possibleBuildings = Arrays.asList("Bronze Mine", "Iron Mine", "Gold Mine");
+    private List<String> baseBuildings     = Arrays.asList("Pyramid", "Caravan");
 
     public DesertWyzyny() {
         setResources(resources);

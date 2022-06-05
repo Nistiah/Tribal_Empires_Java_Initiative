@@ -13,11 +13,13 @@ public class City extends Province {
     private List<String> resources                = List.of();
     private String       type                     = "City";
     private List<String> possibleBuildings        = List.of();
-    private List<String> baseBuildings            = Arrays.asList("Dzielnica mieszkaniowa",
-                                                                  "Targ",
-                                                                  "Koszary",
-                                                                  "Świątynia",
-                                                                  "Magazyn");
+    private List<String> baseBuildings     = Arrays.asList("Residential District",
+                                                           "Market",
+                                                           "Barracks",
+                                                           "Temple",
+                                                           "Warehouse");
+ 
+    private Vector<Province> provincelist = new Vector<>();
     private final String[]   cityNamesAssyria  = {
         "Ashur", "Nineveh", "Dur Sharrukin", "Babylon", "Susa", "Haran", "Calah"
     };
