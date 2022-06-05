@@ -38,14 +38,18 @@
                         </TextFlow>
                      </children>
                   </GridPane>
-                  <SplitPane id="rightBar" dividerPositions="0.1349206349206349" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="split-pane2">
+                  <SplitPane id="rightBar" dividerPositions="0.15532879818594103" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="split-pane2">
                      <items>
-                        <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="300.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
-                        <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css">
+                        <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="300.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css">
                            <children>
-                              <TextFlow fx:id="provinceType" layoutX="47.0" layoutY="47.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="700.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <HBox fx:id="panelHbox" layoutX="54.0" layoutY="80.0" prefHeight="44.0" prefWidth="180.0" />
+                              <HBox fx:id="panelHbox" prefHeight="44.0" prefWidth="180.0" />
+                              <TextFlow fx:id="provinceType" prefHeight="42.0" prefWidth="300.0" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children></AnchorPane>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="803.0" prefWidth="300.0" vbarPolicy="NEVER">
+                           <content>
+                              <AnchorPane fx:id="provinceLowerPanel" minHeight="803.0" minWidth="0.0" prefHeight="803.0" prefWidth="297.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
+                           </content>
+                        </ScrollPane>
                      </items>
                   </SplitPane>
                </items>

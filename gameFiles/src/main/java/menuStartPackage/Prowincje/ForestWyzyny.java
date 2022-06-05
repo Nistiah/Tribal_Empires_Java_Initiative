@@ -6,12 +6,12 @@ import java.util.List;
 public class ForestWyzyny extends Province {
     private List<String> resources         = Arrays.asList("drewno", "brąz", "żelazo", "złoto");
     private String       type              = "ForestWyzyny";
-    private List<String> possibleBuildings = Arrays.asList("Tartak",
-                                                           "Kopalnia brąz",
-                                                           "Kopalnia żelazo",
-                                                           "Kopalnia złoto",
-                                                           "Wycięcie lasu");
-    private List<String> baseBuildings = List.of("Łowca");
+    private List<String> possibleBuildings = Arrays.asList("Sawmill",
+                                                           "Bronze Mine",
+                                                           "Iron Mine",
+                                                           "Gold Mine",
+                                                           "Deforestation");
+    private List<String> baseBuildings = List.of("Hunter");
 
     public ForestWyzyny() {
         setResources(resources);

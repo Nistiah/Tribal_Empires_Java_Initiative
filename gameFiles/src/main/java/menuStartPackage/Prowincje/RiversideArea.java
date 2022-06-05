@@ -5,8 +5,8 @@ import java.util.List;
 public class RiversideArea extends Province {
     private List<String> resources         = List.of();
     private String       type              = "RiversideArea";
-    private List<String> possibleBuildings = List.of("System irygacji");
-    private List<String> baseBuildings     = List.of("Farma nadrzeczna");
+    private List<String> possibleBuildings = List.of("Irrigation System");
+    private List<String> baseBuildings     = List.of("Riverside Farm");
 
     public RiversideArea() {
         setResources(resources);
