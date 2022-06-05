@@ -1,9 +1,22 @@
 .bodyBackground {
-    -fx-background-color: linear-gradient(to bottom, rgb(2,0,36,1) 0%, rgb(185,187,110,1) 50%, rgb(2,0,36,1) 100%);
-    /*-fx-background-color: #474747;*/
     -fx-color: #474747;
     -fx-opacity: 90%;
     -fx-background-size: 100% 100%;
+    -fx-border-color: rgba(255, 171, 79, 1);
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 6px;
+    -fx-background-color: rgba(2, 0, 36, 0.95);
+}
+
+.bodyBackgroundX {
+    -fx-color: #474747;
+    -fx-opacity: 90%;
+    -fx-background-size: 100% 100%;
+    -fx-border-color: rgba(255, 171, 79, 1);
+    -fx-border-width: 3px;
+
+    -fx-background-color: rgba(2, 0, 36, 1);
 }
 
 .bodyBackground2 {
@@ -34,6 +47,15 @@
     -fx-border-radius: 5px;
     -fx-background-radius: 6px;
     -fx-background-color: rgba(2, 0, 36, 0.75);
+    -fx-text-fill: pink;
+
+}
+.bodyBackground6 {
+    -fx-border-color: rgba(255, 171, 79, 1);
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 6px;
+    -fx-background-color: rgba(2, 0, 36, 0.95);
     -fx-text-fill: pink;
 
 }
@@ -134,7 +156,11 @@
 
 .split-pane:vertical > .split-pane-divider {
     /*-fx-background-color: rgb(2,0,36,1); maybe?*/
-    -fx-background-color: gold;
+    -fx-background-color: rgba(255, 171, 79, 1);
+    -fx-border-width: 3px;
+    -fx-background-size: 3px;
+    -fx-stroke-width: 3px;
+    -fx-padding: 1 0.1em 1 0.1em;
 }
 
 
@@ -418,4 +444,33 @@
     -fx-background-repeat: no-repeat;
     -fx-background-color: rgb(2,0,36,1);
     -fx-background-position: center;
+}
+
+.settingsButton {
+    -fx-background-radius: 200px;
+    -fx-background-color: rgba(2,0,36,0.80) ;
+    -fx-color: 	rgba(255,192,203,1);
+    -fx-border-radius: 800;
+    -fx-text-fill: rgba(255,192,203,1);
+
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 30;
+    -fx-padding: 10px 20px;
+}
+.settingsButton:hover{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: rgba(2,0,36,0.95) ;
+}
+
+.slider {
+    -slider-filled-track-color: pink ;
+}
+.slider .thumb {
+    -fx-background-color: pink ;
+}
+.slider .track {
+    -fx-background-color: grey ;
+}
+.slider .thumb:hover{
+    -fx-background-color: white ;
 }

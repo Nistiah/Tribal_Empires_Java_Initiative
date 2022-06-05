@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -60,6 +61,8 @@ public class MainBoardController implements Initializable {
     static public Vector<Player> playerList = new Vector<>();
     private static HexagonMap    map;
     private final String         font                = "Manjaro";
+    public Slider soundSlider;
+    public Slider volumeSlider;
     int                          playerId            = 1;
     @FXML
     private TextField            turnField           = new TextField("dupa");
@@ -544,6 +547,16 @@ public class MainBoardController implements Initializable {
 
         mainAnchorPane.setOnKeyPressed(MainBoardController::zoom);
 
+        volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
+        volumeSlider.setOnDragDone(event -> sliderVolumeChange());
+        volumeSlider.setOnMouseDragReleased(event -> sliderVolumeChange());
+        
+        soundSlider.setOnMouseDragged(event -> soundVolumeChange());
+        soundSlider.setOnDragDone(event -> soundVolumeChange());
+        soundSlider.setOnMouseDragReleased(event -> soundVolumeChange());
+        
+        
+
         try {
             image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar1.png")).toURI().toString());
         } catch (URISyntaxException e) {
@@ -656,6 +669,28 @@ public class MainBoardController implements Initializable {
         map.setRenderCoordinates(true);
 
     }
+
+    private void soundVolumeChange() {
+    }
+
+    private void sliderVolumeChange() {
+        musicPlayerInstance.setVolumeAbsolute(volumeSlider.getValue());
+        volumeSlider.setSnapToTicks(true);
+    }
+
+    @FXML
+    AnchorPane settingsPane;
+
+    @FXML
+    void openSettings(ActionEvent event) {
+        settingsPane.setVisible(true);
+    }
+
+    @FXML
+    void settingOff(MouseEvent event) {
+        settingsPane.setVisible(false);
+    }
+
     void hexClick(Hexagon temphex, Province temp){
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
@@ -970,7 +1005,7 @@ public class MainBoardController implements Initializable {
     }
 
     @FXML
-    void backToMainMenuFromBoard(ActionEvent event) {
+    void backToMainMenuFromBoard(MouseEvent event) {
         musicPlayerInstance.exit = true;
         musicPlayerInstance.menu = false;
         musicPlayerInstance.stopMusic();
