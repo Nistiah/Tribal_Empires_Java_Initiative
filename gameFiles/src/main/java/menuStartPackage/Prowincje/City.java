@@ -4,19 +4,36 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import menuStartPackage.player.Player;
+
 public class City extends Province {
-    private List<String> resources         = List.of();
-    private String       type              = "City";
-    private List<String> possibleBuildings = List.of();
+    public static int    cityNamesAssyriaCounter  = 0;
+    public static int    cityNamesEgyptCounter    = 0;
+    public static int    cityNamesHittitesCounter = 0;
+    private List<String> resources                = List.of();
+    private String       type                     = "City";
+    private List<String> possibleBuildings        = List.of();
     private List<String> baseBuildings     = Arrays.asList("Residential District",
                                                            "Market",
                                                            "Barracks",
                                                            "Temple",
                                                            "Warehouse");
+ 
     private Vector<Province> provincelist = new Vector<>();
-    private String           name         = "xyz";
+    private final String[]   cityNamesAssyria  = {
+        "Ashur", "Nineveh", "Dur Sharrukin", "Babylon", "Susa", "Haran", "Calah"
+    };
+    private final String[]   cityNamesEgypt    = {
+        "Memphis", "Thebes", "Amarna", "Avaris", "Alexandria", "Abydos", "Ptkheka"
+    };
+    private final String[]   cityNamesHittites = {
+        "Hattusa", "Nerik", "Kusara", "Karkemisz", "Kanesh", "Aleppo", "Malatya"
+    };
+    private Vector<Province> provincelist      = new Vector<>();
+    private String           name              = "";
 
-    public City() {
+    public City(int id) {
+        this.name=getCityName(id);
         setResources(resources);
         setType(type);
         setBaseProduction(type);
@@ -35,12 +52,42 @@ public class City extends Province {
 
     @Override
     public int getBelief() {
-        return belief + getProvincesBelief();
+        return (belief + getProvincesBelief());
     }
 
     @Override
     public int getBronze() {
         return bronze + getProvincesBronze();
+    }
+
+    public String getCityName(int playerId) {
+        switch (playerId) {
+        case 1 :
+            if (cityNamesEgyptCounter > 7) {
+                cityNamesEgyptCounter++;
+                return "New " + cityNamesEgypt[cityNamesEgyptCounter - 7 - 1];
+            }
+            cityNamesEgyptCounter++;
+            return cityNamesEgypt[cityNamesEgyptCounter - 1];
+
+        case 2 :
+            if (cityNamesHittitesCounter > 7) {
+                cityNamesHittitesCounter++;
+                return "New " + cityNamesHittites[cityNamesHittitesCounter - 7 - 1];
+            }
+            cityNamesHittitesCounter++;
+            return cityNamesHittites[cityNamesHittitesCounter - 1];
+
+        case 3 :
+            if (cityNamesAssyriaCounter > 7) {
+                cityNamesAssyriaCounter++;
+                return "New " + cityNamesAssyria[cityNamesAssyriaCounter - 7 - 1];
+            }
+            cityNamesAssyriaCounter++;
+            return cityNamesAssyria[cityNamesAssyriaCounter - 1];
+        }
+
+        return null;
     }
 
     @Override
@@ -54,7 +101,9 @@ public class City extends Province {
     }
 
     @Override
-    public int getGold() {return gold + getProvincesGold();}
+    public int getGold() {
+        return gold + getProvincesGold();
+    }
 
     @Override
     public int getHorses() {

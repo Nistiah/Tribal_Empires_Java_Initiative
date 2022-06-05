@@ -35,6 +35,7 @@ import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
 import menuStartPackage.Prowincje.*;
+import menuStartPackage.player.Player;
 
 import static menuStartPackage.StartUp.musicPlayerInstance;
 
@@ -67,7 +68,8 @@ public class MapBuilderController {
 
     @FXML
     void CityClick(ActionEvent event) {
-        province = new City();
+        Player player = new Player("Egypt");
+        province = new City(1);
     }
 
     @FXML
@@ -354,7 +356,8 @@ public class MapBuilderController {
     private Province provinceBuilder(String name) {
         switch (name) {
         case "City" :
-            return new City();
+            Player player = new Player("Egypt");
+            return new City(1);
 
         case "Coast" :
             return new Coast();
