@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Sea extends Province {
-    private List<String> resources         = Arrays.asList("ryby", "barwiniki");
+    private List<String> resources         = Arrays.asList("ryby", "barwniki");
     private String       type              = "Sea";
     private List<String> possibleBuildings = Arrays.asList("Poławiacze ryb", "Poławiacze szkarłatników");
     private List<String> baseBuildings     = Arrays.asList();

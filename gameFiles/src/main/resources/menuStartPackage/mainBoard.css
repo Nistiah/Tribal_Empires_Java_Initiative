@@ -244,3 +244,178 @@
     -fx-text-fill: rgb(0, 135, 54);
     -fx-background-color: rgba(2,0,36,0.90) ;
 }
+
+
+
+
+.provincePanelFaith{
+    -fx-background-image:url('faith.png');
+    -fx-background-size: 60% 60%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.provincePanelWood{
+    -fx-background-image:url('wood.png');
+    -fx-background-size: 45% 60%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.provincePanelGold{
+    -fx-background-image:url('gold.png');
+    -fx-background-size: 45% 60%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.provincePanelFood{
+    -fx-background-image:url('food.png');
+    -fx-background-size: 45% 60%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.building {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('gold_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtBuilding {
+    -fx-opacity: 1;
+    -fx-background-image:url('gold_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.baseBuilding {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('gold_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtBaseBuilding {
+    -fx-opacity: 1;
+    -fx-background-image:url('gold_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.possReskonie{
+    -fx-background-image:url('horse.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResbraz{
+    -fx-background-image:url('bronze.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possReszelazo{
+    -fx-background-image:url('iron.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possReszloto{
+    -fx-background-image:url('gold.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResryby{
+    -fx-background-image:url('fish.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResbarwniki{
+    -fx-background-image:url('dyes.png');
+    -fx-background-size: 30 20;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResbydlo{
+    -fx-background-image:url('food.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResdziczyzna{
+    -fx-background-image:url('food.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResdrewno{
+    -fx-background-image:url('wood.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResbursztyn{
+    -fx-background-image:url('wood.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
+.possResowocemorza{
+    -fx-background-image:url('wood.png');
+    -fx-background-size: 30 30;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-background-position: center;
+}
