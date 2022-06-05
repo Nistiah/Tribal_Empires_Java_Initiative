@@ -29,7 +29,6 @@ public class City extends Province {
     private final String[]   cityNamesHittites = {
         "Hattusa", "Nerik", "Kusara", "Karkemisz", "Kanesh", "Aleppo", "Malatya"
     };
-    private Vector<Province> provincelist      = new Vector<>();
     private String           name              = "";
 
     public City(int id) {
