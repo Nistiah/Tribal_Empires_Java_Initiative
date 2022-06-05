@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,11 +16,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane fx:id="mainAnchorPane" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
+<AnchorPane fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menuStartPackage.FXMLControllers.MainBoardController">
    <children>
-      <BorderPane prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
+      <BorderPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="bodyBackground" stylesheets="@../mainBoard.css">
          <right>
-            <SplitPane dividerPositions="0.0" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.0" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="300.0" styleClass="bodyBackgroundX">
                <items>
                   <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#descriptionEntered" onMouseExited="#descriptionExited" prefHeight="150.0" prefWidth="300.0" styleClass="bodyBackground4" SplitPane.resizableWithParent="false">
                      <columnConstraints>
@@ -30,7 +31,7 @@
                         <RowConstraints maxHeight="150.0" minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff05" height="150.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" styleClass="bodyBackground4" width="150.0" />
+                        <Rectangle fx:id="avatar" arcHeight="5.0" arcWidth="3.0" fill="#1f93ff05" height="150.0" smooth="false" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" styleClass="bodyBackgroundX" width="150.0" />
                         <TextFlow fx:id="descriptionField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="130.0" styleClass="bodyBackground4" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets />
@@ -56,9 +57,9 @@
             </SplitPane>
          </right>
          <left>
-            <ScrollPane fx:id="scrollPane" BorderPane.alignment="CENTER">
+            <ScrollPane fx:id="scrollPane" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1620.0" styleClass="bodyBackgroundX" BorderPane.alignment="CENTER">
                <content>
-                  <AnchorPane fx:id="anchorBoard" prefHeight="1080.0" prefWidth="1623.0" styleClass="bodyBackground3" stylesheets="@../mainBoard.css" />
+                  <AnchorPane fx:id="anchorBoard" prefHeight="1080.0" prefWidth="1606.0" styleClass="bodyBackground3" stylesheets="@../mainBoard.css" />
                </content>
             </ScrollPane>
          </left>
@@ -79,7 +80,7 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="150.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints />
@@ -95,7 +96,7 @@
                         <TextField fx:id="goldField" editable="false" focusTraversable="false" onMouseEntered="#goldEntered" onMouseExited="#goldExited" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="dyesField" editable="false" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" styleClass="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                         <TextField fx:id="turnField" styleClass="clock123" GridPane.columnIndex="12" GridPane.rowIndex="2" />
-                        <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#backToMainMenuFromBoard" prefHeight="20.0" prefWidth="20.0" styleClass="exitButton" stylesheets="@../mainBoard.css" text="Quit" GridPane.rowIndex="2">
+                        <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="20.0" prefWidth="20.0" styleClass="exitButton" stylesheets="@../mainBoard.css" text="Quit" GridPane.rowIndex="2">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -124,6 +125,37 @@
       <TextFlow fx:id="ironTextFlow" layoutX="485.0" layoutY="40.0" onMouseEntered="#ironEntered" onMouseExited="#ironExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
       <TextFlow fx:id="horseTextFlow" layoutX="585.0" layoutY="40.0" onMouseEntered="#horseEntered" onMouseExited="#horseExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
       <TextFlow fx:id="dyesTextFlow" layoutX="685.0" layoutY="40.0" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
-      <TextFlow fx:id="descriptionTextFlow" layoutX="1374.0" layoutY="41.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" />
+      <TextFlow fx:id="descriptionTextFlow" layoutX="1359.0" layoutY="43.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="5.0" prefWidth="256.0" styleClass="bodyBackground5" visible="false" AnchorPane.rightAnchor="300.0" />
+      <AnchorPane fx:id="settingsPane" layoutX="6.0" layoutY="46.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1039.0" prefWidth="1941.0" styleClass="bodyBackground6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <BorderPane layoutX="-1.0999999046325684" layoutY="3.0" stylesheets="@../mainBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="600.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Music Volume" />
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Sounds Volume" GridPane.rowIndex="2" />
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#backToMainMenuFromBoard" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Exit Game" GridPane.rowIndex="5" />
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="mainMenuButton" stylesheets="@../menuStart.css" GridPane.rowIndex="1" />
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" GridPane.rowIndex="3" />
+                         <Slider fx:id="volumeSlider" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" styleClass="mainMenuButton" GridPane.rowIndex="1" />
+                         <Slider fx:id="soundSlider" styleClass="mainMenuButton" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onMouseClicked="#settingOff" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Return back to game" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

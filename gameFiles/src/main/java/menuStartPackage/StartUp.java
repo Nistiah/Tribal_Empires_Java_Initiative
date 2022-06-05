@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import menuStartPackage.FXMLControllers.MenuStartController;
 import menuStartPackage.player.Player;
@@ -33,6 +34,7 @@ public class StartUp extends Application {
         scene.setOnKeyPressed(MenuStartController::space);
         stage.setScene(scene);
         stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.show();
 
     }
