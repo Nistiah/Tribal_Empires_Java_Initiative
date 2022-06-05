@@ -1,5 +1,6 @@
 package menuStartPackage.Prowincje;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Province {
@@ -27,6 +28,7 @@ public class Province {
     private List<String> resources;
     private List<String> possibleBuildings;
     List<String>         baseBuildings;
+    public List<String>  builtBuildings = new ArrayList<>();
 
     public String iconPath() {
         return null;
@@ -34,6 +36,10 @@ public class Province {
 
     public void setBaseBuildings(List<String> baseBuildings) {
         this.baseBuildings = baseBuildings;
+    }
+
+    public List<String> getBaseBuildings() {
+        return baseBuildings;
     }
 
     public void setBaseProduction(String type) {
