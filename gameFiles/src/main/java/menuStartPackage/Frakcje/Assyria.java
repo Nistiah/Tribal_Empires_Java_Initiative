@@ -22,6 +22,6 @@ public class Assyria extends Fraction {
         setImprovements(improvements);
         setMilitaryUnit(militaryUnit);
         setKing(king);
-        description = " Assyria blablabla";
+        description = "The Assyrians are one of the major people to live in Mesopotamia. They live in northern Mesopotamia near the start of the Tigris and Euphrates Rivers. They are a warrior society where fighting is a part of life. It is how they survive.";
     }
 }
