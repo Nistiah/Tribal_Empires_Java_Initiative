@@ -727,6 +727,33 @@ public class MainBoardController implements Initializable {
         if(buyingMode)provinceUpperPanel.getChildren().add(by);
         if(colonizeInitialised)provinceUpperPanel.getChildren().add(by);
 
+        if(playerId != temp.getOwnerId() && !buyingMode)
+        {
+            if(Objects.equals(temphex.getProvince().getType(), "City")) {
+                //System.out.println("city = " + playerList.get(3).getCityList());
+                String provNameEnemy = "enemy city " + temp.getOwnerId();
+                Text provinceTypeTxt = new Text(provNameEnemy);
+                provinceTypeTxt.setFill(Paint.valueOf("GRAY"));
+                provinceTypeTxt.setFont(Font.font(font,24));
+                provinceType.getChildren().add(provinceTypeTxt);
+                provinceType.setTextAlignment(TextAlignment.CENTER);
+                provinceUpperPanel.getChildren().add(provinceType);
+
+                Button war = new Button("War");
+                war.setPrefWidth(150);
+                war.setTranslateY(75);
+                //war.getStyleClass().add("colonizeButton");
+                provinceUpperPanel.getChildren().add(war);
+
+                Button peace = new Button("Peace");
+                peace.setPrefWidth(145);
+                peace.setTranslateX(150);
+                peace.setTranslateY(75);
+                //war.getStyleClass().add("colonizeButton");
+                provinceUpperPanel.getChildren().add(peace);
+            }
+        }
+
         if(playerId == temp.getOwnerId() && !buyingMode){
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
