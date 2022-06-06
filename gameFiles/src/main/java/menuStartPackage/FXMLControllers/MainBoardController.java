@@ -226,7 +226,7 @@ public class MainBoardController implements Initializable {
         faithTextFlow.getChildren().add(baseProduction);
 
         for (City city : currentPlayer.getCityList()) {
-            if (city.getBelief() < 0) {
+            if (city.getBelief() <= 0) {
                 continue;
             }
 
@@ -806,27 +806,29 @@ public class MainBoardController implements Initializable {
             String provName = temphex.getProvince().getType();
             switch (provName)
             {
-                case "City": provName = "City";
+                case "City":
+                    City city = (City)temp;
+                    provName = city.getName();
                     break;
                 case "Coast": provName = "Coast";
                     break;
-                case "DesertFlat": provName = "Desert - Lowlands";
+                case "DesertFlat": provName = "Desert";
                     break;
-                case "DesertWyzyny": provName = "Desert - Highlands";
+                case "DesertWyzyny": provName = "Desert hills";
                     break;
-                case "ForestFlat": provName = "Forest - Lowlands";
+                case "ForestFlat": provName = "Forest";
                     break;
-                case "ForestWyzyny": provName = "Forest - Highlands";
+                case "ForestWyzyny": provName = "Forest hills";
                     break;
                 case "Mountains": provName = "Mountains";
                     break;
-                case "RiversideArea": provName = "Riverside Area";
+                case "RiversideArea": provName = "Riverside";
                     break;
                 case "Sea": provName = "Sea";
                     break;
-                case "TrawaFlat": provName = "Grass - Lowlands";
+                case "TrawaFlat": provName = "Grass";
                     break;
-                case "TrawaWyzyny": provName = "Grass - Highlands";
+                case "TrawaWyzyny": provName = "Grass hills";
                     break;
                 default: provName = "";
             }
