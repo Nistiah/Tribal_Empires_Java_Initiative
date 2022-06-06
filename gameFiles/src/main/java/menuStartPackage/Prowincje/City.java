@@ -40,6 +40,8 @@ public class City extends Province {
         setBaseBuildings(baseBuildings);
     }
 
+    ///TODO:tura wyswietla ie na hettytach a nie na egipcie counter increment
+
     public void assignProvince(Province province) {
         provincelist.add(province);
     }

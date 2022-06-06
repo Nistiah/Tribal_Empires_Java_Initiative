@@ -496,9 +496,25 @@
 .settingsButton2:hover{
 }
 
+.mainMenuButton {
+    -fx-background-radius: 200px;
+    -fx-background-color: rgba(2,0,36,0.80) ;
+    -fx-color: 	rgba(255,192,203,1);
+    -fx-border-radius: 800;
+    -fx-text-fill: rgba(255,192,203,1);
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 30;
+    -fx-padding: 10px 20px;
+    -fx-background-size: 100% 100%;
+}
+.mainMenuButton:hover{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: rgba(2,0,36,0.95) ;
+}
 
 .slider {
-    -slider-filled-track-color: pink ;
+    -fx-background-size: 100% 100%;
+    -fx-slider-filled-track-color: pink ;
 }
 .slider .thumb {
     -fx-background-color: pink ;
