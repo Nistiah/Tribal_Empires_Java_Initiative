@@ -236,17 +236,8 @@
 
 
 
-.settingsButton {
-    -fx-background-radius: 30px;
-    -fx-color: #474747;
-    -fx-opacity: 90%;
-    -fx-padding: 10px 20px;
-    -fx-text-align: center;
-    -fx-text-decoration: bold;
-    -fx-font-family: Manjari;
-    -fx-display: inline-block;
-    -fx-font-size: 22px;
-}
+
+
 .text-field {
     -fx-cursor: default;
 }
@@ -490,6 +481,21 @@
     -fx-text-fill: rgb(255, 255, 255);
     -fx-background-color: rgba(2,0,36,0.95) ;
 }
+
+.settingsButton2 {
+    -fx-background-radius: 200px;
+    -fx-background-color: rgba(2,0,36,0.80) ;
+    /*-fx-color: 	rgba(255,192,203,1);*/
+    -fx-border-radius: 800;
+    -fx-text-fill: grey;
+
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 30;
+    -fx-padding: 10px 20px;
+}
+.settingsButton2:hover{
+}
+
 
 .slider {
     -slider-filled-track-color: pink ;

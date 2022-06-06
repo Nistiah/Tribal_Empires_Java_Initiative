@@ -9,9 +9,6 @@ import java.net.URL;
 
 import java.util.*;
 
-import javafx.event.ActionEvent;
-
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +23,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -37,13 +36,11 @@ import javafx.scene.text.TextFlow;
 
 import javafx.stage.Stage;
 
-import static javafx.scene.input.KeyCode.*;
 import static javafx.scene.paint.Color.rgb;
 
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
-import menuStartPackage.Budynki.Building;
 import menuStartPackage.Prowincje.*;
 
 import menuStartPackage.player.Player;
@@ -66,6 +63,13 @@ public class MainBoardController implements Initializable {
     private final String         font                = "Manjaro";
     public Slider soundSlider;
     public Slider volumeSlider;
+
+    private String gameButtonSound = "gameButtonSound.wav";
+    private String hexagonSound = "hexagonSound.wav";
+    private String settingsButtonSound = "settingsButtonSound.wav";
+    private String nextPlayerButtonSound = "nextPlayerButtonSound.wav";
+
+
     int                          playerId            = 1;
     @FXML
     private TextField            turnField           = new TextField("dupa");
@@ -329,6 +333,13 @@ public class MainBoardController implements Initializable {
 
     @FXML
     void nextPlayerButton() throws URISyntaxException {
+
+        file        = new File(nextPlayerButtonSound);
+        media       = new Media(file.toURI().toString());
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         descriptionField.getChildren().clear();
         map.setNormalZoom();
         scrollPane.layout();
@@ -677,6 +688,8 @@ public class MainBoardController implements Initializable {
     }
 
     private void soundVolumeChange() {
+        mediaPlayer.setVolume(soundSlider.getValue()/100);
+        soundSlider.setSnapToTicks(true);
     }
 
     private void sliderVolumeChange() {
@@ -687,10 +700,24 @@ public class MainBoardController implements Initializable {
     @FXML
     AnchorPane settingsPane;
 
-    
+    static Media media;
+    static MediaPlayer   mediaPlayer;
+    static File          file;
+
     boolean visible = false;
     @FXML
     void openSettings() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        file        = new File(gameButtonSound);
+        media       = new Media(file.toURI().toString());
+        mediaPlayer=null;
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
         visible=!visible;
         settingsPane.setVisible(visible);
     }
@@ -701,6 +728,8 @@ public class MainBoardController implements Initializable {
     }
 
     void hexClick(Hexagon temphex, Province temp){
+
+
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
         provinceType.getChildren().clear();
@@ -728,6 +757,18 @@ public class MainBoardController implements Initializable {
         if(colonizeInitialised)provinceUpperPanel.getChildren().add(by);
 
         if(playerId == temp.getOwnerId() && !buyingMode){
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            file        = new File(hexagonSound);
+            media       = new Media(file.toURI().toString());
+            mediaPlayer = null;
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.play();
+
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
                 provinceUpperPanel.getChildren().add(colonize);
@@ -1062,7 +1103,34 @@ public class MainBoardController implements Initializable {
 
     int iColonize, jColonize;
 
+    @FXML
+    void settingsButtonSound() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        file        = new File(settingsButtonSound);
+        media       = new Media(file.toURI().toString());
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+    }
+
     private void colonize(int iFrom, int jFrom) {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        file        = new File(gameButtonSound);
+        media       = new Media(file.toURI().toString());
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
         if(buyInitialised){
             buyClicked();
             cityCoordinatesLock=false;
@@ -1163,6 +1231,20 @@ public class MainBoardController implements Initializable {
 
 
     private void buyField(Hexagon tempname) {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        file        = new File(gameButtonSound);
+        media       = new Media(file.toURI().toString());
+        mediaPlayer = null;
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
+
 //        System.out.println("otwarcie" + cityCoordinatesLock);
         if (colonizeInitialised) {
             colonizeInitialised=false;
