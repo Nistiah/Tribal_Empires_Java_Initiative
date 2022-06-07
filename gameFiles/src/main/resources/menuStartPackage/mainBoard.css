@@ -655,3 +655,6 @@
 .slider .thumb:hover{
     -fx-background-color: white ;
 }
+.scrollPanePanel{
+    -fx-background: rgb(2,0,36,1);
+}
