@@ -219,7 +219,7 @@ public class MainBoardController implements Initializable {
     void faithEntered() {
         faithTextFlow.setVisible(true);
 
-        Text baseProduction = new Text("Base dyes production " + Player.baseBeliefProduction + "\n");
+        Text baseProduction = new Text("Base faith production " + Player.baseBeliefProduction + "\n");
 
         baseProduction.setFont(Font.font(font, 18));
         baseProduction.setFill(Color.GREY);
