@@ -7,10 +7,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-//import static menuStartPackage.FXMLControllers.MainBoardController.
-
-import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -20,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
@@ -55,7 +50,6 @@ public class StatsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
     }
@@ -118,9 +112,6 @@ public class StatsController implements Initializable {
             series6.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
             i++;
         }
-
-
-
 
         chart2.setTitle("Cities per Turn");
         chart1.setTitle("Gold Per Turn");

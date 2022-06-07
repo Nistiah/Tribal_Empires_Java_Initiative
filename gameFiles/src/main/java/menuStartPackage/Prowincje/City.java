@@ -90,7 +90,7 @@ public class City extends Province {
     public String getCityName(int playerId) {
         switch (playerId) {
         case 1 :
-            if (cityNamesEgyptCounter > 7) {
+            if (cityNamesEgyptCounter >= 7) {
                 cityNamesEgyptCounter++;
                 return "New " + cityNamesEgypt[cityNamesEgyptCounter - 7 - 1];
             }
@@ -98,7 +98,7 @@ public class City extends Province {
             return cityNamesEgypt[cityNamesEgyptCounter - 1];
 
         case 2 :
-            if (cityNamesHittitesCounter > 7) {
+            if (cityNamesHittitesCounter >= 7) {
                 cityNamesHittitesCounter++;
                 return "New " + cityNamesHittites[cityNamesHittitesCounter - 7 - 1];
             }
@@ -106,7 +106,7 @@ public class City extends Province {
             return cityNamesHittites[cityNamesHittitesCounter - 1];
 
         case 3 :
-            if (cityNamesAssyriaCounter > 7) {
+            if (cityNamesAssyriaCounter >= 7) {
                 cityNamesAssyriaCounter++;
                 return "New " + cityNamesAssyria[cityNamesAssyriaCounter - 7 - 1];
             }

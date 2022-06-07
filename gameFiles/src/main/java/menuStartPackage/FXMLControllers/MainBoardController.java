@@ -171,7 +171,7 @@ public class MainBoardController implements Initializable {
     void popPanelEntered(City city){
         popPanel.getChildren().clear();
 
-        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost+"\nFood production ");
+        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost*city.popGrowthCostMultiplier+"\nFood production ");
         Text foodProduction = new Text(""+city.getFoodBeforePop());
         Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
         Text foodConsumption = new Text(""+city.getPopulation());
@@ -401,15 +401,12 @@ public class MainBoardController implements Initializable {
         scrollPane.layout();
         provinceLowerPanel.getChildren().clear();
         provinceUpperPanel.getChildren().clear();
-        turnField.setText("Turn: " + tourCounter.getTour());
         currentPlayer = playerList.get(playerId - 1);
 
         if (tourCounter.getTour() == 0) {    // /stats pane regulator
             PlayerData tmp = new PlayerData(currentPlayer.getName());
-
             tmp.addInfo(currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
             addPlayer(tmp);
-            System.out.println(playerId + " " + currentPlayer.getName());
         } else {
             playerStats.get(playerId - 1).addInfo(currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
         }
@@ -418,6 +415,7 @@ public class MainBoardController implements Initializable {
 
         if (playerId == playerList.size() + 1) {
             tourCounter.incrementTour();
+            turnField.setText("Turn: " + tourCounter.getTour());
             playerId = 1;
             for (Player player : playerList) {
                 player.resourcesTourIncrease();
@@ -842,7 +840,6 @@ public class MainBoardController implements Initializable {
         if(playerId != temp.getOwnerId() && !buyingMode)
         {
             if(Objects.equals(temphex.getProvince().getType(), "City")) {
-                //System.out.println("city = " + playerList.get(3).getCityList());
                 String provNameEnemy = "";
                 City city = (City)temp;
                 provNameEnemy = city.getName();
@@ -1216,7 +1213,6 @@ public class MainBoardController implements Initializable {
     
 
     private void shortcuts(KeyEvent event) {
-//        System.out.println(event.getCode());
         switch(event.getCode()){
             case SUBTRACT:
                 map.sizeDown();
@@ -1304,7 +1300,6 @@ public class MainBoardController implements Initializable {
         }
 
         if(!colonizeInitialised) {
-            System.out.println("niecolo " + iFrom + " " + jFrom);
             for (int tempI = iFrom - 6; tempI < iFrom + 7; tempI++) {
                 for (int tempJ = jFrom - 6; tempJ < jFrom + 7; tempJ++) {
                     if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
@@ -1321,13 +1316,12 @@ public class MainBoardController implements Initializable {
             jColonize=jFrom;
             colonizeInitialised=true;
         }else{
-            System.out.println("takcolo " + iFrom + " vs " + iColonize+"|||" + jFrom+" vs "+jColonize);
             if(iFrom!=iColonize||jFrom!=jColonize) {
-                System.out.println("pass");
+
                 if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
-                    System.out.println("pass");
+
                     if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
-                        System.out.println("pass");
+
 
                         City temp = new City(currentPlayer.id);
                         temp.setOwnerId(currentPlayer.id);
@@ -1440,7 +1434,6 @@ public class MainBoardController implements Initializable {
                     }
                 }
             }
-//            System.out.println("trzy" + cityCoordinatesLock);
             return;
         }
 
@@ -1469,14 +1462,11 @@ public class MainBoardController implements Initializable {
             }
         }
         if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
-//            System.out.println("cztery");
             cityCoordinatesLock = false;
             buyingMode=false;
             fullMapBorderCleaning();
             return;
         }
-
-
 
         map.getHexagon(i, j).getProvince().setOwnerId(ownerId);
         City temoCity = (City)map.getHexagon(initialisedI, initialisedJ).getProvince();
@@ -1529,7 +1519,5 @@ public class MainBoardController implements Initializable {
                 }
             }
         }
-//        System.out.println("piec");
     }
-
 }
