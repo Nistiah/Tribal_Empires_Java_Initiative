@@ -20,7 +20,7 @@ public class StartUp extends Application {
     public static MusicPlayer musicPlayerInstance = new MusicPlayer();
     Parent root;
     public void initializeMusic() {
-        musicPlayerInstance.start();
+        musicPlayerInstance.startUpmusic();
     }
     public Scene scene;
     @Override

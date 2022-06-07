@@ -39,7 +39,7 @@
                         </TextFlow>
                      </children>
                   </GridPane>
-                  <SplitPane id="rightBar" dividerPositions="0.1349206349206349" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="split-pane2">
+                  <SplitPane id="rightBar" dividerPositions="0.4" maxWidth="300.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="300.0" styleClass="split-pane2">
                      <items>
                         <AnchorPane fx:id="provinceUpperPanel" minHeight="0.0" minWidth="0.0" prefHeight="459.0" prefWidth="300.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css" />
                         <AnchorPane fx:id="provinceLowerPanel" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bodyBackground4" stylesheets="@../mainBoard.css">
@@ -145,8 +145,8 @@
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#backToMainMenuFromBoard" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Exit Game" GridPane.rowIndex="6" />
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="mainMenuButton" GridPane.rowIndex="1" />
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="mainMenuButton" GridPane.rowIndex="3" />
-                         <Slider fx:id="volumeSlider" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" styleClass="mainMenuButton" GridPane.rowIndex="1" />
-                         <Slider fx:id="soundSlider" styleClass="mainMenuButton" GridPane.rowIndex="3" />
+                         <Slider fx:id="volumeSlider" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="1" />
+                         <Slider fx:id="soundSlider" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="3" />
                         <Button mnemonicParsing="false" onMouseClicked="#settingOff" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Return back to game" GridPane.rowIndex="5" />
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Keyboard Shortcuts" GridPane.rowIndex="4" />
                      </children>

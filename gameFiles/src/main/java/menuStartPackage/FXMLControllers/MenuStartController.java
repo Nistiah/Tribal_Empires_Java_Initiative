@@ -95,7 +95,6 @@ public class MenuStartController implements Initializable {
 
     @FXML
     void quit(ActionEvent event) {
-        musicPlayerInstance.killthread = true;
         musicPlayerInstance.stopMusic();    // for interupt within
         Platform.exit();
     }

@@ -334,11 +334,7 @@ public class MainBoardController implements Initializable {
     @FXML
     void nextPlayerButton() throws URISyntaxException {
 
-        file        = new File(nextPlayerButtonSound);
-        media       = new Media(file.toURI().toString());
-        mediaPlayer = null;
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        soundPlayerPlaySound(nextPlayerButtonSound);
 
         descriptionField.getChildren().clear();
         map.setNormalZoom();
@@ -539,6 +535,8 @@ public class MainBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
         playerList.add(player1);
         player1.id=1;
         playerList.add(player2);
@@ -685,14 +683,16 @@ public class MainBoardController implements Initializable {
 
     }
 
+    private double soundVolume = 0.5;  //initial sound volume
+    private double musicVolume = 0.5;
+
     private void soundVolumeChange() {
-        mediaPlayer.setVolume(soundSlider.getValue()/100);
-        soundSlider.setSnapToTicks(true);
+        soundVolume=soundSlider.getValue()/100;
     }
 
     private void sliderVolumeChange() {
-        musicPlayerInstance.setVolumeAbsolute(volumeSlider.getValue());
-        volumeSlider.setSnapToTicks(true);
+        musicVolume=volumeSlider.getValue()/100;
+        musicPlayerInstance.setVolumeAbsolute(musicVolume);
     }
 
     @FXML
@@ -705,17 +705,8 @@ public class MainBoardController implements Initializable {
     boolean visible = false;
     @FXML
     void openSettings() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        soundPlayerPlaySound(gameButtonSound);
 
-        file        = new File(gameButtonSound);
-        media       = new Media(file.toURI().toString());
-        mediaPlayer=null;
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
         visible=!visible;
         settingsPane.setVisible(visible);
     }
@@ -782,17 +773,8 @@ public class MainBoardController implements Initializable {
         }
 
         if(playerId == temp.getOwnerId() && !buyingMode){
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
-            file        = new File(hexagonSound);
-            media       = new Media(file.toURI().toString());
-            mediaPlayer = null;
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.play();
+            soundPlayerPlaySound(hexagonSound);
 
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
@@ -1130,33 +1112,26 @@ public class MainBoardController implements Initializable {
 
     int iColonize, jColonize;
 
-    @FXML
-    void settingsButtonSound() {
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    boolean soundPlayed = false;
 
-        file        = new File(settingsButtonSound);
-        media       = new Media(file.toURI().toString());
-        mediaPlayer = null;
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+
+    void soundPlayerPlaySound(String filename) {
+        if(!soundPlayed) {
+            soundPlayed=true;
+            file = new File(filename);
+            media = new Media(file.toURI().toString());
+            mediaPlayer = null;
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setVolume(soundVolume);
+            mediaPlayer.play();
+            mediaPlayer.setOnEndOfMedia(()->{soundPlayed=false;});
+
+        }
     }
 
     private void colonize(int iFrom, int jFrom) {
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        file        = new File(gameButtonSound);
-        media       = new Media(file.toURI().toString());
-        mediaPlayer = null;
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        soundPlayerPlaySound(gameButtonSound);
 
         if(buyInitialised){
             buyClicked();
@@ -1258,19 +1233,8 @@ public class MainBoardController implements Initializable {
 
 
     private void buyField(Hexagon tempname) {
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-
-        file        = new File(gameButtonSound);
-        media       = new Media(file.toURI().toString());
-        mediaPlayer = null;
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
-
+        soundPlayerPlaySound(gameButtonSound);
 
 //        System.out.println("otwarcie" + cityCoordinatesLock);
         if (colonizeInitialised) {
