@@ -58,21 +58,21 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 //progamowanie reaktywne - zmiana zmiennej -> zdarzenie
 //ownerId 0 -nikt
 public class MainBoardController implements Initializable {
-    public Vector<Player> playerList = new Vector<>();
+    public static Vector<Player> playerList = new Vector<>();
     private static HexagonMap    map;
     private final String         font                = "Manjaro";
     public Slider soundSlider;
     public Slider volumeSlider;
 
-    private String gameButtonSound = "gameButtonSound.wav";
-    private String hexagonSound = "hexagonSound.wav";
-    private String settingsButtonSound = "settingsButtonSound.wav";
-    private String nextPlayerButtonSound = "nextPlayerButtonSound.wav";
+    private final String gameButtonSound = "gameButtonSound.wav";
+    private final String hexagonSound = "hexagonSound.wav";
+    private final String settingsButtonSound = "settingsButtonSound.wav";
+    private final String nextPlayerButtonSound = "nextPlayerButtonSound.wav";
 
 
     int                          playerId            = 1;
     @FXML
-    private TextField            turnField           = new TextField("dupa");
+    private TextField            turnField           = new TextField("next turn");
     @FXML
     private TextFlow             descriptionField    = new TextFlow();
     @FXML
@@ -548,9 +548,7 @@ public class MainBoardController implements Initializable {
         scrollPane.setVvalue(0.5975);
         scrollPane.setHvalue(0);
 
-        mainAnchorPane.setOnKeyPressed((event)-> {
-            shortcuts(event);
-        });
+        mainAnchorPane.setOnKeyPressed(this::shortcuts);
 
         currentPlayer = playerList.get(1);
 
