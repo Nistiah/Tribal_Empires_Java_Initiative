@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Province {
+    public boolean       isCity = false;
     protected int        gold   = 0;
     protected int        belief = 0;
     protected int        food   = 0;

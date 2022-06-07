@@ -132,6 +132,7 @@
       <TextFlow fx:id="horseTextFlow" layoutX="585.0" layoutY="40.0" onMouseEntered="#horseEntered" onMouseExited="#horseExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" AnchorPane.topAnchor="40.0" />
       <TextFlow fx:id="dyesTextFlow" layoutX="685.0" layoutY="40.0" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" AnchorPane.topAnchor="40.0" />
       <TextFlow fx:id="descriptionTextFlow" layoutX="1359.0" layoutY="43.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="5.0" prefWidth="256.0" styleClass="bodyBackground5" visible="false" AnchorPane.rightAnchor="294.0" />
+      <TextFlow fx:id="popPanel" layoutX="1369.0" layoutY="196.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="5.0" prefWidth="253.0" styleClass="bodyBackground5" visible="false" AnchorPane.leftAnchor="1200.0" AnchorPane.rightAnchor="295.0" />
       <AnchorPane fx:id="settingsPane" layoutX="6.0" layoutY="46.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="1039.0" prefWidth="1941.0" styleClass="bodyBackground6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
             <BorderPane layoutX="-1.0999999046325684" layoutY="3.0" stylesheets="@../mainBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
