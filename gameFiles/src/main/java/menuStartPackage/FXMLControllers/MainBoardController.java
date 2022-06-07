@@ -774,7 +774,9 @@ public class MainBoardController implements Initializable {
         {
             if(Objects.equals(temphex.getProvince().getType(), "City")) {
                 //System.out.println("city = " + playerList.get(3).getCityList());
-                String provNameEnemy = "enemy city " + temp.getOwnerId();
+                String provNameEnemy = "";
+                City city = (City)temp;
+                provNameEnemy = city.getName();
                 Text provinceTypeTxt = new Text(provNameEnemy);
                 provinceTypeTxt.setFill(Paint.valueOf("GRAY"));
                 provinceTypeTxt.setFont(Font.font(font,24));
