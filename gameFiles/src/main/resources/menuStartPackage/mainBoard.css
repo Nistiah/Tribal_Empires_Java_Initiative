@@ -238,6 +238,21 @@
     -fx-text-decoration: bold;
     -fx-text-fill: grey;
 }
+.nextSong{
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-font-family: Manjari;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+    -fx-font-size:15px;
+}
+.nextSong:hover{
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+
+}
+
+
 
 .split-pane:vertical > .split-pane-divider {
     /*-fx-background-color: rgb(2,0,36,1); maybe?*/

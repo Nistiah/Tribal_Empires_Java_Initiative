@@ -7,14 +7,15 @@ import javafx.scene.media.MediaPlayer;
 
 public class MusicPlayer{
     public static MediaPlayer mediaPlayer;
-    private String             songName   = "";
+    private String            songName   = "";
     public boolean            menu       = true;
     public boolean            exit       = false;
-    private String[]           songs      = { "bacchanale.mp3", "EgyptianMarch.mp3", "TurtleBeach.mp3" };
+    private String[]          songs      = { "Bacchanale.mp3", "EgyptianMarch.mp3", "Africa.mp3", "Aida.mp3", "PolovetsianDances.mp3", "Sardar.mp3"};
     public double             volume     = 0.5;
     private Media             media;
     private File              file;
-
+    private int               lastChoice    = -1;
+    private int               currentNumber = -1;
 
     public void startUpmusic() {
             if (menu) {
@@ -24,7 +25,11 @@ public class MusicPlayer{
             exit     = false;
             menu     = true;
             } else {
-            songName = songs[(int) (3 * Math.random())];
+                while (currentNumber==lastChoice) {
+                    currentNumber=(int) (songs.length * Math.random());
+                }
+                lastChoice=currentNumber;
+                songName = songs[currentNumber];
             }
 
             file = new File(songName);
@@ -52,5 +57,6 @@ public class MusicPlayer{
 
     public void setVolumeAbsolute(double value) {
         volume=value;
+        mediaPlayer.setVolume(volume);
     }
 }

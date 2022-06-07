@@ -219,7 +219,7 @@ public class MainBoardController implements Initializable {
     void faithEntered() {
         faithTextFlow.setVisible(true);
 
-        Text baseProduction = new Text("Base dyes production " + Player.baseBeliefProduction + "\n");
+        Text baseProduction = new Text("Base faith production " + Player.baseBeliefProduction + "\n");
 
         baseProduction.setFont(Font.font(font, 18));
         baseProduction.setFill(Color.GREY);
@@ -558,6 +558,8 @@ public class MainBoardController implements Initializable {
         ironTextFlow.setTextAlignment(TextAlignment.CENTER);
         horseTextFlow.setTextAlignment(TextAlignment.CENTER);
         dyesTextFlow.setTextAlignment(TextAlignment.CENTER);
+
+        nextSong.setText("next song ->");
 
 
         volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
@@ -1091,6 +1093,16 @@ public class MainBoardController implements Initializable {
 
         }
     }
+
+
+    @FXML
+    private TextField nextSong;
+    @FXML
+    void nextSong() {
+        musicPlayerInstance.stopMusic();
+    }
+
+
 
     @FXML
     void backToMainMenuFromBoard(MouseEvent event) {
