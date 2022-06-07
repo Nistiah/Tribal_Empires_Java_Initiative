@@ -713,11 +713,6 @@ public class MainBoardController implements Initializable {
         settingsPane.setVisible(visible);
     }
 
-    @FXML
-    void settingOff(MouseEvent event) {
-        settingsPane.setVisible(false);
-    }
-
     void hexClick(Hexagon temphex, Province temp){
 
 

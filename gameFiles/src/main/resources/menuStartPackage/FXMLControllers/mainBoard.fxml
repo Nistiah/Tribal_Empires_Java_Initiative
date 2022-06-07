@@ -152,7 +152,7 @@
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="mainMenuButton" GridPane.rowIndex="3" />
                          <Slider fx:id="volumeSlider" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="1" />
                          <Slider fx:id="soundSlider" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="3" />
-                        <Button mnemonicParsing="false" onMouseClicked="#settingOff" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Return back to game" GridPane.rowIndex="5" />
+                        <Button mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Return back to game" GridPane.rowIndex="5" />
                         <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Keyboard Shortcuts" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>

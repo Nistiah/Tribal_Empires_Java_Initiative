@@ -39,7 +39,6 @@ public class MusicPlayer{
             mediaPlayer.setVolume(volume);
             mediaPlayer.play();
 
-            System.out.println(mediaPlayer.getStatus());
             mediaPlayer.setOnEndOfMedia(()->{
                 startUpmusic();
             });
