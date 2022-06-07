@@ -171,17 +171,43 @@ public class MainBoardController implements Initializable {
     void popPanelEntered(City city){
         popPanel.getChildren().clear();
 
+        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost+"\nFood production ");
+        Text foodProduction = new Text(""+city.getFoodBeforePop());
+        Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
+        Text foodConsumption = new Text(""+city.getPopulation());
+        Text netGainNotNumber = new Text("\nFood net gain ");
+        Text netGain = new Text(""+city.getFood());
+
+        cityPop.setFont(Font.font(font, 18));
+        cityPop.setFill(Color.GREY);
+        cityPop.setTextAlignment(TextAlignment.CENTER);
+
+        foodProduction.setFont(Font.font(font, 18));
+        foodProduction.setFill(Color.GREEN);
+        foodProduction.setTextAlignment(TextAlignment.CENTER);
+
+        foodConsumptionNotNumber.setFont(Font.font(font, 18));
+        foodConsumptionNotNumber.setFill(Color.GREY);
+        foodConsumptionNotNumber.setTextAlignment(TextAlignment.CENTER);
+
+        foodConsumption.setFont(Font.font(font, 18));
+        foodConsumption.setFill(Color.RED);
+        foodConsumption.setTextAlignment(TextAlignment.CENTER);
+
+        netGainNotNumber.setFont(Font.font(font, 18));
+        netGainNotNumber.setFill(Color.GREY);
+        netGainNotNumber.setTextAlignment(TextAlignment.CENTER);
+
+        netGain.setFont(Font.font(font, 18));
+        if(city.getFood()==0) {
+            netGain.setFill(Color.GREY);
+        }else{
+            netGain.setFill(Color.GREEN);
+        }
+        netGain.setTextAlignment(TextAlignment.CENTER);
 
 
-        Text description = new Text("City population "+ city.getPopulation()
-                +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost
-                +"\nFood production "+city.getFoodBeforePop()
-                +"\nFood consumption by population "+city.getPopulation()
-                +"\nFood net gain "+city.getFood());
-        description.setFont(Font.font(font, 18));
-        description.setFill(Color.GREY);
-//        description.setTextAlignment(TextAlignment.CENTER);
-        popPanel.getChildren().add(description);
+        popPanel.getChildren().addAll(cityPop,foodProduction,foodConsumptionNotNumber,foodConsumption,netGainNotNumber,netGain);
         popPanel.setTextAlignment(TextAlignment.CENTER);
         popPanel.setVisible(true);
 
@@ -888,15 +914,6 @@ public class MainBoardController implements Initializable {
                 default: provName = "";
             }
             String foodInCity = "food";
-            int pop = -1;
-            if(temphex.getProvince().isCity) {
-                City tempCity = (City) temphex.getProvince();
-                foodInCity = "produced " + tempCity.getFoodBeforePop() + "consumed " + tempCity.getPopulation() +"\nstack " +tempCity.currentPopGrowth +" cost" + tempCity.popGrowthCost*tempCity.popGrowthCostMultiplier;
-                pop=tempCity.getPopulation();
-
-
-            }
-
             Text provinceType2 = new Text(provName);
             provinceType.getChildren().add(provinceType2);
             provinceType.setTextAlignment(TextAlignment.CENTER);
@@ -910,6 +927,7 @@ public class MainBoardController implements Initializable {
             int wood = temphex.getProvince().getWood();
             int gold = temphex.getProvince().getGold();
             int food = temphex.getProvince().getFood();
+            int pop  = temphex.getProvince().getPop();
 
             Text textOnProd = new Text();
             //GOLD
@@ -1216,6 +1234,14 @@ public class MainBoardController implements Initializable {
                     e.printStackTrace();
                 }
                 break;
+            case X:
+                currentPlayer.setFaith(500);
+                currentPlayer.setGold(500);
+                currentPlayer.setBuildingResources(500);
+                currentPlayer.setBronze(500);
+                currentPlayer.setIron(500);
+                currentPlayer.setHorses(500);
+                currentPlayer.setDyes(500);
 
 
         }

@@ -26,6 +26,11 @@ public class City extends Province {
                                                            "Temple",
                                                            "Warehouse");
 
+    @Override
+    public int getPop(){
+        return population;
+    }
+
 
     private Vector<Province> provincelist = new Vector<>();
     private final String[]   cityNamesAssyria  = {
