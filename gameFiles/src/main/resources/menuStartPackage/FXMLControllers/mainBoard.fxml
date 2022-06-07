@@ -98,6 +98,11 @@
                            </font>
                         </Button>
                         <TextField fx:id="textField" promptText="coord" styleClass="button1" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                        <TextField fx:id="nextSong" editable="false" onMouseClicked="#nextSong" styleClass="nextSong" GridPane.columnIndex="11" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </GridPane>
                </children>

@@ -559,6 +559,8 @@ public class MainBoardController implements Initializable {
         horseTextFlow.setTextAlignment(TextAlignment.CENTER);
         dyesTextFlow.setTextAlignment(TextAlignment.CENTER);
 
+        nextSong.setText("next song ->");
+
 
         volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
         volumeSlider.setOnDragDone(event -> sliderVolumeChange());
@@ -1091,6 +1093,16 @@ public class MainBoardController implements Initializable {
 
         }
     }
+
+
+    @FXML
+    private TextField nextSong;
+    @FXML
+    void nextSong() {
+        musicPlayerInstance.stopMusic();
+    }
+
+
 
     @FXML
     void backToMainMenuFromBoard(MouseEvent event) {
