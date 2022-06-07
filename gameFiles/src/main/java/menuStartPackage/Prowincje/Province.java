@@ -25,6 +25,10 @@ public class Province {
         this.j = j;
     }
 
+    public int getPop(){
+        return -1;
+    }
+
     private int          j;
     protected int        ownerId;
     private String       type;
