@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -730,18 +731,18 @@ public class MainBoardController implements Initializable {
         });
 
         colonize.setPrefWidth(200);
-        colonize.setTranslateY(75);
+        colonize.setTranslateY(95);
         colonize.setTranslateX(20);
         colonize.getStyleClass().add("colonizeButton");
 
         by.setPrefWidth(205);
         by.setTranslateX(20);
-        by.setTranslateY(135);
+        by.setTranslateY(155);
         by.getStyleClass().add("colonizeButton");
 
         fieldWithFaith.setPrefWidth(205);
         fieldWithFaith.setTranslateX(20);
-        fieldWithFaith.setTranslateY(195);
+        fieldWithFaith.setTranslateY(215);
         fieldWithFaith.getStyleClass().add("colonizeButton");
 
         Button unit1 = new Button("recruit unit 1");
@@ -750,22 +751,24 @@ public class MainBoardController implements Initializable {
 
         unit1.setPrefWidth(205);
         unit1.setTranslateX(20);
-        unit1.setTranslateY(255);
+        unit1.setTranslateY(275);
         unit1.getStyleClass().add("colonizeButton");
 
         unit2.setPrefWidth(205);
         unit2.setTranslateX(20);
-        unit2.setTranslateY(315);
+        unit2.setTranslateY(335);
         unit2.getStyleClass().add("colonizeButton");
 
         unit3.setPrefWidth(205);
         unit3.setTranslateX(20);
-        unit3.setTranslateY(375);
+        unit3.setTranslateY(395);
         unit3.getStyleClass().add("colonizeButton");
 
 
         if(buyingMode)provinceUpperPanel.getChildren().add(by);
         if(colonizeInitialised)provinceUpperPanel.getChildren().add(by);
+
+        int resourcesHeight = 40;
 
         if(playerId != temp.getOwnerId() && !buyingMode)
         {
@@ -800,6 +803,7 @@ public class MainBoardController implements Initializable {
 
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
+                resourcesHeight = 60;
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceUpperPanel.getChildren().add(by);
                 provinceUpperPanel.getChildren().add(fieldWithFaith);
@@ -856,7 +860,7 @@ public class MainBoardController implements Initializable {
             //GOLD
             TextField goldProduction = new TextField(String.valueOf(gold));
             goldProduction.getStyleClass().add("provincePanelGold");
-            goldProduction.setTranslateY(40);
+            goldProduction.setTranslateY(resourcesHeight);
             goldProduction.setTranslateX(50);
             goldProduction.setFont(Font.font(font,16));
             goldProduction.setPrefWidth(50);
@@ -872,7 +876,7 @@ public class MainBoardController implements Initializable {
                 }
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 35);
-                textOnProd.setY(y + 20);
+                textOnProd.setY(y + 40);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
                 provinceUpperPanel.getChildren().add(textOnProd);
             });
@@ -881,7 +885,7 @@ public class MainBoardController implements Initializable {
             //FOOD
             TextField foodProduction = new TextField(String.valueOf(food));
             foodProduction.getStyleClass().add("provincePanelFood");
-            foodProduction.setTranslateY(40);
+            foodProduction.setTranslateY(resourcesHeight);
             foodProduction.setTranslateX(100);
             foodProduction.setFont(Font.font(font,16));
             foodProduction.setPrefWidth(50);
@@ -897,16 +901,16 @@ public class MainBoardController implements Initializable {
                 }
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 85);
-                textOnProd.setY(y + 20);
+                textOnProd.setY(y + 40);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
                 provinceUpperPanel.getChildren().add(textOnProd);
             });
             foodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
-            //WOOD
+            //BUILDING RESOURCES
             TextField woodProduction = new TextField(String.valueOf(wood));
             woodProduction.getStyleClass().add("provincePanelWood");
-            woodProduction.setTranslateY(40);
+            woodProduction.setTranslateY(resourcesHeight);
             woodProduction.setTranslateX(150);
             woodProduction.setFont(Font.font(font,16));
             woodProduction.setPrefWidth(50);
@@ -918,11 +922,11 @@ public class MainBoardController implements Initializable {
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
                 if(goldProduction.contains(x,y)){
-                    sb.append("wood");
+                    sb.append("building resources");
                 }
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 135);
-                textOnProd.setY(y + 20);
+                textOnProd.setY(y + 40);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
                 provinceUpperPanel.getChildren().add(textOnProd);
             });
@@ -931,7 +935,7 @@ public class MainBoardController implements Initializable {
             //BELIEF
             TextField beliefProduction = new TextField(String.valueOf(belief));
             beliefProduction.getStyleClass().add("provincePanelFaith");
-            beliefProduction.setTranslateY(40);
+            beliefProduction.setTranslateY(resourcesHeight);
             beliefProduction.setTranslateX(200);
             beliefProduction.setFont(Font.font(font,16));
             beliefProduction.setPrefWidth(50);
@@ -947,16 +951,44 @@ public class MainBoardController implements Initializable {
                 }
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 185);
-                textOnProd.setY(y + 20);
+                textOnProd.setY(y + 40);
                 textOnProd.setFill(Paint.valueOf("GRAY"));
                 provinceUpperPanel.getChildren().add(textOnProd);
             });
             beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
+            //POPULATION
+            TextField population = new TextField(String.valueOf(belief));
+            population.getStyleClass().add("provincePanelPopulation");
+            population.setTranslateY(35);
+            population.setTranslateX(125);
+            population.setFont(Font.font(font,16));
+            population.setPrefWidth(50);
+            population.setEditable(false);
+            population.setAlignment(Pos.BOTTOM_RIGHT);
+
+            population.setOnMouseMoved(e -> {
+                provinceUpperPanel.getChildren().remove(textOnProd);
+                double x = e.getX();
+                double y = e.getY();
+                StringBuilder sb = new StringBuilder();
+                if(goldProduction.contains(x,y)){
+                    sb.append("population");
+                }
+                textOnProd.setText(sb.toString());
+                textOnProd.setX(x + 125);
+                textOnProd.setY(y + 20);
+                textOnProd.setFill(Paint.valueOf("GRAY"));
+                provinceUpperPanel.getChildren().add(textOnProd);
+            });
+            population.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+
             provinceUpperPanel.getChildren().add(goldProduction);
             provinceUpperPanel.getChildren().add(foodProduction);
             provinceUpperPanel.getChildren().add(woodProduction);
             provinceUpperPanel.getChildren().add(beliefProduction);
+            if(Objects.equals(temphex.getProvince().getType(),"City"))provinceUpperPanel.getChildren().add(population);
+
 
             final int[] resourcesOffset = {(int) beliefProduction.getLayoutBounds().getHeight() + 70};
             //possible resources

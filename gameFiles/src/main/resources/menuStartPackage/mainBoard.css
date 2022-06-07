@@ -376,8 +376,8 @@
     -fx-text-fill: pink;
 }
 .provincePanelWood{
-    -fx-background-image:url('wood.png');
-    -fx-background-size: 45% 60%;
+    -fx-background-image:url('buildingResources.png');
+    -fx-background-size: 55% 60%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
     -fx-background-color: rgb(2,0,36,1);
@@ -400,6 +400,16 @@
     -fx-background-size: 45% 60%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.provincePanelPopulation{
+    -fx-background-image:url('population.png');
+    -fx-background-size: 50% 90%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0px -6px;
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center-right;
     -fx-text-decoration: bold;
