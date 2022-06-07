@@ -10,15 +10,23 @@ public class City extends Province {
     public static int    cityNamesAssyriaCounter  = 0;
     public static int    cityNamesEgyptCounter    = 0;
     public static int    cityNamesHittitesCounter = 0;
+
+    private int          population               = 1;
+    public double       popGrowthCostMultiplier  = 1;
+    public double        popGrowthCost            = 5;
+    public double        currentPopGrowth         = 0;
+    private final double popGrowthScaler          = 1.1;
+
     private List<String> resources                = List.of();
     private String       type                     = "City";
     private List<String> possibleBuildings        = List.of();
-    private List<String> baseBuildings     = Arrays.asList("Residential District",
+    private List<String> baseBuildings            = Arrays.asList("Residential District",
                                                            "Market",
                                                            "Barracks",
                                                            "Temple",
                                                            "Warehouse");
- 
+
+
     private Vector<Province> provincelist = new Vector<>();
     private final String[]   cityNamesAssyria  = {
         "Ashur", "Nineveh", "Dur Sharrukin", "Babylon", "Susa", "Haran", "Calah"
@@ -31,8 +39,21 @@ public class City extends Province {
     };
     private String           name              = "";
 
+    public void populationGrowth(){
+        currentPopGrowth+=getFood();
+        if(currentPopGrowth>=popGrowthCost*popGrowthCostMultiplier){
+            currentPopGrowth-=popGrowthCost;
+            population++;
+            popGrowthCost=popGrowthCost*popGrowthScaler;
+        }
+    }
+
     public City(int id) {
         this.name=getCityName(id);
+        if(id==1){
+            popGrowthCostMultiplier=0.9;
+        }
+        isCity=true;
         setResources(resources);
         setType(type);
         setBaseProduction(type);
@@ -98,6 +119,10 @@ public class City extends Province {
 
     @Override
     public int getFood() {
+        return food + getProvincesFood() - population;
+    }
+
+    public int getFoodBeforePop() {
         return food + getProvincesFood();
     }
 
@@ -203,5 +228,13 @@ public class City extends Province {
     @Override
     public int getWood() {
         return wood + getProvincesWood();
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
     }
 }

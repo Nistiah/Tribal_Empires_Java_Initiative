@@ -93,6 +93,7 @@ public class MainBoardController implements Initializable {
     private boolean              buyingMode          = false;
     private boolean              buyInitialised      = false;
     private int                  ownerId             = 1;
+    private final static int     PROVINCE_COST       = 20;
     private final TourCounter    tourCounter         = new TourCounter();
     boolean                      cityCoordinatesLock = false;
     private Parent               root;
@@ -140,6 +141,9 @@ public class MainBoardController implements Initializable {
     public  HBox                 panelHbox;
     @FXML
     public  GridPane             mainPanel;
+    @FXML
+    private TextFlow popPanel;
+
 
     @FXML
     void bronzeEntered() {
@@ -162,6 +166,30 @@ public class MainBoardController implements Initializable {
             text.setFill(Color.GREEN);
             bronzeTextFlow.getChildren().add(text);
         }
+    }
+
+    void popPanelEntered(City city){
+        popPanel.getChildren().clear();
+
+
+
+        Text description = new Text("City population "+ city.getPopulation()
+                +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost
+                +"\nFood production "+city.getFoodBeforePop()
+                +"\nFood consumption by population "+city.getPopulation()
+                +"\nFood net gain "+city.getFood());
+        description.setFont(Font.font(font, 18));
+        description.setFill(Color.GREY);
+//        description.setTextAlignment(TextAlignment.CENTER);
+        popPanel.getChildren().add(description);
+        popPanel.setTextAlignment(TextAlignment.CENTER);
+        popPanel.setVisible(true);
+
+    }
+    void popPanelExited(){
+        popPanel.getChildren().clear();
+        popPanel.setVisible(false);
+
     }
 
     @FXML
@@ -337,6 +365,11 @@ public class MainBoardController implements Initializable {
 
         soundPlayerPlaySound(nextPlayerButtonSound);
 
+
+        buyingMode          = false;
+        buyInitialised      = false;
+        cityCoordinatesLock = false;
+
         descriptionField.getChildren().clear();
         map.setNormalZoom();
         scrollPane.layout();
@@ -358,11 +391,11 @@ public class MainBoardController implements Initializable {
         playerId++;
 
         if (playerId == playerList.size() + 1) {
-            playerId = 1;
             tourCounter.incrementTour();
-
+            playerId = 1;
             for (Player player : playerList) {
                 player.resourcesTourIncrease();
+
             }
         }
 
@@ -706,6 +739,10 @@ public class MainBoardController implements Initializable {
     static File          file;
 
     boolean visible = false;
+    boolean goldVSfaithBuy = false; //false gold, true faith
+
+
+
     @FXML
     void openSettings() {
         soundPlayerPlaySound(gameButtonSound);
@@ -721,12 +758,18 @@ public class MainBoardController implements Initializable {
         provinceUpperPanel.getChildren().clear();
         provinceType.getChildren().clear();
 
-        Button colonize = new Button("colonize");
-        Button by = new Button("kup se pole with gold");
-        Button fieldWithFaith = new Button("kup se pole with faith");
+        Button colonize = new Button("build a new city");
+        Button buyProvinceGold = new Button("buy a province with gold"); //cost 20
+        Button buyProvinceFaith = new Button("buy a province with faith"); //cost 20
 
-        by.setOnMouseClicked(e -> {
+        buyProvinceGold.setOnMouseClicked(e -> {
             buyClicked();
+            goldVSfaithBuy = false;
+            buyField(temphex);
+        });
+        buyProvinceFaith.setOnMouseClicked(e->{
+            buyClicked();
+            goldVSfaithBuy=true;
             buyField(temphex);
         });
 
@@ -735,15 +778,15 @@ public class MainBoardController implements Initializable {
         colonize.setTranslateX(20);
         colonize.getStyleClass().add("colonizeButton");
 
-        by.setPrefWidth(205);
-        by.setTranslateX(20);
-        by.setTranslateY(155);
-        by.getStyleClass().add("colonizeButton");
+        buyProvinceGold.setPrefWidth(205);
+        buyProvinceGold.setTranslateX(20);
+        buyProvinceGold.setTranslateY(155);
+        buyProvinceGold.getStyleClass().add("colonizeButton");
 
-        fieldWithFaith.setPrefWidth(205);
-        fieldWithFaith.setTranslateX(20);
-        fieldWithFaith.setTranslateY(215);
-        fieldWithFaith.getStyleClass().add("colonizeButton");
+        buyProvinceFaith.setPrefWidth(205);
+        buyProvinceFaith.setTranslateX(20);
+        buyProvinceFaith.setTranslateY(215);
+        buyProvinceFaith.getStyleClass().add("colonizeButton");
 
         Button unit1 = new Button("recruit unit 1");
         Button unit2 = new Button("recruit unit 2");
@@ -765,8 +808,8 @@ public class MainBoardController implements Initializable {
         unit3.getStyleClass().add("colonizeButton");
 
 
-        if(buyingMode)provinceUpperPanel.getChildren().add(by);
-        if(colonizeInitialised)provinceUpperPanel.getChildren().add(by);
+        if(buyingMode)provinceUpperPanel.getChildren().add(buyProvinceGold);
+        if(colonizeInitialised)provinceUpperPanel.getChildren().add(buyProvinceGold);
 
         int resourcesHeight = 40;
 
@@ -805,8 +848,8 @@ public class MainBoardController implements Initializable {
             {
                 resourcesHeight = 60;
                 provinceUpperPanel.getChildren().add(colonize);
-                provinceUpperPanel.getChildren().add(by);
-                provinceUpperPanel.getChildren().add(fieldWithFaith);
+                provinceUpperPanel.getChildren().add(buyProvinceGold);
+                provinceUpperPanel.getChildren().add(buyProvinceFaith);
                 provinceUpperPanel.getChildren().add(unit1);
                 provinceUpperPanel.getChildren().add(unit2);
                 provinceUpperPanel.getChildren().add(unit3);
@@ -842,6 +885,16 @@ public class MainBoardController implements Initializable {
                     break;
                 default: provName = "";
             }
+            String foodInCity = "food";
+            int pop = -1;
+            if(temphex.getProvince().isCity) {
+                City tempCity = (City) temphex.getProvince();
+                foodInCity = "produced " + tempCity.getFoodBeforePop() + "consumed " + tempCity.getPopulation() +"\nstack " +tempCity.currentPopGrowth +" cost" + tempCity.popGrowthCost*tempCity.popGrowthCostMultiplier;
+                pop=tempCity.getPopulation();
+
+
+            }
+
             Text provinceType2 = new Text(provName);
             provinceType.getChildren().add(provinceType2);
             provinceType.setTextAlignment(TextAlignment.CENTER);
@@ -883,6 +936,7 @@ public class MainBoardController implements Initializable {
             goldProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //FOOD
+
             TextField foodProduction = new TextField(String.valueOf(food));
             foodProduction.getStyleClass().add("provincePanelFood");
             foodProduction.setTranslateY(resourcesHeight);
@@ -891,14 +945,18 @@ public class MainBoardController implements Initializable {
             foodProduction.setPrefWidth(50);
             foodProduction.setEditable(false);
 
+            String finalFoodInCity = foodInCity;
+
             foodProduction.setOnMouseMoved(e -> {
                 provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
-                if(goldProduction.contains(x,y)){
-                    sb.append("food");
-                }
+
+                if (goldProduction.contains(x, y)) {
+                        sb.append(finalFoodInCity);
+                    }
+
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 85);
                 textOnProd.setY(y + 40);
@@ -958,7 +1016,9 @@ public class MainBoardController implements Initializable {
             beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //POPULATION
-            TextField population = new TextField(String.valueOf(belief));
+
+
+            TextField population = new TextField(String.valueOf(pop));///
             population.getStyleClass().add("provincePanelPopulation");
             population.setTranslateY(35);
             population.setTranslateX(125);
@@ -968,6 +1028,9 @@ public class MainBoardController implements Initializable {
             population.setAlignment(Pos.BOTTOM_RIGHT);
 
             population.setOnMouseMoved(e -> {
+                City tempCity = (City)temphex.getProvince();
+                popPanelEntered(tempCity);
+
                 provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
@@ -981,7 +1044,10 @@ public class MainBoardController implements Initializable {
                 textOnProd.setFill(Paint.valueOf("GRAY"));
                 provinceUpperPanel.getChildren().add(textOnProd);
             });
-            population.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+            population.setOnMouseExited(e -> {
+                provinceUpperPanel.getChildren().remove(textOnProd);
+                popPanelExited();
+            });
 
             provinceUpperPanel.getChildren().add(goldProduction);
             provinceUpperPanel.getChildren().add(foodProduction);
@@ -1115,6 +1181,9 @@ public class MainBoardController implements Initializable {
             provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
         }
         if(buyInitialised) {
+
+
+
             buyField(temphex);
         }
         if(colonizeInitialised){
@@ -1301,17 +1370,12 @@ public class MainBoardController implements Initializable {
 
 
     private void buyField(Hexagon tempname) {
-
         soundPlayerPlaySound(gameButtonSound);
 
-//        System.out.println("otwarcie" + cityCoordinatesLock);
         if (colonizeInitialised) {
             colonizeInitialised=false;
             fullMapBorderCleaning();
         }
-
-
-
 
         int i = tempname.getQ();
         int j = tempname.getR();
@@ -1319,29 +1383,26 @@ public class MainBoardController implements Initializable {
         if(buyInitialised&&(map.getHexagon(i,j).getBorderColor()!=Color.PINK)){
             fullMapBorderCleaning();
             buyClicked();
-//            System.out.println("jeden");
             return;
         }
-
 
         if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
             buyClicked();
             fullMapBorderCleaning();
-//            System.out.println("dwa");
             return;
         }
 
         if (!cityCoordinatesLock&& Objects.equals(map.getHexagon(i, j).getProvince().getType(), "City")) {
             cityCoordinatesLock = true;
-            buyInitialised      = true;
-            initialisedI        = i;
-            initialisedJ        = j;
+            buyInitialised = true;
+            initialisedI = i;
+            initialisedJ = j;
 
             for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
                     if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
                         if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                            if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6|| (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 7))) {
+                            if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6 || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 7))) {
                                 continue;
                             }
                             if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
@@ -1353,11 +1414,32 @@ public class MainBoardController implements Initializable {
             }
 //            System.out.println("trzy" + cityCoordinatesLock);
             return;
-        }else{
-
-
         }
 
+
+        if(!goldVSfaithBuy){
+            if(currentPlayer.getGold()>=PROVINCE_COST) {
+                currentPlayer.setGold(currentPlayer.getGold() - PROVINCE_COST);
+                goldField.setText("" + currentPlayer.getGold());
+            }else{
+                buyingMode          = false;
+                buyInitialised      = false;
+                cityCoordinatesLock = false;
+                fullMapBorderCleaning();
+                return;
+            }
+        }else{
+            if(currentPlayer.getFaith()>=PROVINCE_COST) {
+                currentPlayer.setFaith(currentPlayer.getFaith() - PROVINCE_COST);
+                beliefField.setText("" + currentPlayer.getFaith());
+            }else{
+                buyingMode          = false;
+                buyInitialised      = false;
+                cityCoordinatesLock = false;
+                fullMapBorderCleaning();
+                return;
+            }
+        }
         if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
 //            System.out.println("cztery");
             cityCoordinatesLock = false;
@@ -1365,6 +1447,8 @@ public class MainBoardController implements Initializable {
             fullMapBorderCleaning();
             return;
         }
+
+
 
         map.getHexagon(i, j).getProvince().setOwnerId(ownerId);
         City temoCity = (City)map.getHexagon(initialisedI, initialisedJ).getProvince();
@@ -1390,7 +1474,6 @@ public class MainBoardController implements Initializable {
 
             break;
         }
-
         map.getHexagon(i, j).borderColor(color);
 
         try {
@@ -1402,7 +1485,6 @@ public class MainBoardController implements Initializable {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         map.getHexagon(i, j).borderColor(color);    // /TODO: tutaj
 
         for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {

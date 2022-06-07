@@ -79,6 +79,11 @@ public class Player {
         bronze            += baseBronzeProduction + getProvincesBronze();
         iron              += baseIronProduction + getProvincesIron();
         dyes              += baseDyesProduction + getProvincesDices();
+
+        for(City city: cityList){
+            city.populationGrowth();
+        }
+
     }
 
     public int getBronze() {
