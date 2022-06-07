@@ -60,6 +60,7 @@ public class Player {
 
     public void createNewCity(City city) {
         getCityList().add(city);
+        cityCounter=cityList.size();
     }
 
 //  private int goldProduction=baseGoldProduction+getProvincesGold();
@@ -161,7 +162,7 @@ public class Player {
     }
 
     public int getNumberOfProvinces() {
-        return numberOfProvinces;
+        return cityCounter;
     }
 
     public void setNumberOfProvinces(int numberOfProvinces) {

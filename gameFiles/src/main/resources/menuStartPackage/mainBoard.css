@@ -61,8 +61,93 @@
 }
 
 
+.default-color0.chart-series-line { -fx-stroke: #7FFFD4; }
+.default-color1.chart-series-line { -fx-stroke: #FFFF00; }
+.default-color2.chart-series-line { -fx-stroke: #FF0000; }
+.default-color3.chart-series-line { -fx-stroke: #7FFFD4; }
+.default-color4.chart-series-line { -fx-stroke: #FFFF00; }
+.default-color5.chart-series-line { -fx-stroke: #FF0000; }
+
+.chart-series-line {
+    -fx-stroke-width: 2px;
+    -fx-effect: null;
+}
 
 
+.default-color0.chart-line-symbol { -fx-background-color: #7FFFD4, #7FFFD4; -fx-stroke-width: 20px; -fx-cell-size: 50px}
+.default-color1.chart-line-symbol { -fx-background-color: #FFFF00, #FFFF00; -fx-stroke-width: 10px;}
+.default-color2.chart-line-symbol { -fx-background-color: #FF0000, #FF0000; -fx-stroke-width: 40px;}
+.default-color3.chart-line-symbol { -fx-background-color: #7FFFD4, #7FFFD4; -fx-stroke-width: 20px; -fx-cell-size: 50px}
+.default-color4.chart-line-symbol { -fx-background-color: #FFFF00, #FFFF00; -fx-stroke-width: 10px;}
+.default-color5.chart-line-symbol { -fx-background-color: #FF0000, #FF0000; -fx-stroke-width: 40px;}
+
+.chart {
+    -fx-padding: 10px;
+}
+
+.chart-legend-item-symbol{
+    -fx-stroke-width: 20px;
+
+}
+.chart-title{
+    -fx-font-size: 40px;
+    -fx-text-fill: rgba(255, 171, 79, 1);
+    -fx-font-family: Manjari;
+}
+
+
+
+.chart-content {
+    -fx-padding: 30px;
+
+}
+.chart-legend {
+    -fx-background-color:  transparent;
+    -fx-font-size: 40px;
+    -fx-padding: 0px;
+}
+
+.chart-legend-item-symbol{
+    -fx-background-radius: 0;
+}
+
+.chart-legend-item{
+    -fx-text-fill: rgba(255, 171, 79, 1);
+}
+.chart-plot-background {
+    -fx-background-color: rgba(2, 0, 36, 0.95);
+}
+.chart-vertical-grid-lines {
+    -fx-stroke: rgba(255, 171, 79, 1);
+}
+.chart-horizontal-grid-lines {
+    -fx-stroke: rgba(255, 171, 79, 1);
+}
+.chart-alternative-row-fill {
+    -fx-fill: rgba(2, 0, 36, 0.95);
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+.axis {
+    -fx-font-size:  2em;
+    -fx-tick-label-fill: rgba(255, 171, 79, 1);
+    /*-fx-tick-label-font: 10px;*/
+    -fx-font-family: Manjari;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 20;
+}
+
+.axis-label {
+    -fx-text-fill: #462300;
+}
+.axis-tick-mark {
+    -fx-stroke: rgba(255, 171, 79, 1);
+    -fx-stroke-width: 3;
+}
+.axis-minor-tick-mark {
+    -fx-stroke: rgba(255, 171, 79, 1);
+    -fx-stroke-width: 1;
+}
 
 .gold{
     -fx-background-image:url('gold.png');
@@ -511,6 +596,26 @@
     -fx-text-fill: rgb(255, 255, 255);
     -fx-background-color: rgba(2,0,36,0.95) ;
 }
+
+.mainMenuButtonX {
+    -fx-background-radius: 200px;
+    -fx-background-color: rgba(2,0,36,0.80) ;
+    -fx-color: 	rgba(255,192,203,1);
+    -fx-border-radius: 800;
+    -fx-text-fill: rgba(255,192,203,1);
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 20;
+    -fx-font-family: Manjari;
+    -fx-padding: 10px 20px;
+    -fx-background-size: 100% 100%;
+}
+.mainMenuButtonX:hover{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-background-color: rgba(2,0,36,0.95) ;
+}
+
+
+
 
 .slider {
     -fx-background-size: 100% 100%;
