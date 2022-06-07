@@ -13,6 +13,6 @@ public class Egypt extends Fraction {
         setImprovements(improvements);
         setMilitaryUnit(militaryUnit);
         setKing(king);
-        description = "Egypt is located along the Nile River. The Nile is the source of much of Egypt's wealth. The Nile provides food, soil, water, and transportation for the Egyptians. Great floods would come each year and would provide fertile soil for growing food.";
+        description = "\nEgypt is located along the Nile River. The Nile is the source of much of Egypt's wealth. The Nile provides food, soil, water, and transportation for the Egyptians. Great floods would come each year and would provide fertile soil for growing food.";
     }
 }

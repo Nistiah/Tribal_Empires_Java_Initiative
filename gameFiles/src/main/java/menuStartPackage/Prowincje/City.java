@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import menuStartPackage.player.Player;
-
 public class City extends Province {
     public static int    cityNamesAssyriaCounter  = 0;
     public static int    cityNamesEgyptCounter    = 0;
@@ -78,7 +76,7 @@ public class City extends Province {
     }
 
     @Override
-    public int getBelief() {
+    public double getBelief() {
         return (belief + getProvincesBelief());
     }
 
@@ -132,7 +130,7 @@ public class City extends Province {
     }
 
     @Override
-    public int getGold() {
+    public double getGold() {
         return gold + getProvincesGold();
     }
 

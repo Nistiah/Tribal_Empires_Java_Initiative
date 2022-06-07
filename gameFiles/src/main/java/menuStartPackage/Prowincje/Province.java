@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Province {
     public boolean       isCity = false;
-    protected int        gold   = 0;
-    protected int        belief = 0;
+    protected double        gold   = 0;
+    protected double        belief = 0;
     protected int        food   = 0;
     protected int        bronze = 0;
     protected int        iron   = 0;
@@ -116,7 +116,7 @@ public class Province {
         }
     }
 
-    public int getBelief() {
+    public double getBelief() {
         return belief;
     }
 
@@ -137,7 +137,7 @@ public class Province {
         return food;
     }
 
-    public int getGold() {
+    public double getGold() {
         return gold;
     }
 

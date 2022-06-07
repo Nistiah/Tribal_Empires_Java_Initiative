@@ -20,8 +20,8 @@ public class Player {
     public static final int baseDyesProduction              = 0;
 
     private int             numberOfProvinces               = 1;
-    private int             gold                            = 20;
-    private int             belief                          = 0;
+    private double             gold                            = 20;
+    private double             belief                          = 0;
     private int             bronze                          = 0;
     private int             iron                            = 0;
     private int             dyes                            = 0;
@@ -118,11 +118,11 @@ public class Player {
         this.dyes = dyes;
     }
 
-    public int getFaith() {
+    public double getFaith() {
         return belief;
     }
 
-    public void setFaith(int faith) {
+    public void setFaith(double faith) {
         this.belief = faith;
     }
 
@@ -134,11 +134,11 @@ public class Player {
         this.fraction = fraction;
     }
 
-    public int getGold() {
+    public double getGold() {
         return gold;
     }
 
-    public void setGold(int gold) {
+    public void setGold(double gold) {
         this.gold = gold;
     }
 

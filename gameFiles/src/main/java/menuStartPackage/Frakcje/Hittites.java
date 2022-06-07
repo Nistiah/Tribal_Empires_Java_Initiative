@@ -14,6 +14,6 @@ public class Hittites extends Fraction {
         setImprovements(improvements);
         setMilitaryUnit(militaryUnit);
         setKing(king);
-        description = "The Hittites manufacture advanced iron goods, rule over their kingdom through government officials with independent authority over various branches of government, and worshipped storm gods.";
+        description = "\nThe Hittites manufacture advanced iron goods, rule over their kingdom through government officials with independent authority over various branches of government, and worshipped storm gods.";
     }
 }

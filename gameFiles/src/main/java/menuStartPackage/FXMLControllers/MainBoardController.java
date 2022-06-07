@@ -171,16 +171,30 @@ public class MainBoardController implements Initializable {
     void popPanelEntered(City city){
         popPanel.getChildren().clear();
 
-        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost*city.popGrowthCostMultiplier+"\nFood production ");
+        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost*city.popGrowthCostMultiplier);
+        Text bonus = new Text("");
+        Text foodProductionNotNumber = new Text("\nFood production ");
         Text foodProduction = new Text(""+city.getFoodBeforePop());
         Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
         Text foodConsumption = new Text(""+city.getPopulation());
         Text netGainNotNumber = new Text("\nFood net gain ");
         Text netGain = new Text(""+city.getFood());
 
+        if(city.getOwnerId()==1){
+            bonus.setText("\nfertile soils - new population cost -10%");
+            bonus.setFont(Font.font(font, 18));
+            bonus.setFill(Color.GREEN);
+            bonus.setTextAlignment(TextAlignment.CENTER);
+
+        }
+
         cityPop.setFont(Font.font(font, 18));
         cityPop.setFill(Color.GREY);
         cityPop.setTextAlignment(TextAlignment.CENTER);
+
+        foodProductionNotNumber.setFont(Font.font(font, 18));
+        foodProductionNotNumber.setFill(Color.GREY);
+        foodProductionNotNumber.setTextAlignment(TextAlignment.CENTER);
 
         foodProduction.setFont(Font.font(font, 18));
         foodProduction.setFill(Color.GREEN);
@@ -207,7 +221,7 @@ public class MainBoardController implements Initializable {
         netGain.setTextAlignment(TextAlignment.CENTER);
 
 
-        popPanel.getChildren().addAll(cityPop,foodProduction,foodConsumptionNotNumber,foodConsumption,netGainNotNumber,netGain);
+        popPanel.getChildren().addAll(cityPop,bonus,foodProductionNotNumber,foodProduction,foodConsumptionNotNumber,foodConsumption,netGainNotNumber,netGain);
         popPanel.setTextAlignment(TextAlignment.CENTER);
         popPanel.setVisible(true);
 
@@ -229,10 +243,22 @@ public class MainBoardController implements Initializable {
         descriptionTextFlow.setVisible(true);
 
         Text description = new Text(currentPlayer.getFraction().getDescription());
-
+        Text bonus = new Text();
+        //TODO:Hettyci boonus implementacja mechaniki
+        if(currentPlayer.id==1) {
+            bonus.setText("\n\nFACTION BONUS\nferile soils - new population cost -10%\n");
+            bonus.setFont(Font.font(font, 18));
+            bonus.setFill(Color.GREEN);
+            bonus.setTextAlignment(TextAlignment.CENTER);
+        }else if(currentPlayer.id==3){
+            bonus.setText("\n\nFACTION BONUS\nfirst scripture - new tile cost -20%\n");
+            bonus.setFont(Font.font(font, 18));
+            bonus.setFill(Color.GREEN);
+            bonus.setTextAlignment(TextAlignment.CENTER);
+        }
         description.setFont(Font.font(font, 18));
         description.setFill(Color.GREY);
-        descriptionTextFlow.getChildren().add(description);
+        descriptionTextFlow.getChildren().addAll(description, bonus);
     }
 
     @FXML
@@ -314,7 +340,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text(city.getName() + " gold production " + city.getGold() + "\n");
+            Text text = new Text(city.getName() + " gold production " + (int)city.getGold() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -343,7 +369,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text("City " + city.getName() + "horse production" + city.getHorses() + "\n");
+            Text text = new Text("City " + city.getName() + "horse production" + (int)city.getHorses() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -405,10 +431,10 @@ public class MainBoardController implements Initializable {
 
         if (tourCounter.getTour() == 0) {    // /stats pane regulator
             PlayerData tmp = new PlayerData(currentPlayer.getName());
-            tmp.addInfo(currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
+            tmp.addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
             addPlayer(tmp);
         } else {
-            playerStats.get(playerId - 1).addInfo(currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
+            playerStats.get(playerId - 1).addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
         }
 
         playerId++;
@@ -457,8 +483,8 @@ public class MainBoardController implements Initializable {
         temp.setFont(Font.font(font, 18));
         temp.setFill(Color.PINK);
         descriptionField.getChildren().add(temp);
-        goldField.setText("" + currentPlayer.getGold());
-        beliefField.setText("" + currentPlayer.getFaith());
+        goldField.setText("" + (int)currentPlayer.getGold());
+        beliefField.setText("" + (int)currentPlayer.getFaith());
         bronzeField.setText("" + currentPlayer.getBronze());
         recoursesField.setText("" + currentPlayer.getBuildingResources());
         horsesField.setText("" + currentPlayer.getHorses());
@@ -648,8 +674,8 @@ public class MainBoardController implements Initializable {
         descriptionField.getChildren().add(temp2);
         descriptionField.setLineSpacing(20);
 
-        goldField.setText("" + playerList.get(playerId).getGold());
-        beliefField.setText("" + playerList.get(playerId).getFaith());
+        goldField.setText("" + (int)playerList.get(playerId).getGold());
+        beliefField.setText("" + (int)playerList.get(playerId).getFaith());
         bronzeField.setText("" + playerList.get(playerId).getBronze());
         recoursesField.setText("" + playerList.get(playerId).getBuildingResources());
         horsesField.setText("" + playerList.get(playerId).getHorses());
@@ -920,9 +946,9 @@ public class MainBoardController implements Initializable {
 
 
 
-            int belief = temphex.getProvince().getBelief();
+            int belief = (int)temphex.getProvince().getBelief();
             int wood = temphex.getProvince().getWood();
-            int gold = temphex.getProvince().getGold();
+            int gold = (int)temphex.getProvince().getGold();
             int food = temphex.getProvince().getFood();
             int pop  = temphex.getProvince().getPop();
 
@@ -1436,12 +1462,15 @@ public class MainBoardController implements Initializable {
             }
             return;
         }
-
+        double provinceCostMultiplier = 1;
+        if(currentPlayer.id==3){
+            provinceCostMultiplier=0.8;
+        }
 
         if(!goldVSfaithBuy){
-            if(currentPlayer.getGold()>=PROVINCE_COST) {
-                currentPlayer.setGold(currentPlayer.getGold() - PROVINCE_COST);
-                goldField.setText("" + currentPlayer.getGold());
+            if(currentPlayer.getGold()>=PROVINCE_COST*provinceCostMultiplier) {
+                currentPlayer.setGold(currentPlayer.getGold() - PROVINCE_COST*provinceCostMultiplier);
+                goldField.setText("" + (int)currentPlayer.getGold());
             }else{
                 buyingMode          = false;
                 buyInitialised      = false;
@@ -1450,9 +1479,9 @@ public class MainBoardController implements Initializable {
                 return;
             }
         }else{
-            if(currentPlayer.getFaith()>=PROVINCE_COST) {
-                currentPlayer.setFaith(currentPlayer.getFaith() - PROVINCE_COST);
-                beliefField.setText("" + currentPlayer.getFaith());
+            if(currentPlayer.getFaith()>=PROVINCE_COST*provinceCostMultiplier) {
+                currentPlayer.setFaith(currentPlayer.getFaith() - PROVINCE_COST*provinceCostMultiplier);
+                beliefField.setText("" + (int)currentPlayer.getFaith());
             }else{
                 buyingMode          = false;
                 buyInitialised      = false;
