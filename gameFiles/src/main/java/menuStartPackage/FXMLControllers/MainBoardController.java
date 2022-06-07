@@ -721,22 +721,47 @@ public class MainBoardController implements Initializable {
         provinceType.getChildren().clear();
 
         Button colonize = new Button("colonize");
-        Button by = new Button("kup se pole");
+        Button by = new Button("kup se pole with gold");
+        Button fieldWithFaith = new Button("kup se pole with faith");
 
         by.setOnMouseClicked(e -> {
             buyClicked();
             buyField(temphex);
         });
 
-        colonize.setPrefWidth(150);
+        colonize.setPrefWidth(200);
         colonize.setTranslateY(75);
+        colonize.setTranslateX(20);
         colonize.getStyleClass().add("colonizeButton");
 
-        by.setPrefWidth(145);
-        by.setTranslateX(150);
-        by.setTranslateY(75);
+        by.setPrefWidth(205);
+        by.setTranslateX(20);
+        by.setTranslateY(135);
         by.getStyleClass().add("colonizeButton");
 
+        fieldWithFaith.setPrefWidth(205);
+        fieldWithFaith.setTranslateX(20);
+        fieldWithFaith.setTranslateY(195);
+        fieldWithFaith.getStyleClass().add("colonizeButton");
+
+        Button unit1 = new Button("recruit unit 1");
+        Button unit2 = new Button("recruit unit 2");
+        Button unit3 = new Button("recruit unit 3");
+
+        unit1.setPrefWidth(205);
+        unit1.setTranslateX(20);
+        unit1.setTranslateY(255);
+        unit1.getStyleClass().add("colonizeButton");
+
+        unit2.setPrefWidth(205);
+        unit2.setTranslateX(20);
+        unit2.setTranslateY(315);
+        unit2.getStyleClass().add("colonizeButton");
+
+        unit3.setPrefWidth(205);
+        unit3.setTranslateX(20);
+        unit3.setTranslateY(375);
+        unit3.getStyleClass().add("colonizeButton");
 
 
         if(buyingMode)provinceUpperPanel.getChildren().add(by);
@@ -777,6 +802,10 @@ public class MainBoardController implements Initializable {
             {
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceUpperPanel.getChildren().add(by);
+                provinceUpperPanel.getChildren().add(fieldWithFaith);
+                provinceUpperPanel.getChildren().add(unit1);
+                provinceUpperPanel.getChildren().add(unit2);
+                provinceUpperPanel.getChildren().add(unit3);
             }
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 
