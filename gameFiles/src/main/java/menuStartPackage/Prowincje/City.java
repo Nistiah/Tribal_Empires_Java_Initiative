@@ -24,6 +24,11 @@ public class City extends Province {
                                                            "Temple",
                                                            "Warehouse");
 
+    private List<String> possibleUnits = Arrays.asList("Archers", "Chariots", "Infantry");
+    public List<String> getPossibleUnits() {
+        return possibleUnits;
+    }
+
     @Override
     public int getPop(){
         return population;
