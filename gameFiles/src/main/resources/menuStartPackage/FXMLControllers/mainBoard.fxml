@@ -162,10 +162,51 @@
                          <Slider fx:id="volumeSlider" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="56.0" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="1" />
                          <Slider fx:id="soundSlider" styleClass="mainMenuButton" value="50.0" GridPane.rowIndex="3" />
                         <Button mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Return back to game" GridPane.rowIndex="5" />
-                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Keyboard Shortcuts" GridPane.rowIndex="4" />
+                        <Button maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onMouseEntered="#shortcutsEntered" onMouseExited="#shortcutsExited" prefHeight="56.0" prefWidth="600.0" styleClass="settingsButton" text="Keyboard Shortcuts" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </center>
+               <left>
+                  <GridPane fx:id="shortcuts" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" visible="false" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <BorderPane.margin>
+                        <Insets left="200.0" />
+                     </BorderPane.margin>
+                     <children>
+                        <TextField alignment="CENTER" styleClass="shortcuts" text="Zoom map out: -" />
+                        <TextField alignment="CENTER" styleClass="shortcuts" text="Zoom map in: +" GridPane.rowIndex="1" />
+                        <TextField alignment="CENTER" styleClass="shortcuts" text="Next Player: N" GridPane.rowIndex="3" />
+                        <TextField alignment="CENTER" styleClass="shortcuts" text="Next song: M" GridPane.rowIndex="4" />
+                        <TextField alignment="CENTER" styleClass="shortcuts" text="Settings: ESC" GridPane.rowIndex="5" />
+                        <TextField styleClass="shortcuts" text="Moving Map: ←↕→" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </left>
+               <right>
+                  <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <BorderPane.margin>
+                        <Insets right="200.0" />
+                     </BorderPane.margin>
+                  </GridPane>
+               </right>
             </BorderPane>
          </children>
       </AnchorPane>

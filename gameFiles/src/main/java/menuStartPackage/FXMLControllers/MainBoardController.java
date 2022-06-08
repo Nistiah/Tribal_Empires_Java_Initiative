@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -143,6 +145,18 @@ public class MainBoardController implements Initializable {
     public  GridPane             mainPanel;
     @FXML
     private TextFlow popPanel;
+    @FXML
+    private GridPane shortcuts;
+
+    @FXML
+    void shortcutsEntered() {
+        shortcuts.setVisible(true);
+    }
+    @FXML
+    void shortcutsExited() {
+        shortcuts.setVisible(false);
+    }
+
 
 
     @FXML
@@ -171,7 +185,10 @@ public class MainBoardController implements Initializable {
     void popPanelEntered(City city){
         popPanel.getChildren().clear();
 
-        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + city.currentPopGrowth +"/"+city.popGrowthCost*city.popGrowthCostMultiplier);
+        double currentPopGrowth = BigDecimal.valueOf(city.currentPopGrowth).setScale(2, RoundingMode.HALF_DOWN).doubleValue();
+        double currentPopGrowthCost = BigDecimal.valueOf(city.popGrowthCost*city.popGrowthCostMultiplier).setScale(2, RoundingMode.HALF_DOWN).doubleValue();
+
+        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + currentPopGrowth +"/"+currentPopGrowthCost);
         Text bonus = new Text("");
         Text foodProductionNotNumber = new Text("\nFood production ");
         Text foodProduction = new Text(""+city.getFoodBeforePop());
@@ -1241,9 +1258,12 @@ public class MainBoardController implements Initializable {
     private void shortcuts(KeyEvent event) {
         switch(event.getCode()){
             case SUBTRACT:
+            case UNDERSCORE:
+            case MINUS:
                 map.sizeDown();
                 break;
             case ADD:
+            case EQUALS:
                 map.sizeUp();
                 break;
             case ESCAPE:
@@ -1264,8 +1284,10 @@ public class MainBoardController implements Initializable {
                 currentPlayer.setIron(500);
                 currentPlayer.setHorses(500);
                 currentPlayer.setDyes(500);
-
-
+                break;
+            case M:
+                nextSong();
+                break;
         }
     }
 

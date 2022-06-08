@@ -238,6 +238,17 @@
     -fx-text-decoration: bold;
     -fx-text-fill: grey;
 }
+
+.shortcuts{
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-font-size: 30;
+    -fx-text-fill: grey;
+}
+
 .nextSong{
     -fx-background-color: rgb(2,0,36,1);
     -fx-font-family: Manjari;
