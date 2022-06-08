@@ -44,6 +44,7 @@ import static javafx.scene.paint.Color.rgb;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
+import menuStartPackage.Jednostki.ArmyUnit;
 import menuStartPackage.Prowincje.*;
 
 import menuStartPackage.player.Player;
@@ -855,24 +856,44 @@ public class MainBoardController implements Initializable {
         buyProvinceFaith.setTranslateY(215);
         buyProvinceFaith.getStyleClass().add("colonizeButton");
 
-        Button unit1 = new Button("recruit unit 1");
-        Button unit2 = new Button("recruit unit 2");
-        Button unit3 = new Button("recruit unit 3");
+        Button recruitUnits = new Button("Units");
 
-        unit1.setPrefWidth(205);
-        unit1.setTranslateX(20);
-        unit1.setTranslateY(275);
-        unit1.getStyleClass().add("colonizeButton");
+        recruitUnits.setPrefWidth(205);
+        recruitUnits.setTranslateX(20);
+        recruitUnits.setTranslateY(275);
+        recruitUnits.getStyleClass().add("colonizeButton");
+        recruitUnits.setOnMouseClicked(e -> {
+            provinceLowerPanel.getChildren().clear();
+            City c1 = (City)temp;
+            final int[] unitY = {0};
+            c1.getPossibleUnits().forEach(unit -> {
+                Button u = new Button(unit);
+                u.setTranslateY(unitY[0]);
+                u.setPrefWidth(150);
+                u.setOnMouseClicked(un -> {
+                    provinceLowerPanel.getChildren().clear();
+                    u.setTranslateY(0);
+                    u.setText("Recruit "+unit);
+                    u.setPrefWidth(300);
+                    provinceLowerPanel.getChildren().add(u);
+                    ArmyUnit tempUnit = new ArmyUnit();
+                    final int[] upgradeY = {60};
+                    tempUnit.getPossibleUpgrades().forEach(possUpgrade -> {
+                        Button upgrade = new Button(possUpgrade);
+                        upgrade.setTranslateY(upgradeY[0]);
+                        upgrade.setPrefWidth(300);
+                        upgradeY[0] += 60;
+                        provinceLowerPanel.getChildren().add(upgrade);
+                    });
+                });
+                unitY[0] += 60;
+                provinceLowerPanel.getChildren().add(u);
+            });
 
-        unit2.setPrefWidth(205);
-        unit2.setTranslateX(20);
-        unit2.setTranslateY(335);
-        unit2.getStyleClass().add("colonizeButton");
 
-        unit3.setPrefWidth(205);
-        unit3.setTranslateX(20);
-        unit3.setTranslateY(395);
-        unit3.getStyleClass().add("colonizeButton");
+        });
+
+
 
 
         if(buyingMode)provinceUpperPanel.getChildren().add(buyProvinceGold);
@@ -918,9 +939,7 @@ public class MainBoardController implements Initializable {
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceUpperPanel.getChildren().add(buyProvinceGold);
                 provinceUpperPanel.getChildren().add(buyProvinceFaith);
-                provinceUpperPanel.getChildren().add(unit1);
-                provinceUpperPanel.getChildren().add(unit2);
-                provinceUpperPanel.getChildren().add(unit3);
+                provinceUpperPanel.getChildren().add(recruitUnits);
             }
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 

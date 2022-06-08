@@ -1,5 +1,8 @@
 package menuStartPackage.Jednostki;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ArmyUnit {
     protected int life = 0;
     protected int attack = 0;
@@ -8,6 +11,8 @@ public class ArmyUnit {
     protected int farDefence= 0;
     protected int closeAttack = 0;
     protected int closeDefence = 0;
+
+    private List<String> possibleUpgrades = Arrays.asList("Bronze Armor", "Iron Armor", "Banner");
 
 
     public int getLife() {
@@ -56,5 +61,9 @@ public class ArmyUnit {
 
     public void setCloseDefence(int closeDefence) {
         this.closeDefence = closeDefence;
+    }
+
+    public List<String> getPossibleUpgrades() {
+        return possibleUpgrades;
     }
 }
