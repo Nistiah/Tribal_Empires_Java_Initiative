@@ -3,6 +3,7 @@ package menuStartPackage.Jednostki;
 public class Chariots extends ArmyUnit{
     public static final int baseChariotHp = 25;
     public Chariots() {
+        life=baseChariotHp;
         name="Chariots";
         int closeAttack = 3;
         setCloseAttack(closeAttack);
