@@ -819,6 +819,8 @@ public class MainBoardController implements Initializable {
         settingsPane.setVisible(visible);
     }
 
+    @FXML AnchorPane siegePane;
+
     void hexClick(Hexagon temphex, Province temp){
 
 
@@ -932,6 +934,9 @@ public class MainBoardController implements Initializable {
                 siege.setPrefWidth(299);
                 siege.setTranslateX(0);
                 siege.setTranslateY(150);
+                siege.setOnMouseClicked(e ->{
+                    siegePane.setVisible(true);
+                });
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(siege);
             }
