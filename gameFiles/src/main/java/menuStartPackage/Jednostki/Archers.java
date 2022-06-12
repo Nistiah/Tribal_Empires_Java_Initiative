@@ -1,8 +1,10 @@
 package menuStartPackage.Jednostki;
 
 public class Archers extends ArmyUnit{
-
+    public static final int baseArcherHp = 15;
     public Archers() {
+        life=baseArcherHp;
+        name="Archer";
         int closeAttack = 1;
         setCloseAttack(closeAttack);
         int closeDefence = 1;

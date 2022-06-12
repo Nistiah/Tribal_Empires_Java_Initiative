@@ -44,7 +44,7 @@ import static javafx.scene.paint.Color.rgb;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
-import menuStartPackage.Jednostki.ArmyUnit;
+import menuStartPackage.Jednostki.*;
 import menuStartPackage.Prowincje.*;
 
 import menuStartPackage.player.Player;
@@ -509,35 +509,6 @@ public class MainBoardController implements Initializable {
         ironField.setText("" + currentPlayer.getIron());
         dyesField.setText("" + currentPlayer.getDyes());
 
-        Text goldField1      = new Text("Złoto: " + currentPlayer.getGold());
-        Text beliefField1    = new Text("Wiara: " + currentPlayer.getFaith());
-        Text bronzeField1    = new Text("Brąz: " + currentPlayer.getBronze());
-        Text recoursesField1 = new Text("Surowce: " + currentPlayer.getBuildingResources());
-        Text horsesField1    = new Text("Konie: " + currentPlayer.getHorses());
-        Text ironField1      = new Text("Żelazo: " + currentPlayer.getIron());
-        Text dyesField1      = new Text("Barwniki: " + currentPlayer.getDyes());
-
-        goldField1.setFont(Font.font(font, 20));
-        beliefField1.setFont(Font.font(font, 20));
-        bronzeField1.setFont(Font.font(font, 20));
-        recoursesField1.setFont(Font.font(font, 20));
-        horsesField1.setFont(Font.font(font, 20));
-        ironField1.setFont(Font.font(font, 20));
-        dyesField1.setFont(Font.font(font, 20));
-        goldField1.setTranslateY(10);
-        beliefField1.setTranslateY(30);
-        bronzeField1.setTranslateY(50);
-        recoursesField1.setTranslateY(70);
-        horsesField1.setTranslateY(90);
-        ironField1.setTranslateY(110);
-        dyesField1.setTranslateY(130);
-        provinceUpperPanel.getChildren().add(goldField1);
-        provinceUpperPanel.getChildren().add(beliefField1);
-        provinceUpperPanel.getChildren().add(bronzeField1);
-        provinceUpperPanel.getChildren().add(recoursesField1);
-        provinceUpperPanel.getChildren().add(horsesField1);
-        provinceUpperPanel.getChildren().add(ironField1);
-        provinceUpperPanel.getChildren().add(dyesField1);
 
         if (buyInitialised) {
             buyClicked();
@@ -862,47 +833,7 @@ public class MainBoardController implements Initializable {
         armies.setTranslateX(20);
         armies.setTranslateY(275);
         armies.getStyleClass().add("colonizeButton");
-        armies.setOnMouseClicked(e -> {
-            provinceLowerPanel.getChildren().clear();
-            City c1 = (City)temp;
-            final int[] unitY = {0};
-            c1.army.forEach(army -> {
-                Button a = new Button(army.getName());
-                a.setTranslateY(unitY[0]);
-                a.setPrefWidth(299);
-                unitY[0] += 60;
-                provinceLowerPanel.getChildren().add(a);
-            });
-            Button newArmy = new Button("Add army");
-            newArmy.setTranslateY(unitY[0]);
-            newArmy.setPrefWidth(299);
-            provinceLowerPanel.getChildren().add(newArmy);
-            /*c1.getPossibleUnits().forEach(unit -> {
-                Button u = new Button(unit);
-                u.setTranslateY(unitY[0]);
-                u.setPrefWidth(150);
-                u.setOnMouseClicked(un -> {
-                    provinceLowerPanel.getChildren().clear();
-                    u.setTranslateY(0);
-                    u.setText("Recruit "+unit);
-                    u.setPrefWidth(300);
-                    provinceLowerPanel.getChildren().add(u);
-                    ArmyUnit tempUnit = new ArmyUnit();
-                    final int[] upgradeY = {60};
-                    tempUnit.getPossibleUpgrades().forEach(possUpgrade -> {
-                        Button upgrade = new Button(possUpgrade);
-                        upgrade.setTranslateY(upgradeY[0]);
-                        upgrade.setPrefWidth(300);
-                        upgradeY[0] += 60;
-                        provinceLowerPanel.getChildren().add(upgrade);
-                    });
-                });*/
-               // unitY[0] += 60;
-               // provinceLowerPanel.getChildren().add(a);
-           // });
 
-
-        });
 
 
 
@@ -954,6 +885,10 @@ public class MainBoardController implements Initializable {
 
             if(Objects.equals(temphex.getProvince().getType(), "City"))
             {
+                City c1 = (City)temp;
+                armies.setOnMouseClicked(e -> {
+                    armiesClicked(c1);
+                });
                 resourcesHeight = 60;
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceUpperPanel.getChildren().add(buyProvinceGold);
@@ -1289,6 +1224,116 @@ public class MainBoardController implements Initializable {
         }
 
 
+    }
+
+    void armiesClicked(City city)
+    {
+        provinceLowerPanel.getChildren().clear();
+        final int[] unitY = {0};
+        city.army.forEach(army -> {
+            Button a = new Button(army.getName());
+            a.setTranslateY(unitY[0]);
+            a.setPrefWidth(299);
+            unitY[0] += 60;
+            a.setOnMouseClicked(e2 -> {
+                singleArmyClicked(army);
+            });
+            provinceLowerPanel.getChildren().add(a);
+        });
+        Button newArmy = new Button("Add army");
+        newArmy.setTranslateY(unitY[0]);
+        newArmy.setPrefWidth(299);
+        newArmy.setOnMouseClicked(e1 -> {
+            Army addNewArmy = new Army();
+            city.addArmy(addNewArmy);
+
+            provinceLowerPanel.getChildren().clear();
+            unitY[0] = 0;
+            city.army.forEach(army -> {
+                Button a = new Button(army.getName());
+                a.setTranslateY(unitY[0]);
+                a.setPrefWidth(299);
+                a.setOnMouseClicked(e2 -> {
+                    provinceLowerPanel.getChildren().clear();
+                    singleArmyClicked(army);
+                });
+                unitY[0] += 60;
+                newArmy.setTranslateY(unitY[0]);
+                provinceLowerPanel.getChildren().add(a);
+                provinceLowerPanel.getChildren().remove(newArmy);
+                provinceLowerPanel.getChildren().add(newArmy);
+            });
+        });
+        if(!provinceLowerPanel.getChildren().contains(newArmy))provinceLowerPanel.getChildren().add(newArmy);
+    }
+
+    void singleArmyClicked(Army army)
+    {
+        provinceLowerPanel.getChildren().clear();
+
+        //ARCHERS AMOUNT
+        TextField archersAmount = new TextField("" + army.getArchersAmount());
+        archersAmount.getStyleClass().add("armyArcher");
+        archersAmount.setTranslateY(10);
+        archersAmount.setTranslateX(55);
+        archersAmount.setFont(Font.font(font,16));
+        archersAmount.setPrefWidth(50);
+        archersAmount.setEditable(false);
+        archersAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        //CHARIOTS AMOUNT
+        TextField chariotsAmount = new TextField("" + army.getChariotsAmount());
+        chariotsAmount.getStyleClass().add("armyChariot");
+        chariotsAmount.setTranslateY(10);
+        chariotsAmount.setTranslateX(105);
+        chariotsAmount.setFont(Font.font(font,16));
+        chariotsAmount.setPrefWidth(80);
+        chariotsAmount.setEditable(false);
+        chariotsAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        //WARRIORS AMOUNT
+        TextField warriorsAmount = new TextField("" + army.getWarriorsAmount());
+        warriorsAmount.getStyleClass().add("armyWarrior");
+        warriorsAmount.setTranslateY(10);
+        warriorsAmount.setTranslateX(185);
+        warriorsAmount.setFont(Font.font(font,16));
+        warriorsAmount.setPrefWidth(50);
+        warriorsAmount.setEditable(false);
+        warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        Button recruitArchers = new Button("Recruit Archers");
+        recruitArchers.setTranslateY(50);
+        recruitArchers.setPrefWidth(299);
+        recruitArchers.setOnMouseClicked(e3 -> {
+            army.addUnit(new Archers());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+
+        Button recruitChariots = new Button("Recruit Chariots");
+        recruitChariots.setTranslateY(110);
+        recruitChariots.setPrefWidth(299);
+        recruitChariots.setOnMouseClicked(e3 -> {
+            army.addUnit(new Chariots());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+
+        Button recruitInfantry = new Button("Recruit Infantry");
+        recruitInfantry.setTranslateY(170);
+        recruitInfantry.setPrefWidth(299);
+        recruitInfantry.setOnMouseClicked(e3 -> {
+            army.addUnit(new Infantry());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+        provinceLowerPanel.getChildren().add(archersAmount);
+        provinceLowerPanel.getChildren().add(chariotsAmount);
+        provinceLowerPanel.getChildren().add(warriorsAmount);
+
+        provinceLowerPanel.getChildren().add(recruitArchers);
+        provinceLowerPanel.getChildren().add(recruitChariots);
+        provinceLowerPanel.getChildren().add(recruitInfantry);
     }
 
     

@@ -1,8 +1,9 @@
 package menuStartPackage.Jednostki;
 
 public class Infantry extends ArmyUnit{
-
+    public static final int baseWarriorHp = 20;
     public Infantry() {
+        name="Infantry";
         int closeAttack = 3;
         setCloseAttack(closeAttack);
         int closeDefence = 3;
