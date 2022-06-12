@@ -1,7 +1,8 @@
 package menuStartPackage.Jednostki;
 
-public class Chariots extends ArmyUnit{
-    public Chariots() {
+public class Chariot extends ArmyUnit{
+    public static final int baseChariotHp = 25;
+    public Chariot() {
         int closeAttack = 3;
         setCloseAttack(closeAttack);
         int closeDefence = 3;
