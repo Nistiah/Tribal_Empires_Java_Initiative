@@ -12,8 +12,21 @@ public class ArmyUnit {
     protected int closeAttack = 0;
     protected int closeDefence = 0;
 
+    protected int amount = 0;
+
     private List<String> possibleUpgrades = Arrays.asList("Bronze Armor", "Iron Armor", "Banner");
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
 
     public int getLife() {
         return life;

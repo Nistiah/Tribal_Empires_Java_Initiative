@@ -1,5 +1,8 @@
 package menuStartPackage.Prowincje;
 
+import menuStartPackage.Jednostki.Army;
+import menuStartPackage.Jednostki.ArmyUnit;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -31,6 +34,22 @@ public class City extends Province {
     private List<String> possibleUnits = Arrays.asList("Archers", "Chariots", "Infantry");
     public List<String> getPossibleUnits() {
         return possibleUnits;
+    }
+
+
+    public Vector<Army> army = new Vector<Army>();
+
+    public void initArmy()
+    {
+        Army defArmy = new Army();
+        defArmy.setName("Default1");
+        this.army.add(defArmy);
+    }
+
+    public void addArmy(Army newArmy)
+    {
+        newArmy.setName("Army " + this.army.size());
+        this.army.add(newArmy);
     }
 
     @Override
@@ -71,6 +90,7 @@ public class City extends Province {
         setBaseProduction(type);
         setPossibleBuildings(possibleBuildings);
         setBaseBuildings(baseBuildings);
+        initArmy();
     }
 
     ///TODO:tura wyswietla ie na hettytach a nie na egipcie counter increment
