@@ -820,6 +820,14 @@ public class MainBoardController implements Initializable {
     }
 
     @FXML AnchorPane siegePane;
+    @FXML TextField siegeName;
+    @FXML TextFlow siegeAtack;
+    @FXML TextFlow siegeDefence;
+
+    @FXML
+    void siegeExit() {
+        siegePane.setVisible(false);
+    }
 
     void hexClick(Hexagon temphex, Province temp){
 
@@ -940,13 +948,61 @@ public class MainBoardController implements Initializable {
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(peace);
 
-
+    //TODO: siege button
                 Button siege = new Button("Siege");
                 siege.setPrefWidth(299);
                 siege.setTranslateX(0);
                 siege.setTranslateY(150);
                 siege.setOnMouseClicked(e ->{
+                    siegeAtack.getChildren().clear();
+                    siegeDefence.getChildren().clear();
+
                     siegePane.setVisible(true);
+                    City tempCity = (City)temphex.getProvince();
+//                    siegeName.clear();
+                    siegeName.setText("Siege of " + tempCity.getName());
+                    Text atackForces = new Text("Besieging Army\n");
+                    atackForces.setFont(Font.font(font, 30));
+                    atackForces.setFill(Color.GREY);
+                    siegeAtack.getChildren().add(atackForces);
+                    siegeAtack.setTextAlignment(TextAlignment.CENTER);
+
+                    Text atackersForcesStrenght = new Text("Strength " + tempCity.siege.getAtackStrength() +"%\n");
+                    atackersForcesStrenght.setFont(Font.font(font, 30));
+                    atackersForcesStrenght.setFill(Color.GREY);
+                    siegeAtack.getChildren().add(atackersForcesStrenght);
+                    siegeAtack.setTextAlignment(TextAlignment.CENTER);
+
+                    for(ArmyUnit unit : tempCity.siege.atackingArmy.getUnits()){
+                        Text unitText = new Text(unit.getName() + "\n");
+                        unitText.setFont(Font.font(font, 18));
+                        unitText.setFill(Color.GREY);
+                        siegeAtack.getChildren().add(unitText);
+                    }
+
+
+
+                    Text defenceForces = new Text("Defenders Army\n");
+                    defenceForces.setFont(Font.font(font, 30));
+                    defenceForces.setFill(Color.GREY);
+                    siegeDefence.getChildren().add(defenceForces);
+                    siegeDefence.setTextAlignment(TextAlignment.CENTER);
+
+                    Text defenceForcesStrenght = new Text("Strength " + tempCity.siege.getDefenseStrength() +"%\n");
+                    defenceForcesStrenght.setFont(Font.font(font, 30));
+                    defenceForcesStrenght.setFill(Color.GREY);
+                    siegeDefence.getChildren().add(defenceForcesStrenght);
+                    siegeDefence.setTextAlignment(TextAlignment.CENTER);
+
+                    for(ArmyUnit unit : tempCity.siege.defendingArmy.getUnits()){
+                        Text unitText = new Text(unit.getName() + "\n");
+                        unitText.setFont(Font.font(font, 18));
+                        unitText.setFill(Color.GREY);
+                        siegeDefence.getChildren().add(unitText);
+                    }
+
+
+
                 });
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(siege);

@@ -1,7 +1,6 @@
 package menuStartPackage.Prowincje;
 
-import menuStartPackage.Jednostki.Army;
-import menuStartPackage.Jednostki.ArmyUnit;
+import menuStartPackage.Jednostki.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,7 @@ public class City extends Province {
     public static int    cityNamesAssyriaCounter  = 0;
     public static int    cityNamesEgyptCounter    = 0;
     public static int    cityNamesHittitesCounter = 0;
+
 
     public int           cityHp                   = 1000;
 
@@ -29,7 +29,7 @@ public class City extends Province {
                                                            "Temple",
                                                            "Warehouse");
 
-//    public Siege siege= null;
+
 
     private List<String> possibleUnits = Arrays.asList("Archers", "Chariots", "Infantry");
     public List<String> getPossibleUnits() {
@@ -270,17 +270,175 @@ public class City extends Province {
         this.population = population;
     }
 
-//    public class Siege{
-//
-//        private Army atackingArmy;
-//        private Army defendingArmy;
-//
+    Army army1 = new Army();
+    Army army2 = new Army();
+    public Siege siege = new Siege();
+
+    public class Siege{
+
+        public Army atackingArmy;
+        public Army defendingArmy;
+
+        double siegeCostInitial=50;
+
+        int atackStrengthInitial=0;
+        int defenseStrengthInitial=0;
+
+        double atackCloseDamageInitial=0;
+        double defenseCloseDamageInitial=0;
+
+        double atackFarDamageInitial=0;
+        double defenseFarDamageInitial=0;
+
+        double atackCloseDefenceInitial=0;
+        double defenseCloseDefenceInitial=5;
+
+        double atackFarDefenceInitial=0;
+        double defenseFarDefenceInitial=2;
+
+        double siegeCost;
+        double atackStrength;
+        double defenseStrength;
+        double atackCloseDamage;
+        double defenseCloseDamage;
+        double atackFarDamage;
+        double defenseFarDamage;
+        double atackCloseDefence;
+        double defenseCloseDefence;
+        double atackFarDefence;
+        double defenseFarDefence;
+
+
+        public double getDefenseStrength() {
+            System.out.println(defenseStrength+ " "+ defenseStrengthInitial);
+            return (double)defenseStrength/defenseStrengthInitial*100;
+        }
+
+        public double getAtackStrength() {
+            return (double)atackStrength/atackStrengthInitial*100;
+        }
+
+        public double getAtackCloseDamage() {
+            return atackCloseDamage;
+        }
+
+        public double getDefenseCloseDamage() {
+            return defenseCloseDamage;
+        }
+
+        public double getAtackFarDamage() {
+            return atackFarDamage;
+        }
+
+        public double getDefenseFarDamage() {
+            return defenseFarDamage;
+        }
+
+        public double getAtackCloseDefence() {
+            return atackCloseDefence;
+        }
+
+        public double getDefenceCloseDefence() {
+            return defenseCloseDefence;
+        }
+
+        public double getAtackFarDefence() {
+            return atackFarDefence;
+        }
+
+        public double getDefenceFarDefence() {
+            return defenseFarDefence;
+        }
+
+
+
 //        Siege(Army atackingArmy, Army defendingArmy){
 //            this.atackingArmy=atackingArmy;
 //            this.defendingArmy=defendingArmy;
 //        }
-//
-//        }
+        Siege(){
+            atackingArmy=new Army();
+            defendingArmy=new Army();
+
+            atackingArmy.addUnit(new Archer());
+            atackingArmy.addUnit(new Infantry());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+
+            defendingArmy.addUnit(new Archer());
+            defendingArmy.addUnit(new Infantry());
+            defendingArmy.addUnit(new Chariots());
+
+            for(ArmyUnit unit: atackingArmy.getUnits()){
+                atackStrengthInitial+=unit.getLife();
+                atackCloseDamageInitial+=unit.getCloseAttack();
+                atackFarDamageInitial+=unit.getFarAttack();
+                atackCloseDefenceInitial+=unit.getCloseDefence();
+                atackFarDefenceInitial+= unit.getFarDefence();
+            }
+            for (ArmyUnit unit:defendingArmy.getUnits()){
+                defenseStrengthInitial+=unit.getLife();
+                defenseCloseDamageInitial+=unit.getCloseAttack();
+                defenseFarDamageInitial+=unit.getFarAttack();
+                defenseCloseDefenceInitial+=unit.getCloseDefence();
+                defenseFarDefenceInitial+= unit.getFarDefence();
+
+
+            }
+
+            siegeCostInitial = defenseStrengthInitial * (defenseCloseDefenceInitial+defenseFarDefenceInitial);
+
+            atackStrength=atackStrengthInitial;
+            defenseStrength=defenseStrengthInitial;
+            siegeCost=siegeCostInitial;
+            recalculate();
+
+        }
+
+
+        void recalculate(){
+            atackCloseDamage=atackCloseDamageInitial*atackStrength;
+            defenseCloseDamage=defenseCloseDamageInitial*defenseStrength;
+            atackFarDamage=atackFarDamageInitial*atackStrength;
+            defenseFarDamage=defenseFarDamageInitial*defenseStrength;
+            atackCloseDefence=atackCloseDefenceInitial*atackStrength;
+            defenseCloseDefence=defenseCloseDefenceInitial*defenseStrength;
+            atackFarDefence=atackFarDefenceInitial*atackStrength;
+            defenseFarDefence=defenseFarDefenceInitial*defenseStrength;
+            siegeCost=siegeCostInitial*defenseStrength;
+        }
+
+        int calculateDefendersCasualties(){
+            int damage=0;
+            damage += atackCloseDamage - defenseCloseDefence;
+            damage += atackFarDamage - defenseFarDefence;
+            return damage;
+        }
+
+        int calculateAtackersCasualties(){
+            int damage=0;
+            damage += defenseCloseDamage - atackCloseDefence;
+            damage += defenseFarDamage - atackFarDefence;
+            return damage;
+        }
+
+        void turnPasses(){
+
+
+
+
+
+
+            recalculate();
+        }
+
+
+
+
+
+        }
+
+
 
 
 
