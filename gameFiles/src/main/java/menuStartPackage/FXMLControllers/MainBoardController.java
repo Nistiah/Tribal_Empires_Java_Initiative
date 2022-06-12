@@ -856,17 +856,28 @@ public class MainBoardController implements Initializable {
         buyProvinceFaith.setTranslateY(215);
         buyProvinceFaith.getStyleClass().add("colonizeButton");
 
-        Button recruitUnits = new Button("Units");
+        Button armies = new Button("Armies");
 
-        recruitUnits.setPrefWidth(205);
-        recruitUnits.setTranslateX(20);
-        recruitUnits.setTranslateY(275);
-        recruitUnits.getStyleClass().add("colonizeButton");
-        recruitUnits.setOnMouseClicked(e -> {
+        armies.setPrefWidth(205);
+        armies.setTranslateX(20);
+        armies.setTranslateY(275);
+        armies.getStyleClass().add("colonizeButton");
+        armies.setOnMouseClicked(e -> {
             provinceLowerPanel.getChildren().clear();
             City c1 = (City)temp;
             final int[] unitY = {0};
-            c1.getPossibleUnits().forEach(unit -> {
+            c1.army.forEach(army -> {
+                Button a = new Button(army.getName());
+                a.setTranslateY(unitY[0]);
+                a.setPrefWidth(299);
+                unitY[0] += 60;
+                provinceLowerPanel.getChildren().add(a);
+            });
+            Button newArmy = new Button("Add army");
+            newArmy.setTranslateY(unitY[0]);
+            newArmy.setPrefWidth(299);
+            provinceLowerPanel.getChildren().add(newArmy);
+            /*c1.getPossibleUnits().forEach(unit -> {
                 Button u = new Button(unit);
                 u.setTranslateY(unitY[0]);
                 u.setPrefWidth(150);
@@ -885,10 +896,10 @@ public class MainBoardController implements Initializable {
                         upgradeY[0] += 60;
                         provinceLowerPanel.getChildren().add(upgrade);
                     });
-                });
-                unitY[0] += 60;
-                provinceLowerPanel.getChildren().add(u);
-            });
+                });*/
+               // unitY[0] += 60;
+               // provinceLowerPanel.getChildren().add(a);
+           // });
 
 
         });
@@ -947,7 +958,7 @@ public class MainBoardController implements Initializable {
                 provinceUpperPanel.getChildren().add(colonize);
                 provinceUpperPanel.getChildren().add(buyProvinceGold);
                 provinceUpperPanel.getChildren().add(buyProvinceFaith);
-                provinceUpperPanel.getChildren().add(recruitUnits);
+                provinceUpperPanel.getChildren().add(armies);
             }
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 
