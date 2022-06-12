@@ -168,7 +168,7 @@
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="800.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -185,9 +185,9 @@
                         <TextField fx:id="attackersCasualties" styleClass="siege2" />
                         <TextField fx:id="rng" styleClass="siege2" GridPane.columnIndex="1" />
                         <TextField fx:id="defendersCasualties" styleClass="siege2" GridPane.columnIndex="2" />
-                        <TextFlow fx:id="attackersFlow" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                        <TextFlow fx:id="rngFlow" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextFlow fx:id="defendersFlow" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextFlow fx:id="attackersFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <TextFlow fx:id="rngFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <TextFlow fx:id="defendersFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                      </children>
                   </GridPane>
                </center>

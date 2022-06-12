@@ -273,12 +273,30 @@ public class City extends Province {
 
     Army army1 = new Army();
     Army army2 = new Army();
-    public Siege siege = new Siege();
+    public Siege siege = new Siege(1);
+
+    void defendersVictory(){
+        siege=null;
+    }
+    void attackersVictory(Army army, int id){
+        this.army.clear();
+        this.army.add(army);
+
+        ownerId=id;
+        provincelist.forEach(p->p.setOwnerId(id));
+        siege=null;
+
+
+    }
+
+
 
     public class Siege{
 
         public Army atackingArmy;
         public Army defendingArmy;
+
+        public int attackerId;
 
 
         int atackStrengthInitial=0;
@@ -398,7 +416,8 @@ public class City extends Province {
 //            this.atackingArmy=atackingArmy;
 //            this.defendingArmy=defendingArmy;
 //        }
-        Siege(){
+        Siege(int id){
+            attackerId=id;
             atackingArmy=new Army();
             defendingArmy=new Army();
 
@@ -525,6 +544,15 @@ public class City extends Province {
             atackStrength-=atkCasualties;
             defenseStrength-=defCasualties;
             recalculate();
+
+            if(atackStrength/atackStrengthInitial<0.25){
+                defendersVictory();
+            }
+            if(defenseStrength/defenseStrengthInitial<0.20){
+                attackersVictory(atackingArmy,attackerId);
+            }
+
+
         }
     }
 }

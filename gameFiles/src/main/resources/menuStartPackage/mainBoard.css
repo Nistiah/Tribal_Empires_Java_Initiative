@@ -694,7 +694,7 @@
 }
 .siege2{
     -fx-color: #474747;
-    -fx-font-size: 30;
+    -fx-font-size: 40;
     -fx-font-family: Manjari;
     -fx-background-color: transparent;
     -fx-alignment: center;
@@ -704,7 +704,7 @@
 }
 .siege2:hover{
     -fx-color: #474747;
-    -fx-font-size: 30;
+    -fx-font-size: 40;
     -fx-font-family: Manjari;
     -fx-background-color: transparent;
     -fx-alignment: center;

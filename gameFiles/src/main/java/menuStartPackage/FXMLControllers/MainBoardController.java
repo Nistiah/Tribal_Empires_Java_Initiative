@@ -1019,18 +1019,18 @@ public class MainBoardController implements Initializable {
                     attackersCasualties.setText("Attackers casualties " + tempCity.siege.atkCasualties);
                     rng.setText("RNG "+tempCity.siege.lastRng);
 
-                    Text rngDescription = new Text("Defenders Damage Modifier -  RNG  -  Attackers Damage Modifier");
-                    Text zero = new Text("200%  -  0  -  0%\n");
-                    Text one = new Text("160%  -  1  -  0%\n");
-                    Text two = new Text("120%  -  2  -  0%\n");
-                    Text three = new Text("100%  -  3  -  0%\n");
-                    Text four = new Text("100%  -  4  -  40%\n");
-                    Text five = new Text("100%  -  5  -  80%\n");
-                    Text six = new Text("90%  -  6  -  120%\n");
-                    Text seven = new Text("80%  -  7  -  180%\n");
-                    Text eight = new Text("70%  -  8  -  240%\n");
-                    Text nine = new Text("60%  -  9  -  320%\n");
-                    Text ten = new Text("50%  -  10  -  400%\n");
+                    Text rngDescription = new Text("Defenders Damage Modifier -  RNG  -  Attackers Damage Modifier\n\n");
+                    Text zero =     new Text("200%  -  0  -  0%  \n");
+                    Text one =      new Text("160%  -  1  -  0%  \n");
+                    Text two =      new Text("120%  -  2  -  0%  \n");
+                    Text three =    new Text("100%  -  3  -  0%  \n");
+                    Text four =     new Text("100%  -  4  -  40% \n");
+                    Text five =     new Text("100%  -  5  -  80% \n");
+                    Text six =      new Text("90%   -  6  -  120%\n");
+                    Text seven =    new Text("80%   -  7  -  180%\n");
+                    Text eight =    new Text("70%   -  8  -  240%\n");
+                    Text nine =     new Text("60%   -  9  -  320%\n");
+                    Text ten =      new Text("50%  -  10  -  400%\n");
 
                     rngDescription.setFont(Font.font(font, 18));
                     rngDescription.setFill(Color.GREY);
@@ -1101,7 +1101,7 @@ public class MainBoardController implements Initializable {
                     rngFlow.getChildren().addAll(rngDescription, zero, one, two, three, four, five, six, seven, eight, nine, ten);
                     rngFlow.setTextAlignment(TextAlignment.CENTER);
 
-                    Text defendersFlowDescription = new Text("Defenders Stats\n "+
+                    Text defendersFlowDescription = new Text("Defenders Stats\n\n "+
                             "Initial Far Damage "+tempCity.siege.getDefenseFarDamageInitial()+"\n"+
                             "Initial Far Defence"+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
                             "Initial Close Damage"+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
@@ -1118,7 +1118,7 @@ public class MainBoardController implements Initializable {
 
 
 
-                    Text attackersFlowDescription = new Text("Attackers Stats\n"+
+                    Text attackersFlowDescription = new Text("Attackers Stats\n\n"+
                             "Initial Far Damage "+tempCity.siege.getAtackFarDamageInitial()+"\n"+
                             "Initial Far Defence"+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
                             "Initial Close Damage"+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
