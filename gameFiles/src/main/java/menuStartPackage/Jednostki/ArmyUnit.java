@@ -11,10 +11,15 @@ public class ArmyUnit {
     protected int farDefence= 0;
     protected int closeAttack = 0;
     protected int closeDefence = 0;
+    String name ="";
 
     protected int amount = 0;
 
     private List<String> possibleUpgrades = Arrays.asList("Bronze Armor", "Iron Armor", "Banner");
+
+    public String getName() {
+        return name;
+    }
 
     public int getAmount() {
         return amount;

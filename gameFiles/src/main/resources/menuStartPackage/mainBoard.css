@@ -682,3 +682,13 @@
     -fx-text-fill: pink;
 
 }
+.siegeName{
+    -fx-color: #474747;
+    -fx-font-size: 60;
+    -fx-font-family: Manjari;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: grey;
+
+}

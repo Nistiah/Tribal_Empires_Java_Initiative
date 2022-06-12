@@ -1,7 +1,6 @@
 package menuStartPackage.Prowincje;
 
-import menuStartPackage.Jednostki.Army;
-import menuStartPackage.Jednostki.ArmyUnit;
+import menuStartPackage.Jednostki.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,7 @@ public class City extends Province {
     public static int    cityNamesAssyriaCounter  = 0;
     public static int    cityNamesEgyptCounter    = 0;
     public static int    cityNamesHittitesCounter = 0;
+
 
     public int           cityHp                   = 1000;
 
@@ -29,7 +29,7 @@ public class City extends Province {
                                                            "Temple",
                                                            "Warehouse");
 
-//    public Siege siege= null;
+
 
     private List<String> possibleUnits = Arrays.asList("Archers", "Chariots", "Infantry");
     public List<String> getPossibleUnits() {
@@ -270,17 +270,142 @@ public class City extends Province {
         this.population = population;
     }
 
-//    public class Siege{
-//
-//        private Army atackingArmy;
-//        private Army defendingArmy;
-//
+    Army army1 = new Army();
+    Army army2 = new Army();
+    public Siege siege = new Siege();
+
+    public class Siege{
+
+        public Army atackingArmy;
+        public Army defendingArmy;
+        int atackStrengthInitial=0;
+        int defenseStrengthInitial=0;
+
+        int atackCloseDamageInitial;
+        int defenseCloseDamageInitial;
+
+        int atackFarDamageInitial;
+        int defenseFarDamageInitial;
+
+        int atackCloseDefenceInitial;
+        int defenceCloseDefenceInitial=5;
+
+        int atackFarDefenceInitial;
+        int defenceFarDefenceInitial=2;
+
+
+        int atackStrength;
+        int defenseStrength;
+        int atackCloseDamage;
+        int defenseCloseDamage;
+        int atackFarDamage;
+        int defenseFarDamage;
+        int atackCloseDefence;
+        int defenceCloseDefence;
+        int atackFarDefence;
+        int defenceFarDefence;
+
+
+        public double getDefenseStrength() {
+            System.out.println(defenseStrength+ " "+ defenseStrengthInitial);
+            return (double)defenseStrength/defenseStrengthInitial*100;
+        }
+
+        public double getAtackStrength() {
+            return (double)atackStrength/atackStrengthInitial*100;
+        }
+
+        public int getAtackCloseDamage() {
+            return atackCloseDamage;
+        }
+
+        public int getDefenseCloseDamage() {
+            return defenseCloseDamage;
+        }
+
+        public int getAtackFarDamage() {
+            return atackFarDamage;
+        }
+
+        public int getDefenseFarDamage() {
+            return defenseFarDamage;
+        }
+
+        public int getAtackCloseDefence() {
+            return atackCloseDefence;
+        }
+
+        public int getDefenceCloseDefence() {
+            return defenceCloseDefence;
+        }
+
+        public int getAtackFarDefence() {
+            return atackFarDefence;
+        }
+
+        public int getDefenceFarDefence() {
+            return defenceFarDefence;
+        }
+
+
+
 //        Siege(Army atackingArmy, Army defendingArmy){
 //            this.atackingArmy=atackingArmy;
 //            this.defendingArmy=defendingArmy;
 //        }
-//
-//        }
+        Siege(){
+            atackingArmy=new Army();
+            defendingArmy=new Army();
+
+            atackingArmy.addUnit(new Archer());
+            atackingArmy.addUnit(new Infantry());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+
+            defendingArmy.addUnit(new Archer());
+            defendingArmy.addUnit(new Infantry());
+            defendingArmy.addUnit(new Chariots());
+
+            for(ArmyUnit unit: atackingArmy.getUnits()){
+                atackStrengthInitial+=unit.getLife();
+                atackCloseDamageInitial+=unit.getCloseAttack();
+                atackFarDamageInitial+=unit.getFarAttack();
+                atackCloseDefenceInitial+=unit.getCloseDefence();
+                atackFarDefenceInitial+= unit.getFarDefence();
+            }
+            for (ArmyUnit unit:defendingArmy.getUnits()){
+                defenseStrengthInitial+=unit.getLife();
+                defenseStrengthInitial+=unit.getCloseAttack();
+                defenseStrengthInitial+=unit.getFarAttack();
+                defenseStrengthInitial+=unit.getCloseDefence();
+                defenseStrengthInitial+= unit.getFarDefence();
+            }
+
+            atackStrength=atackStrengthInitial;
+            defenseStrength=defenseStrengthInitial;
+
+            recalculateDamage();
+
+        }
+
+
+        void recalculateDamage(){
+            atackCloseDamage=atackCloseDamageInitial*atackStrength;
+            defenseCloseDamage=defenseCloseDamageInitial*defenseStrength;
+            atackFarDamage=atackFarDamageInitial*atackStrength;
+            defenseFarDamage=defenseFarDamageInitial*defenseStrength;
+            atackCloseDefence=atackCloseDefenceInitial*atackStrength;
+            defenceCloseDefence=defenceCloseDefenceInitial*defenseStrength;
+            atackFarDefence=atackFarDefenceInitial*atackStrength;
+            defenceFarDefence=defenceFarDefenceInitial*defenseStrength;
+        }
+
+
+
+
+        }
+
+
 
 
 
