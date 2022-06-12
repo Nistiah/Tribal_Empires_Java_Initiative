@@ -9,8 +9,10 @@ public class City extends Province {
     public static int    cityNamesEgyptCounter    = 0;
     public static int    cityNamesHittitesCounter = 0;
 
+    public int           cityHp                   = 1000;
+
     private int          population               = 1;
-    public double       popGrowthCostMultiplier  = 1;
+    public double        popGrowthCostMultiplier  = 1;
     public double        popGrowthCost            = 5;
     public double        currentPopGrowth         = 0;
     private final double popGrowthScaler          = 1.1;
@@ -23,6 +25,8 @@ public class City extends Province {
                                                            "Barracks",
                                                            "Temple",
                                                            "Warehouse");
+
+//    public Siege siege= null;
 
     private List<String> possibleUnits = Arrays.asList("Archers", "Chariots", "Infantry");
     public List<String> getPossibleUnits() {
@@ -245,4 +249,24 @@ public class City extends Province {
     public void setPopulation(int population) {
         this.population = population;
     }
+
+//    public class Siege{
+//
+//        private Army atackingArmy;
+//        private Army defendingArmy;
+//
+//        Siege(Army atackingArmy, Army defendingArmy){
+//            this.atackingArmy=atackingArmy;
+//            this.defendingArmy=defendingArmy;
+//        }
+//
+//        }
+
+
+
+
+
+
+
+
 }

@@ -175,7 +175,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text(city.getName() + " dyes production " + city.getBronze() + "\n");
+            Text text = new Text(city.getName() + " bronze production " + city.getBronze() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -376,7 +376,7 @@ public class MainBoardController implements Initializable {
     void horseEntered() {
         horseTextFlow.setVisible(true);
 
-        Text baseProduction = new Text("Base dyes production " + Player.baseHorsesProduction + "\n");
+        Text baseProduction = new Text("Base horses production " + Player.baseHorsesProduction + "\n");
 
         baseProduction.setFont(Font.font(font, 18));
         baseProduction.setFill(Color.GREY);
@@ -387,7 +387,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text("City " + city.getName() + "horse production" + (int)city.getHorses() + "\n");
+            Text text = new Text("City " + city.getName() + "horses production" + (int)city.getHorses() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -405,7 +405,7 @@ public class MainBoardController implements Initializable {
     void ironEntered() {
         ironTextFlow.setVisible(true);
 
-        Text baseProduction = new Text("Base dyes production " + Player.baseIronProduction + "\n");
+        Text baseProduction = new Text("Base iron production " + Player.baseIronProduction + "\n");
 
         baseProduction.setFont(Font.font(font, 18));
         baseProduction.setFill(Color.GREY);
@@ -416,7 +416,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text(city.getName() + " dyes production " + city.getIron() + "\n");
+            Text text = new Text(city.getName() + " iron production " + city.getIron() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
