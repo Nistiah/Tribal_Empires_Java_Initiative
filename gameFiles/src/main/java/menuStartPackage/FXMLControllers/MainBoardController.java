@@ -926,6 +926,14 @@ public class MainBoardController implements Initializable {
                 peace.setTranslateY(75);
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(peace);
+
+
+                Button siege = new Button("Siege");
+                siege.setPrefWidth(299);
+                siege.setTranslateX(0);
+                siege.setTranslateY(150);
+                //war.getStyleClass().add("colonizeButton");
+                provinceUpperPanel.getChildren().add(siege);
             }
         }
 
