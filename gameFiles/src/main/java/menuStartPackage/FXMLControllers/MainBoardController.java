@@ -1026,11 +1026,11 @@ public class MainBoardController implements Initializable {
                     Text three =    new Text("100%  -  3  -  0%  \n");
                     Text four =     new Text("100%  -  4  -  40% \n");
                     Text five =     new Text("100%  -  5  -  80% \n");
-                    Text six =      new Text("90%   -  6  -  120%\n");
-                    Text seven =    new Text("80%   -  7  -  180%\n");
-                    Text eight =    new Text("70%   -  8  -  240%\n");
-                    Text nine =     new Text("60%   -  9  -  320%\n");
-                    Text ten =      new Text("50%  -  10  -  400%\n");
+                    Text six =      new Text("  90%   -  6  -  120%\n");
+                    Text seven =    new Text("  80%   -  7  -  180%\n");
+                    Text eight =    new Text("  70%   -  8  -  240%\n");
+                    Text nine =     new Text("  60%   -  9  -  320%\n");
+                    Text ten =      new Text("  50%   - 10 -  400%\n");
 
                     rngDescription.setFont(Font.font(font, 18));
                     rngDescription.setFill(Color.GREY);
@@ -1103,14 +1103,14 @@ public class MainBoardController implements Initializable {
 
                     Text defendersFlowDescription = new Text("Defenders Stats\n\n "+
                             "Initial Far Damage "+tempCity.siege.getDefenseFarDamageInitial()+"\n"+
-                            "Initial Far Defence"+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
-                            "Initial Close Damage"+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
-                            "Initial Close Defence"+tempCity.siege.getDefenseCloseDefenceInitial()+"\n"+
+                            "Initial Far Defence "+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
+                            "Initial Close Damage "+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
+                            "Initial Close Defence "+tempCity.siege.getDefenseCloseDefenceInitial()+"\n"+
 
-                            "\nFinal Far Damage"+tempCity.siege.getDefenseFarDamage()+"\n"+
-                            "Final Far Defence"+tempCity.siege.getDefenceFarDefence()+"\n"+
-                            "Final Close Damage"+tempCity.siege.getDefenseCloseDamage()+"\n"+
-                            "Final Close Defence"+tempCity.siege.getDefenceCloseDefence()+"\n"
+                            "\nFinal Far Damage "+tempCity.siege.getDefenseFarDamage()+"\n"+
+                            "Final Far Defence "+tempCity.siege.getDefenceFarDefence()+"\n"+
+                            "Final Close Damage "+tempCity.siege.getDefenseCloseDamage()+"\n"+
+                            "Final Close Defence "+tempCity.siege.getDefenceCloseDefence()+"\n"
                             );
                     defendersFlowDescription.setFont(Font.font(font, 18));
                     defendersFlowDescription.setFill(Color.GREY);
@@ -1120,14 +1120,14 @@ public class MainBoardController implements Initializable {
 
                     Text attackersFlowDescription = new Text("Attackers Stats\n\n"+
                             "Initial Far Damage "+tempCity.siege.getAtackFarDamageInitial()+"\n"+
-                            "Initial Far Defence"+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
-                            "Initial Close Damage"+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
-                            "Initial Close Defence"+tempCity.siege.getAtackCloseDefenceInitial()+"\n"+
+                            "Initial Far Defence "+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
+                            "Initial Close Damage "+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
+                            "Initial Close Defence "+tempCity.siege.getAtackCloseDefenceInitial()+"\n"+
 
-                            "\nFinal Far Damage"+tempCity.siege.getAtackFarDamage()+"\n"+
-                            "Final Far Defence"+tempCity.siege.getAtackFarDefence()+"\n"+
-                            "Final Close Damage"+tempCity.siege.getAtackCloseDamage()+"\n"+
-                            "Final Close Defence"+tempCity.siege.getAtackCloseDefence()+"\n"
+                            "\nFinal Far Damage "+tempCity.siege.getAtackFarDamage()+"\n"+
+                            "Final Far Defence "+tempCity.siege.getAtackFarDefence()+"\n"+
+                            "Final Close Damage "+tempCity.siege.getAtackCloseDamage()+"\n"+
+                            "Final Close Defence "+tempCity.siege.getAtackCloseDefence()+"\n"
                             );
                     attackersFlowDescription.setFont(Font.font(font, 18));
                     attackersFlowDescription.setFill(Color.GREY);

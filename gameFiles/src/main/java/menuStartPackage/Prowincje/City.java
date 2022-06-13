@@ -243,6 +243,7 @@ public class City extends Province {
 
         for (Province province : provincelist) {
             retIron += province.getIron();
+
         }
 
         return retIron;
