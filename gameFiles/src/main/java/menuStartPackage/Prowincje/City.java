@@ -43,7 +43,9 @@ public class City extends Province {
     {
         Army defArmy = new Army();
         defArmy.setName("Base army");
+
         defArmy.setIsDeafult();
+
         this.army.add(defArmy);
     }
 
