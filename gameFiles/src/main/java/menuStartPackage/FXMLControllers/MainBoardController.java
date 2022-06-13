@@ -44,11 +44,14 @@ import static javafx.scene.paint.Color.rgb;
 import hexagons.src.main.java.com.prettybyte.hexagons.Hexagon;
 import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
+import menuStartPackage.Jednostki.*;
+
 import menuStartPackage.Jednostki.Army;
 import menuStartPackage.Jednostki.ArmyUnit;
 import menuStartPackage.Jednostki.Chariots;
 import menuStartPackage.Jednostki.Infantry;
 import menuStartPackage.Jednostki.Archer;
+
 import menuStartPackage.Prowincje.*;
 
 import menuStartPackage.player.Player;
@@ -453,10 +456,14 @@ public class MainBoardController implements Initializable {
 
         if (tourCounter.getTour() == 0) {    // /stats pane regulator
             PlayerData tmp = new PlayerData(currentPlayer.getName());
-            tmp.addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
+            tmp.addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces(), currentPlayer.getPopulation());
             addPlayer(tmp);
         } else {
-            playerStats.get(playerId - 1).addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces());
+            if(!currentPlayer.playerDead) {
+                playerStats.get(playerId - 1).addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces(), currentPlayer.getPopulation());
+            }else{
+                playerStats.get(playerId - 1).addInfo((int) 0, 0, 0);
+            }
         }
 
         playerId++;
@@ -519,6 +526,11 @@ public class MainBoardController implements Initializable {
             cityCoordinatesLock=false;
         }
         fullMapBorderCleaning();
+        currentPlayer.checkIfPlayerDead();
+        if(currentPlayer.playerDead) {
+            nextPlayerButton();
+        }
+
     }
 
     private Province provinceBuilder(String name, int owner) {
@@ -594,16 +606,20 @@ public class MainBoardController implements Initializable {
         String          name;
         Vector<Integer> goldPerTour;
         Vector<Integer> numberOfProvincesPerTour;
+        Vector<Integer> numberOfPopsPerTour;
 
         PlayerData(String tmp) {
             this.name                = tmp;
             goldPerTour              = new Vector<>();
             numberOfProvincesPerTour = new Vector<>();
+            numberOfPopsPerTour      = new Vector<>();
         }
 
-        public void addInfo(int gold, int numberOfProvinces) {
+        public void addInfo(int gold, int numberOfProvinces, int pops) {
             goldPerTour.add(gold);
             numberOfProvincesPerTour.add(numberOfProvinces);
+            numberOfPopsPerTour.add(pops);
+
         }
     }
     Player player1 = new Player("Egypt");
@@ -895,6 +911,11 @@ public class MainBoardController implements Initializable {
                 siege.setTranslateX(0);
                 siege.setTranslateY(150);
                 siege.setOnMouseClicked(e ->{
+                    City tempCity = (City)temphex.getProvince();
+                    if(tempCity.siege==null){
+                        return;
+                    }
+                    siegePane.setVisible(true);
                     attackersFlow.getChildren().clear();
                     defendersFlow.getChildren().clear();
                     rngFlow.getChildren().clear();
@@ -902,8 +923,8 @@ public class MainBoardController implements Initializable {
                     siegeAtack.getChildren().clear();
                     siegeDefence.getChildren().clear();
 
-                    siegePane.setVisible(true);
-                    City tempCity = (City)temphex.getProvince();
+
+
 //                    siegeName.clear();
                     siegeName.setText("Siege of " + tempCity.getName());
                     Text atackForces = new Text("Besieging Army\n");
@@ -1037,12 +1058,14 @@ public class MainBoardController implements Initializable {
                     rngFlow.setTextAlignment(TextAlignment.CENTER);
 
                     Text defendersFlowDescription = new Text("Defenders Stats\n\n "+
+                            "Initial Strength "+tempCity.siege.getDefenceStrenghtInitial()+"\n"+
                             "Initial Far Damage "+tempCity.siege.getDefenseFarDamageInitial()+"\n"+
                             "Initial Far Defence"+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
                             "Initial Close Damage"+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
                             "Initial Close Defence"+tempCity.siege.getDefenseCloseDefenceInitial()+"\n"+
 
-                            "\nFinal Far Damage"+tempCity.siege.getDefenseFarDamage()+"\n"+
+                            "\nMean Strength "+tempCity.siege.getDefenceStrenghtMean()+"\n"+
+                            "Final Far Damage"+tempCity.siege.getDefenseFarDamage()+"\n"+
                             "Final Far Defence"+tempCity.siege.getDefenceFarDefence()+"\n"+
                             "Final Close Damage"+tempCity.siege.getDefenseCloseDamage()+"\n"+
                             "Final Close Defence"+tempCity.siege.getDefenceCloseDefence()+"\n"
@@ -1054,12 +1077,14 @@ public class MainBoardController implements Initializable {
 
 
                     Text attackersFlowDescription = new Text("Attackers Stats\n\n"+
+                            "Initial Strength "+tempCity.siege.getAttackStrenghtInitial()+"\n"+
                             "Initial Far Damage "+tempCity.siege.getAtackFarDamageInitial()+"\n"+
                             "Initial Far Defence"+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
                             "Initial Close Damage"+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
                             "Initial Close Defence"+tempCity.siege.getAtackCloseDefenceInitial()+"\n"+
 
-                            "\nFinal Far Damage"+tempCity.siege.getAtackFarDamage()+"\n"+
+                            "\nMean Strength "+tempCity.siege.getAtackStrenghtMean()+"\n"+
+                            "Final Far Damage"+tempCity.siege.getAtackFarDamage()+"\n"+
                             "Final Far Defence"+tempCity.siege.getAtackFarDefence()+"\n"+
                             "Final Close Damage"+tempCity.siege.getAtackCloseDamage()+"\n"+
                             "Final Close Defence"+tempCity.siege.getAtackCloseDefence()+"\n"
@@ -1585,6 +1610,109 @@ public class MainBoardController implements Initializable {
         upgradeInfantry.setDisable(isInfantry[0] != 1);
 
 
+    void armiesClicked(City city)
+    {
+        provinceLowerPanel.getChildren().clear();
+        final int[] unitY = {0};
+        city.army.forEach(army -> {
+            Button a = new Button(army.getName());
+            a.setTranslateY(unitY[0]);
+            a.setPrefWidth(299);
+            unitY[0] += 60;
+            a.setOnMouseClicked(e2 -> {
+                singleArmyClicked(army);
+            });
+            provinceLowerPanel.getChildren().add(a);
+        });
+        Button newArmy = new Button("Add army");
+        newArmy.setTranslateY(unitY[0]);
+        newArmy.setPrefWidth(299);
+        newArmy.setOnMouseClicked(e1 -> {
+            Army addNewArmy = new Army();
+            city.addArmy(addNewArmy);
+
+            provinceLowerPanel.getChildren().clear();
+            unitY[0] = 0;
+            city.army.forEach(army -> {
+                Button a = new Button(army.getName());
+                a.setTranslateY(unitY[0]);
+                a.setPrefWidth(299);
+                a.setOnMouseClicked(e2 -> {
+                    provinceLowerPanel.getChildren().clear();
+                    singleArmyClicked(army);
+                });
+                unitY[0] += 60;
+                newArmy.setTranslateY(unitY[0]);
+                provinceLowerPanel.getChildren().add(a);
+                provinceLowerPanel.getChildren().remove(newArmy);
+                provinceLowerPanel.getChildren().add(newArmy);
+            });
+        });
+        if(!provinceLowerPanel.getChildren().contains(newArmy))provinceLowerPanel.getChildren().add(newArmy);
+    }
+
+    void singleArmyClicked(Army army)
+    {
+        provinceLowerPanel.getChildren().clear();
+
+        //ARCHERS AMOUNT
+        TextField archersAmount = new TextField("" + army.getArchersAmount());
+        archersAmount.getStyleClass().add("armyArcher");
+        archersAmount.setTranslateY(10);
+        archersAmount.setTranslateX(55);
+        archersAmount.setFont(Font.font(font,16));
+        archersAmount.setPrefWidth(50);
+        archersAmount.setEditable(false);
+        archersAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        //CHARIOTS AMOUNT
+        TextField chariotsAmount = new TextField("" + army.getChariotsAmount());
+        chariotsAmount.getStyleClass().add("armyChariot");
+        chariotsAmount.setTranslateY(10);
+        chariotsAmount.setTranslateX(105);
+        chariotsAmount.setFont(Font.font(font,16));
+        chariotsAmount.setPrefWidth(80);
+        chariotsAmount.setEditable(false);
+        chariotsAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        //WARRIORS AMOUNT
+        TextField warriorsAmount = new TextField("" + army.getWarriorsAmount());
+        warriorsAmount.getStyleClass().add("armyWarrior");
+        warriorsAmount.setTranslateY(10);
+        warriorsAmount.setTranslateX(185);
+        warriorsAmount.setFont(Font.font(font,16));
+        warriorsAmount.setPrefWidth(50);
+        warriorsAmount.setEditable(false);
+        warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
+
+        Button recruitArchers = new Button("Recruit Archers");
+        recruitArchers.setTranslateY(50);
+        recruitArchers.setPrefWidth(299);
+        recruitArchers.setOnMouseClicked(e3 -> {
+            army.addUnit(new Archer());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+
+        Button recruitChariots = new Button("Recruit Chariots");
+        recruitChariots.setTranslateY(110);
+        recruitChariots.setPrefWidth(299);
+        recruitChariots.setOnMouseClicked(e3 -> {
+            army.addUnit(new Chariots());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+
+        Button recruitInfantry = new Button("Recruit Infantry");
+        recruitInfantry.setTranslateY(170);
+        recruitInfantry.setPrefWidth(299);
+        recruitInfantry.setOnMouseClicked(e3 -> {
+            army.addUnit(new Infantry());
+            provinceLowerPanel.getChildren().clear();
+            singleArmyClicked(army);
+        });
+
+
 
         Button sentArmyToSiege = new Button("Sent army to siege");
         sentArmyToSiege.setTranslateY(410);
@@ -1595,6 +1723,7 @@ public class MainBoardController implements Initializable {
         });
         sentArmyToSiege.setDisable(army.getUnits().size() == 0);
 
+
         provinceLowerPanel.getChildren().add(archersAmount);
         provinceLowerPanel.getChildren().add(chariotsAmount);
         provinceLowerPanel.getChildren().add(warriorsAmount);
@@ -1602,6 +1731,7 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(recruitArchers);
         provinceLowerPanel.getChildren().add(recruitChariots);
         provinceLowerPanel.getChildren().add(recruitInfantry);
+
 
         provinceLowerPanel.getChildren().add(upgradeArchers);
         provinceLowerPanel.getChildren().add(upgradeChariots);
@@ -1697,6 +1827,7 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(upgradeToLvl2);
         provinceLowerPanel.getChildren().add(upgradeToLvl3);
     }
+
     
 
     private void shortcuts(KeyEvent event) {
