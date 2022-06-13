@@ -77,6 +77,7 @@ public class City extends Province {
             population++;
             popGrowthCost=popGrowthCost*popGrowthScaler;
         }
+        siege.turnPasses();
     }
 
     public City(int id) {
@@ -272,19 +273,69 @@ public class City extends Province {
 
     Army army1 = new Army();
     Army army2 = new Army();
-    public Siege siege = new Siege();
+    public Siege siege = new Siege(1);
+
+    void defendersVictory(){
+        siege=null;
+    }
+    void attackersVictory(Army army, int id){
+        this.army.clear();
+        this.army.add(army);
+
+        ownerId=id;
+        provincelist.forEach(p->p.setOwnerId(id));
+        siege=null;
+
+
+    }
+
+
 
     public class Siege{
 
         public Army atackingArmy;
         public Army defendingArmy;
 
-        double siegeCostInitial=50;
+        public int attackerId;
+
 
         int atackStrengthInitial=0;
         int defenseStrengthInitial=0;
 
         double atackCloseDamageInitial=0;
+
+        public double getAtackCloseDamageInitial() {
+            return round(atackCloseDamageInitial,1);
+        }
+
+        public double getDefenseCloseDamageInitial() {
+            return round(defenseCloseDamageInitial,1);
+        }
+
+        public double getAtackFarDamageInitial() {
+            return round(atackFarDamageInitial,1);
+        }
+
+        public double getDefenseFarDamageInitial() {
+            return round(defenseFarDamageInitial,1);
+        }
+
+        public double getAtackCloseDefenceInitial() {
+            return round(atackCloseDefenceInitial,1);
+        }
+
+        public double getDefenseCloseDefenceInitial() {
+            return round(defenseCloseDefenceInitial,1);
+        }
+
+        public double getAtackFarDefenceInitial() {
+            return round(atackFarDefenceInitial,1);
+        }
+
+        public double getDefenseFarDefenceInitial() {
+            return round(defenseFarDefenceInitial,1);
+        }
+
         double defenseCloseDamageInitial=0;
 
         double atackFarDamageInitial=0;
@@ -296,7 +347,7 @@ public class City extends Province {
         double atackFarDefenceInitial=0;
         double defenseFarDefenceInitial=2;
 
-        double siegeCost;
+
         double atackStrength;
         double defenseStrength;
         double atackCloseDamage;
@@ -308,46 +359,55 @@ public class City extends Province {
         double atackFarDefence;
         double defenseFarDefence;
 
+        public double round(double value, int places) {
+            if (places < 0) throw new IllegalArgumentException();
+
+            long factor = (long) Math.pow(10, places);
+            value = value * factor;
+            long tmp = Math.round(value);
+            return (double) tmp / factor;
+        }
+
 
         public double getDefenseStrength() {
             System.out.println(defenseStrength+ " "+ defenseStrengthInitial);
-            return (double)defenseStrength/defenseStrengthInitial*100;
+            return round((double)defenseStrength/defenseStrengthInitial*100,1);
         }
 
         public double getAtackStrength() {
-            return (double)atackStrength/atackStrengthInitial*100;
+            return round((double)atackStrength/atackStrengthInitial*100,1);
         }
 
         public double getAtackCloseDamage() {
-            return atackCloseDamage;
+            return round( atackCloseDamage,1);
         }
 
         public double getDefenseCloseDamage() {
-            return defenseCloseDamage;
+            return round(defenseCloseDamage,1);
         }
 
         public double getAtackFarDamage() {
-            return atackFarDamage;
+            return round(atackFarDamage,1);
         }
 
         public double getDefenseFarDamage() {
-            return defenseFarDamage;
+            return round(defenseFarDamage,1);
         }
 
         public double getAtackCloseDefence() {
-            return atackCloseDefence;
+            return round(atackCloseDefence,1);
         }
 
         public double getDefenceCloseDefence() {
-            return defenseCloseDefence;
+            return round(defenseCloseDefence,1);
         }
 
         public double getAtackFarDefence() {
-            return atackFarDefence;
+            return round(atackFarDefence,1);
         }
 
         public double getDefenceFarDefence() {
-            return defenseFarDefence;
+            return round(defenseFarDefence,1);
         }
 
 
@@ -356,7 +416,8 @@ public class City extends Province {
 //            this.atackingArmy=atackingArmy;
 //            this.defendingArmy=defendingArmy;
 //        }
-        Siege(){
+        Siege(int id){
+            attackerId=id;
             atackingArmy=new Army();
             defendingArmy=new Army();
 
@@ -386,26 +447,23 @@ public class City extends Province {
 
             }
 
-            siegeCostInitial = defenseStrengthInitial * (defenseCloseDefenceInitial+defenseFarDefenceInitial);
-
             atackStrength=atackStrengthInitial;
             defenseStrength=defenseStrengthInitial;
-            siegeCost=siegeCostInitial;
             recalculate();
 
         }
 
 
         void recalculate(){
-            atackCloseDamage=atackCloseDamageInitial*atackStrength;
-            defenseCloseDamage=defenseCloseDamageInitial*defenseStrength;
-            atackFarDamage=atackFarDamageInitial*atackStrength;
-            defenseFarDamage=defenseFarDamageInitial*defenseStrength;
-            atackCloseDefence=atackCloseDefenceInitial*atackStrength;
-            defenseCloseDefence=defenseCloseDefenceInitial*defenseStrength;
-            atackFarDefence=atackFarDefenceInitial*atackStrength;
-            defenseFarDefence=defenseFarDefenceInitial*defenseStrength;
-            siegeCost=siegeCostInitial*defenseStrength;
+            atackCloseDamage=atackCloseDamageInitial*atackStrength/atackStrengthInitial;
+            defenseCloseDamage=defenseCloseDamageInitial*defenseStrength/defenseStrengthInitial;
+            atackFarDamage=atackFarDamageInitial*atackStrength/atackStrengthInitial;
+            defenseFarDamage=defenseFarDamageInitial*defenseStrength/defenseStrengthInitial;
+            atackCloseDefence=atackCloseDefenceInitial*atackStrength/atackStrengthInitial;
+            defenseCloseDefence=defenseCloseDefenceInitial*defenseStrength/defenseStrengthInitial;
+            atackFarDefence=atackFarDefenceInitial*atackStrength/atackStrengthInitial;
+            defenseFarDefence=defenseFarDefenceInitial*defenseStrength/defenseStrengthInitial;
+
         }
 
         int calculateDefendersCasualties(){
@@ -422,29 +480,79 @@ public class City extends Province {
             return damage;
         }
 
+        public int lastRng=-1;
+        public double  defCasualties;
+        public double  atkCasualties;
+
         void turnPasses(){
+            double defModifier;
+            double atkModifier;
+            atackStrength*=0.95;
+            defenseStrength*=0.9;
 
+            lastRng=(int)(Math.random()*10);
+            switch (lastRng){
+                case 0:
+                    defModifier=2;
+                    atkModifier=0;
+                    break;
+                case 1:
+                    defModifier=1.6;
+                    atkModifier=0;
+                    break;
+                case 2:
+                    defModifier=1.2;
+                    atkModifier=0;
+                    break;
+                case 3:
+                    defModifier=1;
+                    atkModifier=0.1;
+                    break;
+                case 4:
+                    defModifier=1;
+                    atkModifier=0.4;
+                    break;
+                case 5:
+                    defModifier=1;
+                    atkModifier=0.8;
+                    break;
+                case 6:
+                    defModifier=0.9;
+                    atkModifier=1.2;
+                    break;
+                case 7:
+                    defModifier=0.8;
+                    atkModifier=1.8;
+                    break;
+                case 8:
+                    defModifier=0.7;
+                    atkModifier=2.4;
+                    break;
+                case 9:
+                    defModifier=0.6;
+                    atkModifier=3.2;
+                    break;
+                default:
+                    defModifier=0.5;
+                    atkModifier=4;
+                    break;
+            }
 
+            defCasualties=round(Math.abs(calculateDefendersCasualties()*atkModifier),1);
+            atkCasualties=Math.abs(calculateAtackersCasualties()*defModifier);
 
-
-
-
+            atackStrength-=atkCasualties;
+            defenseStrength-=defCasualties;
             recalculate();
+
+            if(atackStrength/atackStrengthInitial<0.25){
+                defendersVictory();
+            }
+            if(defenseStrength/defenseStrengthInitial<0.20){
+                attackersVictory(atackingArmy,attackerId);
+            }
+
+
         }
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
+    }
 }

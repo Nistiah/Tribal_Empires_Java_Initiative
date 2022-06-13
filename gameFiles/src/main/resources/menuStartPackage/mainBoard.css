@@ -692,3 +692,23 @@
     -fx-text-fill: grey;
 
 }
+.siege2{
+    -fx-color: #474747;
+    -fx-font-size: 40;
+    -fx-font-family: Manjari;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill:pink;
+
+}
+.siege2:hover{
+    -fx-color: #474747;
+    -fx-font-size: 40;
+    -fx-font-family: Manjari;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: grey;
+
+}
