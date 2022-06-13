@@ -699,3 +699,26 @@
 .scrollPanePanel{
     -fx-background: rgb(2,0,36,1);
 }
+
+.siegeImage{
+    -fx-background-image:url('O_cerco_de_Lisboa_Roque_Gameiro.png');
+    -fx-background-size: 80% 95%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+    /*-fx-background-color: #474747;*/
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+
+}
+.siegeName{
+    -fx-color: #474747;
+    -fx-font-size: 60;
+    -fx-font-family: Manjari;
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+    -fx-text-decoration: bold;
+    -fx-text-fill: grey;
+
+}

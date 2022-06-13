@@ -11,7 +11,7 @@ public class ArmyUnit {
     protected int farDefence= 0;
     protected int closeAttack = 0;
     protected int closeDefence = 0;
-    String name = "";
+    String name ="";
 
     protected int amount = 0;
 

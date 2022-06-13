@@ -13,4 +13,5 @@ public class Chariots extends ArmyUnit{
         int farDefence = 2;
         setFarDefence(farDefence);
     }
+
 }
