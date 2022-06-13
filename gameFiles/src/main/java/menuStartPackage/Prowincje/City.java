@@ -78,6 +78,9 @@ public class City extends Province {
             population++;
             popGrowthCost=popGrowthCost*popGrowthScaler;
         }
+        if(siege==null){
+            return;
+        }
         siege.turnPasses();
     }
 
@@ -426,6 +429,11 @@ public class City extends Province {
             atackingArmy.addUnit(new Infantry());
             atackingArmy.addUnit(new Chariots());
             atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+
 
             defendingArmy.addUnit(new Archer());
             defendingArmy.addUnit(new Infantry());
@@ -444,9 +452,9 @@ public class City extends Province {
                 defenseFarDamageInitial+=unit.getFarAttack();
                 defenseCloseDefenceInitial+=unit.getCloseDefence();
                 defenseFarDefenceInitial+= unit.getFarDefence();
-
-
             }
+            atackStrengthInitial*=2;
+            defenseStrengthInitial*=2;
 
             atackStrength=atackStrengthInitial;
             defenseStrength=defenseStrengthInitial;
@@ -554,6 +562,22 @@ public class City extends Province {
             }
 
 
+        }
+
+        public String getDefenceStrenghtInitial() {
+            return round(defenseStrengthInitial,1)+"";
+        }
+
+        public String getDefenceStrenghtMean() {
+            return round(defenseStrength,1)+"";
+        }
+
+        public String getAttackStrenghtInitial() {
+            return round(atackStrengthInitial,1)+"";
+        }
+
+        public String getAtackStrenghtMean() {
+            return round(atackStrength,1)+"";
         }
     }
 }
