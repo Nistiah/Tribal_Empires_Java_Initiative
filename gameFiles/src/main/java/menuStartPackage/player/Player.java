@@ -11,6 +11,8 @@ import menuStartPackage.Prowincje.City;
 
 public class Player {
 
+    public boolean playerDead = false;
+
     public static final int baseGoldProduction              = 1;
     public static final int baseBeliefProduction            = 0;
     public static final int baseBuildingResourcesProduction = 1;
@@ -36,6 +38,19 @@ public class Player {
     // tu dodac trzeba bedzie frakcje tez, ale gosix musi zrobic klase matke bo kurde polimorfizm konieczny
     private String   name;
     private Fraction fraction;
+
+    public void checkIfPlayerDead() {
+        int numberOfCities=0;
+        for(City city : cityList) {
+            if(city.getOwnerId()==id) {
+                numberOfCities++;
+            }
+        }
+        if(numberOfCities==0) {
+            playerDead=true;
+        }
+    }
+
 
     public Player(String name) {
         this.setName(name);
@@ -285,4 +300,12 @@ public class Player {
 
         return retWood;
     }
+    public int getPopulation() {
+        int population = 0;
+        for(City city: cityList){
+            population += city.getPopulation();
+        }
+        return population;
+    }
+
 }

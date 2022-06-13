@@ -34,10 +34,15 @@ public class StatsController implements Initializable {
     private XYChart.Series series4= new XYChart.Series();
     private XYChart.Series series5= new XYChart.Series();
     private XYChart.Series series6= new XYChart.Series();
+    private XYChart.Series series7= new XYChart.Series();
+    private XYChart.Series series8= new XYChart.Series();
+    private XYChart.Series series9= new XYChart.Series();
     @FXML
     private LineChart<String, Integer>                   chart1;
     @FXML
     private LineChart<String, Integer>                   chart2;
+    @FXML
+    private LineChart<String, Integer>                   chart3;
 
     public static void addPlayer(MainBoardController.PlayerData tmp) {
         playerStats.add(tmp);
@@ -74,6 +79,9 @@ public class StatsController implements Initializable {
         series4.setName(playerList.get(0).getName());
         series5.setName(playerList.get(1).getName());
         series6.setName(playerList.get(2).getName());
+        series7.setName(playerList.get(0).getName());
+        series8.setName(playerList.get(1).getName());
+        series9.setName(playerList.get(2).getName());
 
         for (Integer element : playerStats.get(0).goldPerTour) {
             series1.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
@@ -83,6 +91,12 @@ public class StatsController implements Initializable {
         i = 0;
         for (Integer element : playerStats.get(0).numberOfProvincesPerTour) {
             series4.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
+            i++;
+        }
+
+        i = 0;
+        for (Integer element : playerStats.get(0).numberOfPopsPerTour) {
+            series7.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
             i++;
         }
 
@@ -100,6 +114,12 @@ public class StatsController implements Initializable {
         }
 
         i = 0;
+        for (Integer element : playerStats.get(1).numberOfPopsPerTour) {
+            series8.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
+            i++;
+        }
+
+        i = 0;
 
         for (Integer element : playerStats.get(2).goldPerTour) {
             series3.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
@@ -113,11 +133,23 @@ public class StatsController implements Initializable {
             i++;
         }
 
+        i = 0;
+
+        for (Integer element : playerStats.get(2).numberOfPopsPerTour) {
+            series9.getData().add(new XYChart.Data<String, Integer>(i.toString(), element));
+            i++;
+        }
+
+
+
+
         chart2.setTitle("Cities per Turn");
         chart1.setTitle("Gold Per Turn");
+        chart3.setTitle("Population Per Turn");
 
         chart1.getData().addAll(series1, series2, series3);
         chart2.getData().addAll(series4, series5, series6);
+        chart3.getData().addAll(series7, series8, series9);
     }
 
 
@@ -125,15 +157,20 @@ public class StatsController implements Initializable {
     void citiesPerTurn() {
         chart1.setVisible(false);
         chart2.setVisible(true);
-
-
+        chart3.setVisible(false);
     }
 
     @FXML
     void goldPerTurn() {
         chart1.setVisible(true);
         chart2.setVisible(false);
+        chart3.setVisible(false);
     }
 
-
+    @FXML
+    void populationPerTurn() {
+        chart1.setVisible(false);
+        chart2.setVisible(false);
+        chart3.setVisible(true);
+    }
 }
