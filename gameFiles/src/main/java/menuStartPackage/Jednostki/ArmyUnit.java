@@ -11,6 +11,7 @@ public class ArmyUnit {
     protected int farDefence= 0;
     protected int closeAttack = 0;
     protected int closeDefence = 0;
+    protected int lvl = 0;
     String name ="";
 
     protected int amount = 0;
@@ -19,6 +20,25 @@ public class ArmyUnit {
 
     public String getName() {
         return name;
+    }
+
+    public String getNameWithLvl() {
+        return name + " LVL: "+getLvl();
+    }
+
+    public void increaseLvl(int lvl)
+    {
+        this.lvl += lvl;
+    }
+
+    public void setLvl(int lvl)
+    {
+        this.lvl = lvl;
+    }
+
+    public int getLvl()
+    {
+        return this.lvl;
     }
 
     public int getAmount() {
