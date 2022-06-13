@@ -426,6 +426,36 @@
     -fx-text-decoration: bold;
     -fx-text-fill: pink;
 }
+.armyArcher{
+    -fx-background-image:url('archer.png');
+    -fx-background-size: 50% 90%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0px 0px;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.armyChariot{
+    -fx-background-image:url('chariot.png');
+    -fx-background-size: 70% 170%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0px -10px;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
+.armyWarrior{
+    -fx-background-image:url('warrior.png');
+    -fx-background-size: 50% 90%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 0px 0px;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-right;
+    -fx-text-decoration: bold;
+    -fx-text-fill: pink;
+}
 .building {
     -fx-opacity: 0.2;
     -fx-background-image:url('gold_mine.png');
