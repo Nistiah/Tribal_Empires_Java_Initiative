@@ -794,6 +794,12 @@ public class MainBoardController implements Initializable {
     @FXML TextField siegeName;
     @FXML TextFlow siegeAtack;
     @FXML TextFlow siegeDefence;
+    @FXML TextField defendersCasualties;
+    @FXML TextField rng;
+    @FXML TextField attackersCasualties;
+    @FXML TextFlow  attackersFlow;
+    @FXML TextFlow  rngFlow;
+    @FXML TextFlow  defendersFlow;
 
     @FXML
     void siegeExit() {
@@ -885,6 +891,10 @@ public class MainBoardController implements Initializable {
                 siege.setTranslateX(0);
                 siege.setTranslateY(150);
                 siege.setOnMouseClicked(e ->{
+                    attackersFlow.getChildren().clear();
+                    defendersFlow.getChildren().clear();
+                    rngFlow.getChildren().clear();
+
                     siegeAtack.getChildren().clear();
                     siegeDefence.getChildren().clear();
 
@@ -911,8 +921,6 @@ public class MainBoardController implements Initializable {
                         siegeAtack.getChildren().add(unitText);
                     }
 
-
-
                     Text defenceForces = new Text("Defenders Army\n");
                     defenceForces.setFont(Font.font(font, 30));
                     defenceForces.setFill(Color.GREY);
@@ -931,6 +939,153 @@ public class MainBoardController implements Initializable {
                         unitText.setFill(Color.GREY);
                         siegeDefence.getChildren().add(unitText);
                     }
+//                    @FXML TextField defendersCasualties;
+//                    @FXML TextField rng;
+//                    @FXML TextField attackersCasualties;
+//                    @FXML TextFlow  attackersFlow;
+//                    @FXML TextFlow  rngFlow;
+//                    @FXML TextFlow  defendersFlow;
+
+                    defendersCasualties.setText("Defenders casualties " + tempCity.siege.defCasualties);
+                    attackersCasualties.setText("Attackers casualties " + tempCity.siege.atkCasualties);
+                    rng.setText("RNG "+tempCity.siege.lastRng);
+
+                    Text rngDescription = new Text("Defenders Damage Modifier -  RNG  -  Attackers Damage Modifier\n\n");
+                    Text zero =     new Text("200%  -  0  -  0%  \n");
+                    Text one =      new Text("160%  -  1  -  0%  \n");
+                    Text two =      new Text("120%  -  2  -  0%  \n");
+                    Text three =    new Text("100%  -  3  -  0%  \n");
+                    Text four =     new Text("100%  -  4  -  40% \n");
+                    Text five =     new Text("100%  -  5  -  80% \n");
+                    Text six =      new Text("90%   -  6  -  120%\n");
+                    Text seven =    new Text("80%   -  7  -  180%\n");
+                    Text eight =    new Text("70%   -  8  -  240%\n");
+                    Text nine =     new Text("60%   -  9  -  320%\n");
+                    Text ten =      new Text("50%  -  10  -  400%\n");
+
+                    rngDescription.setFont(Font.font(font, 18));
+                    rngDescription.setFill(Color.GREY);
+                    zero.setFont(Font.font(font, 18));
+                    zero.setFill(Color.GREY);
+                    one.setFont(Font.font(font, 18));
+                    one.setFill(Color.GREY);
+                    two.setFont(Font.font(font, 18));
+                    two.setFill(Color.GREY);
+                    three.setFont(Font.font(font, 18));
+                    three.setFill(Color.GREY);
+                    four.setFont(Font.font(font, 18));
+                    four.setFill(Color.GREY);
+                    five.setFont(Font.font(font, 18));
+                    five.setFill(Color.GREY);
+                    six.setFont(Font.font(font, 18));
+                    six.setFill(Color.GREY);
+                    seven.setFont(Font.font(font, 18));
+                    seven.setFill(Color.GREY);
+                    eight.setFont(Font.font(font, 18));
+                    eight.setFill(Color.GREY);
+                    nine.setFont(Font.font(font, 18));
+                    nine.setFill(Color.GREY);
+                    ten.setFont(Font.font(font, 18));
+                    ten.setFill(Color.GREY);
+
+                    switch(tempCity.siege.lastRng){
+                        case 0:
+                            zero.setFill(Color.WHITE);
+                            break;
+                        case 1:
+                            one.setFill(Color.WHITE);
+                            break;
+                        case 2:
+                            two.setFill(Color.WHITE);
+                            break;
+                        case 3:
+                            three.setFill(Color.WHITE);
+                            break;
+                        case 4:
+                            four.setFill(Color.WHITE);
+                            break;
+                        case 5:
+                            five.setFill(Color.WHITE);
+                            break;
+                        case 6:
+                            six.setFill(Color.WHITE);
+                            break;
+                        case 7:
+                            seven.setFill(Color.WHITE);
+                            break;
+                        case 8:
+                            eight.setFill(Color.WHITE);
+                            break;
+                        case 9:
+                            nine.setFill(Color.WHITE);
+                            break;
+                        case 10:
+                            ten.setFill(Color.WHITE);
+                            break;
+                    }
+
+
+
+
+
+
+                    rngFlow.getChildren().addAll(rngDescription, zero, one, two, three, four, five, six, seven, eight, nine, ten);
+                    rngFlow.setTextAlignment(TextAlignment.CENTER);
+
+                    Text defendersFlowDescription = new Text("Defenders Stats\n\n "+
+                            "Initial Far Damage "+tempCity.siege.getDefenseFarDamageInitial()+"\n"+
+                            "Initial Far Defence"+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
+                            "Initial Close Damage"+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
+                            "Initial Close Defence"+tempCity.siege.getDefenseCloseDefenceInitial()+"\n"+
+
+                            "\nFinal Far Damage"+tempCity.siege.getDefenseFarDamage()+"\n"+
+                            "Final Far Defence"+tempCity.siege.getDefenceFarDefence()+"\n"+
+                            "Final Close Damage"+tempCity.siege.getDefenseCloseDamage()+"\n"+
+                            "Final Close Defence"+tempCity.siege.getDefenceCloseDefence()+"\n"
+                            );
+                    defendersFlowDescription.setFont(Font.font(font, 18));
+                    defendersFlowDescription.setFill(Color.GREY);
+                    defendersFlow.getChildren().add(defendersFlowDescription);
+
+
+
+                    Text attackersFlowDescription = new Text("Attackers Stats\n\n"+
+                            "Initial Far Damage "+tempCity.siege.getAtackFarDamageInitial()+"\n"+
+                            "Initial Far Defence"+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
+                            "Initial Close Damage"+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
+                            "Initial Close Defence"+tempCity.siege.getAtackCloseDefenceInitial()+"\n"+
+
+                            "\nFinal Far Damage"+tempCity.siege.getAtackFarDamage()+"\n"+
+                            "Final Far Defence"+tempCity.siege.getAtackFarDefence()+"\n"+
+                            "Final Close Damage"+tempCity.siege.getAtackCloseDamage()+"\n"+
+                            "Final Close Defence"+tempCity.siege.getAtackCloseDefence()+"\n"
+                            );
+                    attackersFlowDescription.setFont(Font.font(font, 18));
+                    attackersFlowDescription.setFill(Color.GREY);
+                    attackersFlow.getChildren().add(attackersFlowDescription);
+
+                    attackersFlow.setTextAlignment(TextAlignment.CENTER);
+                    defendersFlow.setTextAlignment(TextAlignment.CENTER);
+                    rngFlow.setTextAlignment(TextAlignment.CENTER);
+
+                    attackersCasualties.setOnMouseEntered(e1 ->{
+                        attackersFlow.setVisible(true);
+                    });
+                    attackersCasualties.setOnMouseExited(e1 ->{
+                        attackersFlow.setVisible(false);
+                    });
+                    defendersCasualties.setOnMouseEntered(e1 ->{
+                        defendersFlow.setVisible(true);
+                    });
+                    defendersCasualties.setOnMouseExited(e1 ->{
+                        defendersFlow.setVisible(false);
+                    });
+                    rng.setOnMouseEntered(e1 ->{
+                        rngFlow.setVisible(true);
+                    });
+                    rng.setOnMouseExited(e1 ->{
+                        rngFlow.setVisible(false);
+                    });
 
 
 
