@@ -70,8 +70,8 @@ import static menuStartPackage.StartUp.musicPlayerInstance;
 //ownerId 0 -nikt
 public class MainBoardController implements Initializable {
     public static Vector<Player> playerList = new Vector<>();
-    private static HexagonMap    map;
-    private final String         font                = "Manjaro";
+    private static HexagonMap map;
+    private final String font = "Manjaro";
     public Slider soundSlider;
     public Slider volumeSlider;
 
@@ -79,78 +79,79 @@ public class MainBoardController implements Initializable {
     private final String hexagonSound = "hexagonSound.wav";
     private final String settingsButtonSound = "settingsButtonSound.wav";
     private final String nextPlayerButtonSound = "nextPlayerButtonSound.wav";
+    @FXML TextFlow siegeDescription;
 
 
-    int                          playerId            = 1;
+    int playerId = 1;
     @FXML
-    private TextField            turnField           = new TextField("next turn");
+    private TextField turnField = new TextField("next turn");
     @FXML
-    private TextFlow             descriptionField    = new TextFlow();
+    private TextFlow descriptionField = new TextFlow();
     @FXML
-    private TextField            goldField           = new TextField("goldField");
+    private TextField goldField = new TextField("goldField");
     @FXML
-    private TextField            beliefField         = new TextField("beliefField");
+    private TextField beliefField = new TextField("beliefField");
     @FXML
-    private TextField            bronzeField         = new TextField("bronzeField");
+    private TextField bronzeField = new TextField("bronzeField");
     @FXML
-    private TextField            dyesField           = new TextField("dyesField");
+    private TextField dyesField = new TextField("dyesField");
     @FXML
-    private TextField            recoursesField      = new TextField("recoursesField");
+    private TextField recoursesField = new TextField("recoursesField");
     @FXML
-    private TextField            horsesField         = new TextField("horsesField");
+    private TextField horsesField = new TextField("horsesField");
     @FXML
-    private TextField            ironField           = new TextField("ironField");
-    private boolean              buyingMode          = false;
-    private boolean              buyInitialised      = false;
-    private int                  ownerId             = 1;
-    private final static int     PROVINCE_COST       = 20;
-    private final TourCounter    tourCounter         = new TourCounter();
-    boolean                      cityCoordinatesLock = false;
-    private Parent               root;
+    private TextField ironField = new TextField("ironField");
+    private boolean buyingMode = false;
+    private boolean buyInitialised = false;
+    private int ownerId = 1;
+    private final static int PROVINCE_COST = 20;
+    private final TourCounter tourCounter = new TourCounter();
+    boolean cityCoordinatesLock = false;
+    private Parent root;
     @FXML
-    public Button                generateHexagonMap;
+    public Button generateHexagonMap;
     @FXML
-    public AnchorPane            anchorBoard;
+    public AnchorPane anchorBoard;
     @FXML
-    private TextField            textField;
-    private Color                color;
+    private TextField textField;
+    private Color color;
     @FXML
-    public AnchorPane            provinceLowerPanel;
+    public AnchorPane provinceLowerPanel;
     @FXML
-    public AnchorPane            provinceUpperPanel;
+    public AnchorPane provinceUpperPanel;
     @FXML
-    private Rectangle            avatar;
+    private Rectangle avatar;
     @FXML
-    private TextFlow             descriptionTextFlow;
+    private TextFlow descriptionTextFlow;
     @FXML
-    private TextFlow             bronzeTextFlow;
+    private TextFlow bronzeTextFlow;
     @FXML
-    private TextFlow             dyesTextFlow;
+    private TextFlow dyesTextFlow;
     @FXML
-    private TextFlow             faithTextFlow;
+    private TextFlow faithTextFlow;
     @FXML
-    private TextFlow             goldTextFlow;
+    private TextFlow goldTextFlow;
     @FXML
-    private TextFlow             horseTextFlow;
+    private TextFlow horseTextFlow;
     @FXML
-    private TextFlow             ironTextFlow;
+    private TextFlow ironTextFlow;
     @FXML
-    private TextFlow             woodTextFlow;
-    private Player               currentPlayer;
-    private Image                image;
-    private Image                image2;
-    private int                  initialisedI;
-    private int                  initialisedJ;
+    private TextFlow woodTextFlow;
+    private Player currentPlayer;
+    private Image image;
+    private Image image2;
+    private int initialisedI;
+    private int initialisedJ;
     @FXML
-    private ScrollPane           scrollPane;
+    private ScrollPane scrollPane;
     @FXML
-    private AnchorPane           mainAnchorPane;
+    private AnchorPane mainAnchorPane;
     @FXML
-    public  TextFlow             provinceType;
+    public TextFlow provinceType;
     @FXML
-    public  HBox                 panelHbox;
+    public HBox panelHbox;
     @FXML
-    public  GridPane             mainPanel;
+    public GridPane mainPanel;
     @FXML
     private TextFlow popPanel;
     @FXML
@@ -160,11 +161,11 @@ public class MainBoardController implements Initializable {
     void shortcutsEntered() {
         shortcuts.setVisible(true);
     }
+
     @FXML
     void shortcutsExited() {
         shortcuts.setVisible(false);
     }
-
 
 
     @FXML
@@ -190,22 +191,22 @@ public class MainBoardController implements Initializable {
         }
     }
 
-    void popPanelEntered(City city){
+    void popPanelEntered(City city) {
         popPanel.getChildren().clear();
 
         double currentPopGrowth = BigDecimal.valueOf(city.currentPopGrowth).setScale(2, RoundingMode.HALF_DOWN).doubleValue();
-        double currentPopGrowthCost = BigDecimal.valueOf(city.popGrowthCost*city.popGrowthCostMultiplier).setScale(2, RoundingMode.HALF_DOWN).doubleValue();
+        double currentPopGrowthCost = BigDecimal.valueOf(city.popGrowthCost * city.popGrowthCostMultiplier).setScale(2, RoundingMode.HALF_DOWN).doubleValue();
 
-        Text cityPop = new Text("City population "+ city.getPopulation() +"\nFood needed for population to grow " + currentPopGrowth +"/"+currentPopGrowthCost);
+        Text cityPop = new Text("City population " + city.getPopulation() + "\nFood needed for population to grow " + currentPopGrowth + "/" + currentPopGrowthCost);
         Text bonus = new Text("");
         Text foodProductionNotNumber = new Text("\nFood production ");
-        Text foodProduction = new Text(""+city.getFoodBeforePop());
+        Text foodProduction = new Text("" + city.getFoodBeforePop());
         Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
-        Text foodConsumption = new Text(""+city.getPopulation());
+        Text foodConsumption = new Text("" + city.getPopulation());
         Text netGainNotNumber = new Text("\nFood net gain ");
-        Text netGain = new Text(""+city.getFood());
+        Text netGain = new Text("" + city.getFood());
 
-        if(city.getOwnerId()==1){
+        if (city.getOwnerId() == 1) {
             bonus.setText("\nfertile soils - new population cost -10%");
             bonus.setFont(Font.font(font, 18));
             bonus.setFill(Color.GREEN);
@@ -238,20 +239,21 @@ public class MainBoardController implements Initializable {
         netGainNotNumber.setTextAlignment(TextAlignment.CENTER);
 
         netGain.setFont(Font.font(font, 18));
-        if(city.getFood()==0) {
+        if (city.getFood() == 0) {
             netGain.setFill(Color.GREY);
-        }else{
+        } else {
             netGain.setFill(Color.GREEN);
         }
         netGain.setTextAlignment(TextAlignment.CENTER);
 
 
-        popPanel.getChildren().addAll(cityPop,bonus,foodProductionNotNumber,foodProduction,foodConsumptionNotNumber,foodConsumption,netGainNotNumber,netGain);
+        popPanel.getChildren().addAll(cityPop, bonus, foodProductionNotNumber, foodProduction, foodConsumptionNotNumber, foodConsumption, netGainNotNumber, netGain);
         popPanel.setTextAlignment(TextAlignment.CENTER);
         popPanel.setVisible(true);
 
     }
-    void popPanelExited(){
+
+    void popPanelExited() {
         popPanel.getChildren().clear();
         popPanel.setVisible(false);
 
@@ -270,12 +272,12 @@ public class MainBoardController implements Initializable {
         Text description = new Text(currentPlayer.getFraction().getDescription());
         Text bonus = new Text();
         //TODO:Hettyci boonus implementacja mechaniki
-        if(currentPlayer.id==1) {
+        if (currentPlayer.id == 1) {
             bonus.setText("\n\nFACTION BONUS\nferile soils - new population cost -10%\n");
             bonus.setFont(Font.font(font, 18));
             bonus.setFill(Color.GREEN);
             bonus.setTextAlignment(TextAlignment.CENTER);
-        }else if(currentPlayer.id==3){
+        } else if (currentPlayer.id == 3) {
             bonus.setText("\n\nFACTION BONUS\nfirst scripture - new tile cost -20%\n");
             bonus.setFont(Font.font(font, 18));
             bonus.setFill(Color.GREEN);
@@ -365,7 +367,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text(city.getName() + " gold production " + (int)city.getGold() + "\n");
+            Text text = new Text(city.getName() + " gold production " + (int) city.getGold() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -394,7 +396,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text("City " + city.getName() + "horses production" + (int)city.getHorses() + "\n");
+            Text text = new Text("City " + city.getName() + "horses production" + (int) city.getHorses() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -443,8 +445,8 @@ public class MainBoardController implements Initializable {
         soundPlayerPlaySound(nextPlayerButtonSound);
 
 
-        buyingMode          = false;
-        buyInitialised      = false;
+        buyingMode = false;
+        buyInitialised = false;
         cityCoordinatesLock = false;
 
         descriptionField.getChildren().clear();
@@ -459,9 +461,9 @@ public class MainBoardController implements Initializable {
             tmp.addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces(), currentPlayer.getPopulation());
             addPlayer(tmp);
         } else {
-            if(!currentPlayer.playerDead) {
+            if (!currentPlayer.playerDead) {
                 playerStats.get(playerId - 1).addInfo((int) currentPlayer.getGold(), currentPlayer.getNumberOfProvinces(), currentPlayer.getPopulation());
-            }else{
+            } else {
                 playerStats.get(playerId - 1).addInfo((int) 0, 0, 0);
             }
         }
@@ -479,21 +481,21 @@ public class MainBoardController implements Initializable {
         }
 
         switch (playerId) {
-            case 1 :
+            case 1:
                 image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar1.png")).toURI().toString());
                 scrollPane.setVvalue(0.5975);
                 scrollPane.setHvalue(0);
 
                 break;
 
-            case 2 :
+            case 2:
                 image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar2.png")).toURI().toString());
                 scrollPane.setVvalue(0);
                 scrollPane.setHvalue(0);
 
                 break;
 
-            case 3 :
+            case 3:
                 image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar3.png")).toURI().toString());
                 scrollPane.setVvalue(0.4621);
                 scrollPane.setHvalue(0.3900);
@@ -505,15 +507,15 @@ public class MainBoardController implements Initializable {
 
         avatar.setFill(imgPat2);
         currentPlayer = playerList.get(playerId - 1);
-        ownerId       = playerId;
+        ownerId = playerId;
 
         Text temp = new Text(currentPlayer.getName() + "\n" + currentPlayer.getFraction().getKing());
 
         temp.setFont(Font.font(font, 18));
         temp.setFill(Color.PINK);
         descriptionField.getChildren().add(temp);
-        goldField.setText("" + (int)currentPlayer.getGold());
-        beliefField.setText("" + (int)currentPlayer.getFaith());
+        goldField.setText("" + (int) currentPlayer.getGold());
+        beliefField.setText("" + (int) currentPlayer.getFaith());
         bronzeField.setText("" + currentPlayer.getBronze());
         recoursesField.setText("" + currentPlayer.getBuildingResources());
         horsesField.setText("" + currentPlayer.getHorses());
@@ -523,11 +525,11 @@ public class MainBoardController implements Initializable {
 
         if (buyInitialised) {
             buyClicked();
-            cityCoordinatesLock=false;
+            cityCoordinatesLock = false;
         }
         fullMapBorderCleaning();
         currentPlayer.checkIfPlayerDead();
-        if(currentPlayer.playerDead) {
+        if (currentPlayer.playerDead) {
             nextPlayerButton();
         }
 
@@ -535,40 +537,40 @@ public class MainBoardController implements Initializable {
 
     private Province provinceBuilder(String name, int owner) {
         switch (name) {
-            case "City" :
+            case "City":
                 return new City(owner);
 
-            case "Coast" :
+            case "Coast":
                 return new Coast();
 
-            case "DesertFlat" :
+            case "DesertFlat":
                 return new DesertFlat();
 
-            case "DesertWyzyny" :
+            case "DesertWyzyny":
                 return new DesertWyzyny();
 
-            case "ForestFlat" :
+            case "ForestFlat":
                 return new ForestFlat();
 
-            case "ForestWyzyny" :
+            case "ForestWyzyny":
                 return new ForestWyzyny();
 
-            case "Mountains" :
+            case "Mountains":
                 return new Mountains();
 
-            case "RiversideArea" :
+            case "RiversideArea":
                 return new RiversideArea();
 
-            case "Sea" :
+            case "Sea":
                 return new Sea();
 
-            case "TrawaFlat" :
+            case "TrawaFlat":
                 return new TrawaFlat();
 
-            case "TrawaWyzyny" :
+            case "TrawaWyzyny":
                 return new TrawaWyzyny();
 
-            default :
+            default:
                 return new TrawaFlat();
         }
     }
@@ -603,16 +605,16 @@ public class MainBoardController implements Initializable {
     }
 
     public class PlayerData {
-        String          name;
+        String name;
         Vector<Integer> goldPerTour;
         Vector<Integer> numberOfProvincesPerTour;
         Vector<Integer> numberOfPopsPerTour;
 
         PlayerData(String tmp) {
-            this.name                = tmp;
-            goldPerTour              = new Vector<>();
+            this.name = tmp;
+            goldPerTour = new Vector<>();
             numberOfProvincesPerTour = new Vector<>();
-            numberOfPopsPerTour      = new Vector<>();
+            numberOfPopsPerTour = new Vector<>();
         }
 
         public void addInfo(int gold, int numberOfProvinces, int pops) {
@@ -622,6 +624,7 @@ public class MainBoardController implements Initializable {
 
         }
     }
+
     Player player1 = new Player("Egypt");
     Player player2 = new Player("Hittites");
     Player player3 = new Player("Assyria");
@@ -629,15 +632,46 @@ public class MainBoardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        Text text = new Text("Siege result is decided following those rules\n\n\n" +
+                "Main factor is strength of both sides\n" +
+                "Attackers strength is calculated as follows: (combined army hp) * 2 \n" +
+                "Defenders strength is calculated as follows: (combined army hp + 50) * 2 \n\n" +
+                "Every initial value is multiplied by strength as percentage of initial strength\n\n" +
+                "Every turn \nThe attackers strength is multiplied by 95% and defenders strength is multiplied by 90%\n" +
+                "The attackers mean damage is subtracted from defenders mean defence\n" +
+                "The defenders mean damage is subtracted from attackers mean defence\n" +
+                "Then the difference is multiplied by rng factor for current turn\n" +
+                "If the difference is greater than 0 the damage is applied to the other side\n\n\n" +
+                "For the defenders to win the attackers strength must be lower than 25%\n" +
+                "For the attackers to win the defenders strength must be lower than 20%");
+
+        text.setFont(Font.font(font, 16));
+        text.setFill(Color.GREY);
+
+
+        siegeDescription.getChildren().add(text);
+        siegeDescription.setTextAlignment(TextAlignment.CENTER);
+
+        siegeName.setOnMouseEntered(event -> {
+            siegeDescription.setVisible(true);
+        });
+
+        siegeName.setOnMouseExited(event -> {
+            siegeDescription.setVisible(false);
+        });
+
+
 
         playerList.add(player1);
-        player1.id=1;
+        player1.id = 1;
         playerList.add(player2);
-        player2.id=2;
+        player2.id = 2;
         playerList.add(player3);
-        player3.id=3;
+        player3.id = 3;
         scrollPane.setVvalue(0.5975);
         scrollPane.setHvalue(0);
+
+
 
         mainAnchorPane.setOnKeyPressed(this::shortcuts);
 
@@ -658,12 +692,11 @@ public class MainBoardController implements Initializable {
         volumeSlider.setOnMouseDragged(event -> sliderVolumeChange());
         volumeSlider.setOnDragDone(event -> sliderVolumeChange());
         volumeSlider.setOnMouseDragReleased(event -> sliderVolumeChange());
-        
+
         soundSlider.setOnMouseDragged(event -> soundVolumeChange());
         soundSlider.setOnDragDone(event -> soundVolumeChange());
         soundSlider.setOnMouseDragReleased(event -> soundVolumeChange());
-        
-        
+
 
         try {
             image2 = new Image(Objects.requireNonNull(getClass().getResource("avatar1.png")).toURI().toString());
@@ -675,23 +708,23 @@ public class MainBoardController implements Initializable {
 
         generateHexagonMap.setVisible(false);
 
-        playerId=1;
-        currentPlayer=playerList.get(0);
-        Text temp2 = new Text(playerList.get(0).getName() +"\n" + playerList.get(playerId - 1).getFraction().getKing());
-        temp2.setFont(Font.font(font,18));
+        playerId = 1;
+        currentPlayer = playerList.get(0);
+        Text temp2 = new Text(playerList.get(0).getName() + "\n" + playerList.get(playerId - 1).getFraction().getKing());
+        temp2.setFont(Font.font(font, 18));
         temp2.setFill(Color.PINK);
         descriptionField.getChildren().add(temp2);
         descriptionField.setLineSpacing(20);
 
-        goldField.setText("" + (int)playerList.get(playerId).getGold());
-        beliefField.setText("" + (int)playerList.get(playerId).getFaith());
+        goldField.setText("" + (int) playerList.get(playerId).getGold());
+        beliefField.setText("" + (int) playerList.get(playerId).getFaith());
         bronzeField.setText("" + playerList.get(playerId).getBronze());
         recoursesField.setText("" + playerList.get(playerId).getBuildingResources());
         horsesField.setText("" + playerList.get(playerId).getHorses());
         ironField.setText("" + playerList.get(playerId).getIron());
         dyesField.setText("" + playerList.get(playerId).getDyes());
 
-        turnField.setText("Turn: "+tourCounter.getTour());
+        turnField.setText("Turn: " + tourCounter.getTour());
         nullHex.setProvince(new Province());
         nullHex.getProvince().setOwnerId(-1);   //wazne dla granic mapy przy malowaniu jej do map buildera
         map = new HexagonMap(40);
@@ -704,25 +737,26 @@ public class MainBoardController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        int i,j,owner;
+        int i, j, owner;
         String tempProvince;
 
-        while(true){
+        while (true) {
             assert scanner != null;
             if (!scanner.hasNext()) break;
 
-            j=scanner.nextInt();
-            i=scanner.nextInt();
-            owner=scanner.nextInt();
-            tempProvince=scanner.next();
+            j = scanner.nextInt();
+            i = scanner.nextInt();
+            owner = scanner.nextInt();
+            tempProvince = scanner.next();
             Hexagon temphex = new Hexagon(j, i);
 
             Province temp = provinceBuilder(tempProvince, owner);
             temp.setType(tempProvince);
             temp.setOwnerId(owner);
             temp.setCoordinates(j, i);
-            if(tempProvince.equals("City")){
-                playerList.get(owner-1).createNewCity((City)temp);
+            if (tempProvince.equals("City")) {
+                playerList.get(owner - 1).createNewCity((City) temp);
+
             }
             temphex.setProvince(temp);
             temphex.setStrokeWidth(hexBorderWidth);
@@ -736,7 +770,7 @@ public class MainBoardController implements Initializable {
 
 
             temphex.setOnMouseClicked(MouseEvent -> hexClick(temphex, temp));
-            temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue()+ " H"+scrollPane.getHvalue() + "owner:" + temphex.getProvince().getOwnerId()));
+            temphex.setOnMouseMoved(MouseEvent -> textField.setText(temphex.getQ() + ":" + temphex.getR() + " V:" + scrollPane.getVvalue() + " H" + scrollPane.getHvalue() + "owner:" + temphex.getProvince().getOwnerId()));
             map.addHexagon(temphex);
 
         }
@@ -749,27 +783,30 @@ public class MainBoardController implements Initializable {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
         int jSetter = 1, jLimiter = 46;
-        for (int i2 = 1; i2 <35; i2++) {
-            if (i2 % 2 == 0) {jSetter--; jLimiter--;}
-            for (int j2=jSetter; j2 < jLimiter; j2++) {
+        for (int i2 = 1; i2 < 35; i2++) {
+            if (i2 % 2 == 0) {
+                jSetter--;
+                jLimiter--;
+            }
+            for (int j2 = jSetter; j2 < jLimiter; j2++) {
                 if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
 
-                switch (map.getHexagon(j2,i2).getProvince().getOwnerId()) {
+                switch (map.getHexagon(j2, i2).getProvince().getOwnerId()) {
                     case 0:
-                        color = rgb(2,0,36,1);
-                        map.getHexagon(j2,i2).borderColor(color);
+                        color = rgb(2, 0, 36, 1);
+                        map.getHexagon(j2, i2).borderColor(color);
                         break;
                     case 1:
                         color = Color.AQUAMARINE;
-                        map.getHexagon(j2,i2).borderColor(color);
+                        map.getHexagon(j2, i2).borderColor(color);
                         break;
                     case 2:
                         color = Color.YELLOW;
-                        map.getHexagon(j2,i2).borderColor(color);
+                        map.getHexagon(j2, i2).borderColor(color);
                         break;
                     case 3:
                         color = Color.RED;
-                        map.getHexagon(j2,i2).borderColor(color);
+                        map.getHexagon(j2, i2).borderColor(color);
                         break;
                 }
             }
@@ -782,11 +819,11 @@ public class MainBoardController implements Initializable {
     private double musicVolume = 0.5;
 
     private void soundVolumeChange() {
-        soundVolume=soundSlider.getValue()/100;
+        soundVolume = soundSlider.getValue() / 100;
     }
 
     private void sliderVolumeChange() {
-        musicVolume=volumeSlider.getValue()/100;
+        musicVolume = volumeSlider.getValue() / 100;
         musicPlayerInstance.setVolumeAbsolute(musicVolume);
     }
 
@@ -794,39 +831,48 @@ public class MainBoardController implements Initializable {
     AnchorPane settingsPane;
 
     static Media media;
-    static MediaPlayer   mediaPlayer;
-    static File          file;
+    static MediaPlayer mediaPlayer;
+    static File file;
 
     boolean visible = false;
     boolean goldVSfaithBuy = false; //false gold, true faith
-
 
 
     @FXML
     void openSettings() {
         soundPlayerPlaySound(gameButtonSound);
 
-        visible=!visible;
+        visible = !visible;
         settingsPane.setVisible(visible);
     }
 
-    @FXML AnchorPane siegePane;
-    @FXML TextField siegeName;
-    @FXML TextFlow siegeAtack;
-    @FXML TextFlow siegeDefence;
-    @FXML TextField defendersCasualties;
-    @FXML TextField rng;
-    @FXML TextField attackersCasualties;
-    @FXML TextFlow  attackersFlow;
-    @FXML TextFlow  rngFlow;
-    @FXML TextFlow  defendersFlow;
+    @FXML
+    AnchorPane siegePane;
+    @FXML
+    TextField siegeName;
+    @FXML
+    TextFlow siegeAtack;
+    @FXML
+    TextFlow siegeDefence;
+    @FXML
+    TextField defendersCasualties;
+    @FXML
+    TextField rng;
+    @FXML
+    TextField attackersCasualties;
+    @FXML
+    TextFlow attackersFlow;
+    @FXML
+    TextFlow rngFlow;
+    @FXML
+    TextFlow defendersFlow;
 
     @FXML
     void siegeExit() {
         siegePane.setVisible(false);
     }
 
-    void hexClick(Hexagon temphex, Province temp){
+    void hexClick(Hexagon temphex, Province temp) {
 
 
         provinceLowerPanel.getChildren().clear();
@@ -842,9 +888,9 @@ public class MainBoardController implements Initializable {
             goldVSfaithBuy = false;
             buyField(temphex);
         });
-        buyProvinceFaith.setOnMouseClicked(e->{
+        buyProvinceFaith.setOnMouseClicked(e -> {
             buyClicked();
-            goldVSfaithBuy=true;
+            goldVSfaithBuy = true;
             buyField(temphex);
         });
 
@@ -871,23 +917,26 @@ public class MainBoardController implements Initializable {
         armies.getStyleClass().add("colonizeButton");
 
 
-
-
-
-        if(buyingMode)provinceUpperPanel.getChildren().add(buyProvinceGold);
-        if(colonizeInitialised)provinceUpperPanel.getChildren().add(buyProvinceGold);
+        if (buyingMode) provinceUpperPanel.getChildren().add(buyProvinceGold);
+        if (colonizeInitialised) provinceUpperPanel.getChildren().add(buyProvinceGold);
 
         int resourcesHeight = 40;
 
-        if(playerId != temp.getOwnerId() && !buyingMode)
-        {
-            if(Objects.equals(temphex.getProvince().getType(), "City")) {
+        if (playerId != temp.getOwnerId() && !buyingMode) {
+            if (Objects.equals(temphex.getProvince().getType(), "City")) {
+
+                City c1 = (City)temp;
+                armies.setOnMouseClicked(e -> {
+                    armiesClicked(c1);
+                });
+
+
                 String provNameEnemy = "";
-                City city = (City)temp;
+                City city = (City) temp;
                 provNameEnemy = city.getName();
                 Text provinceTypeTxt = new Text(provNameEnemy);
                 provinceTypeTxt.setFill(Paint.valueOf("GRAY"));
-                provinceTypeTxt.setFont(Font.font(font,24));
+                provinceTypeTxt.setFont(Font.font(font, 24));
                 provinceType.getChildren().add(provinceTypeTxt);
                 provinceType.setTextAlignment(TextAlignment.CENTER);
                 provinceUpperPanel.getChildren().add(provinceType);
@@ -905,14 +954,14 @@ public class MainBoardController implements Initializable {
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(peace);
 
-    //TODO: siege button
+                //TODO: siege button
                 Button siege = new Button("Siege");
                 siege.setPrefWidth(299);
                 siege.setTranslateX(0);
                 siege.setTranslateY(150);
-                siege.setOnMouseClicked(e ->{
-                    City tempCity = (City)temphex.getProvince();
-                    if(tempCity.siege==null){
+                siege.setOnMouseClicked(e -> {
+                    City tempCity = (City) temphex.getProvince();
+                    if (tempCity.siege == null) {
                         return;
                     }
                     siegePane.setVisible(true);
@@ -924,7 +973,6 @@ public class MainBoardController implements Initializable {
                     siegeDefence.getChildren().clear();
 
 
-
 //                    siegeName.clear();
                     siegeName.setText("Siege of " + tempCity.getName());
                     Text atackForces = new Text("Besieging Army\n");
@@ -933,13 +981,13 @@ public class MainBoardController implements Initializable {
                     siegeAtack.getChildren().add(atackForces);
                     siegeAtack.setTextAlignment(TextAlignment.CENTER);
 
-                    Text atackersForcesStrenght = new Text("Strength " + tempCity.siege.getAtackStrength() +"%\n");
+                    Text atackersForcesStrenght = new Text("Strength " + tempCity.siege.getAtackStrength() + "%\n\n");
                     atackersForcesStrenght.setFont(Font.font(font, 30));
                     atackersForcesStrenght.setFill(Color.GREY);
                     siegeAtack.getChildren().add(atackersForcesStrenght);
                     siegeAtack.setTextAlignment(TextAlignment.CENTER);
 
-                    for(ArmyUnit unit : tempCity.siege.atackingArmy.getUnits()){
+                    for (ArmyUnit unit : tempCity.siege.atackingArmy.getUnits()) {
                         Text unitText = new Text(unit.getName() + "\n");
                         unitText.setFont(Font.font(font, 18));
                         unitText.setFill(Color.GREY);
@@ -952,13 +1000,13 @@ public class MainBoardController implements Initializable {
                     siegeDefence.getChildren().add(defenceForces);
                     siegeDefence.setTextAlignment(TextAlignment.CENTER);
 
-                    Text defenceForcesStrenght = new Text("Strength " + tempCity.siege.getDefenseStrength() +"%\n");
+                    Text defenceForcesStrenght = new Text("Strength " + tempCity.siege.getDefenseStrength() + "%\n\n");
                     defenceForcesStrenght.setFont(Font.font(font, 30));
                     defenceForcesStrenght.setFill(Color.GREY);
                     siegeDefence.getChildren().add(defenceForcesStrenght);
                     siegeDefence.setTextAlignment(TextAlignment.CENTER);
 
-                    for(ArmyUnit unit : tempCity.siege.defendingArmy.getUnits()){
+                    for (ArmyUnit unit : tempCity.siege.defendingArmy.getUnits()) {
                         Text unitText = new Text(unit.getName() + "\n");
                         unitText.setFont(Font.font(font, 18));
                         unitText.setFill(Color.GREY);
@@ -973,20 +1021,21 @@ public class MainBoardController implements Initializable {
 
                     defendersCasualties.setText("Defenders casualties " + tempCity.siege.defCasualties);
                     attackersCasualties.setText("Attackers casualties " + tempCity.siege.atkCasualties);
-                    rng.setText("RNG "+tempCity.siege.lastRng);
+                    rng.setText("" + tempCity.siege.getLastRng());
+                    rng.setAlignment(Pos.CENTER);
 
-                    Text rngDescription = new Text("Defenders Damage Modifier -  RNG  -  Attackers Damage Modifier\n\n");
-                    Text zero =     new Text("200%  -  0  -  0%  \n");
-                    Text one =      new Text("160%  -  1  -  0%  \n");
-                    Text two =      new Text("120%  -  2  -  0%  \n");
-                    Text three =    new Text("100%  -  3  -  0%  \n");
-                    Text four =     new Text("100%  -  4  -  40% \n");
-                    Text five =     new Text("100%  -  5  -  80% \n");
-                    Text six =      new Text("90%   -  6  -  120%\n");
-                    Text seven =    new Text("80%   -  7  -  180%\n");
-                    Text eight =    new Text("70%   -  8  -  240%\n");
-                    Text nine =     new Text("60%   -  9  -  320%\n");
-                    Text ten =      new Text("50%  -  10  -  400%\n");
+                    Text rngDescription = new Text("Defenders Damage Modifier -  Roll  -  Attackers Damage Modifier\n\n");
+                    Text zero = new Text("200%  -  0  -  0%  \n");
+                    Text one = new Text("160%  -  1  -  0%  \n");
+                    Text two = new Text("120%  -  2  -  0%  \n");
+                    Text three = new Text("100%  -  3  -  0%  \n");
+                    Text four = new Text("100%  -  4  -  40% \n");
+                    Text five = new Text("100%  -  5  -  80% \n");
+                    Text six = new Text("90%   -  6  -  120%\n");
+                    Text seven = new Text("80%   -  7  -  180%\n");
+                    Text eight = new Text("70%   -  8  -  240%\n");
+                    Text nine = new Text("60%   -  9  -  320%\n");
+                    Text ten = new Text("50%  -  10  -  400%\n");
 
                     rngDescription.setFont(Font.font(font, 18));
                     rngDescription.setFill(Color.GREY);
@@ -1013,7 +1062,7 @@ public class MainBoardController implements Initializable {
                     ten.setFont(Font.font(font, 18));
                     ten.setFill(Color.GREY);
 
-                    switch(tempCity.siege.lastRng){
+                    switch (tempCity.siege.lastRng) {
                         case 0:
                             zero.setFill(Color.WHITE);
                             break;
@@ -1050,45 +1099,40 @@ public class MainBoardController implements Initializable {
                     }
 
 
-
-
-
-
                     rngFlow.getChildren().addAll(rngDescription, zero, one, two, three, four, five, six, seven, eight, nine, ten);
                     rngFlow.setTextAlignment(TextAlignment.CENTER);
 
-                    Text defendersFlowDescription = new Text("Defenders Stats\n\n "+
-                            "Initial Strength "+tempCity.siege.getDefenceStrenghtInitial()+"\n"+
-                            "Initial Far Damage "+tempCity.siege.getDefenseFarDamageInitial()+"\n"+
-                            "Initial Far Defence"+tempCity.siege.getDefenseFarDefenceInitial()+"\n"+
-                            "Initial Close Damage"+tempCity.siege.getDefenseCloseDamageInitial()+"\n"+
-                            "Initial Close Defence"+tempCity.siege.getDefenseCloseDefenceInitial()+"\n"+
+                    Text defendersFlowDescription = new Text("Defenders Stats\n\n " +
+                            "Initial Strength " + tempCity.siege.getDefenceStrenghtInitial() + "\n" +
+                            "Initial Far Damage " + tempCity.siege.getDefenseFarDamageInitial() + "\n" +
+                            "Initial Far Defence" + tempCity.siege.getDefenseFarDefenceInitial() + "\n" +
+                            "Initial Close Damage" + tempCity.siege.getDefenseCloseDamageInitial() + "\n" +
+                            "Initial Close Defence" + tempCity.siege.getDefenseCloseDefenceInitial() + "\n" +
 
-                            "\nMean Strength "+tempCity.siege.getDefenceStrenghtMean()+"\n"+
-                            "Final Far Damage"+tempCity.siege.getDefenseFarDamage()+"\n"+
-                            "Final Far Defence"+tempCity.siege.getDefenceFarDefence()+"\n"+
-                            "Final Close Damage"+tempCity.siege.getDefenseCloseDamage()+"\n"+
-                            "Final Close Defence"+tempCity.siege.getDefenceCloseDefence()+"\n"
-                            );
+                            "\nMean Strength " + tempCity.siege.getDefenceStrenghtMean() + "\n" +
+                            "Final Far Damage" + tempCity.siege.getDefenseFarDamage() + "\n" +
+                            "Final Far Defence" + tempCity.siege.getDefenceFarDefence() + "\n" +
+                            "Final Close Damage" + tempCity.siege.getDefenseCloseDamage() + "\n" +
+                            "Final Close Defence" + tempCity.siege.getDefenceCloseDefence() + "\n"
+                    );
                     defendersFlowDescription.setFont(Font.font(font, 18));
                     defendersFlowDescription.setFill(Color.GREY);
                     defendersFlow.getChildren().add(defendersFlowDescription);
 
 
+                    Text attackersFlowDescription = new Text("Attackers Stats\n\n" +
+                            "Initial Strength " + tempCity.siege.getAttackStrenghtInitial() + "\n" +
+                            "Initial Far Damage " + tempCity.siege.getAtackFarDamageInitial() + "\n" +
+                            "Initial Far Defence" + tempCity.siege.getAtackFarDefenceInitial() + "\n" +
+                            "Initial Close Damage" + tempCity.siege.getAtackCloseDamageInitial() + "\n" +
+                            "Initial Close Defence" + tempCity.siege.getAtackCloseDefenceInitial() + "\n" +
 
-                    Text attackersFlowDescription = new Text("Attackers Stats\n\n"+
-                            "Initial Strength "+tempCity.siege.getAttackStrenghtInitial()+"\n"+
-                            "Initial Far Damage "+tempCity.siege.getAtackFarDamageInitial()+"\n"+
-                            "Initial Far Defence"+tempCity.siege.getAtackFarDefenceInitial()+"\n"+
-                            "Initial Close Damage"+tempCity.siege.getAtackCloseDamageInitial()+"\n"+
-                            "Initial Close Defence"+tempCity.siege.getAtackCloseDefenceInitial()+"\n"+
-
-                            "\nMean Strength "+tempCity.siege.getAtackStrenghtMean()+"\n"+
-                            "Final Far Damage"+tempCity.siege.getAtackFarDamage()+"\n"+
-                            "Final Far Defence"+tempCity.siege.getAtackFarDefence()+"\n"+
-                            "Final Close Damage"+tempCity.siege.getAtackCloseDamage()+"\n"+
-                            "Final Close Defence"+tempCity.siege.getAtackCloseDefence()+"\n"
-                            );
+                            "\nMean Strength " + tempCity.siege.getAtackStrenghtMean() + "\n" +
+                            "Final Far Damage" + tempCity.siege.getAtackFarDamage() + "\n" +
+                            "Final Far Defence" + tempCity.siege.getAtackFarDefence() + "\n" +
+                            "Final Close Damage" + tempCity.siege.getAtackCloseDamage() + "\n" +
+                            "Final Close Defence" + tempCity.siege.getAtackCloseDefence() + "\n"
+                    );
                     attackersFlowDescription.setFont(Font.font(font, 18));
                     attackersFlowDescription.setFill(Color.GREY);
                     attackersFlow.getChildren().add(attackersFlowDescription);
@@ -1097,25 +1141,24 @@ public class MainBoardController implements Initializable {
                     defendersFlow.setTextAlignment(TextAlignment.CENTER);
                     rngFlow.setTextAlignment(TextAlignment.CENTER);
 
-                    attackersCasualties.setOnMouseEntered(e1 ->{
+                    attackersCasualties.setOnMouseEntered(e1 -> {
                         attackersFlow.setVisible(true);
                     });
-                    attackersCasualties.setOnMouseExited(e1 ->{
+                    attackersCasualties.setOnMouseExited(e1 -> {
                         attackersFlow.setVisible(false);
                     });
-                    defendersCasualties.setOnMouseEntered(e1 ->{
+                    defendersCasualties.setOnMouseEntered(e1 -> {
                         defendersFlow.setVisible(true);
                     });
-                    defendersCasualties.setOnMouseExited(e1 ->{
+                    defendersCasualties.setOnMouseExited(e1 -> {
                         defendersFlow.setVisible(false);
                     });
-                    rng.setOnMouseEntered(e1 ->{
+                    rng.setOnMouseEntered(e1 -> {
                         rngFlow.setVisible(true);
                     });
-                    rng.setOnMouseExited(e1 ->{
+                    rng.setOnMouseExited(e1 -> {
                         rngFlow.setVisible(false);
                     });
-
 
 
                 });
@@ -1124,13 +1167,12 @@ public class MainBoardController implements Initializable {
             }
         }
 
-        if(playerId == temp.getOwnerId() && !buyingMode){
+        if (playerId == temp.getOwnerId() && !buyingMode) {
 
             soundPlayerPlaySound(hexagonSound);
 
-            if(Objects.equals(temphex.getProvince().getType(), "City"))
-            {
-                City c1 = (City)temp;
+            if (Objects.equals(temphex.getProvince().getType(), "City")) {
+                City c1 = (City) temp;
                 armies.setOnMouseClicked(e -> {
                     armiesClicked(c1);
                 });
@@ -1143,49 +1185,58 @@ public class MainBoardController implements Initializable {
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
 
             String provName = temphex.getProvince().getType();
-            switch (provName)
-            {
+            switch (provName) {
                 case "City":
-                    City city = (City)temp;
+                    City city = (City) temp;
                     provName = city.getName();
                     break;
-                case "Coast": provName = "Coast";
+                case "Coast":
+                    provName = "Coast";
                     break;
-                case "DesertFlat": provName = "Desert";
+                case "DesertFlat":
+                    provName = "Desert";
                     break;
-                case "DesertWyzyny": provName = "Desert hills";
+                case "DesertWyzyny":
+                    provName = "Desert hills";
                     break;
-                case "ForestFlat": provName = "Forest";
+                case "ForestFlat":
+                    provName = "Forest";
                     break;
-                case "ForestWyzyny": provName = "Forest hills";
+                case "ForestWyzyny":
+                    provName = "Forest hills";
                     break;
-                case "Mountains": provName = "Mountains";
+                case "Mountains":
+                    provName = "Mountains";
                     break;
-                case "RiversideArea": provName = "Riverside";
+                case "RiversideArea":
+                    provName = "Riverside";
                     break;
-                case "Sea": provName = "Sea";
+                case "Sea":
+                    provName = "Sea";
                     break;
-                case "TrawaFlat": provName = "Grass";
+                case "TrawaFlat":
+                    provName = "Grass";
                     break;
-                case "TrawaWyzyny": provName = "Grass hills";
+                case "TrawaWyzyny":
+                    provName = "Grass hills";
                     break;
-                default: provName = "";
+                default:
+                    provName = "";
             }
             String foodInCity = "food";
             Text provinceType2 = new Text(provName);
             provinceType.getChildren().add(provinceType2);
             provinceType.setTextAlignment(TextAlignment.CENTER);
             provinceType2.setFill(Paint.valueOf("GRAY"));
-            provinceType2.setFont(Font.font(font,24));
+            provinceType2.setFont(Font.font(font, 24));
             provinceUpperPanel.getChildren().add(provinceType);
 
 
-
-            int belief = (int)temphex.getProvince().getBelief();
+            int belief = (int) temphex.getProvince().getBelief();
             int wood = temphex.getProvince().getWood();
-            int gold = (int)temphex.getProvince().getGold();
+            int gold = (int) temphex.getProvince().getGold();
             int food = temphex.getProvince().getFood();
-            int pop  = temphex.getProvince().getPop();
+            int pop = temphex.getProvince().getPop();
 
             Text textOnProd = new Text();
             //GOLD
@@ -1193,7 +1244,7 @@ public class MainBoardController implements Initializable {
             goldProduction.getStyleClass().add("provincePanelGold");
             goldProduction.setTranslateY(resourcesHeight);
             goldProduction.setTranslateX(50);
-            goldProduction.setFont(Font.font(font,16));
+            goldProduction.setFont(Font.font(font, 16));
             goldProduction.setPrefWidth(50);
             goldProduction.setEditable(false);
 
@@ -1202,7 +1253,7 @@ public class MainBoardController implements Initializable {
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
-                if(goldProduction.contains(x,y)){
+                if (goldProduction.contains(x, y)) {
                     sb.append("gold");
                 }
                 textOnProd.setText(sb.toString());
@@ -1219,7 +1270,7 @@ public class MainBoardController implements Initializable {
             foodProduction.getStyleClass().add("provincePanelFood");
             foodProduction.setTranslateY(resourcesHeight);
             foodProduction.setTranslateX(100);
-            foodProduction.setFont(Font.font(font,16));
+            foodProduction.setFont(Font.font(font, 16));
             foodProduction.setPrefWidth(50);
             foodProduction.setEditable(false);
 
@@ -1232,8 +1283,8 @@ public class MainBoardController implements Initializable {
                 StringBuilder sb = new StringBuilder();
 
                 if (goldProduction.contains(x, y)) {
-                        sb.append(finalFoodInCity);
-                    }
+                    sb.append(finalFoodInCity);
+                }
 
                 textOnProd.setText(sb.toString());
                 textOnProd.setX(x + 85);
@@ -1248,7 +1299,7 @@ public class MainBoardController implements Initializable {
             woodProduction.getStyleClass().add("provincePanelWood");
             woodProduction.setTranslateY(resourcesHeight);
             woodProduction.setTranslateX(150);
-            woodProduction.setFont(Font.font(font,16));
+            woodProduction.setFont(Font.font(font, 16));
             woodProduction.setPrefWidth(50);
             woodProduction.setEditable(false);
 
@@ -1257,7 +1308,7 @@ public class MainBoardController implements Initializable {
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
-                if(goldProduction.contains(x,y)){
+                if (goldProduction.contains(x, y)) {
                     sb.append("building resources");
                 }
                 textOnProd.setText(sb.toString());
@@ -1273,7 +1324,7 @@ public class MainBoardController implements Initializable {
             beliefProduction.getStyleClass().add("provincePanelFaith");
             beliefProduction.setTranslateY(resourcesHeight);
             beliefProduction.setTranslateX(200);
-            beliefProduction.setFont(Font.font(font,16));
+            beliefProduction.setFont(Font.font(font, 16));
             beliefProduction.setPrefWidth(50);
             beliefProduction.setEditable(false);
 
@@ -1282,7 +1333,7 @@ public class MainBoardController implements Initializable {
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
-                if(goldProduction.contains(x,y)){
+                if (goldProduction.contains(x, y)) {
                     sb.append("faith");
                 }
                 textOnProd.setText(sb.toString());
@@ -1300,20 +1351,20 @@ public class MainBoardController implements Initializable {
             population.getStyleClass().add("provincePanelPopulation");
             population.setTranslateY(35);
             population.setTranslateX(125);
-            population.setFont(Font.font(font,16));
+            population.setFont(Font.font(font, 16));
             population.setPrefWidth(50);
             population.setEditable(false);
             population.setAlignment(Pos.BOTTOM_RIGHT);
 
             population.setOnMouseMoved(e -> {
-                City tempCity = (City)temphex.getProvince();
+                City tempCity = (City) temphex.getProvince();
                 popPanelEntered(tempCity);
 
                 provinceUpperPanel.getChildren().remove(textOnProd);
                 double x = e.getX();
                 double y = e.getY();
                 StringBuilder sb = new StringBuilder();
-                if(goldProduction.contains(x,y)){
+                if (goldProduction.contains(x, y)) {
                     sb.append("population");
                 }
                 textOnProd.setText(sb.toString());
@@ -1331,7 +1382,8 @@ public class MainBoardController implements Initializable {
             provinceUpperPanel.getChildren().add(foodProduction);
             provinceUpperPanel.getChildren().add(woodProduction);
             provinceUpperPanel.getChildren().add(beliefProduction);
-            if(Objects.equals(temphex.getProvince().getType(),"City"))provinceUpperPanel.getChildren().add(population);
+            if (Objects.equals(temphex.getProvince().getType(), "City"))
+                provinceUpperPanel.getChildren().add(population);
 
 
             final int[] resourcesOffset = {(int) beliefProduction.getLayoutBounds().getHeight() + 70};
@@ -1340,10 +1392,9 @@ public class MainBoardController implements Initializable {
             temphex.getProvince().getResources().forEach(resource -> {
                 TextField resourceText = new TextField("  ");
 
-                resourceText.setFont(Font.font(font,16));
+                resourceText.setFont(Font.font(font, 16));
 
-                switch (resource)
-                {
+                switch (resource) {
                     case "ryby":
                         resourceText.getStyleClass().add("possResryby");
                         break;
@@ -1383,8 +1434,8 @@ public class MainBoardController implements Initializable {
                 //resourcesOffset[0] += 20;
                 //panelHbox.getChildren().add(resourceText);
             });
-            if(temphex.getProvince().getResources().size() > 0)provinceLowerPanel.getChildren().add(panelHbox);
-            final int[] buttonOffset = { 10 };
+            if (temphex.getProvince().getResources().size() > 0) provinceLowerPanel.getChildren().add(panelHbox);
+            final int[] buttonOffset = {10};
             temphex.getProvince().getBaseBuildings().forEach(baseBuilding -> {
                 Button baseBuildingButton = new Button(baseBuilding);
                 baseBuildingButton.setId(baseBuilding);
@@ -1395,7 +1446,7 @@ public class MainBoardController implements Initializable {
                 baseBuildingButton.setTranslateX(20);
                 buttonOffset[0] += 120;
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
-                    if(Objects.equals(baseBuilding, builtBuilding)){
+                    if (Objects.equals(baseBuilding, builtBuilding)) {
                         baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     }
 //                    builtBuilding = builtBuilding.replaceAll("\\s+","");
@@ -1410,11 +1461,12 @@ public class MainBoardController implements Initializable {
                 System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
                 baseBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if(!temphex.getProvince().builtBuildings.contains(baseBuilding))temphex.getProvince().builtBuildings.add(baseBuilding);
+                    if (!temphex.getProvince().builtBuildings.contains(baseBuilding))
+                        temphex.getProvince().builtBuildings.add(baseBuilding);
 
                     baseBuildingButton.getStyleClass().add("builtBaseBuilding");
-                    if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
-                    if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
+                    if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
+                    if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
                     //System.out.println(temphex.getProvince().build);
                     List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
                     tempList.remove(baseBuilding);
@@ -1431,7 +1483,7 @@ public class MainBoardController implements Initializable {
                 possibleBuildingButton.setId(building);
                 possibleBuildingButton.getStyleClass().add("building");
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
-                    if(Objects.equals(building, builtBuilding)){
+                    if (Objects.equals(building, builtBuilding)) {
                         possibleBuildingButton.getStyleClass().add("builtBuilding");
                     }
                 });
@@ -1442,10 +1494,11 @@ public class MainBoardController implements Initializable {
                 buttonOffset[0] += 120;
                 possibleBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if(!temphex.getProvince().builtBuildings.contains(building))temphex.getProvince().builtBuildings.add(building);
+                    if (!temphex.getProvince().builtBuildings.contains(building))
+                        temphex.getProvince().builtBuildings.add(building);
                     possibleBuildingButton.getStyleClass().add("builtBuilding");
-                    if(temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
-                    if(temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
+                    if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
+                    if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
                     //System.out.println(temphex.getProvince().builtBuildings);
                     List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
                     tempList.remove(building);
@@ -1458,18 +1511,19 @@ public class MainBoardController implements Initializable {
 
             provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
         }
-        if(buyInitialised) {
-
+        if (buyInitialised) {
 
 
             buyField(temphex);
         }
-        if(colonizeInitialised){
+        if (colonizeInitialised) {
             colonize(temphex.getQ(), temphex.getR());
         }
 
 
     }
+
+
     void armiesClicked(City city)
     {
         provinceLowerPanel.getChildren().clear();
@@ -1610,109 +1664,6 @@ public class MainBoardController implements Initializable {
         upgradeInfantry.setDisable(isInfantry[0] != 1);
 
 
-    void armiesClicked(City city)
-    {
-        provinceLowerPanel.getChildren().clear();
-        final int[] unitY = {0};
-        city.army.forEach(army -> {
-            Button a = new Button(army.getName());
-            a.setTranslateY(unitY[0]);
-            a.setPrefWidth(299);
-            unitY[0] += 60;
-            a.setOnMouseClicked(e2 -> {
-                singleArmyClicked(army);
-            });
-            provinceLowerPanel.getChildren().add(a);
-        });
-        Button newArmy = new Button("Add army");
-        newArmy.setTranslateY(unitY[0]);
-        newArmy.setPrefWidth(299);
-        newArmy.setOnMouseClicked(e1 -> {
-            Army addNewArmy = new Army();
-            city.addArmy(addNewArmy);
-
-            provinceLowerPanel.getChildren().clear();
-            unitY[0] = 0;
-            city.army.forEach(army -> {
-                Button a = new Button(army.getName());
-                a.setTranslateY(unitY[0]);
-                a.setPrefWidth(299);
-                a.setOnMouseClicked(e2 -> {
-                    provinceLowerPanel.getChildren().clear();
-                    singleArmyClicked(army);
-                });
-                unitY[0] += 60;
-                newArmy.setTranslateY(unitY[0]);
-                provinceLowerPanel.getChildren().add(a);
-                provinceLowerPanel.getChildren().remove(newArmy);
-                provinceLowerPanel.getChildren().add(newArmy);
-            });
-        });
-        if(!provinceLowerPanel.getChildren().contains(newArmy))provinceLowerPanel.getChildren().add(newArmy);
-    }
-
-    void singleArmyClicked(Army army)
-    {
-        provinceLowerPanel.getChildren().clear();
-
-        //ARCHERS AMOUNT
-        TextField archersAmount = new TextField("" + army.getArchersAmount());
-        archersAmount.getStyleClass().add("armyArcher");
-        archersAmount.setTranslateY(10);
-        archersAmount.setTranslateX(55);
-        archersAmount.setFont(Font.font(font,16));
-        archersAmount.setPrefWidth(50);
-        archersAmount.setEditable(false);
-        archersAmount.setAlignment(Pos.BOTTOM_RIGHT);
-
-        //CHARIOTS AMOUNT
-        TextField chariotsAmount = new TextField("" + army.getChariotsAmount());
-        chariotsAmount.getStyleClass().add("armyChariot");
-        chariotsAmount.setTranslateY(10);
-        chariotsAmount.setTranslateX(105);
-        chariotsAmount.setFont(Font.font(font,16));
-        chariotsAmount.setPrefWidth(80);
-        chariotsAmount.setEditable(false);
-        chariotsAmount.setAlignment(Pos.BOTTOM_RIGHT);
-
-        //WARRIORS AMOUNT
-        TextField warriorsAmount = new TextField("" + army.getWarriorsAmount());
-        warriorsAmount.getStyleClass().add("armyWarrior");
-        warriorsAmount.setTranslateY(10);
-        warriorsAmount.setTranslateX(185);
-        warriorsAmount.setFont(Font.font(font,16));
-        warriorsAmount.setPrefWidth(50);
-        warriorsAmount.setEditable(false);
-        warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
-
-        Button recruitArchers = new Button("Recruit Archers");
-        recruitArchers.setTranslateY(50);
-        recruitArchers.setPrefWidth(299);
-        recruitArchers.setOnMouseClicked(e3 -> {
-            army.addUnit(new Archer());
-            provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
-        });
-
-        Button recruitChariots = new Button("Recruit Chariots");
-        recruitChariots.setTranslateY(110);
-        recruitChariots.setPrefWidth(299);
-        recruitChariots.setOnMouseClicked(e3 -> {
-            army.addUnit(new Chariots());
-            provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
-        });
-
-        Button recruitInfantry = new Button("Recruit Infantry");
-        recruitInfantry.setTranslateY(170);
-        recruitInfantry.setPrefWidth(299);
-        recruitInfantry.setOnMouseClicked(e3 -> {
-            army.addUnit(new Infantry());
-            provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
-        });
-
-
 
         Button sentArmyToSiege = new Button("Sent army to siege");
         sentArmyToSiege.setTranslateY(410);
@@ -1723,7 +1674,6 @@ public class MainBoardController implements Initializable {
         });
         sentArmyToSiege.setDisable(army.getUnits().size() == 0);
 
-
         provinceLowerPanel.getChildren().add(archersAmount);
         provinceLowerPanel.getChildren().add(chariotsAmount);
         provinceLowerPanel.getChildren().add(warriorsAmount);
@@ -1731,7 +1681,6 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(recruitArchers);
         provinceLowerPanel.getChildren().add(recruitChariots);
         provinceLowerPanel.getChildren().add(recruitInfantry);
-
 
         provinceLowerPanel.getChildren().add(upgradeArchers);
         provinceLowerPanel.getChildren().add(upgradeChariots);
@@ -1828,226 +1777,315 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(upgradeToLvl3);
     }
 
-    
 
-    private void shortcuts(KeyEvent event) {
-        switch(event.getCode()){
-            case SUBTRACT:
-            case UNDERSCORE:
-            case MINUS:
-                map.sizeDown();
-                break;
-            case ADD:
-            case EQUALS:
-                map.sizeUp();
-                break;
-            case ESCAPE:
-                this.openSettings();
-                break;
-            case N:
-                try {
-                    this.nextPlayerButton();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case X:
-                currentPlayer.setFaith(500);
-                currentPlayer.setGold(500);
-                currentPlayer.setBuildingResources(500);
-                currentPlayer.setBronze(500);
-                currentPlayer.setIron(500);
-                currentPlayer.setHorses(500);
-                currentPlayer.setDyes(500);
-                break;
-            case M:
-                nextSong();
-                break;
-        }
-    }
-
-
-    @FXML
-    private TextField nextSong;
-    @FXML
-    void nextSong() {
-        musicPlayerInstance.stopMusic();
-    }
-
-
-
-    @FXML
-    void backToMainMenuFromBoard(MouseEvent event) {
-        musicPlayerInstance.exit = true;
-        musicPlayerInstance.menu = false;
-        musicPlayerInstance.stopMusic();
-
-        try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("exitStats.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
+        private void shortcuts (KeyEvent event){
+            switch (event.getCode()) {
+                case SUBTRACT:
+                case UNDERSCORE:
+                case MINUS:
+                    map.sizeDown();
+                    break;
+                case ADD:
+                case EQUALS:
+                    map.sizeUp();
+                    break;
+                case ESCAPE:
+                    this.openSettings();
+                    break;
+                case N:
+                    try {
+                        this.nextPlayerButton();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case X:
+                    currentPlayer.setFaith(500);
+                    currentPlayer.setGold(500);
+                    currentPlayer.setBuildingResources(500);
+                    currentPlayer.setBronze(500);
+                    currentPlayer.setIron(500);
+                    currentPlayer.setHorses(500);
+                    currentPlayer.setDyes(500);
+                    break;
+                case M:
+                    nextSong();
+                    break;
+            }
         }
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
-    }
 
-    boolean colonizeInitialised = false;
-
-    int iColonize, jColonize;
-
-    boolean soundPlayed = false;
-
-
-    void soundPlayerPlaySound(String filename) {
-        if(!soundPlayed) {
-            soundPlayed=true;
-            file = new File(filename);
-            media = new Media(file.toURI().toString());
-            mediaPlayer = null;
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setVolume(soundVolume);
-            mediaPlayer.play();
-            mediaPlayer.setOnEndOfMedia(()->{soundPlayed=false;});
-
-        }
-    }
-
-    private void colonize(int iFrom, int jFrom) {
-
-        soundPlayerPlaySound(gameButtonSound);
-
-        if(buyInitialised){
-            buyClicked();
-            cityCoordinatesLock=false;
+        @FXML
+        private TextField nextSong;
+        @FXML
+        void nextSong () {
+            musicPlayerInstance.stopMusic();
         }
 
-        if(!colonizeInitialised) {
-            for (int tempI = iFrom - 6; tempI < iFrom + 7; tempI++) {
-                for (int tempJ = jFrom - 6; tempJ < jFrom + 7; tempJ++) {
-                    if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                        if (((Math.abs(iFrom - tempI) > 5) || (Math.abs(jFrom - tempJ) > 5)) || (((tempI < iFrom) && (tempJ < jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || (((tempI > iFrom) && (tempJ > jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || ((tempJ == jFrom) && (Math.abs(iFrom - tempI) > 5)) || ((tempI == iFrom) && (Math.abs(jFrom - tempJ) > 5))))) {
-                            continue;
-                        }
+
+        @FXML
+        void backToMainMenuFromBoard (MouseEvent event){
+            musicPlayerInstance.exit = true;
+            musicPlayerInstance.menu = false;
+            musicPlayerInstance.stopMusic();
+
+            try {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("exitStats.fxml")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.getScene().setRoot(root);
+        }
+
+        boolean colonizeInitialised = false;
+
+        int iColonize, jColonize;
+
+        boolean soundPlayed = false;
+
+
+        void soundPlayerPlaySound (String filename){
+            if (!soundPlayed) {
+                soundPlayed = true;
+                file = new File(filename);
+                media = new Media(file.toURI().toString());
+                mediaPlayer = null;
+                mediaPlayer = new MediaPlayer(media);
+                mediaPlayer.setVolume(soundVolume);
+                mediaPlayer.play();
+                mediaPlayer.setOnEndOfMedia(() -> {
+                    soundPlayed = false;
+                });
+
+            }
+        }
+
+        private void colonize ( int iFrom, int jFrom){
+
+            soundPlayerPlaySound(gameButtonSound);
+
+            if (buyInitialised) {
+                buyClicked();
+                cityCoordinatesLock = false;
+            }
+
+            if (!colonizeInitialised) {
+                for (int tempI = iFrom - 6; tempI < iFrom + 7; tempI++) {
+                    for (int tempJ = jFrom - 6; tempJ < jFrom + 7; tempJ++) {
                         if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                            if (((Math.abs(iFrom - tempI) > 5) || (Math.abs(jFrom - tempJ) > 5)) || (((tempI < iFrom) && (tempJ < jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || (((tempI > iFrom) && (tempJ > jFrom) && (Math.abs(iFrom - tempI) + Math.abs(jFrom - tempJ)) > 5) || ((tempJ == jFrom) && (Math.abs(iFrom - tempI) > 5)) || ((tempI == iFrom) && (Math.abs(jFrom - tempJ) > 5))))) {
+                                continue;
+                            }
+                            if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                                map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                            }
                         }
                     }
                 }
-            }
-            iColonize=iFrom;
-            jColonize=jFrom;
-            colonizeInitialised=true;
-        }else{
-            if(iFrom!=iColonize||jFrom!=jColonize) {
+                iColonize = iFrom;
+                jColonize = jFrom;
+                colonizeInitialised = true;
+            } else {
+                if (iFrom != iColonize || jFrom != jColonize) {
 
-                if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
+                    if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
 
-                    if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
+                        if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
 
 
-                        City temp = new City(currentPlayer.id);
-                        temp.setOwnerId(currentPlayer.id);
-                        map.getHexagon(iFrom, jFrom).setProvince(temp);
-                        currentPlayer.createNewCity(temp);
-                        try {
-                            image = new Image(Objects.requireNonNull(getClass().getResource(temp.iconPath())).toURI().toString());
-                        } catch (URISyntaxException e) {
-                            System.out.println("pattern null");
+                            City temp = new City(currentPlayer.id);
+                            temp.setOwnerId(currentPlayer.id);
+                            map.getHexagon(iFrom, jFrom).setProvince(temp);
+                            currentPlayer.createNewCity(temp);
+                            try {
+                                image = new Image(Objects.requireNonNull(getClass().getResource(temp.iconPath())).toURI().toString());
+                            } catch (URISyntaxException e) {
+                                System.out.println("pattern null");
+                            }
+                            ImagePattern imgPat3 = new ImagePattern(image);
+                            map.getHexagon(iFrom, jFrom).setFill(imgPat3);
+                            map.getHexagon(iFrom, jFrom).setOnMouseClicked(MouseEvent -> hexClick(map.getHexagon(iFrom, jFrom), temp));
                         }
-                        ImagePattern imgPat3 = new ImagePattern(image);
-                        map.getHexagon(iFrom, jFrom).setFill(imgPat3);
-                        map.getHexagon(iFrom, jFrom).setOnMouseClicked(MouseEvent -> hexClick(map.getHexagon(iFrom, jFrom), temp));
                     }
                 }
+                fullMapBorderCleaning();
+                colonizeInitialised = false;
             }
-            fullMapBorderCleaning();
-            colonizeInitialised = false;
         }
-    }
 
 
-    // panel do uruchomienia kupowania hexów dla miasta
-    void buyClicked() {
-        buyingMode = !buyingMode;
+        // panel do uruchomienia kupowania hexów dla miasta
+        void buyClicked () {
+            buyingMode = !buyingMode;
 
-        if (!buyingMode){
-            buyInitialised      = false;
+            if (!buyingMode) {
+                buyInitialised = false;
 //            cityCoordinatesLock = false;
 //            fullMapBorderCleaning();
 //            colonize(initialisedI,initialisedJ);
 //            colonize(initialisedI,initialisedJ);
-            initialisedI = -11;
-            initialisedJ = -11;
+                initialisedI = -11;
+                initialisedJ = -11;
+            }
         }
-    }
 
-    void fullMapBorderCleaning(){
-        int jSetter = 1, jLimiter = 46;
-        for (int i2 = 1; i2 <35; i2++) {
-            if (i2 % 2 == 0) {jSetter--; jLimiter--;}
-            for (int j2=jSetter; j2 < jLimiter; j2++) {
-                if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
+        void fullMapBorderCleaning () {
+            int jSetter = 1, jLimiter = 46;
+            for (int i2 = 1; i2 < 35; i2++) {
+                if (i2 % 2 == 0) {
+                    jSetter--;
+                    jLimiter--;
+                }
+                for (int j2 = jSetter; j2 < jLimiter; j2++) {
+                    if (i2 % 2 == 1 && j2 == jLimiter - 1) continue;
 
-                switch (map.getHexagon(j2,i2).getProvince().getOwnerId()) {
-                    case 0:
-                        color = rgb(2,0,36,1);
-                        map.getHexagon(j2,i2).borderColor(color);
-                        break;
-                    case 1:
-                        color = Color.AQUAMARINE;
-                        map.getHexagon(j2,i2).borderColor(color);
-                        break;
-                    case 2:
-                        color = Color.YELLOW;
-                        map.getHexagon(j2,i2).borderColor(color);
-                        break;
-                    case 3:
-                        color = Color.RED;
-                        map.getHexagon(j2,i2).borderColor(color);
-                        break;
+                    switch (map.getHexagon(j2, i2).getProvince().getOwnerId()) {
+                        case 0:
+                            color = rgb(2, 0, 36, 1);
+                            map.getHexagon(j2, i2).borderColor(color);
+                            break;
+                        case 1:
+                            color = Color.AQUAMARINE;
+                            map.getHexagon(j2, i2).borderColor(color);
+                            break;
+                        case 2:
+                            color = Color.YELLOW;
+                            map.getHexagon(j2, i2).borderColor(color);
+                            break;
+                        case 3:
+                            color = Color.RED;
+                            map.getHexagon(j2, i2).borderColor(color);
+                            break;
+                    }
                 }
             }
         }
-    }
 
 
+        private void buyField (Hexagon tempname){
+            soundPlayerPlaySound(gameButtonSound);
 
+            if (colonizeInitialised) {
+                colonizeInitialised = false;
+                fullMapBorderCleaning();
+            }
 
-    private void buyField(Hexagon tempname) {
-        soundPlayerPlaySound(gameButtonSound);
+            int i = tempname.getQ();
+            int j = tempname.getR();
 
-        if (colonizeInitialised) {
-            colonizeInitialised=false;
-            fullMapBorderCleaning();
-        }
+            if (buyInitialised && (map.getHexagon(i, j).getBorderColor() != Color.PINK)) {
+                fullMapBorderCleaning();
+                buyClicked();
+                return;
+            }
 
-        int i = tempname.getQ();
-        int j = tempname.getR();
+            if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
+                buyClicked();
+                fullMapBorderCleaning();
+                return;
+            }
 
-        if(buyInitialised&&(map.getHexagon(i,j).getBorderColor()!=Color.PINK)){
-            fullMapBorderCleaning();
-            buyClicked();
-            return;
-        }
+            if (!cityCoordinatesLock && Objects.equals(map.getHexagon(i, j).getProvince().getType(), "City")) {
+                cityCoordinatesLock = true;
+                buyInitialised = true;
+                initialisedI = i;
+                initialisedJ = j;
 
-        if (!buyInitialised && (tempname.getProvince().getOwnerId() != playerId)) {
-            buyClicked();
-            fullMapBorderCleaning();
-            return;
-        }
+                for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
+                    for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
+                        if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
+                            if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                                if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6 || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 7))) {
+                                    continue;
+                                }
+                                if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
+                                    map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
+                                }
+                            }
+                        }
+                    }
+                }
+                return;
+            }
+            double provinceCostMultiplier = 1;
+            if (currentPlayer.id == 3) {
+                provinceCostMultiplier = 0.8;
+            }
 
-        if (!cityCoordinatesLock&& Objects.equals(map.getHexagon(i, j).getProvince().getType(), "City")) {
-            cityCoordinatesLock = true;
-            buyInitialised = true;
-            initialisedI = i;
-            initialisedJ = j;
+            if (!goldVSfaithBuy) {
+                if (currentPlayer.getGold() >= PROVINCE_COST * provinceCostMultiplier) {
+                    currentPlayer.setGold(currentPlayer.getGold() - PROVINCE_COST * provinceCostMultiplier);
+                    goldField.setText("" + (int) currentPlayer.getGold());
+                } else {
+                    buyingMode = false;
+                    buyInitialised = false;
+                    cityCoordinatesLock = false;
+                    fullMapBorderCleaning();
+                    return;
+                }
+            } else {
+                if (currentPlayer.getFaith() >= PROVINCE_COST * provinceCostMultiplier) {
+                    currentPlayer.setFaith(currentPlayer.getFaith() - PROVINCE_COST * provinceCostMultiplier);
+                    beliefField.setText("" + (int) currentPlayer.getFaith());
+                } else {
+                    buyingMode = false;
+                    buyInitialised = false;
+                    cityCoordinatesLock = false;
+                    fullMapBorderCleaning();
+                    return;
+                }
+            }
+            if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
+                cityCoordinatesLock = false;
+                buyingMode = false;
+                fullMapBorderCleaning();
+                return;
+            }
+
+            map.getHexagon(i, j).getProvince().setOwnerId(ownerId);
+            City temoCity = (City) map.getHexagon(initialisedI, initialisedJ).getProvince();
+            temoCity.assignProvince(map.getHexagon(i, j).getProvince());
+            switch (map.getHexagon(i, j).getProvince().getOwnerId()) {
+                case 0:
+                    color = rgb(2, 0, 36, 1);
+
+                    break;
+
+                case 1:
+                    color = Color.AQUAMARINE;
+
+                    break;
+
+                case 2:
+                    color = Color.YELLOW;
+
+                    break;
+
+                case 3:
+                    color = Color.RED;
+
+                    break;
+            }
+            map.getHexagon(i, j).borderColor(color);
+
+            try {
+                image = new Image(Objects.requireNonNull(getClass().getResource(map.getHexagon(i, j).getProvince().iconPath())).toURI().toString());
+
+                ImagePattern imgPat3 = new ImagePattern(image);
+
+                map.getHexagon(i, j).setFill(imgPat3);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            map.getHexagon(i, j).borderColor(color);    // /TODO: tutaj
 
             for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
                 for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
                     if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
                         if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                            if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6 || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 7))) {
+                            if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
                                 continue;
                             }
                             if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
@@ -2057,93 +2095,5 @@ public class MainBoardController implements Initializable {
                     }
                 }
             }
-            return;
-        }
-        double provinceCostMultiplier = 1;
-        if(currentPlayer.id==3){
-            provinceCostMultiplier=0.8;
-        }
-
-        if(!goldVSfaithBuy){
-            if(currentPlayer.getGold()>=PROVINCE_COST*provinceCostMultiplier) {
-                currentPlayer.setGold(currentPlayer.getGold() - PROVINCE_COST*provinceCostMultiplier);
-                goldField.setText("" + (int)currentPlayer.getGold());
-            }else{
-                buyingMode          = false;
-                buyInitialised      = false;
-                cityCoordinatesLock = false;
-                fullMapBorderCleaning();
-                return;
-            }
-        }else{
-            if(currentPlayer.getFaith()>=PROVINCE_COST*provinceCostMultiplier) {
-                currentPlayer.setFaith(currentPlayer.getFaith() - PROVINCE_COST*provinceCostMultiplier);
-                beliefField.setText("" + (int)currentPlayer.getFaith());
-            }else{
-                buyingMode          = false;
-                buyInitialised      = false;
-                cityCoordinatesLock = false;
-                fullMapBorderCleaning();
-                return;
-            }
-        }
-        if (map.getHexagon(i, j).getBorderColor() != Color.PINK) {
-            cityCoordinatesLock = false;
-            buyingMode=false;
-            fullMapBorderCleaning();
-            return;
-        }
-
-        map.getHexagon(i, j).getProvince().setOwnerId(ownerId);
-        City temoCity = (City)map.getHexagon(initialisedI, initialisedJ).getProvince();
-        temoCity.assignProvince(map.getHexagon(i, j).getProvince());
-        switch (map.getHexagon(i, j).getProvince().getOwnerId()) {
-        case 0 :
-            color = rgb(2, 0, 36, 1);
-
-            break;
-
-        case 1 :
-            color = Color.AQUAMARINE;
-
-            break;
-
-        case 2 :
-            color = Color.YELLOW;
-
-            break;
-
-        case 3 :
-            color = Color.RED;
-
-            break;
-        }
-        map.getHexagon(i, j).borderColor(color);
-
-        try {
-            image = new Image(Objects.requireNonNull(getClass().getResource(map.getHexagon(i, j).getProvince().iconPath())).toURI().toString());
-
-            ImagePattern imgPat3 = new ImagePattern(image);
-
-            map.getHexagon(i, j).setFill(imgPat3);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        map.getHexagon(i, j).borderColor(color);    // /TODO: tutaj
-
-        for (int tempI = initialisedI - 3; tempI < initialisedI + 4; tempI++) {
-            for (int tempJ = initialisedJ - 3; tempJ < initialisedJ + 4; tempJ++) {
-                if ((map.getHexagon(tempI, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ - 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ + 1).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI + 1, tempJ).getProvince().getOwnerId() == ownerId) || (map.getHexagon(tempI - 1, tempJ).getProvince().getOwnerId() == ownerId)) {
-                    if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                        if (((Math.abs(initialisedI - tempI) > 3) || (Math.abs(initialisedJ - tempJ) > 3)) || (((tempI < initialisedI) && (tempJ < initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || (((tempI > initialisedI) && (tempJ > initialisedJ) && (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 4) || ((tempJ == initialisedJ) && (Math.abs(initialisedI - tempI) == 3)) || ((tempI == initialisedI) && (Math.abs(initialisedJ - tempJ) == 3)) || (Math.abs(initialisedI - tempI) + Math.abs(initialisedJ - tempJ)) == 6))) {
-                            continue;
-                        }
-                        if (map.getHexagon(tempI, tempJ).getProvince().getOwnerId() == 0) {
-                            map.getHexagon(tempI, tempJ).borderColor(Color.PINK);
-                        }
-                    }
-                }
-            }
         }
     }
-}

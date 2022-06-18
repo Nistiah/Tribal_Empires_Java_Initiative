@@ -277,9 +277,11 @@ public class City extends Province {
         this.population = population;
     }
 
-    Army army1 = new Army();
-    Army army2 = new Army();
-    public Siege siege = new Siege(1);
+
+
+    public void setSiege(Siege siege){
+        this.siege=siege;
+    }
 
     void defendersVictory(){
         siege=null;
@@ -294,10 +296,46 @@ public class City extends Province {
 
 
     }
+    public Siege siege = new Siege(1);
 
 
 
     public class Siege{
+
+        Siege(int id){
+            atackingArmy=new Army();
+            defendingArmy=new Army();
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Chariots());
+            atackingArmy.addUnit(new Archer());
+            defendingArmy.addUnit(new Chariots());
+            defendingArmy.addUnit(new Chariots());
+
+
+            for(ArmyUnit unit: atackingArmy.getUnits()){
+                atackStrengthInitial+=unit.getLife();
+                atackCloseDamageInitial+=unit.getCloseAttack();
+                atackFarDamageInitial+=unit.getFarAttack();
+                atackCloseDefenceInitial+=unit.getCloseDefence();
+                atackFarDefenceInitial+= unit.getFarDefence();
+            }
+            for (ArmyUnit unit:defendingArmy.getUnits()){
+                defenseStrengthInitial+=unit.getLife();
+                defenseCloseDamageInitial+=unit.getCloseAttack();
+                defenseFarDamageInitial+=unit.getFarAttack();
+                defenseCloseDefenceInitial+=unit.getCloseDefence();
+                defenseFarDefenceInitial+= unit.getFarDefence();
+            }
+            atackStrengthInitial*=2;
+            defenseStrengthInitial*=2;
+
+            atackStrength=atackStrengthInitial;
+            defenseStrength=defenseStrengthInitial;
+            recalculate();
+
+        }
+
 
         public Army atackingArmy;
         public Army defendingArmy;
@@ -305,10 +343,7 @@ public class City extends Province {
         public int attackerId;
 
 
-        int atackStrengthInitial=0;
-        int defenseStrengthInitial=0;
 
-        double atackCloseDamageInitial=0;
 
         public double getAtackCloseDamageInitial() {
             return round(atackCloseDamageInitial,1);
@@ -342,6 +377,10 @@ public class City extends Province {
             return round(defenseFarDefenceInitial,1);
         }
 
+        int atackStrengthInitial=0;
+        int defenseStrengthInitial=50;
+
+        double atackCloseDamageInitial=0;
         double defenseCloseDamageInitial=0;
 
         double atackFarDamageInitial=0;
@@ -422,47 +461,6 @@ public class City extends Province {
 //            this.atackingArmy=atackingArmy;
 //            this.defendingArmy=defendingArmy;
 //        }
-        Siege(int id){
-            attackerId=id;
-            atackingArmy=new Army();
-            defendingArmy=new Army();
-
-            atackingArmy.addUnit(new Archer());
-            atackingArmy.addUnit(new Infantry());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-
-
-            defendingArmy.addUnit(new Archer());
-            defendingArmy.addUnit(new Infantry());
-            defendingArmy.addUnit(new Chariots());
-
-            for(ArmyUnit unit: atackingArmy.getUnits()){
-                atackStrengthInitial+=unit.getLife();
-                atackCloseDamageInitial+=unit.getCloseAttack();
-                atackFarDamageInitial+=unit.getFarAttack();
-                atackCloseDefenceInitial+=unit.getCloseDefence();
-                atackFarDefenceInitial+= unit.getFarDefence();
-            }
-            for (ArmyUnit unit:defendingArmy.getUnits()){
-                defenseStrengthInitial+=unit.getLife();
-                defenseCloseDamageInitial+=unit.getCloseAttack();
-                defenseFarDamageInitial+=unit.getFarAttack();
-                defenseCloseDefenceInitial+=unit.getCloseDefence();
-                defenseFarDefenceInitial+= unit.getFarDefence();
-            }
-            atackStrengthInitial*=2;
-            defenseStrengthInitial*=2;
-
-            atackStrength=atackStrengthInitial;
-            defenseStrength=defenseStrengthInitial;
-            recalculate();
-
-        }
 
 
         void recalculate(){
@@ -490,8 +488,34 @@ public class City extends Province {
             damage += defenseFarDamage - atackFarDefence;
             return damage;
         }
-
         public int lastRng=-1;
+
+
+        public String getLastRng(){
+            switch (lastRng) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    return "Roll " + lastRng + " - Cadia Stands!";
+                case 5:
+                case 6:
+                    return "Roll " + lastRng + " - Plague!";
+                case 7:
+                case 8:
+                    return "Roll " + lastRng + " - Water Shortage!";
+                case 9:
+                    return "Roll " + lastRng + " - Fire!";
+                case 10:
+                    return "Roll " + lastRng + " - Defenders Desert!";
+                case -1:
+                    return "Army Arrived! Siege is not yet started!";
+            }
+            return "";
+        }
+
+
         public double  defCasualties;
         public double  atkCasualties;
 

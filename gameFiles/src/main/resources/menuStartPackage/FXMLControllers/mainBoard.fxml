@@ -137,7 +137,7 @@
         <TextFlow fx:id="dyesTextFlow" layoutX="685.0" layoutY="40.0" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" prefHeight="0.0" prefWidth="250.0" styleClass="bodyBackground5" visible="false" AnchorPane.topAnchor="40.0" />
         <TextFlow fx:id="descriptionTextFlow" layoutX="1359.0" layoutY="43.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="5.0" prefWidth="256.0" styleClass="bodyBackground5" visible="false" AnchorPane.rightAnchor="294.0" />
         <TextFlow fx:id="popPanel" layoutX="1369.0" layoutY="196.0" onMouseEntered="#goldEntered" onMouseExited="#goldExited" prefHeight="5.0" prefWidth="253.0" styleClass="bodyBackground5" visible="false" AnchorPane.leftAnchor="1200.0" AnchorPane.rightAnchor="295.0" />
-        <AnchorPane fx:id="siegePane" prefHeight="200.0" prefWidth="200.0" styleClass="bodyBackground6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+        <AnchorPane fx:id="siegePane" prefHeight="200.0" prefWidth="200.0" styleClass="bodyBackground6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
             <children>
                 <BorderPane prefHeight="1034.0" prefWidth="1914.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <top>
@@ -157,7 +157,10 @@
                                 <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Pane maxHeight="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="siegeImage" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <Pane maxHeight="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="siegeImage" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <children>
+                              <TextFlow fx:id="siegeDescription" layoutX="95.0" layoutY="8.0" prefHeight="383.0" prefWidth="768.0" styleClass="bodyBackground55" visible="false" />
+                           </children></Pane>
                                 <TextField fx:id="siegeName" alignment="CENTER" styleClass="siegeName" text="SiegeOF" GridPane.columnIndex="2" />
                                 <TextFlow fx:id="siegeAtack" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextFlow fx:id="siegeDefence" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -174,16 +177,19 @@
                             <rowConstraints>
                                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button mnemonicParsing="false" onMouseClicked="#siegeExit" text="back" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                                <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#siegeExit" prefHeight="136.0" prefWidth="800.0" styleClass="nextPlayerButton2" text="Go back to the map" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                     <font>
-                                        <Font size="10.0" />
+                                        <Font size="18.0" />
                                     </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" />
+                           </GridPane.margin>
                                 </Button>
-                                <TextField fx:id="attackersCasualties" styleClass="siege2" />
-                                <TextField fx:id="rng" styleClass="siege2" GridPane.columnIndex="1" />
+                                <TextField fx:id="attackersCasualties" alignment="CENTER_RIGHT" styleClass="siege2" />
+                                <TextField fx:id="rng" styleClass="siege2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                                 <TextField fx:id="defendersCasualties" styleClass="siege2" GridPane.columnIndex="2" />
                                 <TextFlow fx:id="attackersFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                                 <TextFlow fx:id="rngFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
