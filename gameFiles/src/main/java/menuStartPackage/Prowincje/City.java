@@ -21,6 +21,7 @@ public class City extends Province {
     public double        popGrowthCost            = 5;
     public double        currentPopGrowth         = 0;
     private final double popGrowthScaler          = 1.1;
+    private int          populationLimit          = 10;
 
     private List<String> resources                = List.of();
     private String       type                     = "City";
@@ -81,6 +82,9 @@ public class City extends Province {
             currentPopGrowth-=popGrowthCost;
             population++;
             popGrowthCost=popGrowthCost*popGrowthScaler;
+        }
+        if(population > populationLimit){
+            population = populationLimit;
         }
         if(siege==null){
             return;
@@ -273,6 +277,12 @@ public class City extends Province {
 
     public int getPopulation() {
         return population;
+    }
+
+    public int getPopulationLimit() { return populationLimit; }
+
+    public void setPopulationLimit(int populationLimit) {
+        this.populationLimit = populationLimit;
     }
 
     public void setPopulation(int population) {

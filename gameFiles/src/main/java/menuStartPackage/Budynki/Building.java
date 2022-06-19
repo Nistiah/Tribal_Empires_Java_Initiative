@@ -125,7 +125,7 @@ public class Building {
             break;
 
         case "ResidentialDistrict" :
-            populationLimit = 5;
+            populationLimit = 10;
 
             break;
 
