@@ -274,5 +274,28 @@
                 </BorderPane>
             </children>
         </AnchorPane>
+      <AnchorPane fx:id="victory" prefHeight="1096.0" prefWidth="1936.0" styleClass="bodyBackground6" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <BorderPane prefHeight="1074.0" prefWidth="1914.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <TextField fx:id="victoryTextField" alignment="CENTER" styleClass="victoryText" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="400.0" right="400.0" />
+                     </BorderPane.margin>
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </TextField>
+               </center>
+               <bottom>
+                  <Button mnemonicParsing="false" onMouseClicked="#backToMainMenuFromBoard" styleClass="settingsButton" text="Game Statistics" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="100.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </bottom>
+            </BorderPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

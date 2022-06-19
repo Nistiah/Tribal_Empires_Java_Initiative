@@ -674,6 +674,19 @@
 .settingsButton2:hover{
 }
 
+.victoryText {
+    -fx-background-radius: 200px;
+    -fx-background-color: transparent;
+    /*-fx-color: 	rgba(255,192,203,1);*/
+    -fx-border-radius: 800;
+    -fx-text-fill: green;
+    -fx-text-alignment: center;
+
+    /*-fx-opacity:85%;*/
+    -fx-font-size: 40;
+    -fx-padding: 10px 20px;
+}
+
 .mainMenuButton {
     -fx-background-radius: 200px;
     -fx-background-color: rgba(2,0,36,0.80) ;

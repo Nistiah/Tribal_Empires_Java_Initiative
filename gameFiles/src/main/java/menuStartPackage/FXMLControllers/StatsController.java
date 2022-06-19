@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 import static menuStartPackage.FXMLControllers.MainBoardController.playerList;
+import static menuStartPackage.StartUp.musicPlayerInstance;
 
 public class StatsController implements Initializable {
     public static Vector<MainBoardController.PlayerData> playerStats = new Vector<>();
@@ -172,5 +174,10 @@ public class StatsController implements Initializable {
         chart1.setVisible(false);
         chart2.setVisible(false);
         chart3.setVisible(true);
+    }
+    @FXML
+    void quit(ActionEvent event) {
+        musicPlayerInstance.stopMusic();    // for interupt within
+        Platform.exit();
     }
 }

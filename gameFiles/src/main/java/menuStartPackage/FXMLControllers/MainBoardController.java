@@ -439,6 +439,26 @@ public class MainBoardController implements Initializable {
         ironTextFlow.setVisible(false);
     }
 
+    @FXML AnchorPane victory;
+    @FXML TextField  victoryTextField;
+    boolean victoryAchieved = false;
+
+    void victoryAchieved(){
+        int maxPop=0;
+        String name = null;
+        for(Player player: playerList){
+            if(player.getPopulation()>maxPop){
+                maxPop=player.getPopulation();
+                name=player.getName();
+            }
+        }
+        if(maxPop>=100){
+            victoryAchieved=true;
+            victoryTextField.setText(name + " Victory by population!");
+            victory.setVisible(true);
+        }
+    }
+
     @FXML
     void nextPlayerButton() throws URISyntaxException {
 
@@ -466,6 +486,7 @@ public class MainBoardController implements Initializable {
             } else {
                 playerStats.get(playerId - 1).addInfo((int) 0, 0, 0);
             }
+            victoryAchieved();
         }
 
         playerId++;
@@ -1779,38 +1800,40 @@ public class MainBoardController implements Initializable {
 
 
         private void shortcuts (KeyEvent event){
-            switch (event.getCode()) {
-                case SUBTRACT:
-                case UNDERSCORE:
-                case MINUS:
-                    map.sizeDown();
-                    break;
-                case ADD:
-                case EQUALS:
-                    map.sizeUp();
-                    break;
-                case ESCAPE:
-                    this.openSettings();
-                    break;
-                case N:
-                    try {
-                        this.nextPlayerButton();
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case X:
-                    currentPlayer.setFaith(500);
-                    currentPlayer.setGold(500);
-                    currentPlayer.setBuildingResources(500);
-                    currentPlayer.setBronze(500);
-                    currentPlayer.setIron(500);
-                    currentPlayer.setHorses(500);
-                    currentPlayer.setDyes(500);
-                    break;
-                case M:
-                    nextSong();
-                    break;
+            if(!victoryAchieved) {
+                switch (event.getCode()) {
+                    case SUBTRACT:
+                    case UNDERSCORE:
+                    case MINUS:
+                        map.sizeDown();
+                        break;
+                    case ADD:
+                    case EQUALS:
+                        map.sizeUp();
+                        break;
+                    case ESCAPE:
+                        this.openSettings();
+                        break;
+                    case N:
+                        try {
+                            this.nextPlayerButton();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case X:
+                        currentPlayer.setFaith(500);
+                        currentPlayer.setGold(500);
+                        currentPlayer.setBuildingResources(500);
+                        currentPlayer.setBronze(500);
+                        currentPlayer.setIron(500);
+                        currentPlayer.setHorses(500);
+                        currentPlayer.setDyes(500);
+                        break;
+                    case M:
+                        nextSong();
+                        break;
+                }
             }
         }
 
@@ -1851,7 +1874,7 @@ public class MainBoardController implements Initializable {
                 soundPlayed = true;
                 file = new File(filename);
                 media = new Media(file.toURI().toString());
-                mediaPlayer = null;
+//                mediaPlayer = null;
                 mediaPlayer = new MediaPlayer(media);
                 mediaPlayer.setVolume(soundVolume);
                 mediaPlayer.play();
