@@ -4,6 +4,7 @@ import menuStartPackage.Budynki.Building;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Province {
     public boolean       isCity = false;
@@ -37,6 +38,12 @@ public class Province {
     List<String>         baseBuildings;
     public List<String>  builtBuildings = new ArrayList<>();
     public List<Building> build = new ArrayList<Building>();
+
+    public Vector<Building> builtBuildingsVector = new Vector<Building>();
+
+    public void addBuiltBuildingsVector(Building building) {
+        builtBuildingsVector.add(building);
+    }
 
     public void setBuild(){
         possibleBuildings.forEach(bld -> {

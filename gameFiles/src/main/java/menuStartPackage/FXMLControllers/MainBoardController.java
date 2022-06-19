@@ -46,6 +46,7 @@ import hexagons.src.main.java.com.prettybyte.hexagons.HexagonMap;
 
 import menuStartPackage.Jednostki.*;
 
+import menuStartPackage.Budynki.*;
 import menuStartPackage.Jednostki.Army;
 import menuStartPackage.Jednostki.ArmyUnit;
 import menuStartPackage.Jednostki.Chariots;
@@ -1480,10 +1481,15 @@ public class MainBoardController implements Initializable {
                 });
                 System.out.println("Build: " + temphex.getProvince().build);
                 System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
+                System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
                 baseBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if (!temphex.getProvince().builtBuildings.contains(baseBuilding))
+                    if (!temphex.getProvince().builtBuildings.contains(baseBuilding)){
                         temphex.getProvince().builtBuildings.add(baseBuilding);
+                        String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
+                        buyBuilding(temphex.getProvince(), buildingNoSpaces);
+                    }
+
 
                     baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
@@ -1491,9 +1497,12 @@ public class MainBoardController implements Initializable {
                     //System.out.println(temphex.getProvince().build);
                     List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
                     tempList.remove(baseBuilding);
-                    //temphex.getProvince().setPossibleBuildings(tempList);
-                    //System.out.println(temphex.getProvince().getPossibleBuildings());
+                    hexClick(temphex, temp);
                 });
+                if(!temphex.getProvince().builtBuildings.contains("IrrigationSystem")){
+                    buttonOffset[0] = 10;
+                    return;
+                }
 
                 provinceLowerPanel.getChildren().add(baseBuildingButton);
             });
@@ -1515,16 +1524,20 @@ public class MainBoardController implements Initializable {
                 buttonOffset[0] += 120;
                 possibleBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if (!temphex.getProvince().builtBuildings.contains(building))
+                    if (!temphex.getProvince().builtBuildings.contains(building)){
                         temphex.getProvince().builtBuildings.add(building);
+                        String buildingNoSpaces = building.replaceAll("\\s+","");
+                        if(buildingNoSpaces.equals("CatchingBoars")) buildingNoSpaces = "CatchingBoar";
+                        buyBuilding(temphex.getProvince(), buildingNoSpaces);
+                    }
+
                     possibleBuildingButton.getStyleClass().add("builtBuilding");
                     if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
                     if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
                     //System.out.println(temphex.getProvince().builtBuildings);
                     List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
                     tempList.remove(building);
-                    //temphex.getProvince().setPossibleBuildings(tempList);
-                    //System.out.println(temphex.getProvince().getPossibleBuildings());
+                    hexClick(temphex, temp);
                 });
                 provinceLowerPanel.getChildren().add(possibleBuildingButton);
             });
@@ -1544,6 +1557,86 @@ public class MainBoardController implements Initializable {
 
     }
 
+    void buyBuilding(Province province, String building){
+        province.builtBuildings.add(building);
+        switch (building) {
+            case "AmberCollector":
+                province.builtBuildingsVector.add(new AmberCollector());
+                break;
+            case "Barracks":
+                province.builtBuildingsVector.add(new Barracks());
+                break;
+            case "BronzeMine":
+                province.builtBuildingsVector.add(new BronzeMine());
+                break;
+            case "Caravan":
+                province.builtBuildingsVector.add(new Caravan());
+                break;
+            case "CatchingBoar":
+                province.builtBuildingsVector.add(new CatchingBoar());
+                break;
+            case "CowBreeding":
+                province.builtBuildingsVector.add(new CowBreeding());
+                break;
+            case "Deforestation":
+                province.builtBuildingsVector.add(new Deforestation());
+                break;
+            case "Farm":
+                province.builtBuildingsVector.add(new Farm());
+                break;
+            case "Fishermen":
+                province.builtBuildingsVector.add(new Fishermen());
+                break;
+            case "GoldMine":
+                province.builtBuildingsVector.add(new GoldMine());
+                break;
+            case "HorseBreeding":
+                province.builtBuildingsVector.add(new HorseBreeding());
+                break;
+            case "Hunter":
+                province.builtBuildingsVector.add(new Hunter());
+                break;
+            case "IronMine":
+                province.builtBuildingsVector.add(new IronMine());
+                break;
+            case "IrrigationSystem":
+                province.builtBuildingsVector.add(new IrrigationSystem());
+                break;
+            case "Lighthouse":
+                province.builtBuildingsVector.add(new Lighthouse());
+                break;
+            case "Market":
+                province.builtBuildingsVector.add(new Market());
+                break;
+            case "PigBreeding":
+                province.builtBuildingsVector.add(new PigBreeding());
+                break;
+            case "Pyramid":
+                province.builtBuildingsVector.add(new Pyramid());
+                break;
+            case "ResidentialDistrict":
+                province.builtBuildingsVector.add(new ResidentialDistrict());
+                break;
+            case "RiversideFarm":
+                province.builtBuildingsVector.add(new RiversideFarm());
+                break;
+            case "Sawmill":
+                province.builtBuildingsVector.add(new Sawmill());
+                break;
+            case "ScarletFishermen":
+                province.builtBuildingsVector.add(new ScarletFishermen());
+                break;
+            case "SeaFoodCollector":
+                province.builtBuildingsVector.add(new SeaFoodCollector());
+                break;
+            case "Temple":
+                province.builtBuildingsVector.add(new Temple());
+                break;
+            case "Warehouse":
+                province.builtBuildingsVector.add(new Warehouse());
+                break;
+        }
+    }
 
     void armiesClicked(City city)
     {
@@ -1590,12 +1683,18 @@ public class MainBoardController implements Initializable {
     {
         provinceLowerPanel.getChildren().clear();
 
+        TextField armyName = new TextField("" + army.getName());
+        armyName.setTranslateY(5);
+        armyName.setPrefWidth(299);
+        armyName.getStyleClass().add("lvlText");
+        provinceLowerPanel.getChildren().add(armyName);
+
         //ARCHERS AMOUNT
         TextField archersAmount = new TextField("" + army.getArchersAmount());
         archersAmount.getStyleClass().add("armyArcher");
-        archersAmount.setTranslateY(10);
+        archersAmount.setTranslateY(35);
         archersAmount.setTranslateX(55);
-        archersAmount.setFont(Font.font(font,16));
+        archersAmount.setFont(Font.font(font, 16));
         archersAmount.setPrefWidth(50);
         archersAmount.setEditable(false);
         archersAmount.setAlignment(Pos.BOTTOM_RIGHT);
@@ -1603,9 +1702,9 @@ public class MainBoardController implements Initializable {
         //CHARIOTS AMOUNT
         TextField chariotsAmount = new TextField("" + army.getChariotsAmount());
         chariotsAmount.getStyleClass().add("armyChariot");
-        chariotsAmount.setTranslateY(10);
+        chariotsAmount.setTranslateY(35);
         chariotsAmount.setTranslateX(105);
-        chariotsAmount.setFont(Font.font(font,16));
+        chariotsAmount.setFont(Font.font(font, 16));
         chariotsAmount.setPrefWidth(80);
         chariotsAmount.setEditable(false);
         chariotsAmount.setAlignment(Pos.BOTTOM_RIGHT);
@@ -1613,15 +1712,15 @@ public class MainBoardController implements Initializable {
         //WARRIORS AMOUNT
         TextField warriorsAmount = new TextField("" + army.getWarriorsAmount());
         warriorsAmount.getStyleClass().add("armyWarrior");
-        warriorsAmount.setTranslateY(10);
+        warriorsAmount.setTranslateY(35);
         warriorsAmount.setTranslateX(185);
-        warriorsAmount.setFont(Font.font(font,16));
+        warriorsAmount.setFont(Font.font(font, 16));
         warriorsAmount.setPrefWidth(50);
         warriorsAmount.setEditable(false);
         warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button recruitArchers = new Button("Recruit Archers");
-        recruitArchers.setTranslateY(50);
+        recruitArchers.setTranslateY(75);
         recruitArchers.setPrefWidth(299);
         recruitArchers.setOnMouseClicked(e3 -> {
             army.addUnit(new Archer());
@@ -1630,7 +1729,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button recruitChariots = new Button("Recruit Chariots");
-        recruitChariots.setTranslateY(110);
+        recruitChariots.setTranslateY(135);
         recruitChariots.setPrefWidth(299);
         recruitChariots.setOnMouseClicked(e3 -> {
             army.addUnit(new Chariots());
@@ -1639,7 +1738,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button recruitInfantry = new Button("Recruit Infantry");
-        recruitInfantry.setTranslateY(170);
+        recruitInfantry.setTranslateY(195);
         recruitInfantry.setPrefWidth(299);
         recruitInfantry.setOnMouseClicked(e3 -> {
             army.addUnit(new Infantry());
@@ -1648,46 +1747,45 @@ public class MainBoardController implements Initializable {
         });
 
         Button upgradeArchers = new Button("Upgrade Archers");
-        upgradeArchers.setTranslateY(230);
+        upgradeArchers.setTranslateY(255);
         upgradeArchers.setPrefWidth(299);
         upgradeArchers.setOnMouseClicked(e3 -> {
-            upgradeUnitClicked(army,"Archer");
+            upgradeUnitClicked(army, "Archer");
         });
         final int[] isArchers = {0};
         army.getUnits().forEach(unit -> {
-            if(Objects.equals(unit.getName(), "Archer")) isArchers[0] = 1;
+            if (Objects.equals(unit.getName(), "Archer")) isArchers[0] = 1;
         });
         upgradeArchers.setDisable(isArchers[0] != 1);
 
         Button upgradeChariots = new Button("Upgrade Chariots");
-        upgradeChariots.setTranslateY(290);
+        upgradeChariots.setTranslateY(315);
         upgradeChariots.setPrefWidth(299);
         upgradeChariots.setOnMouseClicked(e3 -> {
-            upgradeUnitClicked(army,"Chariots");
+            upgradeUnitClicked(army, "Chariots");
         });
         final int[] isChariots = {0};
         army.getUnits().forEach(unit -> {
-            if(Objects.equals(unit.getName(), "Chariots")) isChariots[0] = 1;
+            if (Objects.equals(unit.getName(), "Chariots")) isChariots[0] = 1;
         });
         upgradeChariots.setDisable(isChariots[0] != 1);
 
         Button upgradeInfantry = new Button("Upgrade Infantry");
-        upgradeInfantry.setTranslateY(350);
+        upgradeInfantry.setTranslateY(375);
         upgradeInfantry.setPrefWidth(299);
         upgradeInfantry.setOnMouseClicked(e3 -> {
 
-            upgradeUnitClicked(army,"Infantry");
+            upgradeUnitClicked(army, "Infantry");
         });
         final int[] isInfantry = {0};
         army.getUnits().forEach(unit -> {
-            if(Objects.equals(unit.getName(), "Infantry")) isInfantry[0] = 1;
+            if (Objects.equals(unit.getName(), "Infantry")) isInfantry[0] = 1;
         });
         upgradeInfantry.setDisable(isInfantry[0] != 1);
 
 
-
         Button sentArmyToSiege = new Button("Sent army to siege");
-        sentArmyToSiege.setTranslateY(410);
+        sentArmyToSiege.setTranslateY(435);
         sentArmyToSiege.setPrefWidth(299);
         sentArmyToSiege.setOnMouseClicked(e3 -> {
             provinceLowerPanel.getChildren().clear();
@@ -1708,6 +1806,7 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(upgradeInfantry);
 
         provinceLowerPanel.getChildren().add(sentArmyToSiege);
+
     }
 
     public void upgradeUnitClicked(Army army, String unitName)
@@ -1725,24 +1824,100 @@ public class MainBoardController implements Initializable {
             if(Objects.equals(u.getName(), unitName))
             {
                 if(u.getLvl() == 0)lvls[0]+=1;
-                if(u.getLvl() == 0)lvls[1]+=1;
-                if(u.getLvl() == 0)lvls[2]+=1;
-                if(u.getLvl() == 0)lvls[3]+=1;
+                if(u.getLvl() == 1)lvls[1]+=1;
+                if(u.getLvl() == 2)lvls[2]+=1;
+                if(u.getLvl() == 3)lvls[3]+=1;
             }
         });
         System.out.println(Arrays.toString(lvls));
 
-        Button upgradeToLvl1 = new Button("Upgrade unit to lvl 1");
-        upgradeToLvl1.setTranslateY(50);
+        TextField lvl0Label = new TextField("LVL 1");
+        lvl0Label.setTranslateY(10);
+        lvl0Label.setTranslateX(30);
+        lvl0Label.setPrefWidth(60);
+        lvl0Label.setEditable(false);
+        lvl0Label.setAlignment(Pos.CENTER);
+        lvl0Label.getStyleClass().add("lvlText");
+
+        TextField lvl0 = new TextField("" + lvls[0]);
+        lvl0.setTranslateY(30);
+        lvl0.setTranslateX(30);
+        lvl0.setPrefWidth(60);
+        lvl0.setEditable(false);
+        lvl0.setAlignment(Pos.CENTER);
+        lvl0.getStyleClass().add("lvl");
+
+        TextField lvl1Label = new TextField("LVL 2");
+        lvl1Label.setTranslateY(10);
+        lvl1Label.setTranslateX(90);
+        lvl1Label.setPrefWidth(60);
+        lvl1Label.setEditable(false);
+        lvl1Label.setAlignment(Pos.CENTER);
+        lvl1Label.getStyleClass().add("lvlText");
+
+        TextField lvl1 = new TextField("" + lvls[1]);
+        lvl1.setTranslateY(30);
+        lvl1.setTranslateX(90);
+        lvl1.setPrefWidth(60);
+        lvl1.setEditable(false);
+        lvl1.setAlignment(Pos.CENTER);
+        lvl1.getStyleClass().add("lvl");
+
+        TextField lvl2Label = new TextField("LVL 3");
+        lvl2Label.setTranslateY(10);
+        lvl2Label.setTranslateX(150);
+        lvl2Label.setPrefWidth(60);
+        lvl2Label.setEditable(false);
+        lvl2Label.setAlignment(Pos.CENTER);
+        lvl2Label.getStyleClass().add("lvlText");
+
+        TextField lvl2 = new TextField("" + lvls[2]);
+        lvl2.setTranslateY(30);
+        lvl2.setTranslateX(150);
+        lvl2.setPrefWidth(60);
+        lvl2.setEditable(false);
+        lvl2.setAlignment(Pos.CENTER);
+        lvl2.getStyleClass().add("lvl");
+
+        TextField lvl3Label = new TextField("LVL 4");
+        lvl3Label.setTranslateY(10);
+        lvl3Label.setTranslateX(210);
+        lvl3Label.setPrefWidth(60);
+        lvl3Label.setEditable(false);
+        lvl3Label.setAlignment(Pos.CENTER);
+        lvl3Label.getStyleClass().add("lvlText");
+
+        TextField lvl3 = new TextField("" + lvls[3]);
+        lvl3.setTranslateY(30);
+        lvl3.setTranslateX(210);
+        lvl3.setPrefWidth(60);
+        lvl3.setEditable(false);
+        lvl3.setAlignment(Pos.CENTER);
+        lvl3.getStyleClass().add("lvl");
+
+
+
+
+
+
+        provinceLowerPanel.getChildren().add(lvl0Label);
+        provinceLowerPanel.getChildren().add(lvl1Label);
+        provinceLowerPanel.getChildren().add(lvl2Label);
+        provinceLowerPanel.getChildren().add(lvl3Label);
+
+        provinceLowerPanel.getChildren().add(lvl0);
+        provinceLowerPanel.getChildren().add(lvl1);
+        provinceLowerPanel.getChildren().add(lvl2);
+        provinceLowerPanel.getChildren().add(lvl3);
+
+        Button upgradeToLvl1 = new Button("Upgrade to lvl 2");
+        upgradeToLvl1.setTranslateY(80);
         upgradeToLvl1.setPrefWidth(299);
         upgradeToLvl1.setOnMouseClicked(e3 -> {
-            for(int i = 0;i<army.getUnits().size();i++)
-            {
+            for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
-                if(Objects.equals(item.getName(), unitName))
-                {
-                    if(item.getLvl() == 0)
-                    {
+                if (Objects.equals(item.getName(), unitName)) {
+                    if (item.getLvl() == 0) {
                         item.setLvl(1);
                         break;
                     }
@@ -1750,20 +1925,17 @@ public class MainBoardController implements Initializable {
                 }
 
             }
-
+            upgradeUnitClicked(army, unitName);
         });
 
-        Button upgradeToLvl2 = new Button("Upgrade unit to lvl 2");
-        upgradeToLvl2.setTranslateY(110);
+        Button upgradeToLvl2 = new Button("Upgrade to lvl 3");
+        upgradeToLvl2.setTranslateY(140);
         upgradeToLvl2.setPrefWidth(299);
         upgradeToLvl2.setOnMouseClicked(e3 -> {
-            for(int i = 0;i<army.getUnits().size();i++)
-            {
+            for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
-                if(Objects.equals(item.getName(), unitName))
-                {
-                    if(item.getLvl() == 1)
-                    {
+                if (Objects.equals(item.getName(), unitName)) {
+                    if (item.getLvl() == 1) {
                         item.setLvl(2);
                         break;
                     }
@@ -1771,19 +1943,17 @@ public class MainBoardController implements Initializable {
                 }
 
             }
+            upgradeUnitClicked(army, unitName);
         });
 
-        Button upgradeToLvl3 = new Button("Upgrade unit to lvl 3");
-        upgradeToLvl3.setTranslateY(170);
+        Button upgradeToLvl3 = new Button("Upgrade to lvl 4");
+        upgradeToLvl3.setTranslateY(200);
         upgradeToLvl3.setPrefWidth(299);
         upgradeToLvl3.setOnMouseClicked(e3 -> {
-            for(int i = 0;i<army.getUnits().size();i++)
-            {
+            for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
-                if(Objects.equals(item.getName(), unitName))
-                {
-                    if(item.getLvl() == 2)
-                    {
+                if (Objects.equals(item.getName(), unitName)) {
+                    if (item.getLvl() == 2) {
                         item.setLvl(3);
                         break;
                     }
@@ -1791,11 +1961,20 @@ public class MainBoardController implements Initializable {
                 }
 
             }
+            upgradeUnitClicked(army, unitName);
+        });
+
+        Button back = new Button("Back");
+        back.setTranslateY(260);
+        back.setPrefWidth(299);
+        back.setOnMouseClicked(e -> {
+            singleArmyClicked(army);
         });
 
         provinceLowerPanel.getChildren().add(upgradeToLvl1);
         provinceLowerPanel.getChildren().add(upgradeToLvl2);
         provinceLowerPanel.getChildren().add(upgradeToLvl3);
+        provinceLowerPanel.getChildren().add(back);
     }
 
 
