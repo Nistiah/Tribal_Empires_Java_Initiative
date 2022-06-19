@@ -201,6 +201,7 @@ public class MainBoardController implements Initializable {
 
         Text cityPop = new Text("City population " + city.getPopulation() + "\nFood needed for population to grow " + currentPopGrowth + "/" + currentPopGrowthCost);
         Text bonus = new Text("");
+        Text populationLimit = new Text("\nPopulation limit " + city.getPopulationLimit());
         Text foodProductionNotNumber = new Text("\nFood production ");
         Text foodProduction = new Text("" + city.getFoodBeforePop());
         Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
@@ -219,6 +220,10 @@ public class MainBoardController implements Initializable {
         cityPop.setFont(Font.font(font, 18));
         cityPop.setFill(Color.GREY);
         cityPop.setTextAlignment(TextAlignment.CENTER);
+
+        populationLimit.setFont(Font.font(font, 18));
+        populationLimit.setFill(Color.GREY);
+        populationLimit.setTextAlignment(TextAlignment.CENTER);
 
         foodProductionNotNumber.setFont(Font.font(font, 18));
         foodProductionNotNumber.setFill(Color.GREY);
@@ -249,7 +254,7 @@ public class MainBoardController implements Initializable {
         netGain.setTextAlignment(TextAlignment.CENTER);
 
 
-        popPanel.getChildren().addAll(cityPop, bonus, foodProductionNotNumber, foodProduction, foodConsumptionNotNumber, foodConsumption, netGainNotNumber, netGain);
+        popPanel.getChildren().addAll(cityPop, populationLimit, bonus, foodProductionNotNumber, foodProduction, foodConsumptionNotNumber, foodConsumption, netGainNotNumber, netGain);
         popPanel.setTextAlignment(TextAlignment.CENTER);
         popPanel.setVisible(true);
 
@@ -1488,9 +1493,18 @@ public class MainBoardController implements Initializable {
                 System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
                 baseBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if (!temphex.getProvince().builtBuildings.contains(baseBuilding)){
+                    String buildingNoSpacesTemp = baseBuilding.replaceAll("\\s+","");
+                    if(Objects.equals(buildingNoSpacesTemp, "ResidentialDistrict") && temphex.getProvince().builtBuildings.contains(baseBuilding)){
+                        City tempCity = (City) temphex.getProvince();
+                        tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
+                    }
+                    else if (!temphex.getProvince().builtBuildings.contains(baseBuilding)){
                         temphex.getProvince().builtBuildings.add(baseBuilding);
                         String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
+                        if(Objects.equals(buildingNoSpaces, "ResidentialDistrict")){
+                            City tempCity = (City) temphex.getProvince();
+                            tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
+                        }
                         buyBuilding(temphex.getProvince(), buildingNoSpaces);
                     }
 
