@@ -279,7 +279,12 @@ public class MainBoardController implements Initializable {
             bonus.setFont(Font.font(font, 18));
             bonus.setFill(Color.GREEN);
             bonus.setTextAlignment(TextAlignment.CENTER);
-        } else if (currentPlayer.id == 3) {
+        } else if (currentPlayer.id == 2) {
+            bonus.setText("\n\nFACTION BONUS\niron makers - iron mines produce additional +2 building resources\n");
+            bonus.setFont(Font.font(font, 18));
+            bonus.setFill(Color.GREEN);
+            bonus.setTextAlignment(TextAlignment.CENTER);
+        }else if (currentPlayer.id == 3) {
             bonus.setText("\n\nFACTION BONUS\nfirst scripture - new tile cost -20%\n");
             bonus.setFont(Font.font(font, 18));
             bonus.setFill(Color.GREEN);
