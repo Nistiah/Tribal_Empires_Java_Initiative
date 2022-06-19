@@ -28,6 +28,14 @@ public class Army {
         return this.warriorsAmount;
     }
 
+    public void clearArmy(){
+        archersAmount=0;
+        chariotsAmount=0;
+        warriorsAmount=0;
+        totalAmount=0;
+        units=null;
+    }
+
     public void updateAmount()
     {
         this.totalAmount = 0;

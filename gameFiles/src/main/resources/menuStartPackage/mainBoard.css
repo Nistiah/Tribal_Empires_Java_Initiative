@@ -644,6 +644,20 @@
     -fx-text-fill: pink;
 }
 
+.siegeButton {
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.siegeButton:hover {
+    -fx-text-fill: white;
+}
+
+
 .settingsButton {
     -fx-background-radius: 200px;
     -fx-background-color: rgba(2,0,36,0.80) ;

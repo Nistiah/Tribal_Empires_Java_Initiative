@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
@@ -496,9 +497,12 @@ public class MainBoardController implements Initializable {
             tourCounter.incrementTour();
             turnField.setText("Turn: " + tourCounter.getTour());
             playerId = 1;
-            for (Player player : playerList) {
-                player.resourcesTourIncrease();
+            try {
+                for (Player player : playerList) {
+                    player.resourcesTourIncrease();
 
+                }
+            }catch (ConcurrentModificationException ignored){
             }
         }
 
@@ -1667,7 +1671,7 @@ public class MainBoardController implements Initializable {
             a.setPrefWidth(299);
             unitY[0] += 60;
             a.setOnMouseClicked(e2 -> {
-                singleArmyClicked(army);
+                singleArmyClicked(army, city);
             });
             provinceLowerPanel.getChildren().add(a);
         });
@@ -1686,7 +1690,7 @@ public class MainBoardController implements Initializable {
                 a.setPrefWidth(299);
                 a.setOnMouseClicked(e2 -> {
                     provinceLowerPanel.getChildren().clear();
-                    singleArmyClicked(army);
+                    singleArmyClicked(army, city);
                 });
                 unitY[0] += 60;
                 newArmy.setTranslateY(unitY[0]);
@@ -1697,8 +1701,9 @@ public class MainBoardController implements Initializable {
         });
         if(!provinceLowerPanel.getChildren().contains(newArmy))provinceLowerPanel.getChildren().add(newArmy);
     }
+    @FXML FlowPane siegeFlow;
 
-    void singleArmyClicked(Army army)
+    void singleArmyClicked(Army army, City originCity)
     {
         provinceLowerPanel.getChildren().clear();
 
@@ -1744,7 +1749,7 @@ public class MainBoardController implements Initializable {
         recruitArchers.setOnMouseClicked(e3 -> {
             army.addUnit(new Archer());
             provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
+            singleArmyClicked(army, originCity);
         });
 
         Button recruitChariots = new Button("Recruit Chariots");
@@ -1753,7 +1758,7 @@ public class MainBoardController implements Initializable {
         recruitChariots.setOnMouseClicked(e3 -> {
             army.addUnit(new Chariots());
             provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
+            singleArmyClicked(army, originCity);
         });
 
         Button recruitInfantry = new Button("Recruit Infantry");
@@ -1762,14 +1767,14 @@ public class MainBoardController implements Initializable {
         recruitInfantry.setOnMouseClicked(e3 -> {
             army.addUnit(new Infantry());
             provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
+            singleArmyClicked(army, originCity);
         });
 
         Button upgradeArchers = new Button("Upgrade Archers");
         upgradeArchers.setTranslateY(255);
         upgradeArchers.setPrefWidth(299);
         upgradeArchers.setOnMouseClicked(e3 -> {
-            upgradeUnitClicked(army, "Archer");
+            upgradeUnitClicked(army, "Archer", originCity);
         });
         final int[] isArchers = {0};
         army.getUnits().forEach(unit -> {
@@ -1781,7 +1786,7 @@ public class MainBoardController implements Initializable {
         upgradeChariots.setTranslateY(315);
         upgradeChariots.setPrefWidth(299);
         upgradeChariots.setOnMouseClicked(e3 -> {
-            upgradeUnitClicked(army, "Chariots");
+            upgradeUnitClicked(army, "Chariots", originCity);
         });
         final int[] isChariots = {0};
         army.getUnits().forEach(unit -> {
@@ -1794,7 +1799,7 @@ public class MainBoardController implements Initializable {
         upgradeInfantry.setPrefWidth(299);
         upgradeInfantry.setOnMouseClicked(e3 -> {
 
-            upgradeUnitClicked(army, "Infantry");
+            upgradeUnitClicked(army, "Infantry", originCity);
         });
         final int[] isInfantry = {0};
         army.getUnits().forEach(unit -> {
@@ -1803,14 +1808,33 @@ public class MainBoardController implements Initializable {
         upgradeInfantry.setDisable(isInfantry[0] != 1);
 
 
-        Button sentArmyToSiege = new Button("Sent army to siege");
-        sentArmyToSiege.setTranslateY(435);
-        sentArmyToSiege.setPrefWidth(299);
-        sentArmyToSiege.setOnMouseClicked(e3 -> {
+        Button sendArmyToSiege = new Button("Send army to siege");
+        sendArmyToSiege.setTranslateY(435);
+        sendArmyToSiege.setPrefWidth(299);
+        sendArmyToSiege.setOnMouseClicked(e3 -> {
             provinceLowerPanel.getChildren().clear();
-            singleArmyClicked(army);
+//            singleArmyClicked(army);
+            textField.setText("Choose city");
+            int layout = 10;
+            for(Player player : playerList){
+                if(player.id!=currentPlayer.id){
+                    for(City city: player.getCityList()){
+                        Button tempButton = new Button(city.getName());
+                        tempButton.setTranslateY(layout);
+                        tempButton.setPrefWidth(299);
+                        provinceLowerPanel.getChildren().add(tempButton);
+                        layout+=60;
+                        tempButton.getStyleClass().add("siegeButton");
+                        tempButton.setOnMouseClicked(event ->{
+                            city.setSiege(army, currentPlayer.id);
+                            originCity.army.remove(army);
+                            provinceLowerPanel.getChildren().clear();
+                        });
+                    }
+                }
+            }
         });
-        sentArmyToSiege.setDisable(army.getUnits().size() == 0);
+        sendArmyToSiege.setDisable(army.getUnits().size() == 0);
 
         provinceLowerPanel.getChildren().add(archersAmount);
         provinceLowerPanel.getChildren().add(chariotsAmount);
@@ -1824,11 +1848,11 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(upgradeChariots);
         provinceLowerPanel.getChildren().add(upgradeInfantry);
 
-        provinceLowerPanel.getChildren().add(sentArmyToSiege);
+        provinceLowerPanel.getChildren().add(sendArmyToSiege);
 
     }
 
-    public void upgradeUnitClicked(Army army, String unitName)
+    public void upgradeUnitClicked(Army army, String unitName, City originCity)
     {
         provinceLowerPanel.getChildren().clear();
 
@@ -1944,7 +1968,7 @@ public class MainBoardController implements Initializable {
                 }
 
             }
-            upgradeUnitClicked(army, unitName);
+            upgradeUnitClicked(army, unitName, originCity);
         });
 
         Button upgradeToLvl2 = new Button("Upgrade to lvl 3");
@@ -1962,7 +1986,7 @@ public class MainBoardController implements Initializable {
                 }
 
             }
-            upgradeUnitClicked(army, unitName);
+            upgradeUnitClicked(army, unitName, originCity);
         });
 
         Button upgradeToLvl3 = new Button("Upgrade to lvl 4");
@@ -1980,14 +2004,14 @@ public class MainBoardController implements Initializable {
                 }
 
             }
-            upgradeUnitClicked(army, unitName);
+            upgradeUnitClicked(army, unitName, originCity);
         });
 
         Button back = new Button("Back");
         back.setTranslateY(260);
         back.setPrefWidth(299);
         back.setOnMouseClicked(e -> {
-            singleArmyClicked(army);
+            singleArmyClicked(army, originCity);
         });
 
         provinceLowerPanel.getChildren().add(upgradeToLvl1);

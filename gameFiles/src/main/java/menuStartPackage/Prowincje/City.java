@@ -4,6 +4,7 @@ import menuStartPackage.Jednostki.*;
 import menuStartPackage.player.Player;
 
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Vector;
 import static menuStartPackage.FXMLControllers.MainBoardController.playerList;
@@ -281,55 +282,80 @@ public class City extends Province {
 
 
 
-    public void setSiege(Siege siege){
-        this.siege=siege;
+    public void setSiege(Army army, int playerId){
+        this.siege= new Siege(army,playerId);
     }
 
     void defendersVictory(){
         siege=null;
     }
     void attackersVictory(Army army, int id){
+        boolean validator = true;
         this.army.clear();
         this.army.add(army);
         Player player;
         for(Player player1:playerList){
+            if(player1.id==ownerId){
+                while (validator) {
+                    try {
+                        for (City city : player1.getCityList()) {
+                            if (city == this) {
+                                player1.getCityList().remove(this);
+                            }
+                        }
+                        validator=false;
+
+                    }catch (ConcurrentModificationException exeption){
+                        validator=true;
+                    }
+                }
+            }
             if(player1.id==id){
                 player=player1;
                 player.createNewCity(this);
             }
-            if(player1.id==ownerId){
-                for(City city:player1.getCityList()){
-                    if(city==this){
-                        player1.getCityList().remove(this);
-                    }
-                }
-            }
         }
-
-
-
-
         ownerId=id;
         provincelist.forEach(p->p.setOwnerId(id));
         siege=null;
-
-
     }
-    public Siege siege = new Siege(2);
+    public Siege siege = null;
 
+    Army sumArmy(){
+        Army newArmy= new Army();
+        for(Army oldArmy : army){
+               for(ArmyUnit armyUnit: oldArmy.getUnits()){
+                   if(armyUnit.getName().equals("Archer")){
+                       newArmy.addUnit(armyUnit);
+                   }
+               }
+        }
+        for(Army oldArmy : army){
+            for(ArmyUnit armyUnit: oldArmy.getUnits()){
+                if(armyUnit.getName().equals("Infantry")){
+                    newArmy.addUnit(armyUnit);
+                }
+            }
+        }
+        for(Army oldArmy : army){
+            for(ArmyUnit armyUnit: oldArmy.getUnits()){
+                if(armyUnit.getName().equals("Chariots")){
+                    newArmy.addUnit(armyUnit);
+                }
+            }
+        }
+        army.clear();
+        army.add(newArmy);
 
+        return newArmy;
+    }
 
     public class Siege{
 
-        Siege(int id){
-            atackingArmy=new Army();
-            defendingArmy=new Army();
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Chariots());
-            atackingArmy.addUnit(new Archer());
-            defendingArmy.addUnit(new Chariots());
-            defendingArmy.addUnit(new Chariots());
+        Siege(Army army, int id){
+            atackingArmy=army;
+            defendingArmy=sumArmy();
+
 
 
             for(ArmyUnit unit: atackingArmy.getUnits()){
