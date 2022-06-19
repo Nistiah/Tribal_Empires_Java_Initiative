@@ -646,6 +646,8 @@
 
 .siegeButton {
     -fx-background-color: rgb(2,0,36,1);
+    -fx-font-family: Manjari;
+    -fx-font-size: 18;
     -fx-alignment: center;
     -fx-border-style: solid;
     -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);

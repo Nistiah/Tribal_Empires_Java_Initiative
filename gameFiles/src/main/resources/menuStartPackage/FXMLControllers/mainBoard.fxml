@@ -100,13 +100,13 @@
                                 <TextField fx:id="recoursesField" editable="false" onMouseEntered="#woodEntered" onMouseExited="#woodExited" styleClass="buildingResources" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                 <TextField fx:id="goldField" editable="false" focusTraversable="false" onMouseEntered="#goldEntered" onMouseExited="#goldExited" styleClass="gold" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <TextField fx:id="dyesField" editable="false" onMouseEntered="#dyesEntered" onMouseExited="#dyesExited" styleClass="dyes" GridPane.columnIndex="7" GridPane.rowIndex="2" />
-                                <TextField fx:id="turnField" styleClass="clock123" GridPane.columnIndex="12" GridPane.rowIndex="2" />
+                                <TextField fx:id="turnField" editable="false" styleClass="clock123" GridPane.columnIndex="12" GridPane.rowIndex="2" />
                                 <Button maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="20.0" prefWidth="20.0" styleClass="exitButton" stylesheets="@../mainBoard.css" text="Quit" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="12.0" />
                                     </font>
                                 </Button>
-                                <TextField fx:id="textField" promptText="coord" styleClass="button1" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+                                <TextField fx:id="textField" editable="false" promptText="coord" styleClass="button1" visible="false" GridPane.columnIndex="9" GridPane.rowIndex="2" />
                                 <TextField fx:id="nextSong" editable="false" onMouseClicked="#nextSong" styleClass="nextSong" GridPane.columnIndex="11" GridPane.rowIndex="2">
                                     <font>
                                         <Font size="15.0" />
@@ -161,7 +161,7 @@
                            <children>
                               <TextFlow fx:id="siegeDescription" layoutX="95.0" layoutY="8.0" prefHeight="383.0" prefWidth="768.0" styleClass="bodyBackground55" visible="false" />
                            </children></Pane>
-                                <TextField fx:id="siegeName" alignment="CENTER" styleClass="siegeName" text="SiegeOF" GridPane.columnIndex="2" />
+                                <TextField fx:id="siegeName" alignment="CENTER" editable="false" styleClass="siegeName" text="SiegeOF" GridPane.columnIndex="2" />
                                 <TextFlow fx:id="siegeAtack" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <TextFlow fx:id="siegeDefence" prefHeight="200.0" prefWidth="200.0" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                             </children>
@@ -188,9 +188,9 @@
                               <Insets bottom="10.0" />
                            </GridPane.margin>
                                 </Button>
-                                <TextField fx:id="attackersCasualties" alignment="CENTER_RIGHT" styleClass="siege2" />
-                                <TextField fx:id="rng" styleClass="siege2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                                <TextField fx:id="defendersCasualties" styleClass="siege2" GridPane.columnIndex="2" />
+                                <TextField fx:id="attackersCasualties" alignment="CENTER_RIGHT" editable="false" styleClass="siege2" />
+                                <TextField fx:id="rng" editable="false" styleClass="siege2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                <TextField fx:id="defendersCasualties" editable="false" styleClass="siege2" GridPane.columnIndex="2" />
                                 <TextFlow fx:id="attackersFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                                 <TextFlow fx:id="rngFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                                 <TextFlow fx:id="defendersFlow" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
@@ -247,12 +247,12 @@
                                 <Insets left="200.0" />
                             </BorderPane.margin>
                             <children>
-                                <TextField alignment="CENTER" styleClass="shortcuts" text="Zoom map out: -" />
-                                <TextField alignment="CENTER" styleClass="shortcuts" text="Zoom map in: +" GridPane.rowIndex="1" />
-                                <TextField alignment="CENTER" styleClass="shortcuts" text="Next Player: N" GridPane.rowIndex="3" />
-                                <TextField alignment="CENTER" styleClass="shortcuts" text="Next song: M" GridPane.rowIndex="4" />
-                                <TextField alignment="CENTER" styleClass="shortcuts" text="Settings: ESC" GridPane.rowIndex="5" />
-                                <TextField styleClass="shortcuts" text="Moving Map: ←↕→" GridPane.rowIndex="2" />
+                                <TextField alignment="CENTER" editable="false" styleClass="shortcuts" text="Zoom map out: -" />
+                                <TextField alignment="CENTER" editable="false" styleClass="shortcuts" text="Zoom map in: +" GridPane.rowIndex="1" />
+                                <TextField alignment="CENTER" editable="false" styleClass="shortcuts" text="Next Player: N" GridPane.rowIndex="3" />
+                                <TextField alignment="CENTER" editable="false" styleClass="shortcuts" text="Next song: M" GridPane.rowIndex="4" />
+                                <TextField alignment="CENTER" editable="false" styleClass="shortcuts" text="Settings: ESC" GridPane.rowIndex="5" />
+                                <TextField editable="false" styleClass="shortcuts" text="Moving Map: ←↕→" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
                     </left>
@@ -278,7 +278,7 @@
          <children>
             <BorderPane prefHeight="1074.0" prefWidth="1914.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <center>
-                  <TextField fx:id="victoryTextField" alignment="CENTER" styleClass="victoryText" BorderPane.alignment="CENTER">
+                  <TextField fx:id="victoryTextField" alignment="CENTER" editable="false" styleClass="victoryText" BorderPane.alignment="CENTER">
                      <BorderPane.margin>
                         <Insets left="400.0" right="400.0" />
                      </BorderPane.margin>

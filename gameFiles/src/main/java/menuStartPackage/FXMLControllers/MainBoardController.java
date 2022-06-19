@@ -916,9 +916,11 @@ public class MainBoardController implements Initializable {
         provinceUpperPanel.getChildren().clear();
         provinceType.getChildren().clear();
 
-        Button colonize = new Button("build a new city");
-        Button buyProvinceGold = new Button("buy a province with gold"); //cost 20
-        Button buyProvinceFaith = new Button("buy a province with faith"); //cost 20
+        Button colonize = new Button("Build a new city");
+        Button buyProvinceGold = new Button("Buy a province with 20 gold"); //cost 20
+        Button buyProvinceFaith = new Button("Buy a province with 20 faith"); //cost 20
+        Button armies = new Button("Armies");
+
 
         buyProvinceGold.setOnMouseClicked(e -> {
             buyClicked();
@@ -931,27 +933,23 @@ public class MainBoardController implements Initializable {
             buyField(temphex);
         });
 
-        colonize.setPrefWidth(200);
-        colonize.setTranslateY(95);
-        colonize.setTranslateX(20);
-        colonize.getStyleClass().add("colonizeButton");
+        colonize.setPrefWidth(300);
+        colonize.setTranslateY(100);
+        colonize.getStyleClass().add("siegeButton");
 
-        buyProvinceGold.setPrefWidth(205);
-        buyProvinceGold.setTranslateX(20);
-        buyProvinceGold.setTranslateY(155);
-        buyProvinceGold.getStyleClass().add("colonizeButton");
+        buyProvinceGold.setPrefWidth(300);
+        buyProvinceGold.setTranslateY(160);
+        buyProvinceGold.getStyleClass().add("siegeButton");
 
-        buyProvinceFaith.setPrefWidth(205);
-        buyProvinceFaith.setTranslateX(20);
-        buyProvinceFaith.setTranslateY(215);
-        buyProvinceFaith.getStyleClass().add("colonizeButton");
+        buyProvinceFaith.setPrefWidth(300);
+        buyProvinceFaith.setTranslateY(220);
+        buyProvinceFaith.getStyleClass().add("siegeButton");
 
-        Button armies = new Button("Armies");
 
-        armies.setPrefWidth(205);
-        armies.setTranslateX(20);
-        armies.setTranslateY(275);
-        armies.getStyleClass().add("colonizeButton");
+
+        armies.setPrefWidth(300);
+        armies.setTranslateY(280);
+        armies.getStyleClass().add("siegeButton");
 
 
         if (buyingMode) provinceUpperPanel.getChildren().add(buyProvinceGold);
@@ -1667,6 +1665,7 @@ public class MainBoardController implements Initializable {
         final int[] unitY = {0};
         city.army.forEach(army -> {
             Button a = new Button(army.getName());
+            a.getStyleClass().add("siegeButton");
             a.setTranslateY(unitY[0]);
             a.setPrefWidth(299);
             unitY[0] += 60;
@@ -1676,6 +1675,7 @@ public class MainBoardController implements Initializable {
             provinceLowerPanel.getChildren().add(a);
         });
         Button newArmy = new Button("Add army");
+        newArmy.getStyleClass().add("siegeButton");
         newArmy.setTranslateY(unitY[0]);
         newArmy.setPrefWidth(299);
         newArmy.setOnMouseClicked(e1 -> {
@@ -1686,6 +1686,7 @@ public class MainBoardController implements Initializable {
             unitY[0] = 0;
             city.army.forEach(army -> {
                 Button a = new Button(army.getName());
+                a.getStyleClass().add("siegeButton");
                 a.setTranslateY(unitY[0]);
                 a.setPrefWidth(299);
                 a.setOnMouseClicked(e2 -> {
@@ -1744,6 +1745,7 @@ public class MainBoardController implements Initializable {
         warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
 
         Button recruitArchers = new Button("Recruit Archers");
+        recruitArchers.getStyleClass().add("siegeButton");
         recruitArchers.setTranslateY(75);
         recruitArchers.setPrefWidth(299);
         recruitArchers.setOnMouseClicked(e3 -> {
@@ -1753,6 +1755,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button recruitChariots = new Button("Recruit Chariots");
+        recruitChariots.getStyleClass().add("siegeButton");
         recruitChariots.setTranslateY(135);
         recruitChariots.setPrefWidth(299);
         recruitChariots.setOnMouseClicked(e3 -> {
@@ -1762,6 +1765,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button recruitInfantry = new Button("Recruit Infantry");
+        recruitInfantry.getStyleClass().add("siegeButton");
         recruitInfantry.setTranslateY(195);
         recruitInfantry.setPrefWidth(299);
         recruitInfantry.setOnMouseClicked(e3 -> {
@@ -1771,6 +1775,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button upgradeArchers = new Button("Upgrade Archers");
+        upgradeArchers.getStyleClass().add("siegeButton");
         upgradeArchers.setTranslateY(255);
         upgradeArchers.setPrefWidth(299);
         upgradeArchers.setOnMouseClicked(e3 -> {
@@ -1783,6 +1788,7 @@ public class MainBoardController implements Initializable {
         upgradeArchers.setDisable(isArchers[0] != 1);
 
         Button upgradeChariots = new Button("Upgrade Chariots");
+        upgradeChariots.getStyleClass().add("siegeButton");
         upgradeChariots.setTranslateY(315);
         upgradeChariots.setPrefWidth(299);
         upgradeChariots.setOnMouseClicked(e3 -> {
@@ -1795,6 +1801,7 @@ public class MainBoardController implements Initializable {
         upgradeChariots.setDisable(isChariots[0] != 1);
 
         Button upgradeInfantry = new Button("Upgrade Infantry");
+        upgradeInfantry.getStyleClass().add("siegeButton");
         upgradeInfantry.setTranslateY(375);
         upgradeInfantry.setPrefWidth(299);
         upgradeInfantry.setOnMouseClicked(e3 -> {
@@ -1809,6 +1816,7 @@ public class MainBoardController implements Initializable {
 
 
         Button sendArmyToSiege = new Button("Send army to siege");
+        sendArmyToSiege.getStyleClass().add("siegeButton");
         sendArmyToSiege.setTranslateY(435);
         sendArmyToSiege.setPrefWidth(299);
         sendArmyToSiege.setOnMouseClicked(e3 -> {
@@ -1954,6 +1962,7 @@ public class MainBoardController implements Initializable {
         provinceLowerPanel.getChildren().add(lvl3);
 
         Button upgradeToLvl1 = new Button("Upgrade to lvl 2");
+        upgradeToLvl1.getStyleClass().add("siegeButton");
         upgradeToLvl1.setTranslateY(80);
         upgradeToLvl1.setPrefWidth(299);
         upgradeToLvl1.setOnMouseClicked(e3 -> {
@@ -1972,6 +1981,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button upgradeToLvl2 = new Button("Upgrade to lvl 3");
+        upgradeToLvl2.getStyleClass().add("siegeButton");
         upgradeToLvl2.setTranslateY(140);
         upgradeToLvl2.setPrefWidth(299);
         upgradeToLvl2.setOnMouseClicked(e3 -> {
@@ -1990,6 +2000,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button upgradeToLvl3 = new Button("Upgrade to lvl 4");
+        upgradeToLvl3.getStyleClass().add("siegeButton");
         upgradeToLvl3.setTranslateY(200);
         upgradeToLvl3.setPrefWidth(299);
         upgradeToLvl3.setOnMouseClicked(e3 -> {
@@ -2008,6 +2019,7 @@ public class MainBoardController implements Initializable {
         });
 
         Button back = new Button("Back");
+        back.getStyleClass().add("siegeButton");
         back.setTranslateY(260);
         back.setPrefWidth(299);
         back.setOnMouseClicked(e -> {
