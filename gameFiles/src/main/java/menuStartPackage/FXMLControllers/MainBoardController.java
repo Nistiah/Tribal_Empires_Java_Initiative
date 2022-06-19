@@ -1500,7 +1500,7 @@ public class MainBoardController implements Initializable {
                     hexClick(temphex, temp);
                 });
                 if(Objects.equals(temphex.getProvince().getType(), "RiversideArea")){
-                    if(!temphex.getProvince().builtBuildings.contains("IrrigationSystem")){
+                    if(!temphex.getProvince().builtBuildings.contains("Irrigation System")){
                         buttonOffset[0] = 10;
                         return;
                     }
@@ -1562,7 +1562,7 @@ public class MainBoardController implements Initializable {
     }
 
     void buyBuilding(Province province, String building){
-        province.builtBuildings.add(building);
+        //province.builtBuildings.add(building);
         switch (building) {
             case "AmberCollector":
                 province.builtBuildingsVector.add(new AmberCollector());
@@ -1640,6 +1640,7 @@ public class MainBoardController implements Initializable {
                 province.builtBuildingsVector.add(new Warehouse());
                 break;
         }
+        province.setBuildingsProduction();
     }
 
     void armiesClicked(City city)

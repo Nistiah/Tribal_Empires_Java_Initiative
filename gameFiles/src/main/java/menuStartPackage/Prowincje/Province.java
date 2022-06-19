@@ -41,6 +41,25 @@ public class Province {
 
     public Vector<Building> builtBuildingsVector = new Vector<Building>();
 
+    public void setBuildingsProduction(){
+        setBaseProduction(this.type);
+        for(int iter = 0;iter<builtBuildingsVector.size();iter++)
+        {
+            Building b = builtBuildingsVector.get(iter);
+            String temp = builtBuildings.get(iter);
+            temp = temp.replaceAll("\\s+","");
+            b.setBaseProduction(temp);
+            gold += b.getGold();
+            belief += b.getBelief();
+            food += b.getFood();
+            bronze += b.getBronze();
+            iron += b.getIron();
+            dices += b.getDices();
+            horses += b.getHorses();
+            wood += b.getWood();
+        }
+    }
+
     public void addBuiltBuildingsVector(Building building) {
         builtBuildingsVector.add(building);
     }
