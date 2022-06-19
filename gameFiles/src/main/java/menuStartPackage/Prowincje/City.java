@@ -557,6 +557,9 @@ public class City extends Province {
             int damage=0;
             damage += atackCloseDamage - defenseCloseDefence;
             damage += atackFarDamage - defenseFarDefence;
+            if(damage<0){
+                return 0;
+            }
             return damage;
         }
 
@@ -564,6 +567,9 @@ public class City extends Province {
             int damage=0;
             damage += defenseCloseDamage - atackCloseDefence;
             damage += defenseFarDamage - atackFarDefence;
+            if(damage<0){
+                return 0;
+            }
             return damage;
         }
         public int lastRng=-1;
@@ -652,7 +658,7 @@ public class City extends Province {
             }
 
             defCasualties=round(Math.abs(calculateDefendersCasualties()*atkModifier),1);
-            atkCasualties=Math.abs(calculateAtackersCasualties()*defModifier);
+            atkCasualties=round(Math.abs(calculateAtackersCasualties()*defModifier),1);
 
             atackStrength-=atkCasualties;
             defenseStrength-=defCasualties;
