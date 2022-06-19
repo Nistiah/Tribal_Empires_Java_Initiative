@@ -292,7 +292,23 @@ public class City extends Province {
     void attackersVictory(Army army, int id){
         boolean validator = true;
         this.army.clear();
-        this.army.add(army);
+
+        Army newArmy = new Army();
+        int i = army.getUnits().size();
+        int j=0;
+        double strength = siege.atackStrength/siege.atackStrengthInitial;
+        i= (int) (i*strength);
+        for(ArmyUnit unit: army.getUnits()){
+            if(j>=i+3){
+                break;
+            }
+            if(j%2==0||j%5==0) {
+                newArmy.addUnit(unit);
+            }
+            j++;
+        }
+        army=null;
+        this.army.add(newArmy);
         Player player;
         for(Player player1:playerList){
             if(player1.id==ownerId){
@@ -315,6 +331,12 @@ public class City extends Province {
                 player.createNewCity(this);
             }
         }
+
+
+
+
+
+
         ownerId=id;
         provincelist.forEach(p->p.setOwnerId(id));
         siege=null;
