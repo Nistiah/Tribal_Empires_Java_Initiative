@@ -1511,7 +1511,7 @@ public class MainBoardController implements Initializable {
             });
 
             //possible buildings
-            temphex.getProvince().getPossibleBuildings().forEach(building -> {
+ /*           temphex.getProvince().getPossibleBuildings().forEach(building -> {
                 Button possibleBuildingButton = new Button(building);
                 possibleBuildingButton.setId(building);
                 possibleBuildingButton.getStyleClass().add("building");
@@ -1544,8 +1544,57 @@ public class MainBoardController implements Initializable {
                 });
 
                 provinceLowerPanel.getChildren().add(possibleBuildingButton);
-            });
+            });*/
+            System.out.println("Q: " + temphex.getQ() + " R: " + temphex.getR());
+            for(String building : temphex.getProvince().getPossibleBuildings())
+            {
+                if(building.equals("Gold Mine")) {
+                    if((temphex.getQ() % 3 != 0) || (temphex.getR() % 3 != 0)) continue;
+                };
 
+                if(building.equals("Bronze Mine")) {
+                    if((temphex.getQ() % 2 == 0) || (temphex.getR() % 2 == 0)) continue;
+                    if((temphex.getQ() % 3 == 0) && (temphex.getR() % 3 == 0)) continue;
+                };
+
+                if(building.equals("Iron Mine")) {
+                    if((temphex.getQ() % 2 != 0) || (temphex.getR() % 2 != 0)) continue;
+                    if((temphex.getQ() % 3 == 0) && (temphex.getR() % 3 == 0)) continue;
+                };
+
+                Button possibleBuildingButton = new Button(building);
+                possibleBuildingButton.setId(building);
+                possibleBuildingButton.getStyleClass().add("building");
+                temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
+                    if (Objects.equals(building, builtBuilding)) {
+                        possibleBuildingButton.getStyleClass().add("builtBuilding");
+                    }
+                });
+                possibleBuildingButton.setTranslateY(buttonOffset[0]);
+                possibleBuildingButton.setPrefWidth(250);
+                possibleBuildingButton.setPrefHeight(100);
+                possibleBuildingButton.setTranslateX(20);
+                buttonOffset[0] += 120;
+                possibleBuildingButton.setOnMouseClicked(e -> {
+                    //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
+                    if (!temphex.getProvince().builtBuildings.contains(building)){
+                        temphex.getProvince().builtBuildings.add(building);
+                        String buildingNoSpaces = building.replaceAll("\\s+","");
+                        if(buildingNoSpaces.equals("CatchingBoars")) buildingNoSpaces = "CatchingBoar";
+                        buyBuilding(temphex.getProvince(), buildingNoSpaces);
+                    }
+
+                    possibleBuildingButton.getStyleClass().add("builtBuilding");
+                    if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
+                    if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
+                    //System.out.println(temphex.getProvince().builtBuildings);
+                    List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
+                    tempList.remove(building);
+                    hexClick(temphex, temp);
+                });
+
+                provinceLowerPanel.getChildren().add(possibleBuildingButton);
+            }
 
             provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
         }
