@@ -23,7 +23,7 @@ public class ArmyUnit {
     }
 
     public String getNameWithLvl() {
-        return name + " LVL: "+getLvl();
+        return name + " lv: "+(getLvl()+1);
     }
 
     public void increaseLvl(int lvl)

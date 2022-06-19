@@ -894,6 +894,18 @@ public class MainBoardController implements Initializable {
         siegePane.setVisible(false);
     }
 
+    void war(){
+
+    }
+
+    void peace(){
+
+    }
+
+    void sendToSiege(){
+
+    }
+
     void hexClick(Hexagon temphex, Province temp) {
 
 
@@ -968,6 +980,7 @@ public class MainBoardController implements Initializable {
                 war.setTranslateY(75);
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(war);
+                war.setOnMouseClicked(e->war());
 
                 Button peace = new Button("Peace");
                 peace.setPrefWidth(145);
@@ -975,6 +988,7 @@ public class MainBoardController implements Initializable {
                 peace.setTranslateY(75);
                 //war.getStyleClass().add("colonizeButton");
                 provinceUpperPanel.getChildren().add(peace);
+                peace.setOnMouseClicked(e->peace());
 
                 //TODO: siege button
                 Button siege = new Button("Siege");
@@ -1010,7 +1024,7 @@ public class MainBoardController implements Initializable {
                     siegeAtack.setTextAlignment(TextAlignment.CENTER);
 
                     for (ArmyUnit unit : tempCity.siege.atackingArmy.getUnits()) {
-                        Text unitText = new Text(unit.getName() + "\n");
+                        Text unitText = new Text(unit.getNameWithLvl() + "\n");
                         unitText.setFont(Font.font(font, 18));
                         unitText.setFill(Color.GREY);
                         siegeAtack.getChildren().add(unitText);
@@ -1029,7 +1043,7 @@ public class MainBoardController implements Initializable {
                     siegeDefence.setTextAlignment(TextAlignment.CENTER);
 
                     for (ArmyUnit unit : tempCity.siege.defendingArmy.getUnits()) {
-                        Text unitText = new Text(unit.getName() + "\n");
+                        Text unitText = new Text(unit.getNameWithLvl() + "\n");
                         unitText.setFont(Font.font(font, 18));
                         unitText.setFill(Color.GREY);
                         siegeDefence.getChildren().add(unitText);
