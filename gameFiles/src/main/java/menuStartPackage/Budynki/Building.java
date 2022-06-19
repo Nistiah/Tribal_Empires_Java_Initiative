@@ -18,6 +18,16 @@ public class Building {
     private int      owner;
     private int      maxLevel;
 
+    private String   type = "";
+
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public boolean upgradeExist() {
         return level < 3;
     }
