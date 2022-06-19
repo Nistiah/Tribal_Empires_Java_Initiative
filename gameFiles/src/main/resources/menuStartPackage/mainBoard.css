@@ -411,7 +411,7 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center-right;
     -fx-text-decoration: bold;
-    -fx-text-fill: pink;
+    -fx-text-fill: grey;
 }
 .provincePanelWood{
     -fx-background-image:url('buildingResources.png');
@@ -421,7 +421,7 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center-right;
     -fx-text-decoration: bold;
-    -fx-text-fill: pink;
+    -fx-text-fill: grey;
 }
 .provincePanelGold{
     -fx-background-image:url('gold.png');
@@ -431,7 +431,7 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center-right;
     -fx-text-decoration: bold;
-    -fx-text-fill: pink;
+    -fx-text-fill: grey;
 }
 .provincePanelFood{
     -fx-background-image:url('food.png');
@@ -441,7 +441,7 @@
     -fx-background-color: rgb(2,0,36,1);
     -fx-alignment: center-right;
     -fx-text-decoration: bold;
-    -fx-text-fill: pink;
+    -fx-text-fill: grey;
 }
 .provincePanelPopulation{
     -fx-background-image:url('population.png');

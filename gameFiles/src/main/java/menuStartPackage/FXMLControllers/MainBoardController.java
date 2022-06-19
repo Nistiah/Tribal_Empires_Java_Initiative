@@ -201,7 +201,7 @@ public class MainBoardController implements Initializable {
 
         Text cityPop = new Text("City population " + city.getPopulation() + "\nFood needed for population to grow " + currentPopGrowth + "/" + currentPopGrowthCost);
         Text bonus = new Text("");
-        Text populationLimit = new Text("\nPopulation limit " + city.getPopulationLimit());
+        Text populationLimit = new Text("\nPopulation limit " + city.getPopulationLimit()+"\n(Increase with new Residential Districts)");
         Text foodProductionNotNumber = new Text("\nFood production ");
         Text foodProduction = new Text("" + city.getFoodBeforePop());
         Text foodConsumptionNotNumber = new Text("\nFood consumption by population ");
@@ -254,7 +254,7 @@ public class MainBoardController implements Initializable {
         netGain.setTextAlignment(TextAlignment.CENTER);
 
 
-        popPanel.getChildren().addAll(cityPop, populationLimit, bonus, foodProductionNotNumber, foodProduction, foodConsumptionNotNumber, foodConsumption, netGainNotNumber, netGain);
+        popPanel.getChildren().addAll(cityPop,  bonus, foodProductionNotNumber, foodProduction, foodConsumptionNotNumber, foodConsumption, netGainNotNumber, netGain,populationLimit);
         popPanel.setTextAlignment(TextAlignment.CENTER);
         popPanel.setVisible(true);
 
@@ -1277,21 +1277,22 @@ public class MainBoardController implements Initializable {
             goldProduction.setPrefWidth(50);
             goldProduction.setEditable(false);
 
-            goldProduction.setOnMouseMoved(e -> {
-                provinceUpperPanel.getChildren().remove(textOnProd);
-                double x = e.getX();
-                double y = e.getY();
-                StringBuilder sb = new StringBuilder();
-                if (goldProduction.contains(x, y)) {
-                    sb.append("gold");
-                }
-                textOnProd.setText(sb.toString());
-                textOnProd.setX(x + 35);
-                textOnProd.setY(y + 40);
-                textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceUpperPanel.getChildren().add(textOnProd);
-            });
-            goldProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+            //TODO:Do usuniecia przez Mateusza nastepne komenty
+//            goldProduction.setOnMouseMoved(e -> {
+//                provinceUpperPanel.getChildren().remove(textOnProd);
+//                double x = e.getX();
+//                double y = e.getY();
+//                StringBuilder sb = new StringBuilder();
+//                if (goldProduction.contains(x, y)) {
+//                    sb.append("gold");
+//                }
+//                textOnProd.setText(sb.toString());
+//                textOnProd.setX(x + 35);
+//                textOnProd.setY(y + 40);
+//                textOnProd.setFill(Paint.valueOf("GRAY"));
+//                provinceUpperPanel.getChildren().add(textOnProd);
+//            });
+//            goldProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //FOOD
 
@@ -1305,23 +1306,23 @@ public class MainBoardController implements Initializable {
 
             String finalFoodInCity = foodInCity;
 
-            foodProduction.setOnMouseMoved(e -> {
-                provinceUpperPanel.getChildren().remove(textOnProd);
-                double x = e.getX();
-                double y = e.getY();
-                StringBuilder sb = new StringBuilder();
-
-                if (goldProduction.contains(x, y)) {
-                    sb.append(finalFoodInCity);
-                }
-
-                textOnProd.setText(sb.toString());
-                textOnProd.setX(x + 85);
-                textOnProd.setY(y + 40);
-                textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceUpperPanel.getChildren().add(textOnProd);
-            });
-            foodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+//            foodProduction.setOnMouseMoved(e -> {
+//                provinceUpperPanel.getChildren().remove(textOnProd);
+//                double x = e.getX();
+//                double y = e.getY();
+//                StringBuilder sb = new StringBuilder();
+//
+//                if (goldProduction.contains(x, y)) {
+//                    sb.append(finalFoodInCity);
+//                }
+//
+//                textOnProd.setText(sb.toString());
+//                textOnProd.setX(x + 85);
+//                textOnProd.setY(y + 40);
+//                textOnProd.setFill(Paint.valueOf("GRAY"));
+//                provinceUpperPanel.getChildren().add(textOnProd);
+//            });
+//            foodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //BUILDING RESOURCES
             TextField woodProduction = new TextField(String.valueOf(wood));
@@ -1332,21 +1333,21 @@ public class MainBoardController implements Initializable {
             woodProduction.setPrefWidth(50);
             woodProduction.setEditable(false);
 
-            woodProduction.setOnMouseMoved(e -> {
-                provinceUpperPanel.getChildren().remove(textOnProd);
-                double x = e.getX();
-                double y = e.getY();
-                StringBuilder sb = new StringBuilder();
-                if (goldProduction.contains(x, y)) {
-                    sb.append("building resources");
-                }
-                textOnProd.setText(sb.toString());
-                textOnProd.setX(x + 135);
-                textOnProd.setY(y + 40);
-                textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceUpperPanel.getChildren().add(textOnProd);
-            });
-            woodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+//            woodProduction.setOnMouseMoved(e -> {
+//                provinceUpperPanel.getChildren().remove(textOnProd);
+//                double x = e.getX();
+//                double y = e.getY();
+//                StringBuilder sb = new StringBuilder();
+//                if (goldProduction.contains(x, y)) {
+//                    sb.append("building resources");
+//                }
+//                textOnProd.setText(sb.toString());
+//                textOnProd.setX(x + 135);
+//                textOnProd.setY(y + 40);
+//                textOnProd.setFill(Paint.valueOf("GRAY"));
+//                provinceUpperPanel.getChildren().add(textOnProd);
+//            });
+//            woodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //BELIEF
             TextField beliefProduction = new TextField(String.valueOf(belief));
@@ -1357,21 +1358,21 @@ public class MainBoardController implements Initializable {
             beliefProduction.setPrefWidth(50);
             beliefProduction.setEditable(false);
 
-            beliefProduction.setOnMouseMoved(e -> {
-                provinceUpperPanel.getChildren().remove(textOnProd);
-                double x = e.getX();
-                double y = e.getY();
-                StringBuilder sb = new StringBuilder();
-                if (goldProduction.contains(x, y)) {
-                    sb.append("faith");
-                }
-                textOnProd.setText(sb.toString());
-                textOnProd.setX(x + 185);
-                textOnProd.setY(y + 40);
-                textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceUpperPanel.getChildren().add(textOnProd);
-            });
-            beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+//            beliefProduction.setOnMouseMoved(e -> {
+//                provinceUpperPanel.getChildren().remove(textOnProd);
+//                double x = e.getX();
+//                double y = e.getY();
+//                StringBuilder sb = new StringBuilder();
+//                if (goldProduction.contains(x, y)) {
+//                    sb.append("faith");
+//                }
+//                textOnProd.setText(sb.toString());
+//                textOnProd.setX(x + 185);
+//                textOnProd.setY(y + 40);
+//                textOnProd.setFill(Paint.valueOf("GRAY"));
+//                provinceUpperPanel.getChildren().add(textOnProd);
+//            });
+//            beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //POPULATION
 
@@ -1389,21 +1390,21 @@ public class MainBoardController implements Initializable {
                 City tempCity = (City) temphex.getProvince();
                 popPanelEntered(tempCity);
 
-                provinceUpperPanel.getChildren().remove(textOnProd);
-                double x = e.getX();
-                double y = e.getY();
-                StringBuilder sb = new StringBuilder();
-                if (goldProduction.contains(x, y)) {
-                    sb.append("population");
-                }
-                textOnProd.setText(sb.toString());
-                textOnProd.setX(x + 125);
-                textOnProd.setY(y + 20);
-                textOnProd.setFill(Paint.valueOf("GRAY"));
-                provinceUpperPanel.getChildren().add(textOnProd);
+//                provinceUpperPanel.getChildren().remove(textOnProd);
+//                double x = e.getX();
+//                double y = e.getY();
+//                StringBuilder sb = new StringBuilder();
+//                if (goldProduction.contains(x, y)) {
+//                    sb.append("population");
+//                }
+//                textOnProd.setText(sb.toString());
+//                textOnProd.setX(x + 125);
+//                textOnProd.setY(y + 20);
+//                textOnProd.setFill(Paint.valueOf("GRAY"));
+//                provinceUpperPanel.getChildren().add(textOnProd);
             });
             population.setOnMouseExited(e -> {
-                provinceUpperPanel.getChildren().remove(textOnProd);
+//                provinceUpperPanel.getChildren().remove(textOnProd);
                 popPanelExited();
             });
 
@@ -1486,21 +1487,20 @@ public class MainBoardController implements Initializable {
 //                    }
 
                 });
-                System.out.println("Build: " + temphex.getProvince().build);
-                System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
-                System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
+//                System.out.println("Build: " + temphex.getProvince().build);
+//                System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
+//                System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
                 baseBuildingButton.setOnMouseClicked(e -> {
                     //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
                     String buildingNoSpacesTemp = baseBuilding.replaceAll("\\s+","");
+                    City tempCity = (City) temphex.getProvince();
                     if(Objects.equals(buildingNoSpacesTemp, "ResidentialDistrict") && temphex.getProvince().builtBuildings.contains(baseBuilding)){
-                        City tempCity = (City) temphex.getProvince();
                         tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
                     }
                     else if (!temphex.getProvince().builtBuildings.contains(baseBuilding)){
                         temphex.getProvince().builtBuildings.add(baseBuilding);
                         String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
                         if(Objects.equals(buildingNoSpaces, "ResidentialDistrict")){
-                            City tempCity = (City) temphex.getProvince();
                             tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
                         }
                         buyBuilding(temphex.getProvince(), buildingNoSpaces);
@@ -1578,7 +1578,7 @@ public class MainBoardController implements Initializable {
     }
 
     void buyBuilding(Province province, String building){
-        //province.builtBuildings.add(building);
+
         switch (building) {
             case "AmberCollector":
                 province.builtBuildingsVector.add(new AmberCollector());
