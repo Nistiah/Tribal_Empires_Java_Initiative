@@ -1,10 +1,12 @@
 package menuStartPackage.Prowincje;
 
 import menuStartPackage.Jednostki.*;
+import menuStartPackage.player.Player;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import static menuStartPackage.FXMLControllers.MainBoardController.playerList;
 
 public class City extends Province {
     public static int    cityNamesAssyriaCounter  = 0;
@@ -289,6 +291,23 @@ public class City extends Province {
     void attackersVictory(Army army, int id){
         this.army.clear();
         this.army.add(army);
+        Player player;
+        for(Player player1:playerList){
+            if(player1.id==id){
+                player=player1;
+                player.createNewCity(this);
+            }
+            if(player1.id==ownerId){
+                for(City city:player1.getCityList()){
+                    if(city==this){
+                        player1.getCityList().remove(this);
+                    }
+                }
+            }
+        }
+
+
+
 
         ownerId=id;
         provincelist.forEach(p->p.setOwnerId(id));
@@ -296,7 +315,7 @@ public class City extends Province {
 
 
     }
-    public Siege siege = new Siege(1);
+    public Siege siege = new Siege(2);
 
 
 
@@ -333,6 +352,7 @@ public class City extends Province {
             atackStrength=atackStrengthInitial;
             defenseStrength=defenseStrengthInitial;
             recalculate();
+            attackerId=id;
 
         }
 
