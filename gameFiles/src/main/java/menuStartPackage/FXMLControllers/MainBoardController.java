@@ -1499,10 +1499,13 @@ public class MainBoardController implements Initializable {
                     tempList.remove(baseBuilding);
                     hexClick(temphex, temp);
                 });
-                if(!temphex.getProvince().builtBuildings.contains("IrrigationSystem")){
-                    buttonOffset[0] = 10;
-                    return;
+                if(Objects.equals(temphex.getProvince().getType(), "RiversideArea")){
+                    if(!temphex.getProvince().builtBuildings.contains("IrrigationSystem")){
+                        buttonOffset[0] = 10;
+                        return;
+                    }
                 }
+
 
                 provinceLowerPanel.getChildren().add(baseBuildingButton);
             });
@@ -1539,6 +1542,7 @@ public class MainBoardController implements Initializable {
                     tempList.remove(building);
                     hexClick(temphex, temp);
                 });
+
                 provinceLowerPanel.getChildren().add(possibleBuildingButton);
             });
 
