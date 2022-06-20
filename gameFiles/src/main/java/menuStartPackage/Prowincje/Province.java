@@ -41,22 +41,23 @@ public class Province {
 
     public Vector<Building> builtBuildingsVector = new Vector<Building>();
 
-    public void setBuildingsProduction(){
+    public void setBuildingsProduction(int id){
         setBaseProduction(this.type);
-        for(int iter = 0;iter<builtBuildingsVector.size();iter++)
-        {
-            Building b = builtBuildingsVector.get(iter);
-            String temp = builtBuildings.get(iter);
-            temp = temp.replaceAll("\\s+","");
-            b.setBaseProduction(temp);
-            gold += b.getGold();
-            belief += b.getBelief();
-            food += b.getFood();
-            bronze += b.getBronze();
-            iron += b.getIron();
-            dices += b.getDices();
-            horses += b.getHorses();
-            wood += b.getWood();
+        Building b = builtBuildingsVector.get(builtBuildingsVector.size()-1);
+        String temp = builtBuildings.get(builtBuildings.size()-1);
+        temp = temp.replaceAll("\\s+","");
+        b.setBaseProduction(temp);
+        b.setOwner(id);
+        gold += b.getGold();
+        belief += b.getBelief();
+        food += b.getFood();
+        bronze += b.getBronze();
+        iron += b.getIron();
+        dices += b.getDices();
+        horses += b.getHorses();
+        wood += b.getWood();
+        if(ownerId == 2 && temp.equals("IronMine")){
+            iron += 2;
         }
     }
 
@@ -217,5 +218,9 @@ public class Province {
 
     public int getWood() {
         return wood;
+    }
+
+    public void setWood(int wood) {
+        this.wood = wood;
     }
 }

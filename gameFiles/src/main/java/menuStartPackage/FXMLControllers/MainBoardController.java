@@ -1267,7 +1267,7 @@ public class MainBoardController implements Initializable {
             int food = temphex.getProvince().getFood();
             int pop = temphex.getProvince().getPop();
 
-            Text textOnProd = new Text();
+
             //GOLD
             TextField goldProduction = new TextField(String.valueOf(gold));
             goldProduction.getStyleClass().add("provincePanelGold");
@@ -1277,22 +1277,6 @@ public class MainBoardController implements Initializable {
             goldProduction.setPrefWidth(50);
             goldProduction.setEditable(false);
 
-            //TODO:Do usuniecia przez Mateusza nastepne komenty
-//            goldProduction.setOnMouseMoved(e -> {
-//                provinceUpperPanel.getChildren().remove(textOnProd);
-//                double x = e.getX();
-//                double y = e.getY();
-//                StringBuilder sb = new StringBuilder();
-//                if (goldProduction.contains(x, y)) {
-//                    sb.append("gold");
-//                }
-//                textOnProd.setText(sb.toString());
-//                textOnProd.setX(x + 35);
-//                textOnProd.setY(y + 40);
-//                textOnProd.setFill(Paint.valueOf("GRAY"));
-//                provinceUpperPanel.getChildren().add(textOnProd);
-//            });
-//            goldProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
 
             //FOOD
 
@@ -1306,23 +1290,7 @@ public class MainBoardController implements Initializable {
 
             String finalFoodInCity = foodInCity;
 
-//            foodProduction.setOnMouseMoved(e -> {
-//                provinceUpperPanel.getChildren().remove(textOnProd);
-//                double x = e.getX();
-//                double y = e.getY();
-//                StringBuilder sb = new StringBuilder();
-//
-//                if (goldProduction.contains(x, y)) {
-//                    sb.append(finalFoodInCity);
-//                }
-//
-//                textOnProd.setText(sb.toString());
-//                textOnProd.setX(x + 85);
-//                textOnProd.setY(y + 40);
-//                textOnProd.setFill(Paint.valueOf("GRAY"));
-//                provinceUpperPanel.getChildren().add(textOnProd);
-//            });
-//            foodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+
 
             //BUILDING RESOURCES
             TextField woodProduction = new TextField(String.valueOf(wood));
@@ -1333,21 +1301,7 @@ public class MainBoardController implements Initializable {
             woodProduction.setPrefWidth(50);
             woodProduction.setEditable(false);
 
-//            woodProduction.setOnMouseMoved(e -> {
-//                provinceUpperPanel.getChildren().remove(textOnProd);
-//                double x = e.getX();
-//                double y = e.getY();
-//                StringBuilder sb = new StringBuilder();
-//                if (goldProduction.contains(x, y)) {
-//                    sb.append("building resources");
-//                }
-//                textOnProd.setText(sb.toString());
-//                textOnProd.setX(x + 135);
-//                textOnProd.setY(y + 40);
-//                textOnProd.setFill(Paint.valueOf("GRAY"));
-//                provinceUpperPanel.getChildren().add(textOnProd);
-//            });
-//            woodProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+
 
             //BELIEF
             TextField beliefProduction = new TextField(String.valueOf(belief));
@@ -1358,21 +1312,7 @@ public class MainBoardController implements Initializable {
             beliefProduction.setPrefWidth(50);
             beliefProduction.setEditable(false);
 
-//            beliefProduction.setOnMouseMoved(e -> {
-//                provinceUpperPanel.getChildren().remove(textOnProd);
-//                double x = e.getX();
-//                double y = e.getY();
-//                StringBuilder sb = new StringBuilder();
-//                if (goldProduction.contains(x, y)) {
-//                    sb.append("faith");
-//                }
-//                textOnProd.setText(sb.toString());
-//                textOnProd.setX(x + 185);
-//                textOnProd.setY(y + 40);
-//                textOnProd.setFill(Paint.valueOf("GRAY"));
-//                provinceUpperPanel.getChildren().add(textOnProd);
-//            });
-//            beliefProduction.setOnMouseExited(e -> provinceUpperPanel.getChildren().remove(textOnProd));
+
 
             //POPULATION
 
@@ -1389,19 +1329,6 @@ public class MainBoardController implements Initializable {
             population.setOnMouseMoved(e -> {
                 City tempCity = (City) temphex.getProvince();
                 popPanelEntered(tempCity);
-
-//                provinceUpperPanel.getChildren().remove(textOnProd);
-//                double x = e.getX();
-//                double y = e.getY();
-//                StringBuilder sb = new StringBuilder();
-//                if (goldProduction.contains(x, y)) {
-//                    sb.append("population");
-//                }
-//                textOnProd.setText(sb.toString());
-//                textOnProd.setX(x + 125);
-//                textOnProd.setY(y + 20);
-//                textOnProd.setFill(Paint.valueOf("GRAY"));
-//                provinceUpperPanel.getChildren().add(textOnProd);
             });
             population.setOnMouseExited(e -> {
 //                provinceUpperPanel.getChildren().remove(textOnProd);
@@ -1475,48 +1402,103 @@ public class MainBoardController implements Initializable {
                 baseBuildingButton.setPrefHeight(100);
                 baseBuildingButton.setTranslateX(20);
                 buttonOffset[0] += 120;
+                String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
-                    if (Objects.equals(baseBuilding, builtBuilding)) {
+                    if (Objects.equals(buildingNoSpaces, builtBuilding)) {
                         baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     }
-//                    builtBuilding = builtBuilding.replaceAll("\\s+","");
-//                    if(!temphex.getProvince().builtBuildings.contains(builtBuilding)){
-//                        Building bld = new Building();
-//                        bld.setBaseProduction(builtBuilding);
-//                        temphex.getProvince().build.add(bld);
-//                    }
-
                 });
-//                System.out.println("Build: " + temphex.getProvince().build);
-//                System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
-//                System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
                 baseBuildingButton.setOnMouseClicked(e -> {
-                    //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    String buildingNoSpacesTemp = baseBuilding.replaceAll("\\s+","");
-                    City tempCity = (City) temphex.getProvince();
-                    if(Objects.equals(buildingNoSpacesTemp, "ResidentialDistrict") && temphex.getProvince().builtBuildings.contains(baseBuilding)){
-                        tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
-                    }
-                    else if (!temphex.getProvince().builtBuildings.contains(baseBuilding)){
-                        temphex.getProvince().builtBuildings.add(baseBuilding);
-                        String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
-                        if(Objects.equals(buildingNoSpaces, "ResidentialDistrict")){
-                            tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
-                        }
-                        buyBuilding(temphex.getProvince(), buildingNoSpaces);
-                    }
-
-
+                    buyBuilding(temphex.getProvince(), buildingNoSpaces);
                     baseBuildingButton.getStyleClass().add("builtBaseBuilding");
-                    if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
-                    if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
-                    //System.out.println(temphex.getProvince().build);
-                    List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
-                    tempList.remove(baseBuilding);
                     hexClick(temphex, temp);
                 });
+                TextFlow buildingTextFlow = new TextFlow();
+                buildingTextFlow.getStyleClass().add("buildingInfo");
+                buildingTextFlow.setPrefWidth(250);
+                baseBuildingButton.setOnMouseEntered(e -> {
+                    Building tempBuilding = new Building();
+                    tempBuilding.setBaseProduction(buildingNoSpaces);
+                    int cost = tempBuilding.getCost();
+
+                    City tempCity = null;
+                    int totalPopulation = 0;
+                    if(!Objects.equals(temphex.getProvince().getType(), "City"))
+                    {
+                        for(City city : currentPlayer.getCityList())
+                        {
+                            for(Province tempProvince : city.getProvincelist())
+                            {
+                                if (tempProvince == temphex.getProvince()) {
+                                    tempCity = city;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tempCity = (City) temphex.getProvince();
+                    }
+
+                    assert tempCity != null;
+                    totalPopulation += tempCity.builtBuildings.size();
+                    for(Province tempProvince : tempCity.getProvincelist())
+                    {
+                        totalPopulation += tempProvince.builtBuildings.size();
+                    }
+                    totalPopulation = tempCity.getPopulation() - totalPopulation;
+
+
+                    Text buildingCost = new Text("Costs " + cost + " building resources");
+                    Text bWoodProduction = new Text("\nProduces " + tempBuilding.getWood() + " building resources");
+                    Text bDyesProduction = new Text("\nProduces " + tempBuilding.getDices() + " dyes");
+                    Text bFoodProduction = new Text("\nProduces " + (int) tempBuilding.getFood() + " food");
+                    Text bGoldProduction = new Text("\nProduces " + (int) tempBuilding.getGold() + " gold");
+                    Text bBronzeProduction = new Text("\nProduces " + tempBuilding.getBronze() + " bronze");
+                    Text bIronProduction = new Text("\nProduces " + tempBuilding.getIron() + " iron");
+                    Text bFaithProduction = new Text("\nProduces " + (int) tempBuilding.getBelief() + " faith");
+                    Text bHorsesProduction = new Text("\nProduces " + tempBuilding.getHorses() + " horses");
+                    Text availablePopulation = new Text("\nNeeds 1/" + totalPopulation  + " available population");
+                    buildingCost.setFill(Color.GREY);
+                    bWoodProduction.setFill(Color.GREY);
+                    bDyesProduction.setFill(Color.GREY);
+                    bFoodProduction.setFill(Color.GREY);
+                    bGoldProduction.setFill(Color.GREY);
+                    bBronzeProduction.setFill(Color.GREY);
+                    bIronProduction.setFill(Color.GREY);
+                    bFaithProduction.setFill(Color.GREY);
+                    bHorsesProduction.setFill(Color.GREY);
+                    availablePopulation.setFill(Color.GREY);
+
+                    buildingTextFlow.getChildren().clear();
+                    buildingTextFlow.getChildren().add(buildingCost);
+                    if(tempBuilding.getWood() > 0) buildingTextFlow.getChildren().add(bWoodProduction);
+                    if(tempBuilding.getDices() > 0) buildingTextFlow.getChildren().add(bDyesProduction);
+                    if(tempBuilding.getFood() > 0) buildingTextFlow.getChildren().add(bFoodProduction);
+                    if(tempBuilding.getGold() > 0) buildingTextFlow.getChildren().add(bGoldProduction);
+                    if(tempBuilding.getBronze() > 0) buildingTextFlow.getChildren().add(bBronzeProduction);
+                    if(tempBuilding.getIron() > 0) buildingTextFlow.getChildren().add(bIronProduction);
+                    if(tempBuilding.getBelief() > 0) buildingTextFlow.getChildren().add(bFaithProduction);
+                    if(tempBuilding.getHorses() > 0) buildingTextFlow.getChildren().add(bHorsesProduction);
+                    buildingTextFlow.getChildren().add(availablePopulation);
+                    double tempY = baseBuildingButton.localToScene(baseBuildingButton.getBoundsInLocal()).getMinY();
+                    buildingTextFlow.setTranslateX(1373);
+                    if (tempY > 1000) {
+                        buildingTextFlow.setTranslateY(tempY - 40);
+                    } else if(tempY < 560) {
+                        buildingTextFlow.setTranslateY(560);
+                    } else {
+                        buildingTextFlow.setTranslateY(tempY);
+                    }
+                    mainAnchorPane.getChildren().add(buildingTextFlow);
+                    System.out.println(cost);
+                });
+                baseBuildingButton.setOnMouseExited(e -> {
+                    mainAnchorPane.getChildren().remove(buildingTextFlow);
+                });
                 if(Objects.equals(temphex.getProvince().getType(), "RiversideArea")){
-                    if(!temphex.getProvince().builtBuildings.contains("Irrigation System")){
+                    if(!temphex.getProvince().builtBuildings.contains("IrrigationSystem")){
                         buttonOffset[0] = 10;
                         return;
                     }
@@ -1527,12 +1509,34 @@ public class MainBoardController implements Initializable {
             });
 
             //possible buildings
-            temphex.getProvince().getPossibleBuildings().forEach(building -> {
+            System.out.println("Q: " + temphex.getQ() + " R: " + temphex.getR());
+            for(String building : temphex.getProvince().getPossibleBuildings())
+            {
+                if(building.equals("Gold Mine")) {
+                    if((temphex.getQ() % 3 != 0) || (temphex.getR() % 3 != 0)) continue;
+                };
+
+                if(building.equals("Bronze Mine")) {
+                    if((temphex.getQ() % 2 == 0) || (temphex.getR() % 2 == 0)) continue;
+                    if((temphex.getQ() % 3 == 0) && (temphex.getR() % 3 == 0)) continue;
+                };
+
+                if(building.equals("Iron Mine")) {
+                    if((temphex.getQ() % 2 != 0) || (temphex.getR() % 2 != 0)) continue;
+                    if((temphex.getQ() % 3 == 0) && (temphex.getR() % 3 == 0)) continue;
+                };
+
+                final String buildingNoSpaces = building.replaceAll("\\s+","");
                 Button possibleBuildingButton = new Button(building);
                 possibleBuildingButton.setId(building);
                 possibleBuildingButton.getStyleClass().add("building");
+
+                String buildingNoSpaces3 = building.replaceAll("\\s+","");
+                if(buildingNoSpaces.equals("CatchingBoars")) buildingNoSpaces3 = "CatchingBoar";
+                String finalBuildingNoSpaces = buildingNoSpaces3;
+
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
-                    if (Objects.equals(building, builtBuilding)) {
+                    if (Objects.equals(finalBuildingNoSpaces, builtBuilding)) {
                         possibleBuildingButton.getStyleClass().add("builtBuilding");
                     }
                 });
@@ -1542,25 +1546,107 @@ public class MainBoardController implements Initializable {
                 possibleBuildingButton.setTranslateX(20);
                 buttonOffset[0] += 120;
                 possibleBuildingButton.setOnMouseClicked(e -> {
-                    //System.out.println(e.getSource() + "" + temphex.getQ() + "" + temphex.getR());
-                    if (!temphex.getProvince().builtBuildings.contains(building)){
-                        temphex.getProvince().builtBuildings.add(building);
-                        String buildingNoSpaces = building.replaceAll("\\s+","");
-                        if(buildingNoSpaces.equals("CatchingBoars")) buildingNoSpaces = "CatchingBoar";
-                        buyBuilding(temphex.getProvince(), buildingNoSpaces);
-                    }
+                    String buildingNoSpaces2 = buildingNoSpaces;
+                    if(buildingNoSpaces2.equals("CatchingBoars")) buildingNoSpaces2 = "CatchingBoar";
+                    buyBuilding(temphex.getProvince(), buildingNoSpaces2);
+
 
                     possibleBuildingButton.getStyleClass().add("builtBuilding");
-                    if (temphex.getProvince().builtBuildings == null) System.out.println("LISTA NULL");
-                    if (temphex.getProvince().builtBuildings.isEmpty()) System.out.println("LISTA PUSTA");
-                    //System.out.println(temphex.getProvince().builtBuildings);
-                    List<String> tempList = new ArrayList<>(temphex.getProvince().getPossibleBuildings());
-                    tempList.remove(building);
+
                     hexClick(temphex, temp);
+                });
+                TextFlow buildingTextFlow = new TextFlow();
+                buildingTextFlow.getStyleClass().add("buildingInfo");
+                buildingTextFlow.setPrefWidth(250);
+                possibleBuildingButton.setOnMouseEntered(e -> {
+                    Building tempBuilding = new Building();
+                    tempBuilding.setBaseProduction(finalBuildingNoSpaces);
+                    double buildingResources = tempBuilding.getWood();
+                    if(playerId == 2){
+                        buildingResources += 2;
+                        temphex.getProvince().setWood(temphex.getProvince().getWood() + (int) buildingResources);
+                    }
+                    int cost = tempBuilding.getCost();
+
+                    City tempCity = null;
+                    int totalBuildings = 0;
+                    if(!Objects.equals(temphex.getProvince().getType(), "City"))
+                    {
+                        for(City city : currentPlayer.getCityList())
+                        {
+                            for(Province tempProvince : city.getProvincelist())
+                            {
+                                if (tempProvince == temphex.getProvince()) {
+                                    tempCity = city;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        tempCity = (City) temphex.getProvince();
+                    }
+
+                    assert tempCity != null;
+                    totalBuildings += tempCity.builtBuildings.size();
+                    for(Province tempProvince : tempCity.getProvincelist())
+                    {
+                        totalBuildings += tempProvince.builtBuildings.size();
+                    }
+                    totalBuildings = tempCity.getPopulation() - totalBuildings;
+
+                    Text buildingCost = new Text("Costs " + cost + " building resources");
+                    Text bWoodProduction = new Text("\nProduces " + tempBuilding.getWood() + " building resources");
+                    Text bDyesProduction = new Text("\nProduces " + tempBuilding.getDices() + " dyes");
+                    Text bFoodProduction = new Text("\nProduces " + (int) tempBuilding.getFood() + " food");
+                    Text bGoldProduction = new Text("\nProduces " + (int) tempBuilding.getGold() + " gold");
+                    Text bBronzeProduction = new Text("\nProduces " + tempBuilding.getBronze() + " bronze");
+                    Text bIronProduction = new Text("\nProduces " + tempBuilding.getIron() + " iron");
+                    Text bFaithProduction = new Text("\nProduces " + (int) tempBuilding.getBelief() + " faith");
+                    Text bHorsesProduction = new Text("\nProduces " + tempBuilding.getHorses() + " horses");
+                    Text availablePopulation = new Text("\nNeeds 1/" + totalBuildings  + " population");
+                    buildingCost.setFill(Color.GREY);
+                    bWoodProduction.setFill(Color.GREY);
+                    bDyesProduction.setFill(Color.GREY);
+                    bFoodProduction.setFill(Color.GREY);
+                    bGoldProduction.setFill(Color.GREY);
+                    bBronzeProduction.setFill(Color.GREY);
+                    bIronProduction.setFill(Color.GREY);
+                    bFaithProduction.setFill(Color.GREY);
+                    bHorsesProduction.setFill(Color.GREY);
+                    availablePopulation.setFill(Color.GREY);
+
+                    buildingTextFlow.getChildren().clear();
+                    buildingTextFlow.getChildren().add(buildingCost);
+                    if(tempBuilding.getWood() > 0) buildingTextFlow.getChildren().add(bWoodProduction);
+                    if(tempBuilding.getDices() > 0) buildingTextFlow.getChildren().add(bDyesProduction);
+                    if(tempBuilding.getFood() > 0) buildingTextFlow.getChildren().add(bFoodProduction);
+                    if(tempBuilding.getGold() > 0) buildingTextFlow.getChildren().add(bGoldProduction);
+                    if(tempBuilding.getBronze() > 0) buildingTextFlow.getChildren().add(bBronzeProduction);
+                    if(tempBuilding.getIron() > 0) buildingTextFlow.getChildren().add(bIronProduction);
+                    if(tempBuilding.getBelief() > 0) buildingTextFlow.getChildren().add(bFaithProduction);
+                    if(tempBuilding.getHorses() > 0) buildingTextFlow.getChildren().add(bHorsesProduction);
+                    buildingTextFlow.getChildren().add(availablePopulation);
+
+                    double tempY = possibleBuildingButton.localToScene(possibleBuildingButton.getBoundsInLocal()).getMinY();
+                    buildingTextFlow.setTranslateX(1373);
+                    if (tempY > 1000) {
+                        buildingTextFlow.setTranslateY(tempY - 40);
+                    } else if(tempY < 560) {
+                        buildingTextFlow.setTranslateY(560);
+                    } else {
+                        buildingTextFlow.setTranslateY(tempY);
+                    }
+                    mainAnchorPane.getChildren().add(buildingTextFlow);
+                    System.out.println(cost);
+                });
+                possibleBuildingButton.setOnMouseExited(e -> {
+                    mainAnchorPane.getChildren().remove(buildingTextFlow);
                 });
 
                 provinceLowerPanel.getChildren().add(possibleBuildingButton);
-            });
+            };
 
 
             provinceLowerPanel.setPrefHeight(resourcesOffset[0] + buttonOffset[0] + 200);
@@ -1578,7 +1664,46 @@ public class MainBoardController implements Initializable {
     }
 
     void buyBuilding(Province province, String building){
+        City tempCity = null;
+        int totalBuildings = 0;
+        if(!Objects.equals(province.getType(), "City"))
+        {
+            for(City city : currentPlayer.getCityList())
+            {
+                for(Province tempProvince : city.getProvincelist())
+                {
+                    if (tempProvince == province) {
+                        tempCity = city;
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            tempCity = (City) province;
+        }
 
+        assert tempCity != null;
+        totalBuildings += tempCity.builtBuildings.size();
+        for(Province tempProvince : tempCity.getProvincelist())
+        {
+            totalBuildings += tempProvince.builtBuildings.size();
+        }
+
+        if (province.builtBuildings.contains(building)) {
+            if(!Objects.equals(building, "ResidentialDistrict")) return;
+        }
+        if(tempCity.getPopulation() <= totalBuildings)
+        {
+            return;
+        }
+        Building tempBuilding = new Building();
+        tempBuilding.setBaseProduction(building);
+        if(tempBuilding.getCost() > currentPlayer.getBuildingResources()) return;
+        currentPlayer.setBuildingResources(currentPlayer.getBuildingResources() - tempBuilding.getCost());
+        recoursesField.setText("" + currentPlayer.getBuildingResources());
+        province.builtBuildings.add(building);
         switch (building) {
             case "AmberCollector":
                 province.builtBuildingsVector.add(new AmberCollector());
@@ -1656,7 +1781,9 @@ public class MainBoardController implements Initializable {
                 province.builtBuildingsVector.add(new Warehouse());
                 break;
         }
-        province.setBuildingsProduction();
+        province.builtBuildingsVector.get(province.builtBuildingsVector.size() - 1).setBaseProduction(building);
+        System.out.println("playerID: " + playerId);
+        province.setBuildingsProduction(playerId);
     }
 
     void armiesClicked(City city)
@@ -1744,14 +1871,51 @@ public class MainBoardController implements Initializable {
         warriorsAmount.setEditable(false);
         warriorsAmount.setAlignment(Pos.BOTTOM_RIGHT);
 
+        int totalUnits = 0;
+        for(Army tempArmy : originCity.army)
+        {
+            totalUnits += tempArmy.getTotalAmount();
+        }
+        final int totalUnits2 = totalUnits;
+        final City tempCity2 = originCity;
+
         Button recruitArchers = new Button("Recruit Archers");
         recruitArchers.getStyleClass().add("siegeButton");
         recruitArchers.setTranslateY(75);
         recruitArchers.setPrefWidth(299);
         recruitArchers.setOnMouseClicked(e3 -> {
+            ArmyUnit tempUnit = new ArmyUnit();
+            if(currentPlayer.getGold() < tempUnit.getArcherCost() || totalUnits2 >= tempCity2.getPopulation())
+            {
+                return;
+            }
+            currentPlayer.setGold(currentPlayer.getGold() - tempUnit.getArcherCost());
+            goldField.setText("" + (int) currentPlayer.getGold());
+
             army.addUnit(new Archer());
             provinceLowerPanel.getChildren().clear();
             singleArmyClicked(army, originCity);
+        });
+        TextFlow archerTextFlow = new TextFlow();
+        archerTextFlow.getStyleClass().add("buildingInfo");
+        archerTextFlow.setPrefWidth(250);
+        archerTextFlow.setPrefWidth(250);
+        recruitArchers.setOnMouseEntered(e -> {
+            archerTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text unitCost = new Text("Costs\n" + tempUnit.getArcherCost() +" gold");
+            unitCost.setFill(Color.GREY);
+
+            archerTextFlow.getChildren().clear();
+            archerTextFlow.getChildren().add(unitCost);
+            double tempY = recruitArchers.localToScene(recruitArchers.getBoundsInLocal()).getMinY();
+            archerTextFlow.setTranslateX(1373);
+            archerTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(archerTextFlow);
+
+        });
+        recruitArchers.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(archerTextFlow);
         });
 
         Button recruitChariots = new Button("Recruit Chariots");
@@ -1759,9 +1923,41 @@ public class MainBoardController implements Initializable {
         recruitChariots.setTranslateY(135);
         recruitChariots.setPrefWidth(299);
         recruitChariots.setOnMouseClicked(e3 -> {
+            ArmyUnit tempUnit = new ArmyUnit();
+            if(currentPlayer.getGold() < tempUnit.getChariotsGoldCost() || currentPlayer.getHorses() < tempUnit.getChariotsHorsesCost() || totalUnits2 >= tempCity2.getPopulation())
+            {
+                return;
+            }
+            currentPlayer.setGold(currentPlayer.getGold() - tempUnit.getChariotsGoldCost());
+            goldField.setText("" + (int) currentPlayer.getGold());
+
+            currentPlayer.setHorses(currentPlayer.getHorses() - tempUnit.getChariotsHorsesCost());
+            horsesField.setText("" + currentPlayer.getHorses());
+
             army.addUnit(new Chariots());
             provinceLowerPanel.getChildren().clear();
             singleArmyClicked(army, originCity);
+        });
+        TextFlow chariotsTextFlow = new TextFlow();
+        chariotsTextFlow.getStyleClass().add("buildingInfo");
+        chariotsTextFlow.setPrefWidth(250);
+        chariotsTextFlow.setPrefWidth(250);
+        recruitChariots.setOnMouseEntered(e -> {
+            chariotsTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text unitCost = new Text("Costs\n" + tempUnit.getChariotsGoldCost() +" gold\n" + tempUnit.getChariotsHorsesCost() +" horses");
+            unitCost.setFill(Color.GREY);
+
+            chariotsTextFlow.getChildren().clear();
+            chariotsTextFlow.getChildren().add(unitCost);
+            double tempY = recruitChariots.localToScene(recruitChariots.getBoundsInLocal()).getMinY();
+            chariotsTextFlow.setTranslateX(1373);
+            chariotsTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(chariotsTextFlow);
+
+        });
+        recruitChariots.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(chariotsTextFlow);
         });
 
         Button recruitInfantry = new Button("Recruit Infantry");
@@ -1769,9 +1965,38 @@ public class MainBoardController implements Initializable {
         recruitInfantry.setTranslateY(195);
         recruitInfantry.setPrefWidth(299);
         recruitInfantry.setOnMouseClicked(e3 -> {
+            ArmyUnit tempUnit = new ArmyUnit();
+            if(currentPlayer.getGold() < tempUnit.getInfantryCost() || totalUnits2 >= tempCity2.getPopulation())
+            {
+                return;
+            }
+            currentPlayer.setGold(currentPlayer.getGold() - tempUnit.getInfantryCost());
+            goldField.setText("" + (int) currentPlayer.getGold());
+
             army.addUnit(new Infantry());
             provinceLowerPanel.getChildren().clear();
             singleArmyClicked(army, originCity);
+        });
+        TextFlow infantryTextFlow = new TextFlow();
+        infantryTextFlow.getStyleClass().add("buildingInfo");
+        infantryTextFlow.setPrefWidth(250);
+        infantryTextFlow.setPrefWidth(250);
+        recruitInfantry.setOnMouseEntered(e -> {
+            infantryTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text unitCost = new Text("Costs\n" + tempUnit.getInfantryCost() +" gold");
+            unitCost.setFill(Color.GREY);
+
+            infantryTextFlow.getChildren().clear();
+            infantryTextFlow.getChildren().add(unitCost);
+            double tempY = recruitInfantry.localToScene(recruitInfantry.getBoundsInLocal()).getMinY();
+            infantryTextFlow.setTranslateX(1373);
+            infantryTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(infantryTextFlow);
+
+        });
+        recruitInfantry.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(infantryTextFlow);
         });
 
         Button upgradeArchers = new Button("Upgrade Archers");
@@ -1968,9 +2193,13 @@ public class MainBoardController implements Initializable {
         upgradeToLvl1.setOnMouseClicked(e3 -> {
             for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
+                if(currentPlayer.getBronze() < item.getLvl1BronzeCost()) return;
                 if (Objects.equals(item.getName(), unitName)) {
                     if (item.getLvl() == 0) {
                         item.setLvl(1);
+                        item.setUpgrades();
+                        currentPlayer.setBronze(currentPlayer.getBronze() - item.getLvl1BronzeCost());
+                        bronzeField.setText("" + currentPlayer.getBronze());
                         break;
                     }
                     System.out.println("NO MORE UNITS TO UPGRADE TO LVL 1!");
@@ -1978,6 +2207,30 @@ public class MainBoardController implements Initializable {
 
             }
             upgradeUnitClicked(army, unitName, originCity);
+        });
+        TextFlow unitTextFlow = new TextFlow();
+        unitTextFlow.getStyleClass().add("buildingInfo");
+        unitTextFlow.setPrefWidth(250);
+        unitTextFlow.setPrefWidth(250);
+        upgradeToLvl1.setOnMouseEntered(e -> {
+            unitTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text upgradeCost = new Text("Costs\n" + tempUnit.getLvl1BronzeCost() +" bronze");
+            Text upgrades = new Text("\nAdds\n+" + tempUnit.getLvl1UpgradeCloseDef() + " close defence");
+            upgradeCost.setFill(Color.GREY);
+            upgrades.setFill(Color.GREEN);
+
+            unitTextFlow.getChildren().clear();
+            unitTextFlow.getChildren().add(upgradeCost);
+            unitTextFlow.getChildren().add(upgrades);
+            double tempY = upgradeToLvl1.localToScene(upgradeToLvl1.getBoundsInLocal()).getMinY();
+            unitTextFlow.setTranslateX(1373);
+            unitTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(unitTextFlow);
+
+        });
+        upgradeToLvl1.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(unitTextFlow);
         });
 
         Button upgradeToLvl2 = new Button("Upgrade to lvl 3");
@@ -1987,9 +2240,13 @@ public class MainBoardController implements Initializable {
         upgradeToLvl2.setOnMouseClicked(e3 -> {
             for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
+                if(currentPlayer.getIron() < item.getLvl2IronCost()) return;
                 if (Objects.equals(item.getName(), unitName)) {
                     if (item.getLvl() == 1) {
                         item.setLvl(2);
+                        item.setUpgrades();
+                        currentPlayer.setIron(currentPlayer.getIron() - item.getLvl2IronCost());
+                        ironField.setText("" + currentPlayer.getIron());
                         break;
                     }
                     System.out.println("NO MORE UNITS TO UPGRADE TO LVL 2!");
@@ -1997,6 +2254,29 @@ public class MainBoardController implements Initializable {
 
             }
             upgradeUnitClicked(army, unitName, originCity);
+        });
+        upgradeToLvl2.setOnMouseEntered(e -> {
+            unitTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text upgradeCost = new Text("Costs\n" + tempUnit.getLvl2IronCost() +" iron");
+            Text upgrades1 = new Text("\nAdds\n+" + tempUnit.getLvl2UpgradeCloseDef() + " close defence");
+            Text upgrades2 = new Text("\n+" + tempUnit.getLvl2UpgradeFarDef() + " far defence");
+            upgradeCost.setFill(Color.GREY);
+            upgrades1.setFill(Color.GREEN);
+            upgrades2.setFill(Color.GREEN);
+
+            unitTextFlow.getChildren().clear();
+            unitTextFlow.getChildren().add(upgradeCost);
+            unitTextFlow.getChildren().add(upgrades1);
+            unitTextFlow.getChildren().add(upgrades2);
+            double tempY = upgradeToLvl2.localToScene(upgradeToLvl2.getBoundsInLocal()).getMinY();
+            unitTextFlow.setTranslateX(1373);
+            unitTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(unitTextFlow);
+
+        });
+        upgradeToLvl2.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(unitTextFlow);
         });
 
         Button upgradeToLvl3 = new Button("Upgrade to lvl 4");
@@ -2006,9 +2286,16 @@ public class MainBoardController implements Initializable {
         upgradeToLvl3.setOnMouseClicked(e3 -> {
             for (int i = 0; i < army.getUnits().size(); i++) {
                 ArmyUnit item = army.getUnits().get(i);
+                if(currentPlayer.getDyes() < item.getLvl3DyesCost()) return;
+                if(currentPlayer.getFaith() < item.getLvl3FaithCost()) return;
                 if (Objects.equals(item.getName(), unitName)) {
                     if (item.getLvl() == 2) {
                         item.setLvl(3);
+                        item.setUpgrades();
+                        currentPlayer.setDyes(currentPlayer.getDyes() - item.getLvl3DyesCost());
+                        dyesField.setText("" + currentPlayer.getDyes());
+                        currentPlayer.setFaith(currentPlayer.getFaith() - item.getLvl3FaithCost());
+                        beliefField.setText("" + (int) currentPlayer.getFaith());
                         break;
                     }
                     System.out.println("NO MORE UNITS TO UPGRADE TO LVL 3!");
@@ -2016,6 +2303,33 @@ public class MainBoardController implements Initializable {
 
             }
             upgradeUnitClicked(army, unitName, originCity);
+        });
+        upgradeToLvl3.setOnMouseEntered(e -> {
+            unitTextFlow.getChildren().clear();
+            ArmyUnit tempUnit = new ArmyUnit();
+            Text upgradeCost1 = new Text("Costs\n" + tempUnit.getLvl3DyesCost() +" dyes\n");
+            Text upgradeCost2 = new Text(tempUnit.getLvl3FaithCost() +" faith");
+            Text upgrades1 = new Text("\nAdds\n+" + tempUnit.getLvl3UpgradeCloseAttack() + " close attack");
+            Text upgrades2 = new Text("\n+" + tempUnit.getLvl3UpgradeFarAttack() + " far attack");
+
+            upgradeCost1.setFill(Color.GREY);
+            upgradeCost2.setFill(Color.GREY);
+            upgrades1.setFill(Color.GREEN);
+            upgrades2.setFill(Color.GREEN);
+
+            unitTextFlow.getChildren().clear();
+            unitTextFlow.getChildren().add(upgradeCost1);
+            unitTextFlow.getChildren().add(upgradeCost2);
+            unitTextFlow.getChildren().add(upgrades1);
+            unitTextFlow.getChildren().add(upgrades2);
+            double tempY = upgradeToLvl3.localToScene(upgradeToLvl3.getBoundsInLocal()).getMinY();
+            unitTextFlow.setTranslateX(1373);
+            unitTextFlow.setTranslateY(tempY);
+            mainAnchorPane.getChildren().add(unitTextFlow);
+
+        });
+        upgradeToLvl3.setOnMouseExited(e -> {
+            mainAnchorPane.getChildren().remove(unitTextFlow);
         });
 
         Button back = new Button("Back");

@@ -6,7 +6,7 @@ import java.util.List;
 public class Sea extends Province {
     private List<String> resources         = Arrays.asList("ryby", "barwniki");
     private String       type              = "Sea";
-    private List<String> possibleBuildings = Arrays.asList("Fishermen", "Scarlet Fisherman");
+    private List<String> possibleBuildings = Arrays.asList("Fishermen", "Scarlet Fishermen");
     private List<String> baseBuildings     = Arrays.asList();
 
     public Sea() {

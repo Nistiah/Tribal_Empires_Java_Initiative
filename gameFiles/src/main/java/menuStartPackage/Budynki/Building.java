@@ -18,6 +18,8 @@ public class Building {
     private int      owner;
     private int      maxLevel;
 
+    private int cost;
+
     private String   type = "";
 
     public String getType() {
@@ -28,6 +30,11 @@ public class Building {
         this.type = type;
     }
 
+    public int getCost()
+    {
+        return cost;
+    }
+
     public boolean upgradeExist() {
         return level < 3;
     }
@@ -36,126 +43,126 @@ public class Building {
         switch (type) {
         case "AmberCollector" :
             gold = 2;
-
+            cost = 10;
             break;
 
         case "Barracks" :
-
+            cost = 10;
             ////TODO mechanika lepszych jednostek
             break;
 
         case "BronzeMine" :
             bronze = 1;
-
+            cost = 10;
             break;
 
         case "Caravan" :
             gold = 1;
-
+            cost = 10;
             break;
 
         case "CatchingBoar" :
-
+            cost = 10;
             ////TODO mechanika zdobycia zwierzat
             break;
 
         case "CowBreeding" :
             food = 2;
-
+            cost = 20;
             break;
 
         case "Deforestation" :
-
+            cost = 10;
             ////TODO mechanika na wyciecie lasu
             break;
 
         case "Farm" :
             food = 1;
-
+            cost = 10;
             break;
 
         case "Fishermen" :
             food = 1;
-
+            cost = 10;
             break;
 
         case "GoldMine" :
             gold = 3;
-
+            cost = 30;
             break;
 
         case "HorseBreeding" :
             horses = 1;
-
+            cost = 10;
             break;
 
         case "Hunter" :
             food = 1;
-
+            cost = 10;
             break;
 
         case "IronMine" :
             iron = 1;
-
+            cost = 10;
             break;
 
         case "IrrigationSystem" :
-
+            cost = 10;
             ////TODO irygacja
             break;
 
         case "Lighthouse" :
-
+            cost = 10;
             ////TODO lighthouse
             break;
 
         case "Market" :
             gold = 3;
-
+            cost = 30;
             break;
 
         case "PigBreeding" :
             food = 2;
-
+            cost = 20;
             break;
 
         case "Pyramid" :
             belief = 1;
-
+            cost = 10;
             break;
 
         case "ResidentialDistrict" :
             populationLimit = 10;
-
+            cost = 10;
             break;
 
         case "RiversideFarm" :
             food = 2;
-
+            cost = 20;
             break;
 
         case "Sawmill" :
             wood = 2;
-
+            cost = 20;
             break;
 
         case "ScarletFishermen" :
             dices = 1;
-
+            cost = 10;
             break;
 
         case "SeaFoodCollector" :
             food = 1;
-
+            cost = 10;
             break;
 
         case "Temple" :
             belief = 2;
-
+            cost = 20;
             break;
 
         case "Warehouse" :
-
+            cost = 10;
             ////TODO mechanika na zwiekszanie limitu surowcow
             break;
         }
@@ -206,6 +213,10 @@ public class Building {
 
     public void setOwner(int owner) {
         this.owner = owner;
+    }
+
+    public int getOwner() {
+        return owner;
     }
 
     public double getWood() {
