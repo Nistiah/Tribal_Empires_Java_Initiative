@@ -14,7 +14,104 @@ public class ArmyUnit {
     protected int lvl = 0;
     String name ="";
 
+    protected int lvl1UpgradeCloseDef = 1;
+
+    protected int lvl2UpgradeCloseDef = 2;
+
+    protected int lvl2UpgradeFarDef = 1;
+
+    protected int lvl3UpgradeCloseAttack = 2;
+
+    protected int lvl3UpgradeFarAttack = 1;
+
+    protected int lvl1BronzeCost = 5;
+
+    protected int lvl2IronCost = 10;
+
+    protected int lvl3DyesCost = 5;
+
+    protected int lvl3FaithCost = 5;
+
+    public int getLvl1BronzeCost(){
+        return lvl1BronzeCost;
+    }
+
+    public int getLvl2IronCost(){
+        return lvl2IronCost;
+    }
+
+    public int getLvl3DyesCost(){
+        return lvl3DyesCost;
+    }
+
+    public int getLvl3FaithCost(){
+        return lvl3FaithCost;
+    }
+
+    public int getLvl1UpgradeCloseDef(){
+        return lvl1UpgradeCloseDef;
+    }
+
+    public int getLvl2UpgradeCloseDef(){
+        return lvl2UpgradeCloseDef;
+    }
+
+    public int getLvl2UpgradeFarDef(){
+        return lvl2UpgradeFarDef;
+    }
+
+    public int getLvl3UpgradeCloseAttack(){
+        return lvl3UpgradeCloseAttack;
+    }
+
+    public int getLvl3UpgradeFarAttack(){
+        return lvl3UpgradeFarAttack;
+    }
+
     protected int amount = 0;
+
+    protected int archerCost = 40;
+
+    protected int chariotsGoldCost = 50;
+    protected int chariotsHorsesCost = 2;
+
+    protected int infantryCost = 30;
+
+    public int getArcherCost() {
+        return archerCost;
+    }
+
+    public int getChariotsGoldCost() {
+        return chariotsGoldCost;
+    }
+
+    public int getChariotsHorsesCost() {
+        return chariotsHorsesCost;
+    }
+
+    public int getInfantryCost() {
+        return infantryCost;
+    }
+
+
+    public void setUpgrades()
+    {
+        switch (lvl)
+        {
+            case 1:
+                setCloseDefence(closeDefence + lvl1UpgradeCloseDef);
+                break;
+            case 2:
+                setCloseDefence(closeDefence + lvl2UpgradeCloseDef);
+                setFarDefence(farDefence + lvl2UpgradeFarDef);
+                break;
+            case 3:
+                setCloseAttack(closeAttack + lvl3UpgradeCloseAttack);
+                setFarAttack(farAttack + lvl3UpgradeFarAttack);
+                break;
+        }
+
+    }
 
     private List<String> possibleUpgrades = Arrays.asList("Bronze Armor", "Iron Armor", "Banner");
 

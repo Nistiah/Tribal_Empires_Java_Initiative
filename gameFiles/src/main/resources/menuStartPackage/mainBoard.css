@@ -815,3 +815,16 @@
     -fx-text-decoration: bold;
     -fx-text-fill: grey;
 }
+
+.buildingInfo{
+    -fx-border-color: rgba(255, 171, 79, 0.45);
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 6px;
+    -fx-background-color: rgba(2, 0, 36, 0.75);
+    -fx-text-fill: grey;
+    -fx-font-size: 18;
+    -fx-font-family: Manjari;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}

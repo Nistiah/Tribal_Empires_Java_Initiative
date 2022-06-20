@@ -62,6 +62,10 @@ public class City extends Province {
 
 
     private Vector<Province> provincelist = new Vector<>();
+
+    public Vector<Province> getProvincelist() {
+        return provincelist;
+    }
     private final String[]   cityNamesAssyria  = {
         "Ashur", "Nineveh", "Dur Sharrukin", "Babylon", "Susa", "Haran", "Calah"
     };
