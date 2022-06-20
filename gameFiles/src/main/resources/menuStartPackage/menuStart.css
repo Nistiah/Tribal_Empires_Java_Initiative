@@ -3,6 +3,11 @@
     -fx-background-size: 100% 100%;
     /*-fx-background-repeat: no;*/
 }
+.bodyBackgroundCredits {
+    -fx-background-image: url('credits.png');
+    -fx-background-size: 100% 100%;
+    /*-fx-background-repeat: no;*/
+}
 
 .mainMenuButton {
     -fx-background-radius: 200px;

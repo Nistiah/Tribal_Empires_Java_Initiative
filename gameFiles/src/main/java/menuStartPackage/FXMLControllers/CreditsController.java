@@ -11,11 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class CreditsController {
     private Stage  stage;
-    private Scene  scene;
     private Parent root;
 
     @FXML
