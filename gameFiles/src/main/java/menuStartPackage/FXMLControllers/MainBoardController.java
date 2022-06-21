@@ -626,7 +626,7 @@ public class MainBoardController implements Initializable {
                 continue;
             }
 
-            Text text = new Text(city.getName() + " building resources production " + city.getIron() + "\n");
+            Text text = new Text(city.getName() + " building resources production " + city.getWood() + "\n");
 
             text.setFont(Font.font(font, 18));
             text.setFill(Color.GREEN);
@@ -1212,6 +1212,28 @@ public class MainBoardController implements Initializable {
                 provinceUpperPanel.getChildren().add(armies);
             }
             colonize.setOnMouseClicked(e -> colonize(temphex.getQ(), temphex.getR()));
+            TextFlow colonizeTextFlow = new TextFlow();
+            colonizeTextFlow.getStyleClass().add("buildingInfo");
+            colonize.setOnMouseEntered(e -> {
+                Text buildingCost = new Text("Costs\n200 gold\n50 building resources");
+
+                colonizeTextFlow.setPrefWidth(250);
+                colonizeTextFlow.setPrefHeight(60);
+                buildingCost.setFill(Color.GREY);
+
+                colonizeTextFlow.getChildren().clear();
+                colonizeTextFlow.getChildren().add(buildingCost);
+
+                double tempY = colonize.localToScene(colonize.getBoundsInLocal()).getMinY();
+                colonizeTextFlow.setTranslateX(1373);
+                colonizeTextFlow.setTranslateY(tempY);
+
+                mainAnchorPane.getChildren().add(colonizeTextFlow);
+            });
+            colonize.setOnMouseExited(e -> {
+                mainAnchorPane.getChildren().remove(colonizeTextFlow);
+            });
+
 
             String provName = temphex.getProvince().getType();
             switch (provName) {
@@ -1396,7 +1418,13 @@ public class MainBoardController implements Initializable {
             temphex.getProvince().getBaseBuildings().forEach(baseBuilding -> {
                 Button baseBuildingButton = new Button(baseBuilding);
                 baseBuildingButton.setId(baseBuilding);
-                baseBuildingButton.getStyleClass().add("baseBuilding");
+                //baseBuildingButton.getStyleClass().add("baseBuilding");
+                if(Objects.equals(baseBuilding, "Farm")) baseBuildingButton.getStyleClass().add("farma");
+                if(Objects.equals(baseBuilding, "Pyramid")) baseBuildingButton.getStyleClass().add("piramida");
+                if(Objects.equals(baseBuilding, "Residential District")) baseBuildingButton.getStyleClass().add("resDist");
+                if(Objects.equals(baseBuilding, "Hunter")) baseBuildingButton.getStyleClass().add("hunter");
+                if(Objects.equals(baseBuilding, "Market")) baseBuildingButton.getStyleClass().add("market");
+
                 baseBuildingButton.setTranslateY(buttonOffset[0]);
                 baseBuildingButton.setPrefWidth(250);
                 baseBuildingButton.setPrefHeight(100);
@@ -1405,12 +1433,23 @@ public class MainBoardController implements Initializable {
                 String buildingNoSpaces = baseBuilding.replaceAll("\\s+","");
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
                     if (Objects.equals(buildingNoSpaces, builtBuilding)) {
-                        baseBuildingButton.getStyleClass().add("builtBaseBuilding");
+                        //baseBuildingButton.getStyleClass().add("builtBaseBuilding");
+                        if (Objects.equals(buildingNoSpaces, "ResidentialDistrict")) {
+                            baseBuildingButton.getStyleClass().add("builtBaseBuildingResidentialDistrict");
+                        }
+                        if(Objects.equals(baseBuilding, "Farm")) baseBuildingButton.getStyleClass().add("builtfarma");
+                        if(Objects.equals(baseBuilding, "Pyramid")) baseBuildingButton.getStyleClass().add("builtpiramida");
+                        if(Objects.equals(baseBuilding, "Residential District")) baseBuildingButton.getStyleClass().add("builtresDist");
+                        if(Objects.equals(baseBuilding, "Hunter")) baseBuildingButton.getStyleClass().add("builthunter");
+                        if(Objects.equals(baseBuilding, "Market")) baseBuildingButton.getStyleClass().add("builtmarket");
                     }
                 });
                 baseBuildingButton.setOnMouseClicked(e -> {
+                    System.out.println("Built blds: " + temphex.getProvince().builtBuildings);
+                    System.out.println("Vector: " + temphex.getProvince().builtBuildingsVector);
+
                     buyBuilding(temphex.getProvince(), buildingNoSpaces);
-                    baseBuildingButton.getStyleClass().add("builtBaseBuilding");
+                    //baseBuildingButton.getStyleClass().add("builtBaseBuilding");
                     hexClick(temphex, temp);
                 });
                 TextFlow buildingTextFlow = new TextFlow();
@@ -1443,22 +1482,35 @@ public class MainBoardController implements Initializable {
 
                     assert tempCity != null;
                     totalPopulation += tempCity.builtBuildings.size();
+                    int residentialDistricts = 0;
+                    for(String district : tempCity.builtBuildings)
+                    {
+                        if(district.equals("ResidentialDistrict"))
+                        {
+                            residentialDistricts++;
+                            totalPopulation --;
+                        }
+                    }
                     for(Province tempProvince : tempCity.getProvincelist())
                     {
+                        if(tempProvince.builtBuildings.contains("IrrigationSystem"))
+                        {
+                            totalPopulation --;
+                        }
                         totalPopulation += tempProvince.builtBuildings.size();
                     }
                     totalPopulation = tempCity.getPopulation() - totalPopulation;
 
 
                     Text buildingCost = new Text("Costs " + cost + " building resources");
-                    Text bWoodProduction = new Text("\nProduces " + tempBuilding.getWood() + " building resources");
-                    Text bDyesProduction = new Text("\nProduces " + tempBuilding.getDices() + " dyes");
+                    Text bWoodProduction = new Text("\nProduces " + (int) tempBuilding.getWood() + " building resources");
+                    Text bDyesProduction = new Text("\nProduces " + (int) tempBuilding.getDices() + " dyes");
                     Text bFoodProduction = new Text("\nProduces " + (int) tempBuilding.getFood() + " food");
                     Text bGoldProduction = new Text("\nProduces " + (int) tempBuilding.getGold() + " gold");
-                    Text bBronzeProduction = new Text("\nProduces " + tempBuilding.getBronze() + " bronze");
-                    Text bIronProduction = new Text("\nProduces " + tempBuilding.getIron() + " iron");
+                    Text bBronzeProduction = new Text("\nProduces " + (int) tempBuilding.getBronze() + " bronze");
+                    Text bIronProduction = new Text("\nProduces " + (int) tempBuilding.getIron() + " iron");
                     Text bFaithProduction = new Text("\nProduces " + (int) tempBuilding.getBelief() + " faith");
-                    Text bHorsesProduction = new Text("\nProduces " + tempBuilding.getHorses() + " horses");
+                    Text bHorsesProduction = new Text("\nProduces " + (int) tempBuilding.getHorses() + " horses");
                     Text availablePopulation = new Text("\nNeeds 1/" + totalPopulation  + " available population");
                     buildingCost.setFill(Color.GREY);
                     bWoodProduction.setFill(Color.GREY);
@@ -1469,7 +1521,9 @@ public class MainBoardController implements Initializable {
                     bIronProduction.setFill(Color.GREY);
                     bFaithProduction.setFill(Color.GREY);
                     bHorsesProduction.setFill(Color.GREY);
-                    availablePopulation.setFill(Color.GREY);
+                    if(totalPopulation > 0)availablePopulation.setFill(Color.GREY);
+                    else availablePopulation.setFill(Color.RED);
+
 
                     buildingTextFlow.getChildren().clear();
                     buildingTextFlow.getChildren().add(buildingCost);
@@ -1481,7 +1535,17 @@ public class MainBoardController implements Initializable {
                     if(tempBuilding.getIron() > 0) buildingTextFlow.getChildren().add(bIronProduction);
                     if(tempBuilding.getBelief() > 0) buildingTextFlow.getChildren().add(bFaithProduction);
                     if(tempBuilding.getHorses() > 0) buildingTextFlow.getChildren().add(bHorsesProduction);
-                    buildingTextFlow.getChildren().add(availablePopulation);
+                    if(!buildingNoSpaces.equals("ResidentialDistrict"))buildingTextFlow.getChildren().add(availablePopulation);
+                    if(buildingNoSpaces.equals("ResidentialDistrict"))
+                    {
+                        Text residentialDistrict = new Text("\nIncreases population limit by 5");
+                        residentialDistrict.setFill(Color.GREEN);
+                        Text residentialDistrictsText = new Text("\nBuilt Districts\n" + residentialDistricts);
+                        residentialDistrict.setFill(Color.GREEN);
+                        residentialDistrictsText.setFill(Color.GREY);
+                        buildingTextFlow.getChildren().add(residentialDistrict);
+                        buildingTextFlow.getChildren().add(residentialDistrictsText);
+                    }
                     double tempY = baseBuildingButton.localToScene(baseBuildingButton.getBoundsInLocal()).getMinY();
                     buildingTextFlow.setTranslateX(1373);
                     if (tempY > 1000) {
@@ -1529,7 +1593,13 @@ public class MainBoardController implements Initializable {
                 final String buildingNoSpaces = building.replaceAll("\\s+","");
                 Button possibleBuildingButton = new Button(building);
                 possibleBuildingButton.setId(building);
-                possibleBuildingButton.getStyleClass().add("building");
+                //possibleBuildingButton.getStyleClass().add("building");
+                if(Objects.equals(building, "Cow Breeding") || Objects.equals(building, "Horse Breeding") || Objects.equals(building, "Pig Breeding")) possibleBuildingButton.getStyleClass().add("hodowla");
+                if(Objects.equals(building, "Fishermen") || Objects.equals(building, "Amber Collector") || Objects.equals(building, "Scarlet Fishermen")|| Objects.equals(building, "Sea Food Collector")) possibleBuildingButton.getStyleClass().add("ryby");
+                if(Objects.equals(building, "Sawmill")) possibleBuildingButton.getStyleClass().add("tartak");
+                if(Objects.equals(building, "Iron Mine") || Objects.equals(building, "Bronze Mine")) possibleBuildingButton.getStyleClass().add("building");
+                if(Objects.equals(building, "Gold Mine")) possibleBuildingButton.getStyleClass().add("goldBuilding");
+
 
                 String buildingNoSpaces3 = building.replaceAll("\\s+","");
                 if(buildingNoSpaces.equals("CatchingBoars")) buildingNoSpaces3 = "CatchingBoar";
@@ -1537,7 +1607,12 @@ public class MainBoardController implements Initializable {
 
                 temphex.getProvince().builtBuildings.forEach(builtBuilding -> {
                     if (Objects.equals(finalBuildingNoSpaces, builtBuilding)) {
-                        possibleBuildingButton.getStyleClass().add("builtBuilding");
+                        //possibleBuildingButton.getStyleClass().add("builtBuilding");
+                        if(Objects.equals(building, "Cow Breeding") || Objects.equals(building, "Horse Breeding") || Objects.equals(building, "Pig Breeding")) possibleBuildingButton.getStyleClass().add("builthodowla");
+                        if(Objects.equals(building, "Fishermen") || Objects.equals(building, "Amber Collector") || Objects.equals(building, "Scarlet Fishermen")|| Objects.equals(building, "Sea Food Collector")) possibleBuildingButton.getStyleClass().add("builtryby");
+                        if(Objects.equals(building, "Sawmill")) possibleBuildingButton.getStyleClass().add("builttartak");
+                        if(Objects.equals(building, "Iron Mine") || Objects.equals(building, "Bronze Mine")) possibleBuildingButton.getStyleClass().add("builtBuilding");
+                        if(Objects.equals(building, "Gold Mine")) possibleBuildingButton.getStyleClass().add("builtgoldBuilding");
                     }
                 });
                 possibleBuildingButton.setTranslateY(buttonOffset[0]);
@@ -1561,11 +1636,7 @@ public class MainBoardController implements Initializable {
                 possibleBuildingButton.setOnMouseEntered(e -> {
                     Building tempBuilding = new Building();
                     tempBuilding.setBaseProduction(finalBuildingNoSpaces);
-                    double buildingResources = tempBuilding.getWood();
-                    if(playerId == 2){
-                        buildingResources += 2;
-                        temphex.getProvince().setWood(temphex.getProvince().getWood() + (int) buildingResources);
-                    }
+
                     int cost = tempBuilding.getCost();
 
                     City tempCity = null;
@@ -1590,21 +1661,32 @@ public class MainBoardController implements Initializable {
 
                     assert tempCity != null;
                     totalBuildings += tempCity.builtBuildings.size();
+                    for(String district : tempCity.builtBuildings)
+                    {
+                        if(district.equals("ResidentialDistrict"))
+                        {
+                            totalBuildings --;
+                        }
+                    }
                     for(Province tempProvince : tempCity.getProvincelist())
                     {
+                        if(tempProvince.builtBuildings.contains("IrrigationSystem"))
+                        {
+                            totalBuildings --;
+                        }
                         totalBuildings += tempProvince.builtBuildings.size();
                     }
                     totalBuildings = tempCity.getPopulation() - totalBuildings;
 
                     Text buildingCost = new Text("Costs " + cost + " building resources");
-                    Text bWoodProduction = new Text("\nProduces " + tempBuilding.getWood() + " building resources");
-                    Text bDyesProduction = new Text("\nProduces " + tempBuilding.getDices() + " dyes");
+                    Text bWoodProduction = new Text("\nProduces " + (int) tempBuilding.getWood() + " building resources");
+                    Text bDyesProduction = new Text("\nProduces " + (int) tempBuilding.getDices() + " dyes");
                     Text bFoodProduction = new Text("\nProduces " + (int) tempBuilding.getFood() + " food");
                     Text bGoldProduction = new Text("\nProduces " + (int) tempBuilding.getGold() + " gold");
-                    Text bBronzeProduction = new Text("\nProduces " + tempBuilding.getBronze() + " bronze");
-                    Text bIronProduction = new Text("\nProduces " + tempBuilding.getIron() + " iron");
+                    Text bBronzeProduction = new Text("\nProduces " + (int) tempBuilding.getBronze() + " bronze");
+                    Text bIronProduction = new Text("\nProduces " + (int) tempBuilding.getIron() + " iron");
                     Text bFaithProduction = new Text("\nProduces " + (int) tempBuilding.getBelief() + " faith");
-                    Text bHorsesProduction = new Text("\nProduces " + tempBuilding.getHorses() + " horses");
+                    Text bHorsesProduction = new Text("\nProduces " + (int) tempBuilding.getHorses() + " horses");
                     Text availablePopulation = new Text("\nNeeds 1/" + totalBuildings  + " population");
                     buildingCost.setFill(Color.GREY);
                     bWoodProduction.setFill(Color.GREY);
@@ -1615,7 +1697,8 @@ public class MainBoardController implements Initializable {
                     bIronProduction.setFill(Color.GREY);
                     bFaithProduction.setFill(Color.GREY);
                     bHorsesProduction.setFill(Color.GREY);
-                    availablePopulation.setFill(Color.GREY);
+                    if(totalBuildings > 0)availablePopulation.setFill(Color.GREY);
+                    else availablePopulation.setFill(Color.RED);
 
                     buildingTextFlow.getChildren().clear();
                     buildingTextFlow.getChildren().add(buildingCost);
@@ -1627,7 +1710,13 @@ public class MainBoardController implements Initializable {
                     if(tempBuilding.getIron() > 0) buildingTextFlow.getChildren().add(bIronProduction);
                     if(tempBuilding.getBelief() > 0) buildingTextFlow.getChildren().add(bFaithProduction);
                     if(tempBuilding.getHorses() > 0) buildingTextFlow.getChildren().add(bHorsesProduction);
-                    buildingTextFlow.getChildren().add(availablePopulation);
+                    if(!buildingNoSpaces.equals("IrrigationSystem"))buildingTextFlow.getChildren().add(availablePopulation);
+                    if(buildingNoSpaces.equals("IrrigationSystem"))
+                    {
+                        Text irrigationSystem = new Text("\nAllows to build a Farm");
+                        irrigationSystem.setFill(Color.GREEN);
+                        buildingTextFlow.getChildren().add(irrigationSystem);
+                    }
 
                     double tempY = possibleBuildingButton.localToScene(possibleBuildingButton.getBoundsInLocal()).getMinY();
                     buildingTextFlow.setTranslateX(1373);
@@ -1682,19 +1771,29 @@ public class MainBoardController implements Initializable {
         else
         {
             tempCity = (City) province;
+
         }
 
         assert tempCity != null;
         totalBuildings += tempCity.builtBuildings.size();
+        for(String dist : tempCity.builtBuildings)
+        {
+            if(Objects.equals(dist, "ResidentialDistrict")) totalBuildings -= 1;
+        }
         for(Province tempProvince : tempCity.getProvincelist())
         {
             totalBuildings += tempProvince.builtBuildings.size();
+            for(String irrigation : tempProvince.builtBuildings)
+            {
+                if(Objects.equals(irrigation, "IrrigationSystem")) totalBuildings -= 1;
+            }
         }
 
         if (province.builtBuildings.contains(building)) {
             if(!Objects.equals(building, "ResidentialDistrict")) return;
         }
-        if(tempCity.getPopulation() <= totalBuildings)
+
+        if(tempCity.getPopulation() <= totalBuildings && !Objects.equals(building, "ResidentialDistrict")&& !Objects.equals(building, "IrrigationSystem"))
         {
             return;
         }
@@ -1704,6 +1803,15 @@ public class MainBoardController implements Initializable {
         currentPlayer.setBuildingResources(currentPlayer.getBuildingResources() - tempBuilding.getCost());
         recoursesField.setText("" + currentPlayer.getBuildingResources());
         province.builtBuildings.add(building);
+        /*if(Objects.equals(building, "ResidentialDistrict"))
+        {
+            tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
+        }*/
+        if(Objects.equals(building, "IronMine"))
+        {
+            double buildingResources = tempBuilding.getWood();
+
+        }
         switch (building) {
             case "AmberCollector":
                 province.builtBuildingsVector.add(new AmberCollector());
@@ -1743,6 +1851,9 @@ public class MainBoardController implements Initializable {
                 break;
             case "IronMine":
                 province.builtBuildingsVector.add(new IronMine());
+                if(playerId == 2){
+                    province.setWood(province.getWood() + 2);
+                }
                 break;
             case "IrrigationSystem":
                 province.builtBuildingsVector.add(new IrrigationSystem());
@@ -1761,6 +1872,7 @@ public class MainBoardController implements Initializable {
                 break;
             case "ResidentialDistrict":
                 province.builtBuildingsVector.add(new ResidentialDistrict());
+                tempCity.setPopulationLimit(tempCity.getPopulationLimit() + 5);
                 break;
             case "RiversideFarm":
                 province.builtBuildingsVector.add(new RiversideFarm());
@@ -1781,6 +1893,7 @@ public class MainBoardController implements Initializable {
                 province.builtBuildingsVector.add(new Warehouse());
                 break;
         }
+
         province.builtBuildingsVector.get(province.builtBuildingsVector.size() - 1).setBaseProduction(building);
         System.out.println("playerID: " + playerId);
         province.setBuildingsProduction(playerId);
@@ -1798,6 +1911,27 @@ public class MainBoardController implements Initializable {
             unitY[0] += 60;
             a.setOnMouseClicked(e2 -> {
                 singleArmyClicked(army, city);
+            });
+            TextFlow armyTextFlow = new TextFlow();
+            armyTextFlow.getStyleClass().add("buildingInfo");
+            a.setOnMouseEntered(e -> {
+                Text totalArmy = new Text("Total units\n" + army.getTotalAmount());
+
+                armyTextFlow.setPrefWidth(250);
+                armyTextFlow.setPrefHeight(60);
+                totalArmy.setFill(Color.GREY);
+
+                armyTextFlow.getChildren().clear();
+                armyTextFlow.getChildren().add(totalArmy);
+
+                double tempY = a.localToScene(a.getBoundsInLocal()).getMinY();
+                armyTextFlow.setTranslateX(1373);
+                armyTextFlow.setTranslateY(tempY);
+
+                mainAnchorPane.getChildren().add(armyTextFlow);
+            });
+            a.setOnMouseExited(e -> {
+                mainAnchorPane.getChildren().remove(armyTextFlow);
             });
             provinceLowerPanel.getChildren().add(a);
         });
@@ -1822,6 +1956,27 @@ public class MainBoardController implements Initializable {
                 });
                 unitY[0] += 60;
                 newArmy.setTranslateY(unitY[0]);
+                TextFlow armyTextFlow = new TextFlow();
+                armyTextFlow.getStyleClass().add("buildingInfo");
+                a.setOnMouseEntered(e -> {
+                    Text totalArmy = new Text("Total units\n" + army.getTotalAmount());
+
+                    armyTextFlow.setPrefWidth(250);
+                    armyTextFlow.setPrefHeight(60);
+                    totalArmy.setFill(Color.GREY);
+
+                    armyTextFlow.getChildren().clear();
+                    armyTextFlow.getChildren().add(totalArmy);
+
+                    double tempY = a.localToScene(a.getBoundsInLocal()).getMinY();
+                    armyTextFlow.setTranslateX(1373);
+                    armyTextFlow.setTranslateY(tempY);
+
+                    mainAnchorPane.getChildren().add(armyTextFlow);
+                });
+                a.setOnMouseExited(e -> {
+                    mainAnchorPane.getChildren().remove(armyTextFlow);
+                });
                 provinceLowerPanel.getChildren().add(a);
                 provinceLowerPanel.getChildren().remove(newArmy);
                 provinceLowerPanel.getChildren().add(newArmy);
@@ -1903,11 +2058,25 @@ public class MainBoardController implements Initializable {
         recruitArchers.setOnMouseEntered(e -> {
             archerTextFlow.getChildren().clear();
             ArmyUnit tempUnit = new ArmyUnit();
+
+            int pop = originCity.getPopulation();
+            for(Army army1 : originCity.army)
+            {
+                for(ArmyUnit unit : army1.getUnits())
+                {
+                    pop -= 1;
+                }
+            }
+
             Text unitCost = new Text("Costs\n" + tempUnit.getArcherCost() +" gold");
+            Text availablePopulation = new Text("\nNeeds 1/" + pop +" available population");
             unitCost.setFill(Color.GREY);
+            if(pop < 1)availablePopulation.setFill(Color.RED);
+            else availablePopulation.setFill(Color.GREY);
 
             archerTextFlow.getChildren().clear();
             archerTextFlow.getChildren().add(unitCost);
+            archerTextFlow.getChildren().add(availablePopulation);
             double tempY = recruitArchers.localToScene(recruitArchers.getBoundsInLocal()).getMinY();
             archerTextFlow.setTranslateX(1373);
             archerTextFlow.setTranslateY(tempY);
@@ -1945,11 +2114,24 @@ public class MainBoardController implements Initializable {
         recruitChariots.setOnMouseEntered(e -> {
             chariotsTextFlow.getChildren().clear();
             ArmyUnit tempUnit = new ArmyUnit();
+            int pop = originCity.getPopulation();
+            for(Army army1 : originCity.army)
+            {
+                for(ArmyUnit unit : army1.getUnits())
+                {
+                    pop -= 1;
+                }
+            }
+
             Text unitCost = new Text("Costs\n" + tempUnit.getChariotsGoldCost() +" gold\n" + tempUnit.getChariotsHorsesCost() +" horses");
+            Text availablePopulation = new Text("\nNeeds 1/" + pop +" available population");
+            if(pop < 1)availablePopulation.setFill(Color.RED);
+            else availablePopulation.setFill(Color.GREY);
             unitCost.setFill(Color.GREY);
 
             chariotsTextFlow.getChildren().clear();
             chariotsTextFlow.getChildren().add(unitCost);
+            chariotsTextFlow.getChildren().add(availablePopulation);
             double tempY = recruitChariots.localToScene(recruitChariots.getBoundsInLocal()).getMinY();
             chariotsTextFlow.setTranslateX(1373);
             chariotsTextFlow.setTranslateY(tempY);
@@ -1984,11 +2166,25 @@ public class MainBoardController implements Initializable {
         recruitInfantry.setOnMouseEntered(e -> {
             infantryTextFlow.getChildren().clear();
             ArmyUnit tempUnit = new ArmyUnit();
+
+            int pop = originCity.getPopulation();
+            for(Army army1 : originCity.army)
+            {
+                for(ArmyUnit unit : army1.getUnits())
+                {
+                    pop -= 1;
+                }
+            }
+
             Text unitCost = new Text("Costs\n" + tempUnit.getInfantryCost() +" gold");
+            Text availablePopulation = new Text("\nNeeds 1/" + pop +" available population");
+            if(pop < 1)availablePopulation.setFill(Color.RED);
+            else availablePopulation.setFill(Color.GREY);
             unitCost.setFill(Color.GREY);
 
             infantryTextFlow.getChildren().clear();
             infantryTextFlow.getChildren().add(unitCost);
+            infantryTextFlow.getChildren().add(availablePopulation);
             double tempY = recruitInfantry.localToScene(recruitInfantry.getBoundsInLocal()).getMinY();
             infantryTextFlow.setTranslateX(1373);
             infantryTextFlow.setTranslateY(tempY);
@@ -2434,7 +2630,8 @@ public class MainBoardController implements Initializable {
         }
 
         private void colonize ( int iFrom, int jFrom){
-
+            if(currentPlayer.getGold() < 200) return;                 //if player doesn't have enough gold to colonize, colonize cost
+            if(currentPlayer.getBuildingResources() < 50) return;     //if player doesn't have enough building resources to colonize, colonize cost
             soundPlayerPlaySound(gameButtonSound);
 
             if (buyInitialised) {
@@ -2464,7 +2661,10 @@ public class MainBoardController implements Initializable {
                     if (!Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Sea") && !Objects.equals(map.getHexagon(iFrom, jFrom).getProvince().getType(), "Mountains")) {
 
                         if (map.getHexagon(iFrom, jFrom).getBorderColor() == Color.PINK) {
-
+                            currentPlayer.setGold(currentPlayer.getGold() - 200);  //subtract 200 gold from player, colonize cost
+                            currentPlayer.setBuildingResources(currentPlayer.getBuildingResources() - 50);  //subtract 50 building resources from player, colonize cost
+                            goldField.setText("" + (int) currentPlayer.getGold());
+                            recoursesField.setText("" + currentPlayer.getBuildingResources());
 
                             City temp = new City(currentPlayer.id);
                             temp.setOwnerId(currentPlayer.id);

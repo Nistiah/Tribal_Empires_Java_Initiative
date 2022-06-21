@@ -29,9 +29,7 @@ public class City extends Province {
     private List<String> possibleBuildings        = List.of();
     private List<String> baseBuildings            = Arrays.asList("Residential District",
                                                            "Market",
-                                                           "Barracks",
-                                                           "Temple",
-                                                           "Warehouse");
+                                                           "Temple");
 
 
 

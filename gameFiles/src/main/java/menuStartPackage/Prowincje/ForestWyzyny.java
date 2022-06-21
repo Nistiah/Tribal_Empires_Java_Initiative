@@ -9,8 +9,7 @@ public class ForestWyzyny extends Province {
     private List<String> possibleBuildings = Arrays.asList("Sawmill",
                                                            "Bronze Mine",
                                                            "Iron Mine",
-                                                           "Gold Mine",
-                                                           "Deforestation");
+                                                           "Gold Mine");
     private List<String> baseBuildings = List.of("Hunter");
 
     public ForestWyzyny() {
