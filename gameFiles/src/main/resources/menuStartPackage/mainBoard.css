@@ -485,6 +485,20 @@
 }
 .building {
     -fx-opacity: 0.2;
+    -fx-background-image:url('iron_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.goldBuilding {
+    -fx-opacity: 0.2;
     -fx-background-image:url('gold_mine.png');
     -fx-background-size: 50% 80%;
     -fx-background-repeat: no-repeat;
@@ -497,13 +511,314 @@
     -fx-border-radius: 5;
     -fx-text-fill: pink;
 }
+.goldBuilding:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtgoldBuilding {
+    -fx-opacity: 1;
+    -fx-background-image:url('gold_mine.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtgoldBuilding:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.farma {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('farma.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.farma:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtfarma {
+    -fx-opacity: 1;
+    -fx-background-image:url('farma.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtfarma:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.market {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('market.png');
+    -fx-background-size: 50% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: rgb(2,0,36,1);
+     -fx-background-position: 120px -20px;
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.market:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtmarket {
+    -fx-opacity: 1;
+    -fx-background-image:url('market.png');
+    -fx-background-size: 50% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 120px -20px;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtmarket:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.hodowla {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('hodowla2.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.hodowla:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builthodowla {
+    -fx-opacity: 1;
+    -fx-background-image:url('hodowla2.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builthodowla:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.piramida {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('piramida.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.piramida:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtpiramida {
+    -fx-opacity: 1;
+    -fx-background-image:url('piramida.png');
+    -fx-background-size: 50% 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtpiramida:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.resDist {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('residential.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.resDist:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtresDist {
+    -fx-opacity: 1;
+    -fx-background-image:url('residential.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtresDist:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.ryby {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('ryby.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.ryby:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtryby {
+    -fx-opacity: 1;
+    -fx-background-image:url('ryby.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtryby:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.tartak {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('tartak.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.tartak:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builttartak {
+    -fx-opacity: 1;
+    -fx-background-image:url('tartak.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builttartak:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.hunter {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('hunter.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.hunter:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builthunter {
+    -fx-opacity: 1;
+    -fx-background-image:url('hunter.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builthunter:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
 .building:hover{
     -fx-text-fill: white;
     -fx-opacity: 0.4;
 }
 .builtBuilding {
     -fx-opacity: 1;
-    -fx-background-image:url('gold_mine.png');
+    -fx-background-image:url('iron_mine.png');
     -fx-background-size: 50% 80%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: right;
@@ -553,6 +868,19 @@
 .builtBaseBuilding:hover{
     -fx-text-fill: white;
     -fx-opacity: 1;
+}
+.builtBaseBuildingResidentialDistrict {
+    -fx-opacity: 0.5;
+    -fx-background-image:url('residential.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
 }
 
 .possReskonie{

@@ -6,7 +6,7 @@ import java.util.List;
 public class ForestFlat extends Province {
     private List<String> resources         = Arrays.asList("drewno", "dziczyzna");
     private String       type              = "ForestFlat";
-    private List<String> possibleBuildings = Arrays.asList("Sawmill", "Catching Boars", "Deforestation");
+    private List<String> possibleBuildings = Arrays.asList("Sawmill");
     private List<String> baseBuildings     = List.of("Hunter");
 
     public ForestFlat() {
