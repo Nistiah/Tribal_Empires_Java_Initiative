@@ -812,6 +812,146 @@
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
+.irygacja {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('irygacja.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.irygacja:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtirygacja {
+    -fx-opacity: 1;
+    -fx-background-image:url('irygacja.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #02214f, #057180);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtirygacja:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.caravan {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('caravan.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.caravan:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtcaravan {
+    -fx-opacity: 1;
+    -fx-background-image:url('caravan.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtcaravan:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.riverside {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('riverside.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.riverside:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builtriverside {
+    -fx-opacity: 1;
+    -fx-background-image:url('riverside.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builtriverside:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+.temple {
+    -fx-opacity: 0.2;
+    -fx-background-image:url('temple.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: pink;
+}
+.temple:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 0.4;
+}
+.builttemple {
+    -fx-opacity: 1;
+    -fx-background-image:url('temple.png');
+    -fx-background-size: 40% 70%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: right;
+    -fx-background-color: rgb(2,0,36,1);
+    -fx-alignment: center-left;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 75px 50px to 100px 100px, #014202, #07a62e);
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+.builttemple:hover{
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
 .building:hover{
     -fx-text-fill: white;
     -fx-opacity: 0.4;
