@@ -1424,6 +1424,9 @@ public class MainBoardController implements Initializable {
                 if(Objects.equals(baseBuilding, "Residential District")) baseBuildingButton.getStyleClass().add("resDist");
                 if(Objects.equals(baseBuilding, "Hunter")) baseBuildingButton.getStyleClass().add("hunter");
                 if(Objects.equals(baseBuilding, "Market")) baseBuildingButton.getStyleClass().add("market");
+                if(Objects.equals(baseBuilding, "Riverside Farm")) baseBuildingButton.getStyleClass().add("riverside");
+                if(Objects.equals(baseBuilding, "Temple")) baseBuildingButton.getStyleClass().add("temple");
+                if(Objects.equals(baseBuilding, "Caravan")) baseBuildingButton.getStyleClass().add("caravan");
 
                 baseBuildingButton.setTranslateY(buttonOffset[0]);
                 baseBuildingButton.setPrefWidth(250);
@@ -1442,6 +1445,9 @@ public class MainBoardController implements Initializable {
                         if(Objects.equals(baseBuilding, "Residential District")) baseBuildingButton.getStyleClass().add("builtresDist");
                         if(Objects.equals(baseBuilding, "Hunter")) baseBuildingButton.getStyleClass().add("builthunter");
                         if(Objects.equals(baseBuilding, "Market")) baseBuildingButton.getStyleClass().add("builtmarket");
+                        if(Objects.equals(baseBuilding, "Riverside Farm")) baseBuildingButton.getStyleClass().add("builtriverside");
+                        if(Objects.equals(baseBuilding, "Temple")) baseBuildingButton.getStyleClass().add("builttemple");
+                        if(Objects.equals(baseBuilding, "Caravan")) baseBuildingButton.getStyleClass().add("builtcaravan");
                     }
                 });
                 baseBuildingButton.setOnMouseClicked(e -> {
@@ -1599,6 +1605,7 @@ public class MainBoardController implements Initializable {
                 if(Objects.equals(building, "Sawmill")) possibleBuildingButton.getStyleClass().add("tartak");
                 if(Objects.equals(building, "Iron Mine") || Objects.equals(building, "Bronze Mine")) possibleBuildingButton.getStyleClass().add("building");
                 if(Objects.equals(building, "Gold Mine")) possibleBuildingButton.getStyleClass().add("goldBuilding");
+                if(Objects.equals(building, "Irrigation System")) possibleBuildingButton.getStyleClass().add("irygacja");
 
 
                 String buildingNoSpaces3 = building.replaceAll("\\s+","");
@@ -1613,6 +1620,7 @@ public class MainBoardController implements Initializable {
                         if(Objects.equals(building, "Sawmill")) possibleBuildingButton.getStyleClass().add("builttartak");
                         if(Objects.equals(building, "Iron Mine") || Objects.equals(building, "Bronze Mine")) possibleBuildingButton.getStyleClass().add("builtBuilding");
                         if(Objects.equals(building, "Gold Mine")) possibleBuildingButton.getStyleClass().add("builtgoldBuilding");
+                        if(Objects.equals(building, "Irrigation System")) possibleBuildingButton.getStyleClass().add("builtirygacja");
                     }
                 });
                 possibleBuildingButton.setTranslateY(buttonOffset[0]);
